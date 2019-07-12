@@ -17,7 +17,9 @@ export class UsermanagementService {
     return this.http.post<RegistrationDto>(environment.API_URL + 'CustomerRegistration/InsertRegistrationDetails', registration);
   }
 
-
+  public EmailVerificationUpdate(registration: RegistrationDto): Observable<RegistrationDto> {
+    return this.http.post<RegistrationDto>(environment.API_URL + 'CustomerRegistration/updateRegistrationDetails', registration);
+  }
   
   // mallesh api code
   
