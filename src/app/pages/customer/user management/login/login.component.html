@@ -1,0 +1,170 @@
+
+<!-- <section class="signin">
+  <header class="trans">
+     
+      <div class="main-header">
+          <div class="container">
+              <div class="row">
+                  <div class="col-sm-6">
+                      <a href="index.html" class="site-logo"><img src="assets/layout/images/glogo.png" alt="dunyaya" /></a>
+                  </div>
+              </div> 
+          </div>
+      </div>
+  </header>
+  <main> 
+      <section class="signin_wrap">
+          <div class="container">
+              <div class="row">
+                  <div class="col-sm-4 ">
+                      <div class="si">
+                         <h4>Sign In</h4>
+                          <form class="from_wrapper">
+                              <div class="row inputset">
+                                  <div class="col-sm-4"><label>Email</label></div>
+                                  <div class="col-sm-8"><input type="text" placeholder="email@domain.com"/></div>
+                                  <div class="col-sm-12"><hr></div>
+                              </div>
+                              <div class="row inputset">
+                                  <div class="col-sm-4"><label>Password</label></div>
+                                  <div class="col-sm-8"><input type="password" placeholder="********"/></div>
+                                  <div class="col-sm-12"><hr></div>
+                              </div>
+                              <div class="row acset">
+                                  <div class="col-sm-4"></div>
+                                  <div class="col-sm-8 right-align"><a href="#">Forgot your password?</a></div>
+                              </div>
+                              <div class="row btset">
+                                  <div class="col-sm-12 col-xl-6">
+                                          <a [routerLink]="['/account']" class="line_btn sblue">Sign in</a>
+                                  </div>  
+                                  <div class="col-sm-12 col-xl-6">
+                                          Sign in with
+                                      <a [routerLink]="['/account']"><i class="fa fa-facebook-official" ></i></a>
+                                      <a [routerLink]="['/account']" ><i class="fa fa-google"></i></a>
+                              </div>  
+                                                                
+                              </div>
+                              <div class="row ">
+                                      <div class="col-sm-12">
+                                          <p class="terms">By continuing, you agree to our <a href="#">Terms & Conditions</a>.</p>
+                                      </div>                                        
+                                  </div>
+                              <div class="row ftset">
+                                  <div class="col-sm-12">
+                                      <p>New to Dunyana?</p>
+                                      <a [routerLink]="['/signup']" class="line_btn lblack">Create your account</a>
+                                  </div>                                        
+                              </div>
+                              
+                          </form>
+                      </div>                       
+                  </div>
+              </div>
+          </div>
+      </section>
+  </main>
+  <footer class="trans">
+      <div class="container">
+          <div class="row">
+              <div class="col-md-12">
+              <p>Photo by Jolly Chic.<strong> Shop this look</strong>.</p>
+              </div>                           
+          </div>
+      </div>
+     
+  </footer>
+
+</section> -->
+
+
+<!----------------------------------------------------mallesh modified file -------------------------->
+
+<section class="signin">
+    <header class="trans">
+       
+        <div class="main-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <a href="index.html" class="site-logo"><img src="assets/layout/images/glogo.png" alt="dunyaya" /></a>
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </header>
+    <main> 
+        <section class="signin_wrap">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4 ">
+                        <div class="si">
+                           <h4>Sign In</h4>
+                            <form class="from_wrapper">
+                                <div class="row inputset">
+                                    <div class="col-sm-4"><label>Email</label></div>
+                                    <div class="col-sm-8"><input type="text" placeholder="email@domain.com"/></div>
+                                    <div class="col-sm-12"><hr></div>
+                                </div>
+                                <div class="row inputset">
+                                    <div class="col-sm-4"><label>Password</label></div>
+                                    <div class="col-sm-8"><input type="password" placeholder="********"/></div>
+                                    <div class="col-sm-12"><hr></div>
+                                </div>
+                                <div class="row acset">
+                                    <div class="col-sm-4"></div>
+                                    <div class="col-sm-8 right-align"><a href="#">Forgot your password?</a></div>
+                                </div>
+                                <div class="row btset">
+                                    <div class="col-sm-12 col-xl-6">
+                                            <a [routerLink]="['/account']" class="line_btn sblue">Sign in</a>
+                                    </div>  
+                                    <div class="col-sm-12 col-xl-6">
+                                            Sign in with
+                                        <!-- <a [routerLink]="['/account']"><i class="fa fa-facebook-official" ></i></a>
+                                        <a [routerLink]="['/account']" ><i class="fa fa-google"></i></a> -->
+  
+                                        <a  (click)="socialSignIn('facebook')"><i class="fa fa-facebook-official" ></i></a>
+                                        <a  (click)="socialSignIn('google')" ><i class="fa fa-google"></i></a>
+                                </div>  
+                                                                  
+                                </div>
+                                <div class="row ">
+                                        <div class="col-sm-12">
+                                            <p class="terms">By continuing, you agree to our <a href="#">Terms & Conditions</a>.</p>
+                                        </div>                                        
+                                    </div>
+                                <div class="row ftset">
+                                    <div class="col-sm-12">
+                                        <p>New to Dunyana?</p>
+                                        <a [routerLink]="['/signup']" class="line_btn lblack">Create your account</a>
+                                    </div>                                        
+                                </div>
+                                
+                            </form>
+                        </div>                       
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="trans">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                <p>Photo by Jolly Chic.<strong> Shop this look</strong>.</p>
+                </div>                           
+            </div>
+        </div>
+       
+    </footer>
+  
+  </section>
+
+
+
+
+
+
+
+

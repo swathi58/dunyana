@@ -1,0 +1,324 @@
+$radius: 20px;
+$radiusfull: 100%;
+section {
+    width: 100%;
+    display: block;
+    &.accounts {
+        .text_container {
+            h4 {
+                font-size: 18pt;
+                margin-bottom: 39px;
+            }
+            padding-top: 50px;
+            color: $graylight;
+            .leftPanel {
+                margin-bottom: 105px;
+                h2 {
+                    margin-bottom: 48px;
+                    font-family: $lightfont;
+                    font-size: 32pt;
+                    &+p {
+                        font-size: 22pt;
+                        width: 100%;
+                        font-family: $lightfont;
+                    }
+                }
+            }
+            .wallet {
+                margin-bottom: 105px;
+                h3 {
+                    margin-bottom: 40px;
+                }
+                .g-box {
+                    background: rgb(0, 192, 243);
+                    background: linear-gradient(180deg, rgba(0, 192, 243, 1) 0%, rgba(0, 156, 198, 1) 100%);
+                    border-radius: $radius;
+                    color: $white;
+                    height: 264px;
+                    padding: 15px;
+                    position: relative;
+                    img {
+                        margin-bottom: 25px;
+                    }
+                    p.first {
+                        font-size: 18pt;
+                        margin-bottom: 0;
+                        padding-left: 15px;
+                        padding-top: 15px;
+                    }
+                    p.b-font {
+                        font-size: 50pt;
+                        text-align: center;
+                    }
+                    p:last-child {
+                        position: absolute;
+                        bottom: 5px;
+                        left: 30px;
+                        a {
+                            color: $white;
+                            &:hover {
+                                color: $black;
+                            }
+                        }
+                    }
+                    p.light {
+                        font-family: $lightfont;
+                        padding-left: 15px;
+                    }
+                    .icon-edit:before {
+                        color: $white;
+                    }
+                    i,
+                    span.icon-add {
+                        font-size: 28px;
+                        vertical-align: text-bottom;
+                    }
+                    &:hover {
+                        background: rgb(200, 201, 203);
+                        background: linear-gradient(0deg, rgba(200, 201, 203, 1) 0%, rgba(235, 235, 237, 1) 100%);
+                        color: $graylight;
+                        .icon-edit:before,
+                        span.icon-add,
+                        .icon-add .path1:before,
+                        .icon-add .path2:before,
+                        .icon-add .path3:before {
+                            color: $black;
+                        }
+                    }
+                }
+                .g-box-line {
+                    background: url('assets/layout/images/Rounded_Rectangle.png') no-repeat;
+                    height: 264px;
+                    width: 210px;
+                    padding: 30px;
+                    text-align: center;
+                    float: right;
+                    img {
+                        vertical-align: middle;
+                        margin-top: 70px;
+                    }
+                }
+            }
+            .profile {
+                background: $grayvlight;
+                border-radius: $radius;
+                float: left;
+                width: 100%;
+                .thumb {
+                    display: inline-block;
+                    margin-bottom: 20px;
+                    img {
+                        width: 106px;
+                        height: 106px;
+                        float: left;
+                        margin: 30px 15px 0 30px;
+                        border-radius: $radiusfull;
+                        &+p {
+                            float: left;
+                            margin-top: 55px;
+                        }
+                    }
+                    p {
+                        font-size: 14pt;
+                        font-family: $medfont;
+                        span {
+                            font-family: $lightfont;
+                        }
+                    }
+                }
+                .address {
+                    margin: 30px 30px 0 30px;
+                    .text-blue {
+                        color: $primary-blue;
+                        display: inline;
+                        margin-top: 20px;
+                        font-size: 14pt;
+                        font-family: $medfont;
+                        margin-bottom: 30px;
+                        text-transform: lowercase;
+                        a {
+                            color: $primary-blue;
+                            &:hover {
+                                color: $black;
+                                text-decoration: none;
+                                i,
+                                .icon-edit:before {
+                                    color: $black;
+                                }
+                            }
+                        }
+                    }
+                    .edit {
+                        margin-top: 11px;
+                    }
+                    p {
+                        font-size: 14pt;
+                        margin-bottom: 2rem;
+                        font-family: $medfont;
+                        span {
+                            font-family: $lightfont;
+                        }
+                    }
+                    .f-big {
+                        font-size: 36px;
+                        vertical-align: text-bottom;
+                    }
+                }
+            }
+            .order-history {
+                float: right;
+                h3 {
+                    margin-top: 10px;
+                    margin-bottom: 37px;
+                }
+                .category {
+                    background: rgb(200, 201, 203);
+                    background: linear-gradient(0deg, rgba(200, 201, 203, 1) 0%, rgba(235, 235, 237, 1) 100%);
+                    border-radius: $radius;
+                    color: $graylight;
+                    height: 200px;
+                    padding: 25px 10px 20px 15px;
+                    margin-bottom: 20px;
+                    h3 {
+                        margin-bottom: 0;
+                        font-family: $medfont;
+                        font-size: 16pt;
+                    }
+                    .img {
+                        display: block;
+                        float: left;
+                        img {
+                            border-radius: $radius;
+                            min-width: 110px;
+                        }
+                    }
+                    p {
+                        font-size: 12pt;
+                        font-family: $lightfont;
+                        line-height: 18pt;
+                    }
+                    .opl {
+                        font-family: $medfont;
+                        margin-top: 26pt;
+                        span {
+                            font-family: $lightfont;
+                        }
+                    }
+                    &:hover {
+                        background: rgb(0, 192, 243);
+                        background: linear-gradient(180deg, rgba(0, 192, 243, 1) 0%, rgba(0, 156, 198, 1) 100%);
+                        color: $white;
+                    }
+                }
+                .text-blue {
+                    color: $primary-blue;
+                    font-size: 11pt;
+                    font-weight: 600;
+                    a {
+                        color: $primary-blue;
+                        &:hover {
+                            color: $black;
+                            text-decoration: none;
+                            i {
+                                color: $black;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    section {
+        &.accounts {
+            .text_container {
+                .wallet {
+                    .g-box {
+                        margin-bottom: 20px;
+                        p.b-font {
+                            text-align: left;
+                        }
+                    }
+                    .g-box-line {
+                        float: left;
+                    }
+                }
+                .profile {
+                    margin-bottom: 100px;
+                }
+                .order-history {
+                    .category {
+                        padding: 25px 10px 20px 10px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 667px) {
+    section {
+        &.accounts {
+            .text_container {
+                .order-history {
+                    .category {
+                        display: inline-block;
+                        height: auto;
+                        .img {
+                            width: 110px;
+                            max-width: 100%;
+                        }
+                        img {
+                            text-align: center;
+                            margin-bottom: 10px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 568px) {
+    section {
+        &.accounts {
+            .text_container {
+                .order-history {
+                    .category {
+                        .float-right {
+                            float: left !important;
+                            text-align: left !important;
+                        }
+                        .pl-4 {
+                            padding-left: 15px!important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width:360px) {
+    section {
+        &.accounts {
+            .text_container {
+                .profile {
+                    .thumb {
+                        img {
+                            float: none;
+                            &+p {
+                                float: none;
+                                padding-left: 30px;
+                                padding-top: 0;
+                                margin-top: 25px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
