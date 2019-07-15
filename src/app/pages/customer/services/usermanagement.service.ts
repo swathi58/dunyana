@@ -19,6 +19,17 @@ export class UsermanagementService {
 
 
 
+  public test(): Observable<any> {
+    return this.http.get<any>(environment.API_URL + 'lookup');
+  }
+
+  public CustomerRegistration(registration: RegistrationDto): Observable<RegistrationDto> {
+    return this.http.post<RegistrationDto>(environment.API_URL + 'CustomerRegistration/InsertRegistrationDetails', registration);
+  }
+
+  public EmailVerificationUpdate(registration: RegistrationDto): Observable<RegistrationDto> {
+    return this.http.post<RegistrationDto>(environment.API_URL + 'CustomerRegistration/updateRegistrationDetails', registration);
+  }
 
   
   // mallesh api code

@@ -29,7 +29,7 @@ const routes: Routes = [
     component:RegistrationComponent
   },
   {
-    path:"emailverificationcompleted",
+    path:"emailverificationcompleted/:emailid",
     component:EmailverificationSuccessComponent
   }
 ];

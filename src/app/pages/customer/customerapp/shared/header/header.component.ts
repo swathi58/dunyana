@@ -11,7 +11,9 @@ export class HeaderComponent implements OnInit {
 
   translationMessages: any;
   lang = 'en';
-
+  showDiv="";
+  showlngDiv="";
+  headerimg="assets/layout/images/header_logo.png";
   constructor(  public langShare: LangShareService,
     public translate: TranslateService,
     ) { }
@@ -34,5 +36,18 @@ export class HeaderComponent implements OnInit {
         this.translationMessages = data;
       });
     });
+  }
+  displaysearch()
+  {
+    this.showDiv="showDiv";
+  }
+  closesearch()
+  {
+    this.showDiv="";
+    this.showDiv="search_container";   
+  }
+  displaylang()
+  {
+this.showlngDiv="showDiv";
   }
 }

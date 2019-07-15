@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NguCarouselModule } from '@ngu/carousel';
 import 'hammerjs';
+import {ToastModule} from 'primeng/toast';
+import { MessageService } from 'primeng/components/common/messageservice';
+import { NgxUiLoaderModule } from  'ngx-ui-loader';
 
 import { CustomerappRoutingModule } from './customerapp-routing.module';
 import { HeaderComponent } from './shared/header/header.component';
@@ -16,6 +19,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 registerLocaleData(localeESUS);
 import { registerLocaleData } from '../../../../../node_modules/@angular/common';
 import localeESUS from '@angular/common/locales/es-US';
+
 import {
   HttpClientModule,
   HttpClient,
@@ -32,6 +36,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     CommonModule,
     CustomerappRoutingModule,
     NguCarouselModule,
+    ToastModule,
+    NgxUiLoaderModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -39,6 +45,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         deps: [HttpClient],
       },
     }),
-  ]
+  ],
+  providers:[MessageService]
 })
 export class CustomerappModule { }
