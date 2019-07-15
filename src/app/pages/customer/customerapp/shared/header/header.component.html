@@ -68,30 +68,29 @@
                         </ul>                  
                     </div>
                     <div class="col-sm-6">
-                        <ul class="float-right text-right ml-4">
+                        <!-- <ul class="float-right text-right ml-4">
                             <li>
                                 <img src="../../../../../../assets/icons/english.png" width="20" height="20" [ngClass]="{ blur: lang == 'es' }" (click)="toggleLang('en')" alt="EN" class="lang-item mr-2" />
                                 <img src="../../../../../../assets/icons/spanish.png" width="20" height="20" [ngClass]="{ blur: lang == 'en' }" class="lang-item lang-item--es marg-right-20" (click)="toggleLang('ar')" alt="arbic" />
                             </li>
-                        </ul>
+                        </ul> -->
 
       
                     <div>
                         <ul class="lang">
-                            <li class="search"><a href="#" id="srhLink">{{ 'Search' | translate }}</a></li>
-                            <li><a href="#" id="langSel" (click)="toggleLang('ar')">العربية</a></li>
+                            <li class="search"><a id="srhLink" (click)="displaysearch()">{{ 'Search' | translate }}</a></li>
+                            <li><a class="langSel" (click)="toggleLang('ar'); displaylang()">العربية</a></li>
       
                         </ul>
-                        <div class="search_container">
+                        <div class="search_container" [ngClass]="showDiv">
                             <input type="text" placeholder="Search our brands" />
-                            <a href="#" class="closebtn"></a>
-                            <a href="#" class="filterbtn"></a>
+                            <a class="closebtn" (click)="closesearch()"></a>
+                            <a class="filterbtn"></a>
                         </div>
-                        <div class="lang_container">
-                            
+                        <div class="lang_container" [ngClass]="showlngDiv">                           
                             <ul>
-                                <li><a href="#" (click)="toggleLang('ar')">العربية</a></li>
-                                <li><a href="#" (click)="toggleLang('en')">English</a></li>
+                                <li><a (click)="toggleLang('ar')">العربية</a></li>
+                                <li><a (click)="toggleLang('en')">English</a></li>
                             </ul>
                         </div>
                     </div>
@@ -103,12 +102,12 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6">
-                        <a href="index.html" class="site-logo"><img src="../../assets/layout/images/header_logo.png" alt="dunyaya" /></a>
+                        <a [routerLink]="['/customer/home']" class="site-logo"><img [src]="headerimg" alt="dunyaya" /></a>
                     </div>
                     <div class="col-sm-6 right-align">
                         <ul class="user-actions">
-                            <li class="cat"><a href="#">{{ 'Shopby' | translate }} <strong>{{ 'Category' | translate }}</strong></a></li>
-                            <li class="del"><a href="accounts.html">{{ 'Deliverto' | translate }} <strong>{{ 'SaudiArabia' | translate }}</strong><i class="icon-arrows"></i> </a></li>
+                            <li class="cat"><a [routerLink]="['/customer/home']">{{ 'Shopby' | translate }} <strong>{{ 'Category' | translate }}</strong></a></li>
+                            <li class="del"><a [routerLink]="['/customer/home']">{{ 'Deliverto' | translate }} <strong>{{ 'SaudiArabia' | translate }}</strong><i class="icon-arrows"></i> </a></li>
                             <li class="ac"><a [routerLink]="['/signin']">{{ 'Hithere' | translate }},  <strong>{{ 'Signin' | translate }}</strong></a></li>
                             <li class="cart" style="display: none">
                                 <div class="icon-cart"><span>12</span></div>

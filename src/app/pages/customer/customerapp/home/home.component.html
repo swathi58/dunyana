@@ -1,3 +1,4 @@
+﻿<p-toast></p-toast>
 <main>
     <section class="home_banner">
 
@@ -78,18 +79,20 @@
 
     <app-categoriesslider></app-categoriesslider>
 
-    <section class="fbConnect">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-6 fbimg">
-                    <img src="../../assets/layout/images/fb_badge_img.jpg" alt="connect" />
-                </div>
-                <div class="col-lg-6 fbtxt">
-                    <h2>connect your <br/>Facebook account</h2>
-                    <p>See what your friends are <br/>shopping, get suggestions <br/>and recommendations</p>
-                    <a href="#" class="line_btn swhite">Connect now</a>
-                </div>
-            </div>
-        </div>
-    </section>
+
+  <section class="fbConnect">
+      <div class="container-fluid">
+          <div class="row">
+              <div class="col-lg-6 fbimg">
+                  <img [src]="fb_badge_img" alt="connect" />
+              </div>
+              <div class="col-lg-6 fbtxt">
+                  <h2>connect your <br/>Facebook account</h2>
+                  <p>See what your friends are <br/>shopping, get suggestions <br/>and recommendations</p>
+                  <a href="#" class="line_btn swhite">Connect now</a>
+              </div>
+          </div>
+      </div>
+  </section>
+
 </main>

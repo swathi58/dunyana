@@ -4,14 +4,17 @@ import { registration } from '../model/registration';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
-import { User } from '../../customer/model/user';
-import { RegistrationDto } from '../model/DTOs/RegistraionDto';
+import { User } from '../model/user';
 @Injectable({
   providedIn: 'root'
 })
 export class UsermanagementService {
 
   constructor(private http: HttpClient,public router:Router) {}
+
+  public test(): Observable<any> {
+    return this.http.get<any>(environment.API_URL + 'lookup');
+  }
 
   public CustomerRegistration(registration: RegistrationDto): Observable<RegistrationDto> {
     return this.http.post<RegistrationDto>(environment.API_URL + 'CustomerRegistration/InsertRegistrationDetails', registration);
@@ -20,6 +23,12 @@ export class UsermanagementService {
   public EmailVerificationUpdate(registration: RegistrationDto): Observable<RegistrationDto> {
     return this.http.post<RegistrationDto>(environment.API_URL + 'CustomerRegistration/updateRegistrationDetails', registration);
   }
+
+  public postDetails(Bank: registration): Observable<registration> {
+    return this.http.post<registration>(environment.API_URL + `Bank`, Bank);
+  }
+
+
   
   // mallesh api code
   
@@ -59,28 +68,28 @@ export class UsermanagementService {
 
   registeruser(user:User){
     debugger
-    // const body : User = {
-    //   Email:user.Email,
-    //   FirstName:user.FirstName,
-    //   LastName:user.LastName,      
-    //   LoginType:user.LoginType,
-    //   FBID:user.FBID,      
-    //   Image:user.Image,
-    //   Address:user.Address,
-    //   Mobile:user.Mobile,
-    //   Country:user.Country,
-    //   City:user.City,
-    //   EmailVerified:user.EmailVerified,
-    //   GoogleID:user.GoogleID,
-    //   PWD:user.PWD,
-    //   Type:user.Type
+    const body : User = {
+      Email:user.Email,
+      FirstName:user.FirstName,
+      LastName:user.LastName,      
+      LoginType:user.LoginType,
+      FBID:user.FBID,      
+      Image:user.Image,
+      Address:user.Address,
+      Mobile:user.Mobile,
+      Country:user.Country,
+      City:user.City,
+      EmailVerified:user.EmailVerified,
+      GoogleID:user.GoogleID,
+      PWD:user.PWD,
+      Type:user.Type
       
 
-    // }
+    }
 
     var reqHeader = new HttpHeaders({'No-Auth':'True'});
       debugger
-    return this.http.post(environment.API_URL , user,{headers : reqHeader});
+    return this.http.post(environment.API_URL+'CustomerRegistration/'+'InsertRegistrationDetails',body,{headers : reqHeader});
     
   }
 
@@ -98,4 +107,5 @@ export class UsermanagementService {
     });
 
   }
+
 }

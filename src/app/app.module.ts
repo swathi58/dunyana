@@ -24,7 +24,7 @@ import { registerLocaleData } from '../../node_modules/@angular/common';
 import localeESUS from '@angular/common/locales/es-US';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-
+import {MessageService} from 'primeng/api';
 import {
   HttpClientModule,
   HttpClient,
@@ -80,8 +80,8 @@ export function getAuthServiceConfigs() {
     }),
     //NguCarouselModule
   ],
-  providers: [AuthService,
-    {provide:AuthServiceConfig, useFactory:getAuthServiceConfigs},LangShareService],
+  providers: [AuthService,MessageService,
+    {provide:AuthServiceConfig, useFactory:getAuthServiceConfigs},LangShareService,],
 
   bootstrap: [AppComponent]
 })
