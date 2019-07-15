@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { registration } from '../model/registration';
+import{RegistrationDto}from '../model/DTOs/RegistraionDto';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
@@ -13,6 +14,15 @@ import { ChangepasswordDto } from '../model/DTOs/ChangepasswordDto';
 export class UsermanagementService {
 
   constructor(private http: HttpClient,public router:Router) {}
+
+
+  public postDetails(Bank: registration): Observable<registration> {
+    return this.http.post<registration>(environment.API_URL + `Bank`, Bank);
+  }
+
+
+
+
 
   public test(): Observable<any> {
     return this.http.get<any>(environment.API_URL + 'lookup');
@@ -30,9 +40,11 @@ export class UsermanagementService {
     return this.http.post<RegistrationDto>(environment.API_URL + 'CustomerRegistration/EmailCheckValidation', registration);
   }
 
+
   public ChangePassword(changepassword: ChangepasswordDto): Observable<ChangepasswordDto> {
     return this.http.post<ChangepasswordDto>(environment.API_URL + 'CustomerRegistration/ChangePassword', changepassword);
   }
+
 
   
   // mallesh api code
@@ -70,8 +82,13 @@ export class UsermanagementService {
     return this.router.navigate(['/Home']);
   }
 
-
-  registeruser(user:User){
+Loginapi(login) {
+    var body = login;
+   
+    var headerOptions = new Headers({ 'Content-Type': 'application/json' });
+    return this.http.post(environment.API_URL +'CustomerRegistration/'+'UsersLoginAuthenticate', login, { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) });
+  }
+  registeruser(user:User):Observable<User>{
     debugger
     const body : User = {
       Email:user.Email,
@@ -94,9 +111,10 @@ export class UsermanagementService {
 
     var reqHeader = new HttpHeaders({'No-Auth':'True'});
       debugger
-    return this.http.post(environment.API_URL+'CustomerRegistration/'+'InsertRegistrationDetails',body,{headers : reqHeader});
+    return this.http.post<User>(environment.API_URL+'CustomerRegistration/'+'InsertRegistrationDetails',body,{headers : reqHeader});
     
   }
+
 
   postData(credentials, type) {
     return new Promise((resolve, reject) => {
@@ -112,5 +130,12 @@ export class UsermanagementService {
     });
 
   }
+  //http://125.62.198.229:5000/api/CustomerRegistration/UsersLoginAuthenticate(Parameters:Email,PWD)
+    login(user:User) {
+      var reqHeader = new HttpHeaders({'No-Auth':'True'});
+      debugger
+    return this.http.post<User>(environment.API_URL+'CustomerRegistration/'+'UsersLoginAuthenticate',user,{headers : reqHeader});
+      
+     }
 
 }
