@@ -81,6 +81,7 @@
 <!----------------------------------------------------mallesh modified file -------------------------->
 
 <section class="signin">
+        <p-toast></p-toast>
     <header class="trans">
        
         <div class="main-header">
@@ -100,24 +101,30 @@
                     <div class="col-sm-4 ">
                         <div class="si">
                            <h4>Sign In</h4>
-                            <form class="from_wrapper">
+                            <form class="from_wrapper" #loginForm="ngForm" >
                                 <div class="row inputset">
                                     <div class="col-sm-4"><label>Email</label></div>
-                                    <div class="col-sm-8"><input type="text" placeholder="email@domain.com"/></div>
+                                    <div class="col-sm-8"><input type="text" placeholder="email@domain.com" ngModel name="lEmail" #lEmail="ngModel"
+                                        [email]="true" required />
+                                      
                                     <div class="col-sm-12"><hr></div>
+                                    </div>
                                 </div>
                                 <div class="row inputset">
                                     <div class="col-sm-4"><label>Password</label></div>
-                                    <div class="col-sm-8"><input type="password" placeholder="********"/></div>
+                                    <div class="col-sm-8"><input type="password" placeholder="********" ngModel name="lPassword" #lPassword="ngModel" minlength="6" required />
+                                    
                                     <div class="col-sm-12"><hr></div>
+                                    </div>
                                 </div>
+
                                 <div class="row acset">
                                     <div class="col-sm-4"></div>
                                     <div class="col-sm-8 right-align"><a href="#">Forgot your password?</a></div>
                                 </div>
                                 <div class="row btset">
                                     <div class="col-sm-12 col-xl-6">
-                                            <a [routerLink]="['/account']" class="line_btn sblue">Sign in</a>
+                                            <a  (click)="OnLogin(lEmail.value,lPassword.value)" class="line_btn sblue">Sign in</a>
                                     </div>  
                                     <div class="col-sm-12 col-xl-6">
                                             Sign in with

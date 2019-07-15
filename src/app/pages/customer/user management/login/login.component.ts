@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../../model/user';
 import { UsermanagementService } from '../../services/usermanagement.service';
 import { AuthServiceConfig, FacebookLoginProvider, GoogleLoginProvider,AuthService,SocialLoginModule } from 'angularx-social-login';
-import{ToastrService}from 'ngx-toastr';
-import { Router } from '@angular/router';
+//import{ToastrService}from 'ngx-toastr';
+import {MessageService} from 'primeng/api';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, Observer } from 'rxjs';
+
 
 @Component({
   selector: 'app-login',
@@ -25,7 +27,7 @@ export class LoginComponent implements OnInit {
       Country:"",
       City:"",
       Image:"",
-      EmailVerified:null,
+      EmailVerified:0,
       LoginType:"",
       FBID:"",
       GoogleID:"",
@@ -41,32 +43,36 @@ export class LoginComponent implements OnInit {
   Image: any;
   isBrowser: boolean;
   base64Image: any;
-  
+
+ 
+
   constructor(private dataservice:UsermanagementService,private socialAuthService: AuthService,
-    private toaster: ToastrService,private router: Router) {
+    private messageService: MessageService,private router: Router, ) {
       this.dataservice.sessionIn();
+
      }
 
   ngOnInit() {
-    // let imageUrl = 'https://lh3.googleusercontent.com/-lLC-FsscD40/AAAAAAAAAAI/AAAAAAAAAAA/AMp5VUoSrLythVKtt5Skm9zIUg4uyxnNCw/s48-c-mo/photo.jpg';
- 
-    // this.getBase64ImageFromURL(imageUrl).subscribe(base64data => {
-    //   console.log(base64data);
-    //   this.base64Image = 'data:image/jpg;base64,' + base64data;
-      
-    // });
-  }
   
-  public socialSignIn(socialPlatform: string) {
+  
+  
+}
+
+
+  public socialSignIn(loginPlatform: string) {
     let socialPlatformProvider;
-    if (socialPlatform === 'facebook') {
+    if (loginPlatform === 'facebook') {
       socialPlatformProvider = FacebookLoginProvider.PROVIDER_ID;
-    } else if (socialPlatform === 'google') {
+    }
+     else if (loginPlatform === 'google') {
       socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
+    }
+    else{
+    
     } 
 
     this.socialAuthService.signIn(socialPlatformProvider).then(userData => {
-      console.log(socialPlatform + ' sign in data : ', (userData["firstName"]));
+      console.log(loginPlatform + ' sign in data : ', (userData["firstName"]));
 
       // console.log(userData["SocialUser"]);
       // this.userPostData.firstname=data["SocialUser.firstName"];
@@ -136,12 +142,12 @@ export class LoginComponent implements OnInit {
         this.userPostData.Type = "";
 
       }
-      else {
+      else if(data.provider=="default") {
         data.provider = "D";
 
-        this.userPostData.FirstName = data.firstName;
-        this.userPostData.LastName = data.lastName;
-        this.userPostData.Email = data.email;
+        this.userPostData.FirstName = "";
+        this.userPostData.LastName = "";
+        this.userPostData.Email = "";
         this.userPostData.FBID = "";
         this.userPostData.GoogleID = "";
         this.userPostData.LoginType = data.provider;
@@ -154,26 +160,28 @@ export class LoginComponent implements OnInit {
         this.userPostData.EmailVerified = null;
         this.userPostData.PWD = "";
         this.userPostData.Type = "";
+        debugger
     }
    
      debugger
-    this.dataservice.registeruser(this.userPostData).subscribe((data: any) => {
-      this.toaster.success("items Added Successfully");
+    this.dataservice.registeruser(this.userPostData).subscribe(res => {
+      this.messageService.add({severity:'success', summary:'Success Message', detail:res["result"]});
       this.router.navigateByUrl("customer/home");
        },
        error => {
-         if (error["status"] != 200) {
-           this.toaster.error("Failed to registration");
- 
+        
+           debugger
+           this.messageService.add({severity:'error', summary:'Error Message', detail:error["result"]});
            //this.router.navigateByUrl("customer/home");
-         };
- 
-         
+  
        });
 
     }
     else{
-       this.toaster.show('Email id already Exists');
+      debugger
+      
+       this.messageService.add({severity:'success', summary:'Success Message', detail:'Your Email id is not registerd in Facebook'});
+       
     }
     
 
@@ -217,6 +225,30 @@ export class LoginComponent implements OnInit {
     debugger
   }
 
+  OnLogin(email,password) {  
+    this.userPostData.Email = email;
+    this.userPostData.PWD = password;
 
+  
+       debugger
+
+    this.dataservice.login(this.userPostData).subscribe(res => {
+      debugger
+      this.messageService.add({severity:'success', summary:'Success Message', detail:res["result"]});
+      //this.router.navigateByUrl("customer/home");
+       },
+       error => {
+        
+           debugger
+           this.messageService.add({severity:'error', summary:'Error Message', detail:error["result"]});
+           //this.router.navigateByUrl("customer/home");
+           console.log(error);
+  
+       });
+     
+    
+  }
+
+  
 
 }
