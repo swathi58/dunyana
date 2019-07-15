@@ -10,6 +10,8 @@ import { UsermanagementService } from '../../services/usermanagement.service';
 })
 export class EmailverificationSuccessComponent implements OnInit {
 
+  headerlogo:string="assets/layout/images/header_logo.png";
+  checkinfo:string="assets/layout/images/animated-check.gif";
   registerdto:RegistrationDto={
     Id:0,
     FirstName:null,

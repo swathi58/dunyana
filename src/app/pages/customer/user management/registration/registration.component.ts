@@ -16,6 +16,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./registration.component.scss']
 })
 export class RegistrationComponent implements OnInit {
+
+  headerlogo:string="assets/layout/images/glogo.png";
   ProgressSpinnerDlg:boolean=false;
   registrationForm:FormGroup;
   submitted = false;

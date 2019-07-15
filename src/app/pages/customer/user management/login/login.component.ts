@@ -12,7 +12,10 @@ import { Observable, Observer } from 'rxjs';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
- 
+
+
+  headerlogo:string="assets/layout/images/glogo.png";
+
   userPostData:User={
       Email:"",
       FirstName:"",
