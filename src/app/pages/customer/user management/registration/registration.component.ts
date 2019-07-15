@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder,FormGroup,Validator, Validators} from '@angular/forms';
-//import { MustMatch } from './_helpers/must-match.validator';
 
-import { phoneNumberValidator } from '../../../../shared/validators/phone-validator';
 import { MustMatch } from 'src/app/shared/validators/PasswordMustMatchvalidator';
 import { RegistrationDto } from '../../model/DTOs/RegistraionDto';
 
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { UsermanagementService } from '../../services/usermanagement.service';
+import {MessageService} from 'primeng/api';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registration',
@@ -15,7 +16,7 @@ import { UsermanagementService } from '../../services/usermanagement.service';
   styleUrls: ['./registration.component.scss']
 })
 export class RegistrationComponent implements OnInit {
-
+  ProgressSpinnerDlg:boolean=false;
   registrationForm:FormGroup;
   submitted = false;
   countries:any[]=[]; 
@@ -44,7 +45,9 @@ export class RegistrationComponent implements OnInit {
     EmailVerified:0
   }
 
-  constructor(private formBuilder:FormBuilder, private userservice:UsermanagementService) {  }
+  constructor(private formBuilder:FormBuilder, private userservice:UsermanagementService,
+    private messageService: MessageService,private ngxService: NgxUiLoaderService,
+    private router:Router) {  }
 
   ngOnInit() {
 
@@ -131,10 +134,32 @@ addcustomer() {
   this.registerdto.PWD=this.registrationForm.value["password"];
  // this.registerdto.Image=this.finalImage.replace(/^data:image\/[a-z]+;base64,/, "");
   this.registerdto.LoginType="D";
-
-this.userservice.CustomerRegistration(this.registerdto).subscribe(res=>{
-  console.log(res);
-})
+  this.ProgressSpinnerDlg=true;
+  this.userservice.CustomerRegistration(this.registerdto).subscribe(res=>{
+  this.ProgressSpinnerDlg=false;
+  this.messageService.add({severity:'success', summary:'Success Message', detail:res["result"]});
+ // this.router.navigateByUrl('/');
+ this.ResetForm();
+},
+error=>{
+  this.messageService.add({severity:'error', summary:'Error Message', detail:error["result"]});
+});
  }
 
+
+ ResetForm()
+ {
+
+  this.registrationForm.reset({
+    'firstname':'',
+    'lastname':'',
+    'mobile':'',
+    'emailid':'',
+    'address':'',
+    'country':'Select Country',
+    'city':'',
+    'confirmpassword':'',
+    'password':'',
+  });
+ }
 }

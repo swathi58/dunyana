@@ -20,6 +20,7 @@ export class CategoriessliderComponent implements OnInit {
     interval: {timing: 4000, initialDelay: 1000},
     loop: true,
     touch: true,
+    slide:1,
     velocity: 0.2
   }
 

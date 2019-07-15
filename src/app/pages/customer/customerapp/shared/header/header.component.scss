@@ -2,9 +2,12 @@ header .info-bar ul.lang li.search {
     position: relative;
   }
   
+
+
   header .info-bar ul.lang li.search > a {
     color: #00c0f3;
     line-height: 12pt;
+    cursor: pointer;
   }
   header .info-bar ul.lang li.flag a {
     width: 24px;
@@ -16,6 +19,9 @@ header .info-bar ul.lang li.search {
     -moz-border-radius: 50%;
     text-align: center;
     line-height: 24px;
+  }
+  header .info-bar  .search_container .closebtn, header  .search_container .filterbtn{
+    cursor: pointer;
   }
   
   header .info-bar .search_container {
@@ -72,6 +78,14 @@ header .info-bar ul.lang li.search {
    // background: url(../images/ico_close.png) no-repeat 0 0;
   }
   
+  header .info-bar ul.lang li.langSel {
+    position: relative;
+  cursor: pointer;
+  }
+  header .info-bar ul.lang li.langSel:hover {
+    color: white;
+  }
+
   header .info-bar .lang_container {
     position: absolute;
     width: 100px;
@@ -102,12 +116,14 @@ header .info-bar ul.lang li.search {
     border-bottom: solid 1px #4f5b69;
     text-align: left;
     margin: 0;
+
   }
   
   header .info-bar .lang_container ul li a {
     font-size: 11pt;
     font-family: "teshrin_arltmedium", sans-serif;
     color: #ffffff;
+    cursor: pointer;
   }
   
   header .info-bar .lang_container ul li a:hover {

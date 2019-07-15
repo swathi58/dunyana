@@ -13,6 +13,11 @@ export class UsermanagementService {
 
   constructor(private http: HttpClient,public router:Router) {}
 
+
+  public test(): Observable<any> {
+    return this.http.get<any>(environment.API_URL + 'lookup');
+  }
+
   public CustomerRegistration(registration: RegistrationDto): Observable<RegistrationDto> {
     return this.http.post<RegistrationDto>(environment.API_URL + 'CustomerRegistration/InsertRegistrationDetails', registration);
   }

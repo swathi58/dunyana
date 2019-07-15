@@ -9,6 +9,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class HomeComponent implements OnInit {
 
+  fb_badge_img="assets/layout/images/fb_badge_img.jpg";
   slideNo = 0;
   withAnim = true;
   resetAnim = true;
