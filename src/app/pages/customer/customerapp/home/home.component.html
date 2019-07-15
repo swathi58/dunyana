@@ -1,95 +1,95 @@
 <main>
-  <section class="home_banner">
-    
-      <ngu-carousel #headerCarousel [inputs]="carouselConfig" [dataSource]="headercarouselItems">
-          <div *nguCarouselDef="let item;" class="item">
-              <div class="item" [ngStyle]="{'background-image':'url('+item.img+')'}">
-                  <div class="text_container">
-                      <div class="container">
+    <section class="home_banner">
 
-                          <div class="row">
-                              <div class="col-sm-12 col-xl-12 p-o">
-                                  <h1>all your favourite<br/> brands in one place <br/><strong>shop the world</strong></h1>
-                                  <p><a href="#" class="line_btn lwhite">Explore categories</a></p>
+        <ngu-carousel #headerCarousel [inputs]="carouselConfig" [dataSource]="headercarouselItems">
+            <div *nguCarouselDef="let item;" class="item">
+                <div class="item" [ngStyle]="{'background-image':'url('+item.img+')'}">
+                    <div class="text_container">
+                        <div class="container">
 
-                              </div>
-                          </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-xl-12 p-o">
+                                    <h1>all your favourite<br/> brands in one place <br/><strong>shop the world</strong></h1>
+                                    <p><a href="#" class="line_btn lwhite">Explore categories</a></p>
 
-                      </div>
-                  </div>
-              </div>
-          </div>
-          <!-- <button NguCarouselNext class="rightRs">></button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <button NguCarouselNext class="rightRs">></button>
     <button NguCarouselPrev class="leftRs"><</button> -->
-          <!-- <ul class="myPoint" NguCarouselPoint>
+            <!-- <ul class="myPoint" NguCarouselPoint>
       <li *ngFor="let j of myCarousel.pointNumbers; let j = index" [class.active]="j==myCarousel.activePoint" (click)="myCarousel.moveTo(j)"></li>
     </ul> -->
-      </ngu-carousel>
-  </section>
-  <section class="qkLinks">
-      <div class="container-fluid">
-          <div class="row">
-              <div class="col-sm-12">
-                  <ul class="ql">
+        </ngu-carousel>
+    </section>
+    <section class="qkLinks">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <ul class="ql">
 
-                      <li class=" it">
-                          <a href="#"></a>
-                          <h2>Deals <br/>& promotions</h2>
-                          <i class="icomoon icon-offer"></i>
+                        <li class=" it">
+                            <a href="#"></a>
+                            <h2>Deals <br/>& promotions</h2>
+                            <i class="icomoon icon-offer"></i>
 
-                      </li>
-                      <li class=" it">
-                          <a href="#"></a>
-                          <h2>Track <br/>your package</h2>
-                          <i class="icomoon icon-tracking"></i>
+                        </li>
+                        <li class=" it">
+                            <a href="#"></a>
+                            <h2>Track <br/>your package</h2>
+                            <i class="icomoon icon-tracking"></i>
 
-                      </li>
-                      <li class="it">
-                          <a href="#"></a>
-                          <h2>Customer <br/>Service</h2>
-                          <i class="icomoon icon-cust_serv"></i>
+                        </li>
+                        <li class="it">
+                            <a href="#"></a>
+                            <h2>Customer <br/>Service</h2>
+                            <i class="icomoon icon-cust_serv"></i>
 
-                      </li>
-                      <li class="it">
-                          <a href="#"></a>
-                          <h2>Payment<br/>methods</h2>
-                          <i class="icomoon icon-payment"></i>
+                        </li>
+                        <li class="it">
+                            <a href="#"></a>
+                            <h2>Payment<br/>methods</h2>
+                            <i class="icomoon icon-payment"></i>
 
-                      </li>
-                  </ul>
+                        </li>
+                    </ul>
 
-              </div>
-          </div>
-      </div>
-  </section>
-  <section class="offerbadge">
-      <div class="container-fluid">
-          <div class="row">
-              <div class="col-sm-12">
-                  <div class="ob">
-                      <p>Don’t miss out on the latest offer</p>
-                      <h1>35% off selected items*</h1>
-                      <small>*Terms & condtions apply.</small>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </section>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="offerbadge">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="ob">
+                        <p>Don’t miss out on the latest offer</p>
+                        <h1>35% off selected items*</h1>
+                        <small>*Terms & condtions apply.</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<app-categoriesslider></app-categoriesslider>
+    <app-categoriesslider></app-categoriesslider>
 
-  <section class="fbConnect">
-      <div class="container-fluid">
-          <div class="row">
-              <div class="col-lg-6 fbimg">
-                  <img src="../../assets/layout/images/fb_badge_img.jpg" alt="connect" />
-              </div>
-              <div class="col-lg-6 fbtxt">
-                  <h2>connect your <br/>Facebook account</h2>
-                  <p>See what your friends are <br/>shopping, get suggestions <br/>and recommendations</p>
-                  <a href="#" class="line_btn swhite">Connect now</a>
-              </div>
-          </div>
-      </div>
-  </section>
+    <section class="fbConnect">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6 fbimg">
+                    <img src="../../assets/layout/images/fb_badge_img.jpg" alt="connect" />
+                </div>
+                <div class="col-lg-6 fbtxt">
+                    <h2>connect your <br/>Facebook account</h2>
+                    <p>See what your friends are <br/>shopping, get suggestions <br/>and recommendations</p>
+                    <a href="#" class="line_btn swhite">Connect now</a>
+                </div>
+            </div>
+        </div>
+    </section>
 </main>
