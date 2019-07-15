@@ -1,43 +1,17 @@
-<header>
-  <div class="info-bar"></div>
-
-  <div class="main-header">
-      <div class="container">
-          <div class="row">
-              <div class="col-sm-6">
-                  <a [routerLink]="['/customer/home']" class="site-logo"><img [src]="headerlogo" alt="dunyaya" /></a>
-              </div>
-
-          </div>
-      </div>
-  </div>
-
-</header>
-
 <section class="success-bg text-center">
-  <h1 class="pt-5">
-      Email Verification Success
-  </h1>
 
-  <img class="text-center" [src]="checkinfo">
+
+    <div class="center col-md-3">
+
+        <img class="text-center" [src]="checkinfo">
+        <h2>Success!</h2>
+        <p>
+            You have signed in successfully. You will be redirected in 5 seconds.
+        </p>
+        <p>Redirecting...</p>
+    </div>
+
+
+    <div class="ftxt">Click here if your browser doesn’t redirect you automatically.</div>
 
 </section>
-
-<footer>
-  <div class="container">
-  </div>
-  <div class="container-fluid">
-      <div class="row">
-          <div class="col-sm-12 ftdivider">
-
-          </div>
-      </div>
-  </div>
-  <div class="container">
-      <div class="row">
-          <div class="col-sm-12 fttxt">
-              <p>&copy; Dunyana. All Rights Reserved. 2019.</p>
-          </div>
-      </div>
-  </div>
-</footer>

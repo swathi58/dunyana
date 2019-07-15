@@ -1,3 +1,6 @@
+$teshrin_arltlight-font-path: "../src/assets/scss/fonts/teshrinarlt-light-webfont.woff2";
+$teshrin_arltmedium-font-path: "../src/assets/scss/fonts/teshrinarlt-medium-webfont.woff2";
+
 @font-face {
     font-family: 'teshrin_arltlight';
     src: local('teshrin_arltlight'), url($teshrin_arltlight-font-path) format('woff');

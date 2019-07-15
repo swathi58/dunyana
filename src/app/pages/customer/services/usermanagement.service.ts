@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { User } from '../model/user';
+import { RegistrationDto } from '../model/DTOs/RegistraionDto';
+import { ChangepasswordDto } from '../model/DTOs/ChangepasswordDto';
 @Injectable({
   providedIn: 'root'
 })
@@ -21,13 +23,16 @@ export class UsermanagementService {
   }
 
   public EmailVerificationUpdate(registration: RegistrationDto): Observable<RegistrationDto> {
-    return this.http.post<RegistrationDto>(environment.API_URL + 'CustomerRegistration/updateRegistrationDetails', registration);
+    return this.http.post<RegistrationDto>(environment.API_URL + 'CustomerRegistration/AccountActivation', registration);
   }
 
-  public postDetails(Bank: registration): Observable<registration> {
-    return this.http.post<registration>(environment.API_URL + `Bank`, Bank);
+  public EmailVerification(registration: RegistrationDto): Observable<RegistrationDto> {
+    return this.http.post<RegistrationDto>(environment.API_URL + 'CustomerRegistration/EmailCheckValidation', registration);
   }
 
+  public ChangePassword(changepassword: ChangepasswordDto): Observable<ChangepasswordDto> {
+    return this.http.post<ChangepasswordDto>(environment.API_URL + 'CustomerRegistration/ChangePassword', changepassword);
+  }
 
   
   // mallesh api code

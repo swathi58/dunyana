@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../../model/user';
 import { UsermanagementService } from '../../services/usermanagement.service';
 import { AuthServiceConfig, FacebookLoginProvider, GoogleLoginProvider,AuthService,SocialLoginModule } from 'angularx-social-login';
-import{ToastrService}from 'ngx-toastr';
+// import{ToastrService}from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { Observable, Observer } from 'rxjs';
 
@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
   base64Image: any;
   
   constructor(private dataservice:UsermanagementService,private socialAuthService: AuthService,
-    private toaster: ToastrService,private router: Router) {
+    private router: Router) {
       this.dataservice.sessionIn();
      }
 
@@ -157,12 +157,12 @@ export class LoginComponent implements OnInit {
    
      debugger
     this.dataservice.registeruser(this.userPostData).subscribe((data: any) => {
-      this.toaster.success("items Added Successfully");
+      //this.toaster.success("items Added Successfully");
       this.router.navigateByUrl("customer/home");
        },
        error => {
          if (error["status"] != 200) {
-           this.toaster.error("Failed to registration");
+        //   this.toaster.error("Failed to registration");
  
            //this.router.navigateByUrl("customer/home");
          };
@@ -172,7 +172,7 @@ export class LoginComponent implements OnInit {
 
     }
     else{
-       this.toaster.show('Email id already Exists');
+      // this.toaster.show('Email id already Exists');
     }
     
 

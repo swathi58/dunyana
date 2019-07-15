@@ -43,7 +43,7 @@
 
                               <div class="row inputset">
                                   <div class="col-sm-6"><label>Email</label></div>
-                                  <div class="col-sm-6"><input type="text" placeholder="email@domain.com" formControlName="emailid"/></div>
+                                  <div class="col-sm-6"><input type="text" placeholder="email@domain.com" formControlName="emailid" (focusout)="CheckEmail()" /></div>
                                   <div class="col-sm-12">
                                         <div *ngIf="registrationForm.controls['emailid'].errors && !registrationForm.controls['emailid'].pristine" class="text-danger error">
                                                 <div [hidden]="!registrationForm.controls['emailid'].errors.required">Email Required</div>
@@ -83,14 +83,13 @@
                               <div class="row inputset">
                                       <div class="col-sm-6"><label>Country</label></div>
                                       <div class="col-sm-6">
-                                        <!-- <p-dropdown [options]="countries" formControlName="country" [autoWidth]="false" placeholder="Select Country" [filter]="false">
+                                        <p-dropdown [options]="countries" formControlName="country" [autoWidth]="false" placeholder="Select Country" [filter]="false">
                                             <option *ngFor="let c of countries" [ngValue]="c">{{c}}</option>
-                                        </p-dropdown>    -->
-
-                                        <select name="Country" formControlName="country">
+                                        </p-dropdown>   
+                                        <!-- <select name="Country" formControlName="country">
 
                                                 <option *ngFor="let c of countries" [ngValue]="c.value">{{c.label}}</option>
-                                        </select>
+                                        </select> -->
 
 
                                               <!-- <select name="Country">
@@ -382,8 +381,8 @@
                               <div class="row inputset">
                                 <div class="col-sm-6"><label>Upload Image</label></div>
                                 <div class="col-sm-6">
-                                    <input type="file" #uploader (change)="fileChangeEvent($event)" class="" data-toggle="modal" data-target="#myModal"/>
-                                    <!-- <button type="button" (click)="uploader.click()" pButton label="Upload Image" class="btn btn-primary float-right mt-2"  data-toggle="modal" data-target="#myModal"></button>                                 -->
+                                    <input type="file" #uploader (change)="fileChangeEvent($event)" class="" [hidden]=true />
+                                    <button type="button" (click)="uploader.click()" pButton label="Upload Image" class="btn btn-primary float-right mt-2"  data-toggle="modal" data-target="#myModal" class="upldbtnsty" ></button>                                
                                 </div>
                                 <div class="col-sm-12"><hr></div>
                               </div>
