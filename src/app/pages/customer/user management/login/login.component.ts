@@ -10,6 +10,7 @@ import { AuthServiceConfig, FacebookLoginProvider, GoogleLoginProvider,AuthServi
 })
 export class LoginComponent implements OnInit {
 
+  headerlogo:string="assets/layout/images/glogo.png";
   userPostData:User={
     Email:"",
     FirstName:"",

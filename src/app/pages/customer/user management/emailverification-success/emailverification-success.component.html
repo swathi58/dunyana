@@ -5,7 +5,7 @@
       <div class="container">
           <div class="row">
               <div class="col-sm-6">
-                  <a href="index.html" class="site-logo"><img src="../../assets/layout/images/header_logo.png" alt="dunyaya" /></a>
+                  <a [routerLink]="['/customer/home']" class="site-logo"><img [src]="headerlogo" alt="dunyaya" /></a>
               </div>
 
           </div>
@@ -19,7 +19,7 @@
       Email Verification Success
   </h1>
 
-  <img class="text-center" src="../../../../../assets/layout/images/animated-check.gif">
+  <img class="text-center" [src]="checkinfo">
 
 </section>
 
