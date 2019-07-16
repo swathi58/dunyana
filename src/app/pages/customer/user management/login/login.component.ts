@@ -49,9 +49,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private dataservice:UsermanagementService,private socialAuthService: AuthService,
 
-    private router: Router) {
-
-    private messageService: MessageService,private router: Router) {
+    private router: Router,  private messageService: MessageService) {
 
       this.dataservice.sessionIn();
 

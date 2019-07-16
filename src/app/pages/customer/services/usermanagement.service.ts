@@ -6,7 +6,6 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { User } from '../model/user';
-import { RegistrationDto } from '../model/DTOs/RegistraionDto';
 import { ChangepasswordDto } from '../model/DTOs/ChangepasswordDto';
 @Injectable({
   providedIn: 'root'
@@ -19,10 +18,6 @@ export class UsermanagementService {
   public postDetails(Bank: registration): Observable<registration> {
     return this.http.post<registration>(environment.API_URL + `Bank`, Bank);
   }
-
-
-
-
 
   public test(): Observable<any> {
     return this.http.get<any>(environment.API_URL + 'lookup');
