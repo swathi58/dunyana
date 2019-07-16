@@ -48,12 +48,6 @@ export class RegistrationComponent implements OnInit {
     EmailVerified:0
   }
 
-  changepassword:ChangepasswordDto={
-    Email:null,
-    PWD:null,
-    NPWD:null
-  }
-
 
   constructor(private formBuilder:FormBuilder, private userservice:UsermanagementService,
     private messageService: MessageService,private ngxService: NgxUiLoaderService,
@@ -84,13 +78,6 @@ export class RegistrationComponent implements OnInit {
 ];
 
 this.registrationForm.controls['country'].setValue(this.countries[0]["label"], {onlySelf: true});
-this.changepassword.Email="swathi.chinnala@gmail.com";
-this.changepassword.PWD="swathi";
-this.changepassword.NPWD="swathi09";
-this.userservice.ChangePassword(this.changepassword).subscribe(x=>{
-  console.log(x);
-})
-
 }
 
 
@@ -161,8 +148,8 @@ CheckEmail()
   this.userservice.EmailVerification(this.registerdto).subscribe(res=>{
   this.messageService.add({severity:'success', summary:'Success Message', detail:res["result"]});
   },
-  error=>{
-    this.messageService.add({severity:'error', summary:'Error Message', detail:error["result"]});
+  errormsg=>{
+    this.messageService.add({severity:'error', summary:'Error Message', detail:errormsg["error"]["result"]});
   });
 }
 
