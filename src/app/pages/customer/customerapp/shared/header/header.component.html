@@ -102,19 +102,19 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6">
-                        <a [routerLink]="['/customer/home']" class="site-logo"><img [src]="headerimg" alt="dunyaya" /></a>
+                        <a [routerLink]="['/customer/home']" class="site-logo"><img [src]="logoimg" alt="dunyaya" /></a>
                     </div>
                     <div class="col-sm-6 right-align">
                         <ul class="user-actions">
                             <li class="cat"><a [routerLink]="['/customer/home']">{{ 'Shopby' | translate }} <strong>{{ 'Category' | translate }}</strong></a></li>
                             <li class="del"><a [routerLink]="['/customer/home']">{{ 'Deliverto' | translate }} <strong>{{ 'SaudiArabia' | translate }}</strong><i class="icon-arrows"></i> </a></li>
-                            <li class="ac"><a [routerLink]="['/signin']">{{ 'Hithere' | translate }},  <strong>{{ 'Signin' | translate }}</strong></a></li>
+                            <li class="ac" [hidden]="islogin"><a [routerLink]="['/signin']">{{ 'Hithere' | translate }},  <strong>{{ 'Signin' | translate }}</strong></a></li>
+                            <li class="ac" [hidden]="!islogin"><a>{{ 'Hithere' | translate }},  <strong>{{ useremail | translate }}</strong></a></li>
                             <li class="cart" style="display: none">
                                 <div class="icon-cart"><span>12</span></div>
                             </li>
                         </ul>
-                    </div>
-      
+                    </div>      
                 </div>
             </div>
         </div>
