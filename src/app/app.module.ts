@@ -18,7 +18,7 @@ import { RegistrationComponent } from './pages/customer/user management/registra
 import { SharedModule } from './shared/shared.module';
 import { EmailverificationSuccessComponent } from './pages/customer/user management/emailverification-success/emailverification-success.component';
 import {DialogModule} from 'primeng/dialog';
-
+import {ButtonModule, Button} from 'primeng/button';
 import { LangShareService } from '../app/shared/services/lang-share.service';
 import { registerLocaleData } from '../../node_modules/@angular/common';
 import localeESUS from '@angular/common/locales/es-US';
@@ -76,6 +76,7 @@ export function getAuthServiceConfigs() {
     SocialLoginModule,
     ImageCropperModule,
     DialogModule,
+    ButtonModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

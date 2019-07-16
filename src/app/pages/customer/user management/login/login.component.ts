@@ -72,9 +72,7 @@ export class LoginComponent implements OnInit {
      else if (loginPlatform === 'google') {
       socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
     }
-    else{
-    
-    } 
+  
 
     this.socialAuthService.signIn(socialPlatformProvider).then(userData => {
       console.log(loginPlatform + ' sign in data : ', (userData["firstName"]));
@@ -174,10 +172,10 @@ export class LoginComponent implements OnInit {
       this.messageService.add({severity:'success', summary:'Success Message', detail:res["result"]});
       this.router.navigateByUrl("customer/home");
        },
-       error => {
+       errormsg => {
         
-           debugger
-           this.messageService.add({severity:'error', summary:'Error Message', detail:error["result"]});
+        console.log(errormsg["error"]["result"]);
+        this.messageService.add({severity:'error', summary:'Error Message', detail:errormsg["error"]["result"]});
            //this.router.navigateByUrl("customer/home");
   
        });
@@ -192,9 +190,6 @@ export class LoginComponent implements OnInit {
 
     }
     
-
-    
-
   }
 
   getBase64ImageFromURL(url: string) {
@@ -237,25 +232,32 @@ export class LoginComponent implements OnInit {
     this.userPostData.Email = email;
     this.userPostData.PWD = password;
 
-  
        debugger
 
     this.dataservice.login(this.userPostData).subscribe(res => {
       debugger
       this.messageService.add({severity:'success', summary:'Success Message', detail:res["result"]});
       //this.router.navigateByUrl("customer/home");
-       },
-       error => {
+       },       
+      //  error=>{
+      //    this.messageService.add({severity:'error', summary:'Error Message', detail:error["result"]});
+      //  });
+
+       errormsg => {
         
-           debugger
-           this.messageService.add({severity:'error', summary:'Error Message', detail:error["result"]});
+        console.log(errormsg["error"]["result"]);
+        this.messageService.add({severity:'error', summary:'Error Message', detail:errormsg["error"]["result"]});
            //this.router.navigateByUrl("customer/home");
-           console.log(error);
   
        });
-     
-    
+
   }
+
+  sendlink(email){
+    this.userPostData.Email = email;
+  }
+  
+
 
   
 
