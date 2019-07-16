@@ -9,6 +9,7 @@ import { UsermanagementService } from '../../services/usermanagement.service';
 import {MessageService} from 'primeng/api';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { Router } from '@angular/router';
+import { ChangepasswordDto } from '../../model/DTOs/ChangepasswordDto';
 
 @Component({
   selector: 'app-registration',
@@ -47,6 +48,13 @@ export class RegistrationComponent implements OnInit {
     EmailVerified:0
   }
 
+  changepassword:ChangepasswordDto={
+    Email:null,
+    PWD:null,
+    NPWD:null
+  }
+
+
   constructor(private formBuilder:FormBuilder, private userservice:UsermanagementService,
     private messageService: MessageService,private ngxService: NgxUiLoaderService,
     private router:Router) {  }
@@ -76,6 +84,13 @@ export class RegistrationComponent implements OnInit {
 ];
 
 this.registrationForm.controls['country'].setValue(this.countries[0]["label"], {onlySelf: true});
+this.changepassword.Email="swathi.chinnala@gmail.com";
+this.changepassword.PWD="swathi";
+this.changepassword.NPWD="swathi09";
+this.userservice.ChangePassword(this.changepassword).subscribe(x=>{
+  console.log(x);
+})
+
 }
 
 
@@ -123,8 +138,8 @@ saveCropImage()
   console.log(this.finalImage);
   
 }
-addcustomer() {
-  console.log(this.registrationForm);
+ConvertingFormToDto()
+{
 
   this.registerdto.FirstName=this.registrationForm.value["firstname"];
   this.registerdto.LastName=this.registrationForm.value["lastname"];
@@ -134,8 +149,25 @@ addcustomer() {
   this.registerdto.Country=this.registrationForm.value["country"];
   this.registerdto.City=this.registrationForm.value["city"];
   this.registerdto.PWD=this.registrationForm.value["password"];
- // this.registerdto.Image=this.finalImage.replace(/^data:image\/[a-z]+;base64,/, "");
+  this.registerdto.Image=this.finalImage.replace(/^data:image\/[a-z]+;base64,/, "");
   this.registerdto.LoginType="D";
+
+}
+
+CheckEmail()
+{
+  //this.registerdto.Email="swathi.chinnala@gmail.com";
+  this.ConvertingFormToDto();
+  this.userservice.EmailVerification(this.registerdto).subscribe(res=>{
+  this.messageService.add({severity:'success', summary:'Success Message', detail:res["result"]});
+  },
+  error=>{
+    this.messageService.add({severity:'error', summary:'Error Message', detail:error["result"]});
+  });
+}
+
+addcustomer() {
+this.ConvertingFormToDto();
   this.ProgressSpinnerDlg=true;
   this.userservice.CustomerRegistration(this.registerdto).subscribe(res=>{
   this.ProgressSpinnerDlg=false;
@@ -144,6 +176,8 @@ addcustomer() {
  this.ResetForm();
 },
 error=>{
+  this.ProgressSpinnerDlg=false;
+  console.log(error);
   this.messageService.add({severity:'error', summary:'Error Message', detail:error["result"]});
 });
  }

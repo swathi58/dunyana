@@ -30,6 +30,9 @@ import {
   HttpClient,
   HTTP_INTERCEPTORS,
 } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { ChangepasswordComponent } from './pages/customer/user management/changepassword/changepassword.component';
 registerLocaleData(localeESUS);
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -58,6 +61,8 @@ export function getAuthServiceConfigs() {
     LoginComponent,
     RegistrationComponent,
     EmailverificationSuccessComponent,
+    PageNotFoundComponent,
+    ChangepasswordComponent,
   ],
   imports: [
     BrowserModule,
@@ -78,10 +83,14 @@ export function getAuthServiceConfigs() {
         deps: [HttpClient],
       },
     }),
+   
     //NguCarouselModule
   ],
-  providers: [AuthService,MessageService,
-    {provide:AuthServiceConfig, useFactory:getAuthServiceConfigs},LangShareService,],
+  // providers: [AuthService,MessageService,
+  //   {provide:AuthServiceConfig, useFactory:getAuthServiceConfigs},LangShareService,],
+
+    providers: [AuthService,MessageService,
+      {provide:AuthServiceConfig, useFactory:getAuthServiceConfigs},LangShareService,],
 
   bootstrap: [AppComponent]
 })

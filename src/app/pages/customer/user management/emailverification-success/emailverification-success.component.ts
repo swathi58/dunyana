@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RegistrationDto } from '../../model/DTOs/RegistraionDto';
 import { UsermanagementService } from '../../services/usermanagement.service';
 
@@ -10,8 +10,8 @@ import { UsermanagementService } from '../../services/usermanagement.service';
 })
 export class EmailverificationSuccessComponent implements OnInit {
 
-  headerlogo:string="assets/layout/images/header_logo.png";
-  checkinfo:string="assets/layout/images/animated-check.gif";
+
+  checkinfo:string="assets/layout/images/svg/success.svg";
   registerdto:RegistrationDto={
     Id:0,
     FirstName:null,
@@ -30,7 +30,7 @@ export class EmailverificationSuccessComponent implements OnInit {
     EmailVerified:0
   }
  
-  constructor( private route: ActivatedRoute,private userservice:UsermanagementService) { }
+  constructor( private route: ActivatedRoute,private userservice:UsermanagementService,private router: Router) { }
 
   ngOnInit() {
    console.log(this.route.snapshot.params['emailid']);
@@ -38,7 +38,9 @@ export class EmailverificationSuccessComponent implements OnInit {
    this.registerdto.EmailVerified=1;
    this.userservice.EmailVerificationUpdate( this.registerdto).subscribe(res=>{
      console.log(res);
+    setTimeout(() => {
+      this.router.navigate(['customer/home']);
+  }, 5000);  //5s
    });
   }
-
 }

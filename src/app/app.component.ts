@@ -16,7 +16,6 @@ export class AppComponent {
   constructor(private router: Router,
     public langShare: LangShareService,
     public translate: TranslateService) {
-    //this.router.navigateByUrl('/customer');
 
    }
    toggleLang(lang) {

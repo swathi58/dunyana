@@ -14,6 +14,8 @@ export class HeaderComponent implements OnInit {
   showDiv="";
   showlngDiv="";
   headerimg="assets/layout/images/header_logo.png";
+  englnfimg="assets/icons/english.png";
+  spanlanimg="assets/icons/spanish.png";
   constructor(  public langShare: LangShareService,
     public translate: TranslateService,
     ) { }

@@ -68,18 +68,18 @@
                         </ul>                  
                     </div>
                     <div class="col-sm-6">
-                        <!-- <ul class="float-right text-right ml-4">
+                        <ul class="float-right text-right ml-4">
                             <li>
-                                <img src="../../../../../../assets/icons/english.png" width="20" height="20" [ngClass]="{ blur: lang == 'es' }" (click)="toggleLang('en')" alt="EN" class="lang-item mr-2" />
-                                <img src="../../../../../../assets/icons/spanish.png" width="20" height="20" [ngClass]="{ blur: lang == 'en' }" class="lang-item lang-item--es marg-right-20" (click)="toggleLang('ar')" alt="arbic" />
+                                <img [src]="englnfimg" width="20" height="20" [ngClass]="{ blur: lang == 'es' }" (click)="toggleLang('en')" alt="EN" class="lang-item mr-2" />
+                                <img [src]="spanlanimg" width="20" height="20" [ngClass]="{ blur: lang == 'en' }" class="lang-item lang-item--es marg-right-20" (click)="toggleLang('ar')" alt="arbic" />
                             </li>
-                        </ul> -->
+                        </ul>
 
       
                     <div>
                         <ul class="lang">
                             <li class="search"><a id="srhLink" (click)="displaysearch()">{{ 'Search' | translate }}</a></li>
-                            <li><a class="langSel" (click)="toggleLang('ar'); displaylang()">العربية</a></li>
+                            <!-- <li><a class="langSel" (click)="toggleLang('ar'); displaylang()">العربية</a></li> -->
       
                         </ul>
                         <div class="search_container" [ngClass]="showDiv">
@@ -87,12 +87,12 @@
                             <a class="closebtn" (click)="closesearch()"></a>
                             <a class="filterbtn"></a>
                         </div>
-                        <div class="lang_container" [ngClass]="showlngDiv">                           
+                        <!-- <div class="lang_container" [ngClass]="showlngDiv">                           
                             <ul>
                                 <li><a (click)="toggleLang('ar')">العربية</a></li>
                                 <li><a (click)="toggleLang('en')">English</a></li>
                             </ul>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 </div>
