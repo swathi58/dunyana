@@ -36,7 +36,7 @@ import { ChangepasswordComponent } from './pages/customer/user management/change
 registerLocaleData(localeESUS);
 
 export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http);
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 export function getAuthServiceConfigs() {
