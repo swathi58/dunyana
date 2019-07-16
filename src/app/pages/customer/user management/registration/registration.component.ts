@@ -163,8 +163,10 @@ this.ConvertingFormToDto();
  this.ResetForm();
 },
 error=>{
+
   this.ProgressSpinnerDlg=false;
   console.log(error);
+
   this.messageService.add({severity:'error', summary:'Error Message', detail:error["result"]});
 });
  }
