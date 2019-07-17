@@ -49,11 +49,14 @@ export class HeaderComponent implements OnInit {
     if(lang=="en")
     {
        this.logoimg=this.headerimg;
+
     }
     else if(lang=="ar")
     {
       this.logoimg=this.header_ar_img;
     }
+    this.showlngDiv="";
+    this.showlngDiv="lang_container"; 
   }
   translation() {
     this.langShare.translate$.subscribe(translate => {
@@ -76,4 +79,5 @@ export class HeaderComponent implements OnInit {
   {
 this.showlngDiv="showDiv";
   }
+
 }

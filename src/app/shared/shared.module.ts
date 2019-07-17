@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/components/button/button';
 import {DropdownModule} from 'primeng/dropdown';
-import {DialogModule} from 'primeng/dialog';
+import {DialogModule} from 'primeng/components/dialog/dialog';
 import {ToastModule} from 'primeng/toast';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 const COMMON_MODULES = [
@@ -11,7 +11,8 @@ const COMMON_MODULES = [
   DropdownModule,
   DialogModule,
   ToastModule,
-  ProgressSpinnerModule
+  ProgressSpinnerModule,
+  
 ]
 
 

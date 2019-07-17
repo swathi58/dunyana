@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ChangepasswordDto } from '../../model/DTOs/ChangepasswordDto';
 import { UsermanagementService } from '../../services/usermanagement.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -11,6 +11,12 @@ import { MessageService } from 'primeng/api';
   styleUrls: ['./changepassword.component.scss']
 })
 export class ChangepasswordComponent implements OnInit {
+  
+  @Input() display: boolean;
+  @Output() displayChange = new EventEmitter();
+
+
+
   changepwdForm:FormGroup;
   btndisable:string="disable";
   changepassword:ChangepasswordDto={
