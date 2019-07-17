@@ -19,25 +19,35 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 registerLocaleData(localeESUS);
 import { registerLocaleData } from '../../../../../node_modules/@angular/common';
 import localeESUS from '@angular/common/locales/es-US';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {DialogModule} from 'primeng/components/dialog/dialog';
 
 import {
   HttpClientModule,
   HttpClient,
   HTTP_INTERCEPTORS,
 } from '@angular/common/http';
+import { CategoryListComponent } from './Category Management/category-list/category-list.component';
+import { CategoryDetailsComponent } from './Category Management/category-details/category-details.component';
+import { CustomerAccountComponent } from './account management/customer-account/customer-account.component';
+import { ChangepasswordComponent } from '../user management/changepassword/changepassword.component';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent, HomeComponent,CustomerappComponent, CategoriessliderComponent],
+  declarations: [HeaderComponent, FooterComponent, HomeComponent,CustomerappComponent, CategoriessliderComponent,
+     CategoryListComponent, CategoryDetailsComponent, CustomerAccountComponent,ChangepasswordComponent],
   exports: [CustomerappComponent],
   imports: [
     CommonModule,
     CustomerappRoutingModule,
     NguCarouselModule,
+    DialogModule,
     ToastModule,
     NgxUiLoaderModule,
+    FormsModule,
+    ReactiveFormsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

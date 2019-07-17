@@ -18,13 +18,14 @@ import { RegistrationComponent } from './pages/customer/user management/registra
 import { SharedModule } from './shared/shared.module';
 import { EmailverificationSuccessComponent } from './pages/customer/user management/emailverification-success/emailverification-success.component';
 import {DialogModule} from 'primeng/dialog';
-
+import {ButtonModule, Button} from 'primeng/button';
 import { LangShareService } from '../app/shared/services/lang-share.service';
 import { registerLocaleData } from '../../node_modules/@angular/common';
 import localeESUS from '@angular/common/locales/es-US';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import {MessageService} from 'primeng/api';
+
 import {
   HttpClientModule,
   HttpClient,
@@ -36,7 +37,7 @@ import { ChangepasswordComponent } from './pages/customer/user management/change
 registerLocaleData(localeESUS);
 
 export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http);
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 export function getAuthServiceConfigs() {
@@ -62,7 +63,6 @@ export function getAuthServiceConfigs() {
     RegistrationComponent,
     EmailverificationSuccessComponent,
     PageNotFoundComponent,
-    ChangepasswordComponent,
   ],
   imports: [
     BrowserModule,
@@ -76,6 +76,7 @@ export function getAuthServiceConfigs() {
     SocialLoginModule,
     ImageCropperModule,
     DialogModule,
+    ButtonModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

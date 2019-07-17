@@ -13,7 +13,12 @@ export class HeaderComponent implements OnInit {
   lang = 'en';
   showDiv="";
   showlngDiv="";
+  useremail:string;
+  islogin:boolean=false;
+
+  logoimg:string;
   headerimg="assets/layout/images/header_logo.png";
+  header_ar_img="assets/layout/images/header_logo_ar.png";
   englnfimg="assets/icons/english.png";
   spanlanimg="assets/icons/spanish.png";
   constructor(  public langShare: LangShareService,
@@ -21,15 +26,37 @@ export class HeaderComponent implements OnInit {
     ) { }
 
   ngOnInit() {
+    this.logoimg=this.headerimg;
     this.translate.setDefaultLang('en');
     this.translate.use('en');
     this.langShare.setTranslate(this.translate);
     this.translation();
+
+
+    if(localStorage.length>0)
+    {
+      if(localStorage.getItem("Email"))
+      {
+            this.useremail=localStorage.getItem("Email");
+            this.islogin=true;
+      }
+    }
   }
   toggleLang(lang) {
     this.lang = lang;
     this.translate.use(lang);
     this.langShare.setTranslate(this.translate);
+    if(lang=="en")
+    {
+       this.logoimg=this.headerimg;
+
+    }
+    else if(lang=="ar")
+    {
+      this.logoimg=this.header_ar_img;
+    }
+    this.showlngDiv="";
+    this.showlngDiv="lang_container"; 
   }
   translation() {
     this.langShare.translate$.subscribe(translate => {
@@ -52,4 +79,5 @@ export class HeaderComponent implements OnInit {
   {
 this.showlngDiv="showDiv";
   }
+
 }

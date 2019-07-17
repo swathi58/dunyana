@@ -38,6 +38,7 @@ export class EmailverificationSuccessComponent implements OnInit {
    this.registerdto.EmailVerified=1;
    this.userservice.EmailVerificationUpdate( this.registerdto).subscribe(res=>{
      console.log(res);
+     localStorage.setItem("Email",res["reEmail"]);
     setTimeout(() => {
       this.router.navigate(['customer/home']);
   }, 5000);  //5s
