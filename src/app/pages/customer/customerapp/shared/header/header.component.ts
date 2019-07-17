@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LangShareService } from 'src/app/shared/services/lang-share.service';
 import { TranslateService } from '@ngx-translate/core';
+import { LocalStorageService } from 'angular-web-storage';
 
 @Component({
   selector: 'app-header',
@@ -22,13 +23,18 @@ export class HeaderComponent implements OnInit {
   englnfimg="assets/icons/english.png";
   spanlanimg="assets/icons/spanish.png";
   constructor(  public langShare: LangShareService,
-    public translate: TranslateService,
+    public translate: TranslateService,private localStorage: LocalStorageService
     ) { }
 
   ngOnInit() {
     this.logoimg=this.headerimg;
-    this.translate.setDefaultLang('en');
-    this.translate.use('en');
+    /* this.translate.setDefaultLang('en');
+    this.translate.use('en'); */
+    if(this.localStorage.get('lang') != null){
+      this.lang = this.localStorage.get('lang');
+      this.translate.use(this.lang); 
+      
+    }
     this.langShare.setTranslate(this.translate);
     this.translation();
 
@@ -54,6 +60,7 @@ export class HeaderComponent implements OnInit {
     {
       this.logoimg=this.header_ar_img;
     }
+    this.localStorage.set('lang', lang);
   }
   translation() {
     this.langShare.translate$.subscribe(translate => {

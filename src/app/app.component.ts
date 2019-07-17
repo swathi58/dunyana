@@ -10,15 +10,15 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class AppComponent {
   title = 'dunyana.web';
-  translationMessages: any;
-  lang = 'en';
+  /* translationMessages: any;
+  lang = 'en'; */
   
   constructor(private router: Router,
     public langShare: LangShareService,
     public translate: TranslateService) {
 
    }
-   toggleLang(lang) {
+/*    toggleLang(lang) {
     this.lang = lang;
     this.translate.use(lang);
     this.langShare.setTranslate(this.translate);
@@ -36,5 +36,5 @@ export class AppComponent {
       this.translate.use('en');
       this.langShare.setTranslate(this.translate);
       this.translation();
-  }
+  } */
 }
