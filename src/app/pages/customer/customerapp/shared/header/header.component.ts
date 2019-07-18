@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LangShareService } from 'src/app/shared/services/lang-share.service';
 import { TranslateService } from '@ngx-translate/core';
 import { LocalStorageService } from 'angular-web-storage';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -28,7 +29,7 @@ export class HeaderComponent implements OnInit {
   name: string;
 
   constructor(  public langShare: LangShareService,
-    public translate: TranslateService,private localStorage: LocalStorageService
+    public translate: TranslateService,private localStorage: LocalStorageService,private router :Router
     ) { }
 
   ngOnInit() {
@@ -97,4 +98,11 @@ export class HeaderComponent implements OnInit {
 this.showlngDiv="showDiv";
   }
 
+  logout()
+  {
+    this.localStorage.clear();
+    this.islogin=false;
+    this.router.navigateByUrl('customer/home');
+   // this.ngOnInit();
+  }
 }

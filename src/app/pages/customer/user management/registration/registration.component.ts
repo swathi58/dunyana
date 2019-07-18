@@ -66,7 +66,7 @@ export class RegistrationComponent implements OnInit {
       country:['Select Country',Validators.required],
       city:['',Validators.required],
       password:['',[Validators.required,Validators.minLength(6)]],
-      confirmpassword:['',Validators.required,Validators.minLength(6)]
+      confirmpassword:['',[Validators.required,Validators.minLength(6)]]
  },
  {
   validator: MustMatch('password', 'confirmpassword')
@@ -124,8 +124,6 @@ showDialog() {
 saveCropImage()
 {
   this.finalImage=this.croppedImage;
-  console.log(this.finalImage);
-  
 }
 
 formvalidate()
@@ -201,6 +199,7 @@ error=>{
     'confirmpassword':'',
     'password':'',
   });
+  this.finalImage="";
  }
 
  showTermsDialog() {

@@ -32,10 +32,11 @@ export class CustomerAccountComponent implements OnInit {
   }
 
 profiledata=this.registerdto;
-  constructor(private userservice:UsermanagementService,) { }
+  constructor(private userservice:UsermanagementService) { }
 
   ngOnInit() {
-    this.ProgressSpinnerDlg=true;
+    console.log("account calling");
+    //this.ProgressSpinnerDlg=true;
    this.registerdto.Email=localStorage.getItem("Email");
     this.userservice.GetProfileInformation(this.registerdto).subscribe(res=>{
       this.profiledata.Image='data:image/png;base64,'+res["image"];

@@ -12,7 +12,7 @@ export class CategoriessliderComponent implements OnInit {
    slideNo = 0;
   withAnim = true;
   resetAnim = true;
-  cars: any[];
+  items: any[];
 
 
 
@@ -36,22 +36,22 @@ export class CategoriessliderComponent implements OnInit {
 
   constructor(private cdr: ChangeDetectorRef,private sanitizer: DomSanitizer,private route:Router) {
 
-    this.cars = [
-      {vin: 'Fashion', year: 2010, brand: 'cat_img_beauty'},
-      {vin: 'Shoes', year: 2015, brand: 'cat_img_fash'},
-      {vin: 'Sports Fitness', year: 2012, brand: 'cat_img_shoes'},
-      {vin: 'Accessories & Beauty', year: 1998, brand: 'cat_img_sports'},
-      {vin: 'Virtual Mall', year: 2011, brand: 'cat_img_virtual'},
-      {vin: 'Fashion', year: 2010, brand: 'cat_img_beauty'},
-      {vin: 'Shoes', year: 2015, brand: 'cat_img_fash'},
-      {vin: 'Sports Fitness', year: 2012, brand: 'cat_img_shoes'},
-      {vin: 'Accessories & Beauty', year: 1998, brand: 'cat_img_sports'},
-      {vin: 'Virtual Mall', year: 2011, brand: 'cat_img_virtual'},
-      {vin: 'Fashion', year: 2010, brand: 'cat_img_beauty'},
-      {vin: 'Shoes', year: 2015, brand: 'cat_img_fash'},
-      {vin: 'Sports Fitness', year: 2012, brand: 'cat_img_shoes'},
-      {vin: 'Accessories & Beauty', year: 1998, brand: 'cat_img_sports'},
-      {vin: 'Virtual Mall', year: 2011, brand: 'cat_img_virtual'}
+    this.items = [
+      {vin: 'Fashion', brand: 'cat_img_beauty'},
+      {vin: 'Shoes', brand: 'cat_img_fash'},
+      {vin: 'Sports Fitness', brand: 'cat_img_shoes'},
+      {vin: 'Accessories & Beauty',  brand: 'cat_img_sports'},
+      {vin: 'Virtual Mall',  brand: 'cat_img_virtual'},
+      {vin: 'Fashion', brand: 'cat_img_beauty'},
+      {vin: 'Shoes', brand: 'cat_img_fash'},
+      {vin: 'Sports Fitness',  brand: 'cat_img_shoes'},
+      {vin: 'Accessories & Beauty',brand: 'cat_img_sports'},
+      {vin: 'Virtual Mall', brand: 'cat_img_virtual'},
+      {vin: 'Fashion',  brand: 'cat_img_beauty'},
+      {vin: 'Shoes',  brand: 'cat_img_fash'},
+      {vin: 'Sports Fitness',  brand: 'cat_img_shoes'},
+      {vin: 'Accessories & Beauty', brand: 'cat_img_sports'},
+      {vin: 'Virtual Mall',  brand: 'cat_img_virtual'}
   ];
 
    }

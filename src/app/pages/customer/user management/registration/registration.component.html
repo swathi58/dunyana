@@ -375,7 +375,7 @@
                                      <div class="col-sm-12">
                                             <div *ngIf="registrationForm.controls['confirmpassword'].errors && !registrationForm.controls['confirmpassword'].pristine" class="text-danger error float-right">
                                                     <div [hidden]="!registrationForm.controls['confirmpassword'].errors.required">ConfirmPassword Required</div>
-                                                    <div [hidden]="!registrationForm.controls['pasconfirmpasswordsword'].errors?.minlength">ConfirmPassword Length Must be Grater Than 6</div>
+                                                    <div [hidden]="!registrationForm.controls['confirmpassword'].errors?.minlength">ConfirmPassword Length Must be Grater Than 6</div>
                                                     <div [hidden]="!registrationForm.controls['confirmpassword'].errors?.mustMatch">ConfirmPassword MusT Match Password</div>
                                             </div>
                                      </div>

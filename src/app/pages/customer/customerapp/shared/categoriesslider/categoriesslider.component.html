@@ -22,14 +22,14 @@
 
 <section class="container-fluid carouselSlider category">
         <h2>Shop by category</h2>
-        <p-carousel headerText="Cars" [value]="cars" numVisible="5" responsive="true" circular="true">
-            <ng-template let-car pTemplate="item">
-                <div class="ui-grid ui-grid-responsive">
+        <p-carousel headerText="items" [value]="items" numVisible="5" responsive="true" circular="true">
+            <ng-template let-item pTemplate="item">
+                <div class="ui-grid ui-grid-responsive" (click)="navigatetocategory(item.vin)">
                     <div class="ui-grid-row">
-                        <div class="ui-grid-col-12"><img src="assets/layout/images/{{car.brand}}.jpg" width="210" class="radius"></div>
+                        <div class="ui-grid-col-12"><img src="assets/layout/images/{{item.brand}}.jpg" width="210" class="radius"></div>
                     </div>
                     <div class="ui-grid-row">
-                        <div class="ui-grid-col-12 desc">{{car.vin}}</div>
+                        <div class="ui-grid-col-12 desc">{{item.vin}}</div>
                     </div>
                 </div>
             </ng-template>

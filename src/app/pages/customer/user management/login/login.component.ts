@@ -269,15 +269,20 @@ private router: Router,  private messageService: MessageService,private formBuil
 
     this.dataservice.login(this.userPostData).subscribe(res => {
       debugger
-      this.ProgressSpinnerDlg=false;
       this.userdata=res['reFirstName'];
       localStorage.setItem('username',this.userdata);
-      //this.messageService.add({severity:'success', summary:'Success Message', detail:res["result"]});
+      localStorage.setItem('Email',res['reEmail']);
+      this.messageService.add({severity:'success', summary:'Success Message', detail:res["result"]});
       this.show=false;
       this.div.nativeElement.innerHTML=res["result"];
-      
+
+      setTimeout(() => {
+        this.router.navigate(['customer/shop-by-category']);
+        //this.router.navigateByUrl("customer/shop-by-category");
+    }, 9000); 
+     
       this.Resetlog();
-      this.router.navigateByUrl("customer/home");
+      //this.router.navigateByUrl("customer/customeraccount");
        },       
       //  error=>{
       //    this.messageService.add({severity:'error', summary:'Error Message', detail:error["result"]});
