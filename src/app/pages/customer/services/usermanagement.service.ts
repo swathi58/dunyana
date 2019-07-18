@@ -133,4 +133,11 @@ Loginapi(login) {
       
      }
 
+     forget(user:User) {
+      var reqHeader = new HttpHeaders({'No-Auth':'True'});
+      debugger
+    return this.http.post<User>(environment.API_URL+'CustomerRegistration/'+'ForgotPassword',user,{headers : reqHeader});
+      
+     }
+
 }
