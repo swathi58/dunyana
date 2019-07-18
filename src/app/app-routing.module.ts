@@ -3,6 +3,8 @@ import { Routes, RouterModule, Router } from '@angular/router';
 import { CustomerappComponent } from './pages/customer/customerapp/customerapp.component';
 import { EmailverificationSuccessComponent } from './pages/customer/user management/emailverification-success/emailverification-success.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { CustomerappRoutingModule } from './pages/customer/customerapp/customerapp-routing.module';
+import {} from './pages/customer/customerapp/customerapp.module';
 
 
 

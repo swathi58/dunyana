@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
   userdata:any;
   
   headerlogo:string="assets/layout/images/glogo.png";
-  display='none'; //default Variable
+ // display='none'; //default Variable
   userPostData:User={
       Email:"",
       FirstName:"",
@@ -60,7 +60,10 @@ export class LoginComponent implements OnInit {
   base64Image: any;
   submitted: boolean=false;
   ProgressSpinnerDlg: boolean;
-
+  display: boolean = false;
+  btndisable:string="disable";
+  btnfdisable:string="disable";
+  
  
 
   constructor(private dataservice:UsermanagementService,private socialAuthService: AuthService,
@@ -71,16 +74,24 @@ public langShare: LangShareService,
       this.dataservice.sessionIn();
 
      }
-
+     showDialog() {
+      this.display = true;
+    }
+    onDialogClose(event) {
+     this.display = event;
+    }
+    
   ngOnInit() {
        
     this.loginForm = this.formBuilder.group({      
-       lEmail:['', [Validators.required,Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z.-]+\.[a-zA-Z]{2,}$')]],
+      
+       lEmail:['', [Validators.required,Validators.pattern('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{1,}[.]{1}[a-zA-Z]{2,}')]],
        lPassword: ['', Validators.compose([Validators.required, Validators.minLength(6)])]      
      });
 
      this.ForgetForm=this.formBuilder.group({
-      FEmail:['', [Validators.required,Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z.-]+\.[a-zA-Z]{2,}$')]]
+      FEmail:['', [Validators.required,Validators.pattern('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{1,}[.]{1}[a-zA-Z]{2,}')]]
+
      });
      debugger
      this.ProgressSpinnerDlg=false;
@@ -93,7 +104,7 @@ public langShare: LangShareService,
     }
 }
 
-
+/* 
   public socialSignIn(loginPlatform: string) {
     let socialPlatformProvider;
     if (loginPlatform === 'facebook') {
@@ -259,7 +270,7 @@ public langShare: LangShareService,
     return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
     
   }
-
+ */
   OnLogin() {  
     debugger
     this.submitted = true;

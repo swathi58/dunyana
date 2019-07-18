@@ -36,6 +36,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { ChangepasswordComponent } from './pages/customer/user management/changepassword/changepassword.component';
 import { AdminModule } from './pages/admin/admin.module';
 import { AdminComponent } from './pages/admin/admin.component';
+
 registerLocaleData(localeESUS);
 
 export function HttpLoaderFactory(http: HttpClient) {
