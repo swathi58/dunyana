@@ -1,5 +1,5 @@
 <section class="signin">
-    <h5> <p-toast [showTransitionOptions]="'0ms'" [hideTransitionOptions]="'1ms'"></p-toast></h5>
+    <!-- <h5> <p-toast [showTransitionOptions]="'0ms'" [hideTransitionOptions]="'1ms'"></p-toast></h5> -->
     <header class="trans">
 
         <div class="main-header">
@@ -19,8 +19,8 @@
                 <div class="row">
                     <div class="col-sm-4 ">
                         <div class="si">
-                            <h4>Sign In</h4>
-                            <div #div ></div>
+                            <h4>Sign In<span class="ertxt" #div ></span></h4>
+                            
                             <form class="from_wrapper" [formGroup]="loginForm" (ngSubmit)="OnLogin()">
                                 <div class="row inputset" style="height: 100px">
                                     <div class="col-sm-4"><label>Email</label></div>
@@ -100,7 +100,7 @@
 
                             <div id="bootstrapModel" class="modal fade" role="dialog" >
 
-                                <p-toast [showTransitionOptions]="'0ms'" [hideTransitionOptions]="'1ms'"></p-toast>
+                                
                                 <div class="modal-dialog">
 
 
@@ -129,19 +129,21 @@
 
                                                         <div class="row inputset" style="height: 100px">
                                                             <div class="col-sm-4"><label>Email</label></div>
-                                                            <div class="col-sm-8"><input type="text" formControlName="FEmail"
+                                                            <div class="col-sm-8"><input type="text" formControlName="FEmail" (keypress)="onKeyPress($event)" 
                                                                     placeholder="email@domain.com">
 
-                                                                    <div class="alert alert-danger" *ngIf="ForgetForm.controls['FEmail'].hasError('required') && ForgetForm.controls['FEmail'].touched">Email is required</div>
-                                                                    <div class="alert alert-danger" [hidden]="!ForgetForm.controls['FEmail'].errors?.pattern">Email must be a valid email address</div>
+                                                                    <div style="color: crimson;text-align:left" *ngIf="ForgetForm.controls['FEmail'].hasError('required') && ForgetForm.controls['FEmail'].touched">Email is required</div>
+                                                                    <div style="color: crimson;text-align:left" [hidden]="!ForgetForm.controls['FEmail'].errors?.pattern">Email must be a valid email address</div>
                                                                 <!-- <div class="alert alert-danger" [hidden]="!loginForm.controls['lEmail'].errors?.pattern">Email must be a valid email address</div> -->
                                         
                                                             </div>
+                                                            
                                                             <div class="col-sm-4">
                                                                 &nbsp;
                                                             </div>
                                                             <div class="col-sm-8">
                                                                 <hr>
+                                                                <div [hidden]="show" class="mt-3 text-left" style="color: crimson;text-align:center" #Ferror ></div>
                                                             </div>
                                                         </div>
                                                           

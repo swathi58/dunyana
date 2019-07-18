@@ -7,6 +7,7 @@ import {MessageService} from 'primeng/api';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, Observer } from 'rxjs';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import { NG_FORM_SELECTOR_WARNING } from '@angular/forms/src/directives';
 
 @Component({
   selector: 'app-login',
@@ -14,11 +15,14 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  debugger
 
   loginForm:FormGroup;
   ForgetForm:FormGroup;
   @ViewChild('div') div:ElementRef;
   @ViewChild('closeAddExpenseModal') closeAddExpenseModal: ElementRef;
+  @ViewChild('Ferror')Ferror:ElementRef;
+  public show = false;
   
   headerlogo:string="assets/layout/images/glogo.png";
   display='none'; //default Variable
@@ -37,8 +41,6 @@ export class LoginComponent implements OnInit {
       GoogleID:"",
       PWD:"",
       Type:""
-
-
 
   };
   public responseData: any;
@@ -59,17 +61,18 @@ export class LoginComponent implements OnInit {
      }
 
   ngOnInit() {
-  
+       
     this.loginForm = this.formBuilder.group({      
-       lEmail:['', [Validators.required,Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$')]],
+       lEmail:['', [Validators.required,Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z.-]+\.[a-zA-Z]{2,}$')]],
        lPassword: ['', Validators.compose([Validators.required, Validators.minLength(6)])]      
      });
 
      this.ForgetForm=this.formBuilder.group({
-      FEmail:['', [Validators.required,Validators.pattern('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{1,}[.]{1}[a-zA-Z]{3,}')]]
+      FEmail:['', [Validators.required,Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z.-]+\.[a-zA-Z]{2,}$')]]
      });
      debugger
     // ('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{1,}[.]{1}[a-zA-Z]{3,}')
+    //[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-zA-Z]{2,}$'
 }
 
 
@@ -240,7 +243,7 @@ export class LoginComponent implements OnInit {
     debugger
     this.submitted = true;
     this.ProgressSpinnerDlg=true;
-     
+    
     if (this.loginForm.invalid) {
       return;
     }
@@ -258,6 +261,7 @@ export class LoginComponent implements OnInit {
       this.ProgressSpinnerDlg=false;
       //this.messageService.add({severity:'success', summary:'Success Message', detail:res["result"]});
       this.div.nativeElement.innerHTML=res["result"];
+      
       this.Resetlog();
       this.router.navigateByUrl("customer/home");
        },       
@@ -267,9 +271,10 @@ export class LoginComponent implements OnInit {
 
        errormsg => {
         this.ProgressSpinnerDlg=false;
-        console.log(errormsg["error"]["result"]);
+        console.log(errormsg["error"]["result"]);        
         this.div.nativeElement.innerHTML=errormsg["error"]["result"];
-        this.messageService.add({severity:'error', summary:'Error Message', detail:errormsg["error"]["result"]});
+        debugger
+        //this.messageService.add({severity:'error', summary:'Error Message', detail:errormsg["error"]["result"]});
            //this.router.navigateByUrl("customer/home");
   
        });
@@ -286,10 +291,13 @@ export class LoginComponent implements OnInit {
     this.dataservice.forget(this.userPostData).subscribe(res => {
       debugger
       this.ProgressSpinnerDlg=false;
-      this.messageService.add({severity:'success', summary:'Success Message', detail:res["result"]});
+      //this.messageService.add({severity:'success', summary:'Success Message', detail:res["result"]});
+      this.show=false;
+      this.Ferror.nativeElement.innerHTML=res["result"];
       this.ResetForgot();
       this.closeAddExpenseModal.nativeElement.click();
-      //this.router.navigateByUrl("customer/home");
+      alert(res["result"]);
+      this.router.navigateByUrl("customer/home");
      
        },       
       //  error=>{
@@ -299,11 +307,17 @@ export class LoginComponent implements OnInit {
        errormsg => {
         this.ProgressSpinnerDlg=false;
         console.log(errormsg["error"]["result"]);
-        this.messageService.add({severity:'error', summary:'Error Message', detail:errormsg["error"]["result"]});
-        
+        //this.messageService.add({severity:'error', summary:'Error Message', detail:errormsg["error"]["result"]});
+        this.show=false;
+        this.Ferror.nativeElement.innerHTML=errormsg["error"]["result"];
            //this.router.navigateByUrl("customer/home");
   
        });
+  }
+
+  onKeyPress(event:any) {
+    debugger
+    this.show=true;
   }
 
   Resetlog() {
@@ -316,6 +330,8 @@ export class LoginComponent implements OnInit {
   ResetForgot(){
     this.ForgetForm.reset({
       'FEmail':''
+      
+
     })
   }
 
