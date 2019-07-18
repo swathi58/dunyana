@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LangShareService } from 'src/app/shared/services/lang-share.service';
 import { TranslateService } from '@ngx-translate/core';
 import { LocalStorageService } from 'angular-web-storage';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -12,9 +13,10 @@ export class HeaderComponent implements OnInit {
 
   translationMessages: any;
   lang = 'en';
+  currentlang="English";
   showDiv="";
   showlngDiv="";
-  useremail:string; 
+  useremail:string;
   islogin:boolean=false;
 
   logoimg:string;
@@ -27,7 +29,7 @@ export class HeaderComponent implements OnInit {
   name: string;
 
   constructor(  public langShare: LangShareService,
-    public translate: TranslateService,private localStorage: LocalStorageService
+    public translate: TranslateService,private localStorage: LocalStorageService,private router :Router
     ) { }
 
   ngOnInit() {
@@ -45,14 +47,12 @@ export class HeaderComponent implements OnInit {
 
     if(localStorage.length>0)
     {
-      if(localStorage.getItem("Email"))
+      if(localStorage.getItem("username"))
       {
-            this.useremail=localStorage.getItem("Email");
+            this.useremail=localStorage.getItem("username");
             this.islogin=true;
       }
     }
-
-    this.name=localStorage.getItem('username');
 
   }
   toggleLang(lang) {
@@ -62,11 +62,13 @@ export class HeaderComponent implements OnInit {
     if(lang=="en")
     {
        this.logoimg=this.headerimg;
+       this.currentlang="English";
 
     }
     else if(lang=="ar")
     {
       this.logoimg=this.header_ar_img;
+      this.currentlang="العربية";
     }
 
     this.showlngDiv="";
@@ -96,4 +98,11 @@ export class HeaderComponent implements OnInit {
 this.showlngDiv="showDiv";
   }
 
+  logout()
+  {
+    this.localStorage.clear();
+    this.islogin=false;
+    this.router.navigateByUrl('customer/home');
+   // this.ngOnInit();
+  }
 }

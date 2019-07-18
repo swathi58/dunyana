@@ -13,15 +13,15 @@
           </div>
           <div class="col-md-5 ftlinks">
               <ul>
-                  <li><a href="#">{{ 'ContactUs' | translate }} </a></li>
-                  <li><a href="#">{{ 'Ordering&Payment' | translate }}</a></li>
-                  <li><a href="#"> {{ 'Shipping' | translate }}</a></li>
-                  <li><a href="#">{{ 'Returns' | translate }}</a></li>
-                  <li><a href="#">{{ 'FAQ' | translate }}</a></li>
-                  <li><a href="#">{{ 'AboutDunyana' | translate }}</a></li>
-                  <li><a href="#">{{ 'PrivacyPolicy' | translate }}</a></li>
-                  <li><a href="#">{{ 'Terms&Conditions' | translate }}</a></li>
-                  <li><a href="#">{{ 'PressEnquiries' | translate }}</a></li>
+                  <li><a [routerLink]="['/customer/contact-us']">{{ 'ContactUs' | translate }}</a></li>
+                  <li><a [routerLink]="['/customer/orders-payment']">{{ 'Ordering&Payment' | translate }}</a></li>
+                  <li><a [routerLink]="['/customer/shipping']">{{ 'Shipping' | translate }}</a></li>
+                  <li><a [routerLink]="['/customer/Returns']">{{ 'Returns' | translate }}</a></li>
+                  <li><a [routerLink]="['/customer/faq']">{{ 'FAQ' | translate }}</a></li>
+                  <li><a [routerLink]="['/customer/about-dunyana']">{{ 'AboutDunyana' | translate }}</a></li>
+                  <li><a [routerLink]="['/customer/privacy-policy']">{{ 'PrivacyPolicy' | translate }}</a></li>
+                  <li><a href="javascript:void(0)" (click)="showDialog()">{{ 'Terms&Conditions' | translate }}</a></li>
+                  <li><a [routerLink]="['/customer/press-enquiries']">{{ 'PressEnquiries' | translate }}</a></li>
               </ul>
           </div>
       </div>
@@ -36,8 +36,9 @@
   <div class="container">
       <div class="row">
           <div class="col-sm-12 fttxt">
-              <p>&copy; {{ 'AllRights' | translate }}</p>
+            <p>&copy; {{ 'AllRights' | translate }}</p>
           </div>
       </div>
   </div>
 </footer>
+<app-terms-conditions [display]="display" (displayChange)="onDialogClose($event)"></app-terms-conditions>

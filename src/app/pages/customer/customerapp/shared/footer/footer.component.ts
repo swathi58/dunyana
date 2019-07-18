@@ -9,6 +9,7 @@ import { LocalStorageService } from 'angular-web-storage';
 })
 export class FooterComponent implements OnInit {
   lang = 'en';
+  display: boolean = false;
   imgfooter="assets/layout/images/footer_logo.png";
   constructor(public langShare: LangShareService,
     public translate: TranslateService,private localStorage: LocalStorageService) { }
@@ -19,5 +20,10 @@ export class FooterComponent implements OnInit {
       
     }
   }
-
+  showDialog() {
+    this.display = true;
+}
+onDialogClose(event) {
+   this.display = event;
+}
 }

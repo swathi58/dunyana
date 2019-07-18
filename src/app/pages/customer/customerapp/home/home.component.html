@@ -10,7 +10,10 @@
 
                           <div class="row">
                               <div class="col-sm-12 col-xl-12 p-o">
-                                  <h1>{{ 'allyourfavourite' | translate }}<br/> {{ 'brandsinoneplace' | translate }} <br/><strong>{{ 'shoptheworld'  | translate }}</strong></h1>
+                                <h1>{{ 'allyourfavourite' | translate }}<br/> {{ 'brandsinoneplace' | translate }} <br/><strong>{{ 'shoptheworld'  | translate }}</strong></h1>
+
+                                  <p><a [routerLink]="['/customer/shop-by-category']" class="line_btn lwhite">{{ 'Explorecategories' | translate }}</a></p>
+
                                   <p><a href="#" class="line_btn lwhite">{{ 'Explorecategories' | translate }}</a></p>
 
                               </div>
@@ -34,25 +37,25 @@
                   <ul class="ql">
 
                       <li class=" it">
-                          <a href="#"></a>
+                          <a [routerLink]="['/customer/deals-promotions']"></a>
                           <h2>{{ 'Deals' | translate }} <br/>{{ '&promotions'  | translate }} </h2>
                           <i class="icomoon icon-offer"></i>
 
                       </li>
                       <li class=" it">
-                          <a href="#"></a>
+                          <a [routerLink]="['/customer/track-your-package']"></a>
                           <h2>{{ 'Track'  | translate }} <br/>{{ 'yourpackage'  | translate }} </h2>
                           <i class="icomoon icon-tracking"></i>
 
                       </li>
                       <li class="it">
-                          <a href="#"></a>
+                          <a [routerLink]="['/customer/customer-service']"></a>
                           <h2>{{ 'Customer' | translate }} <br/>{{ 'Service' | translate }}</h2>
                           <i class="icomoon icon-cust_serv"></i>
 
                       </li>
                       <li class="it">
-                          <a href="#"></a>
+                          <a [routerLink]="['/customer/payment-methods']"></a>
                           <h2>{{'Payment' | translate }}<br/>{{ 'methods' | translate }}</h2>
                           <i class="icomoon icon-payment"></i>
 
@@ -68,9 +71,9 @@
           <div class="row">
               <div class="col-sm-12">
                   <div class="ob">
-                      <p>{{ 'Dontmissoutonthelatestoffer' | translate }}</p>
-                      <h1>{{ '35%offselecteditems*' | translate }}</h1>
-                      <small>{{ '*Terms&condtionsapply.' | translate }}</small>
+                    <p>{{ 'Dontmissoutonthelatestoffer' | translate }}</p>
+                    <h1>{{ '35%offselecteditems*' | translate }}</h1>
+                    <small>{{ '*Terms&condtionsapply.' | translate }}</small>
                   </div>
               </div>
           </div>
@@ -88,7 +91,7 @@
               <div class="col-lg-6 fbtxt">
                   <h2>{{ 'connectyour' | translate }} <br/>{{ 'Facebookaccount' | translate }}</h2>
                   <p>{{ 'Seewhatyourfriendsare' | translate }} <br/>{{ 'shopping,getsuggestions' | translate }} <br/>{{ 'andrecommendations' | translate }}</p>
-                  <a href="#" class="line_btn swhite">{{ 'Connectnow' | translate }}</a>
+                  <a [routerLink]="['/customer/home']" class="line_btn swhite">{{ 'Connectnow' | translate }}</a>
               </div>
           </div>
       </div>

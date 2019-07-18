@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { NguCarousel, NguCarouselConfig } from '@ngu/carousel';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Router, ActivatedRoute } from '@angular/router';
 import { LangShareService } from 'src/app/shared/services/lang-share.service';
 import { TranslateService } from '@ngx-translate/core';
 @Component({
@@ -13,6 +14,9 @@ export class CategoriessliderComponent implements OnInit {
    slideNo = 0;
   withAnim = true;
   resetAnim = true;
+  items: any[];
+
+
 
   @ViewChild('categoryCarousel') categoryCarousel: NguCarousel<any>;
 
@@ -26,14 +30,35 @@ export class CategoriessliderComponent implements OnInit {
     velocity: 0.2
   }
 
-  categorycarouselItems = [{name:'Fashion',img:"assets/layout/images/cat_img_fash.jpg"}, {name:'Shoes',img:"assets/layout/images/cat_img_shoes.jpg"},
-  {name:'Sports',img:"assets/layout/images/cat_img_sports.jpg"},{name:'Beauty',img:"assets/layout/images/cat_img_beauty.jpg"},
-  {name:'Virtual',img:"assets/layout/images/cat_img_virtual.jpg"},{name:'Fashion',img:"assets/layout/images/cat_img_fash.jpg"},
-  {name:'Shoes',img:"assets/layout/images/cat_img_shoes.jpg"},{name:'Sports',img:"assets/layout/images/cat_img_sports.jpg"},
-  {name:'Beauty',img:"assets/layout/images/cat_img_beauty.jpg"}];
+  categorycarouselItems = [{name:"Fashion",img:"assets/layout/images/cat_img_fash.jpg"}, {name:"Shoes",img:"assets/layout/images/cat_img_shoes.jpg"},
+  {name:"Sports & Fitness",img:"assets/layout/images/cat_img_sports.jpg"},{name:"Accessories & Beauty",img:"assets/layout/images/cat_img_beauty.jpg"},
+  {name:"Virtual Mall",img:"assets/layout/images/cat_img_virtual.jpg"},{name:"Fashion",img:"assets/layout/images/cat_img_fash.jpg"},
+  {name:"Shoes",img:"assets/layout/images/cat_img_shoes.jpg"},{name:"Sports & Fitness",img:"assets/layout/images/cat_img_sports.jpg"},
+  {name:"Accessories & Beauty",img:"assets/layout/images/cat_img_beauty.jpg"}];
 
-  constructor(private cdr: ChangeDetectorRef,private sanitizer: DomSanitizer, public langShare: LangShareService,
-    public translate: TranslateService) { }
+  constructor(private cdr: ChangeDetectorRef,private sanitizer: DomSanitizer,private route:Router,
+    public langShare: LangShareService,
+    public translate: TranslateService) {
+
+    this.items = [
+      {vin: 'Fashion', brand: 'cat_img_beauty'},
+      {vin: 'Shoes', brand: 'cat_img_fash'},
+      {vin: 'Sports Fitness', brand: 'cat_img_shoes'},
+      {vin: 'Accessories & Beauty',  brand: 'cat_img_sports'},
+      {vin: 'Virtual Mall',  brand: 'cat_img_virtual'},
+      {vin: 'Fashion', brand: 'cat_img_beauty'},
+      {vin: 'Shoes', brand: 'cat_img_fash'},
+      {vin: 'Sports Fitness',  brand: 'cat_img_shoes'},
+      {vin: 'Accessories & Beauty',brand: 'cat_img_sports'},
+      {vin: 'Virtual Mall', brand: 'cat_img_virtual'},
+      {vin: 'Fashion',  brand: 'cat_img_beauty'},
+      {vin: 'Shoes',  brand: 'cat_img_fash'},
+      {vin: 'Sports Fitness',  brand: 'cat_img_shoes'},
+      {vin: 'Accessories & Beauty', brand: 'cat_img_sports'},
+      {vin: 'Virtual Mall',  brand: 'cat_img_virtual'}
+  ];
+
+   }
 
   ngOnInit() {
   }
@@ -42,4 +67,8 @@ export class CategoriessliderComponent implements OnInit {
     this.categoryCarousel.moveTo(slide, !this.withAnim);
   }
 
+  navigatetocategory(catname)
+  {
+    this.route.navigateByUrl('customer/category/'+catname);
+  }
 }
