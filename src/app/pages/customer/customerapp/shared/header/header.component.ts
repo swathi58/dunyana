@@ -46,15 +46,12 @@ export class HeaderComponent implements OnInit {
 
     if(localStorage.length>0)
     {
-      if(localStorage.getItem("Email"))
+      if(localStorage.getItem("username"))
       {
-            this.useremail=localStorage.getItem("Email");
+            this.useremail=localStorage.getItem("username");
             this.islogin=true;
       }
     }
-
-    this.name=localStorage.getItem('username');
-    debugger
 
   }
   toggleLang(lang) {

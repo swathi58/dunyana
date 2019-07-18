@@ -12,6 +12,9 @@ export class CategoriessliderComponent implements OnInit {
    slideNo = 0;
   withAnim = true;
   resetAnim = true;
+  cars: any[];
+
+
 
   @ViewChild('categoryCarousel') categoryCarousel: NguCarousel<any>;
 
@@ -31,7 +34,27 @@ export class CategoriessliderComponent implements OnInit {
   {name:"Shoes",img:"assets/layout/images/cat_img_shoes.jpg"},{name:"Sports & Fitness",img:"assets/layout/images/cat_img_sports.jpg"},
   {name:"Accessories & Beauty",img:"assets/layout/images/cat_img_beauty.jpg"}];
 
-  constructor(private cdr: ChangeDetectorRef,private sanitizer: DomSanitizer,private route:Router) { }
+  constructor(private cdr: ChangeDetectorRef,private sanitizer: DomSanitizer,private route:Router) {
+
+    this.cars = [
+      {vin: 'Fashion', year: 2010, brand: 'cat_img_beauty'},
+      {vin: 'Shoes', year: 2015, brand: 'cat_img_fash'},
+      {vin: 'Sports Fitness', year: 2012, brand: 'cat_img_shoes'},
+      {vin: 'Accessories & Beauty', year: 1998, brand: 'cat_img_sports'},
+      {vin: 'Virtual Mall', year: 2011, brand: 'cat_img_virtual'},
+      {vin: 'Fashion', year: 2010, brand: 'cat_img_beauty'},
+      {vin: 'Shoes', year: 2015, brand: 'cat_img_fash'},
+      {vin: 'Sports Fitness', year: 2012, brand: 'cat_img_shoes'},
+      {vin: 'Accessories & Beauty', year: 1998, brand: 'cat_img_sports'},
+      {vin: 'Virtual Mall', year: 2011, brand: 'cat_img_virtual'},
+      {vin: 'Fashion', year: 2010, brand: 'cat_img_beauty'},
+      {vin: 'Shoes', year: 2015, brand: 'cat_img_fash'},
+      {vin: 'Sports Fitness', year: 2012, brand: 'cat_img_shoes'},
+      {vin: 'Accessories & Beauty', year: 1998, brand: 'cat_img_sports'},
+      {vin: 'Virtual Mall', year: 2011, brand: 'cat_img_virtual'}
+  ];
+
+   }
 
   ngOnInit() {
   }

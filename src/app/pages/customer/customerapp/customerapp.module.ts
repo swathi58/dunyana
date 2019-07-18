@@ -49,6 +49,7 @@ import { CustomerServiceComponent } from './About/customer-service/customer-serv
 import { TrackYourPackageComponent } from './order management/track-your-package/track-your-package.component';
 import { DealsPromotionsComponent } from './Deals Management/deals-promotions/deals-promotions.component';
 import { CategoryComponent } from './customer category management/category/category.component';
+import {CarouselModule} from 'primeng/carousel';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -67,6 +68,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     FormsModule,
     ReactiveFormsModule,
     ProgressSpinnerModule,
+    CarouselModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

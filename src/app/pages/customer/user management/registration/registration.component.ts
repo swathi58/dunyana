@@ -60,13 +60,13 @@ export class RegistrationComponent implements OnInit {
       firstname:['',Validators.required],
       lastname:['',Validators.required],
       // emailid:['',[Validators.required,Validators.email]],
-      emailid:['', [Validators.required,Validators.pattern('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{3,}')]],
+      emailid:['', [Validators.required,Validators.pattern('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}')]],
       mobile:['',[Validators.required,Validators.minLength(10),Validators.maxLength(10)]],
       address:['',Validators.required],
       country:['Select Country',Validators.required],
       city:['',Validators.required],
       password:['',[Validators.required,Validators.minLength(6)]],
-      confirmpassword:['',Validators.required]
+      confirmpassword:['',Validators.required,Validators.minLength(6)]
  },
  {
   validator: MustMatch('password', 'confirmpassword')

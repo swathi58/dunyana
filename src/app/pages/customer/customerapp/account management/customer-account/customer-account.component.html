@@ -172,11 +172,10 @@
   </div>
 </div>
 
-
+<div class="loading-indicator" *ngIf="ProgressSpinnerDlg">
+        <p-progressSpinner></p-progressSpinner>
+</div>
 </section>
 <!-- <app-categoriesslide></app-categoriesslide> -->
 </main>
 <app-changepassword [display]="display" (displayChange)="onDialogClose($event)"></app-changepassword>
-<div class="loading-indicator" *ngIf="ProgressSpinnerDlg">
-        <p-progressSpinner></p-progressSpinner>
-</div>
