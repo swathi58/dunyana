@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
   slideNo = 0;
   withAnim = true;
   resetAnim = true;
-
+  name:any;
   @ViewChild('headerCarousel') headerCarousel: NguCarousel<any>;
  // @ViewChild('categoryCarousel') categoryCarousel: NguCarousel<any>;
 
@@ -55,7 +55,9 @@ export class HomeComponent implements OnInit {
 
 
   ngOnInit() {
-
+   
+  this.name=localStorage.getItem('username');
+  debugger
   }
   ngAfterViewInit() {
     this.cdr.detectChanges();

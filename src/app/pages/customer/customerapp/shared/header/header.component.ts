@@ -14,6 +14,7 @@ export class HeaderComponent implements OnInit {
   showDiv="";
   showlngDiv="";
   headerimg="assets/layout/images/header_logo.png";
+  name: string;
   constructor(  public langShare: LangShareService,
     public translate: TranslateService,
     ) { }
@@ -23,6 +24,8 @@ export class HeaderComponent implements OnInit {
     this.translate.use('en');
     this.langShare.setTranslate(this.translate);
     this.translation();
+    this.name=localStorage.getItem('username');
+    debugger
   }
   toggleLang(lang) {
     this.lang = lang;
