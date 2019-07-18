@@ -1,0 +1,72 @@
+
+<p-dialog header="Add Categories" [(visible)]="display" [modal]="true" [responsive]="true" [style]="{width: '800px'}"  [closeOnEscape]="true"  (onHide)="onClose()">
+<!-- <form #formRef="ngForm">
+  <div *ngFor="let category of categorieslist; let addindex = index">
+      <div>
+        <div class="row">
+           <div class="col-lg-2">
+              <input type="text" pInputText class="form-control" [(ngModel)]="category.Name" name="Name" #Name="ngModel" required />
+           </div>
+           <div class="col-lg-2">
+              <input type="text" pInputText class="form-control" [(ngModel)]="category.Image" name="Image" #Image="ngModel" required />
+           </div>
+           <div class="col-lg-2">
+              <input type="text" pInputText class="form-control" [(ngModel)]="category.Priority" name="Priority" #Priority="ngModel" required />
+           </div>
+           <div class="col-lg-2">
+              <input type="text" pInputText class="form-control" [(ngModel)]="category.IsActive" name="IsActive" #IsActive="ngModel" required />
+           </div>          
+        </div>
+      </div>
+      <br />
+  </div>
+  <button [disabled]="!formRef.form.valid" (click)="add()">Add input</button>
+</form>
+<br />
+<br />
+{{words2 | json}} -->
+
+<form [formGroup]="categoryForm">
+
+   <div formArrayName="category">
+     <div *ngFor="let item of category.controls; let pointIndex=index" [formGroupName]="pointIndex">
+     <label>
+         <div class="row">
+               <!-- <div class="col-lg-2">
+                  <input type="text" pInputText class="form-control" formControlName="Id" />
+               </div> -->
+               <div class="col-lg-2">
+                  <input type="text" pInputText class="form-control" formControlName="Name" placeholder="Name" />
+                  <div *ngIf="item.controls.Name.dirty">
+                        <div *ngIf="item.hasError('required', 'Name')">Required</div>  
+                      </div>
+               </div>
+               <div class="col-lg-2">
+                  <input type="text" pInputText class="form-control"  formControlName="Image" />
+               </div>
+               <div class="col-lg-2">
+                  <input type="text" pInputText class="form-control"  formControlName="Priority" placeholder="Priority"  />
+               </div>
+               <div class="col-lg-2">
+                     <!-- <input type="text" pInputText class="form-control"  formControlName="IsActive" placeholder="Category Name"  /> -->
+
+                     <p-dropdown [options]="categorystatus" formControlName="IsActive" [autoWidth]="false" placeholder="Select Status" [filter]="false">
+                           <option *ngFor="let c of categorystatus" [ngValue]="c">{{c}}</option>
+                     </p-dropdown>  
+               </div>          
+            </div>
+     </label>
+     <!-- <button type="button" (click)="deleteSellingPoint(pointIndex)">Delete Selling Point</button> -->
+     </div>
+     <button type="button" (click)="addSellingPoint()" [disabled]="!categoryForm.valid">Add Selling Point</button>
+   </div>
+ 
+ </form>
+ 
+ 
+ <!-- {{ this.categoryForm.value | json }} -->
+<p-footer>
+    <button type="button" pButton icon="pi pi-check" (click)="display=false" label="Yes"></button>
+    <button type="button" pButton icon="pi pi-close" (click)="display=false" label="No" class="ui-button-secondary"></button>
+</p-footer>
+</p-dialog>

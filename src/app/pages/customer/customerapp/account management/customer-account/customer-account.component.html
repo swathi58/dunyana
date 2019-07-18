@@ -1,0 +1,182 @@
+
+<main>
+<section class="accounts">
+<div class="text_container">
+  <div class="container">
+
+
+      <div class="row">
+          <div class="col-xl-4 col-lg-4 leftPanel">
+
+
+              <h2>Welcome back, <br><span class="font-weight-bold">Mohammed.</span></h2>
+              <p>Lorem ipsum dolor sit amet, consectetur eset adipiscing elit gart.</p>
+
+          </div>
+
+
+          <div class="col-xl-7 col-lg-8 offset-xl-1 offset-lg-0 wallet">
+
+              <div class="row">
+                  <h4 class="col-12">Your Wallet</h4>
+                  <div class="col-xl-4 col-lg-6 ">
+                      <div class="col-xl-12 col-lg-12 g-box">
+                          <p class="first">Points</p>
+                          <p class="b-font">6,320</p>
+
+                          <p><a href="#"><span class="icon-add mr-2"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span> add balance</a></p>
+                      </div>
+                  </div>
+                  <div class="col-xl-4 col-lg-6">
+                      <div class="col-xl-12 col-lg-12 g-box">
+                            <img src="assets/layout/images/svg/mc_logo.svg" height="72px">
+                          <p class="light">Mohammed Ali K<br> <strong> 1051 0510 5100</strong><br> 01/23 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; CVC 123</p>
+                          <p><a href="#"><i class="icon-edit mr-2"></i>edit/remove card</a></p>
+                      </div>
+                  </div>
+                  <div class="col-xl-4 col-lg-12">
+                      <div class="col-xl-12 col-lg-12 g-box-line">
+                          <img src="assets/layout/images/svg/plus.svg" width="55px" height="55px">
+                      </div>
+
+                  </div>
+              </div>
+
+
+          </div>
+
+          <div class="col-xl-4 col-lg-4">
+
+
+              <h4>Your Profile</h4>
+
+
+              <div class="profile">
+
+                  <div class="thumb">
+                      <img [src]="profiledata.Image">
+                      <p>{{profiledata.FirstName}}<br><span> {{profiledata.City}}, {{profiledata.Country}}</span></p>
+                  </div>
+                  <div class="address">
+                      <p> Office No.<br> <span>{{profiledata.Mobile}}</span></p>
+
+                      <p>Mobile No.<br><span>{{profiledata.Mobile}}</span></p>
+
+                      <p>Address (*)<br> <span>{{profiledata.Address}},<br>{{profiledata.City}}, {{profiledata.Country}} </span></p>
+
+                      <p>Email ID<br> <span>{{profiledata.Email}}</span></p>
+
+                      <p class="text-blue float-left"><a (click)="showDialog()">change password </a></p>
+                      <p class="text-blue float-right edit"><a href="#"><i class="text-blue icon-edit f-big mr-2"></i>Edit</a></p>
+
+                  </div>
+
+
+              </div>
+          </div>
+
+          <div class="col-xl-7 col-lg-8 offset-xl-1 offset-lg-0 order-history">
+
+              <h4 class="">Your Order History</h4>
+
+              <div class="col-md-12 category">
+
+
+                  <div class="img col-lg-2 col-sm-2">
+                      <img src="assets/layout/images/cat_img_virtual.jpg" width="110">
+                  </div>
+
+                  <div class="float-left pl-4 col-lg-5 col-sm-5 pr-0">
+                      <h3>Product Name</h3>
+                      <p>Order ID: A1B2 – C3D4 – E5F6<br> Sold by <strong>Retailer Name</strong></p>
+                  </div>
+                  <div class="float-right text-right col-md-4 col-sm-4">
+                      <h3>SAR 123</h3>
+                      <p>MasterCard **** 5100</p>
+                  </div>
+
+
+
+                  <div class="float-left pl-4 opl col-lg-6 col-xl-6 col-sm-6">
+
+                      Order Placed <span>July 12, 2019</span>
+                  </div>
+                  <div class="float-right text-right  col-md-4 col-sm-3">
+                      <h3>on route</h3>
+                      <p>Track Package</p>
+                  </div>
+
+              </div>
+              <div class="col-md-12 category">
+
+
+                  <div class="img col-lg-2 col-sm-2">
+                      <img src="assets/layout/images/cat_img_virtual.jpg" width="110">
+                  </div>
+
+                  <div class="float-left pl-4 col-lg-5 col-sm-5 pr-0">
+                      <h3>Product Name</h3>
+                      <p>Order ID: A1B2 – C3D4 – E5F6<br> Sold by <strong>Retailer Name</strong></p>
+                  </div>
+                  <div class="float-right text-right col-md-4 col-sm-4">
+                      <h3>SAR 123</h3>
+                      <p>MasterCard **** 5100</p>
+                  </div>
+
+
+
+                  <div class="float-left pl-4 opl col-lg-6 col-xl-6 col-sm-6">
+
+                      Order Placed <span>July 12, 2019</span>
+                  </div>
+                  <div class="float-right text-right  col-md-4 col-sm-3">
+                      <h3>on route</h3>
+                      <p>Track Package</p>
+                  </div>
+
+              </div>
+              <div class="col-md-12 category">
+
+
+                  <div class="img col-lg-2 col-sm-2">
+                      <img src="assets/layout/images/cat_img_virtual.jpg" width="110">
+                  </div>
+
+                  <div class="float-left pl-4 col-lg-5 col-sm-5 pr-0">
+                      <h3>Product Name</h3>
+                      <p>Order ID: A1B2 – C3D4 – E5F6<br> Sold by <strong>Retailer Name</strong></p>
+                  </div>
+                  <div class="float-right text-right col-md-4 col-sm-4">
+                      <h3>SAR 123</h3>
+                      <p>MasterCard **** 5100</p>
+                  </div>
+
+
+
+                  <div class="float-left pl-4 opl col-lg-6 col-xl-6 col-sm-6">
+
+                      Order Placed <span>July 12, 2019</span>
+                  </div>
+                  <div class="float-right text-right  col-md-4 col-sm-3">
+                      <h3>on route</h3>
+                      <p>Track Package</p>
+                  </div>
+
+              </div>
+              <p class="col-12 text-right text-blue pr-0"><a href="#">load more</a></p>
+
+          </div>
+
+      </div>
+
+  </div>
+</div>
+
+
+</section>
+<!-- <app-categoriesslide></app-categoriesslide> -->
+</main>
+<app-changepassword [display]="display" (displayChange)="onDialogClose($event)"></app-changepassword>
+<div class="loading-indicator" *ngIf="ProgressSpinnerDlg">
+        <p-progressSpinner></p-progressSpinner>
+</div>
