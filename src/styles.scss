@@ -1,6 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import url("//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+//  @import url("//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+
+@import  '../node_modules/font-awesome/css/font-awesome.css';
 
 $teshrin_arltlight-font-path: "../src/assets/scss/fonts/teshrinarlt-light-webfont.woff";
 $teshrin_arltmedium-font-path: "../src/assets/scss/fonts/teshrinarlt-medium-webfont.woff";

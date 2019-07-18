@@ -1,157 +1,183 @@
-
 <section class="signin">
-        <p-toast></p-toast>
+    <!-- <h5> <p-toast [showTransitionOptions]="'0ms'" [hideTransitionOptions]="'1ms'"></p-toast></h5> -->
     <header class="trans">
-       
+
         <div class="main-header">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6">
-                        <a [routerLink]="['/customer/home']" class="site-logo"><img [src]="headerlogo" alt="dunyaya" /></a>
+                        <a [routerLink]="['/customer/home']" class="site-logo"><img [src]="headerlogo"
+                                alt="dunyaya" /></a>
                     </div>
-                </div> 
+                </div>
             </div>
         </div>
     </header>
-    <main> 
+    <main>
         <section class="signin_wrap">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-4 ">
                         <div class="si">
-                           <h4>Sign In</h4>
-                            <form class="from_wrapper" #loginForm="ngForm" (ngSubmit)="OnLogin(lEmail.value,lPassword.value)">
-                                <div class="row inputset">
+                            <h4>Sign In<span class="ertxt" #div ></span></h4>
+                            
+                            <form class="from_wrapper" [formGroup]="loginForm" (ngSubmit)="OnLogin()">
+                                <div class="row inputset" style="height: 100px">
                                     <div class="col-sm-4"><label>Email</label></div>
-                                    <div class="col-sm-8"><input type="text" placeholder="email@domain.com" ngModel name="lEmail" #lEmail="ngModel"
-                                        [email]="true" required />
+                                    <div class="col-sm-8"><input type="text"  placeholder="email@domain.com" formControlName="lEmail"
+                                         id="lEmail" />
+                                            
+                                         <div style="color: crimson"  *ngIf="loginForm.controls['lEmail'].hasError('required') && loginForm.controls['lEmail'].touched">Email is required</div>
+                                         <div style="color: crimson"  [hidden]="!loginForm.controls['lEmail'].errors?.pattern">Email must be a valid email address</div>
 
-                                        <div *ngIf="lEmail.invalid && (lEmail.dirty || lEmail.touched)"
-                                        class="alert alert-danger">   Email is required.
-                                    </div>
-                                    
-                                    <div class="col-sm-12"><hr></div>
+                                        <div class="col-sm-12">
+                                            <hr>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="row inputset">
+                                <div class="row inputset" style="height: 100px">
                                     <div class="col-sm-4"><label>Password</label></div>
-                                    <div class="col-sm-8"><input type="password" placeholder="********" ngModel name="lPassword" #lPassword="ngModel" minlength="6" maxlength="12" required />
-                                    
-                                     <div *ngIf="lPassword.invalid && (lPassword.dirty || lPassword.touched)"
-                                        class="alert alert-danger">   Enter password
-                                    </div>
-                                    <div class="col-sm-12"><hr></div>
+                                    <div class="col-sm-8">
+                                            <input type="password" class="form-control" formControlName="lPassword" id="lPassword"  placeholder="********">
+                                            <div style="color: crimson"  *ngIf="loginForm.controls['lPassword'].hasError('required') && loginForm.controls['lPassword'].touched">Password is required</div>
+                                             <div style="color: crimson"  [hidden]="!loginForm.controls['lPassword'].errors?.minlength">Password Length Must be Grater Than 6</div> 
+                                        <div class="col-sm-12">
+                                            <hr>
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div class="row acset">
                                     <div class="col-sm-4"></div>
-                                    <div class="col-sm-8 right-align"><a href="#" data-toggle="modal" data-target="#bootstrapModel">Forgot your password?</a></div>
+                                    <div class="col-sm-8 right-align"><a href="#" data-toggle="modal"
+                                            data-target="#bootstrapModel">Forgot your password?</a></div>
                                 </div>
 
                                 <div class="row btset">
                                     <div class="col-sm-12 col-xl-6">
-                                            <!-- <a [disabled]="!ngForm.valid"  (click)="OnLogin(lEmail.value,lPassword.value)" class="line_btn sblue">Sign in</a> -->
-                                            <button type="submit" [disabled]="!loginForm.form.valid"  class="line_btn sblue">Sign in</button>
-                                            
-                                    </div>  
-                                    <div class="col-sm-12 col-xl-6">
-                                            Sign in with
-                                        <!-- <a [routerLink]="['/account']"><i class="fa fa-facebook-official" ></i></a>
-                                        <a [routerLink]="['/account']" ><i class="fa fa-google"></i></a> -->
-  
-                                        <a  (click)="socialSignIn('facebook')"><i class="fa fa-facebook-official" ></i></a>
-                                        <a  (click)="socialSignIn('google')" ><i class="fa fa-google"></i></a>
-                                </div>  
-                                                                  
-                                </div>
-                                <div class="row ">
-                                        <div class="col-sm-12">
-                                            <p class="terms">By continuing, you agree to our <a href="#">Terms & Conditions</a>.</p>
-                                        </div>                                        
+                                       
+                                        <button type="submit"  [disabled]="loginForm.invalid"
+                                            class="line_btn sblue">Sign in</button>
+
                                     </div>
+                                    <div class="col-sm-12 col-xl-6">
+                                        Sign in with
+                                     
+
+                                        <a (click)="socialSignIn('facebook')"><i
+                                                class="fa fa-facebook-official"></i></a>
+                                        <a (click)="socialSignIn('google')"><i class="fa fa-google"></i></a>
+                                    </div>
+
+                                </div>
+
+                                <!-- <div *ngIf="invalidLogin" class="error">
+                                    <div>Invalid credentials.</div>
+                                  </div> -->
+
+
+                                <div class="row ">
+                                    <div class="col-sm-12">
+                                        <p class="terms">By continuing, you agree to our <a href="#">Terms &
+                                                Conditions</a>.</p>
+                                    </div>
+                                </div>
                                 <div class="row ftset">
                                     <div class="col-sm-12">
                                         <p>New to Dunyana?</p>
                                         <a [routerLink]="['/signup']" class="line_btn lblack">Create your account</a>
-                                    </div>                                        
+                                    </div>
                                 </div>
-                                
+
                             </form>
 
 
-                           
-
-
-<!-- Modal section -->
-
-
-<div id="bootstrapModel" class="modal fade" role="dialog">
-
-
-  <div class="modal-dialog">
-
-
-    <!-- Modal content-->
-
-
-    <div class="modal-content">
 
 
 
-<!-- model body section -->
+                            <!-- Modal section -->
 
 
-      <div class="modal-body">
+                            <div id="bootstrapModel" class="modal fade" role="dialog" >
 
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                
+                                <div class="modal-dialog">
 
-        <section class="forgotpassword text-center">
 
-            <div class="center">
-                <h2>change password</h2>
+                                    <!-- Modal content-->
 
-        
-                <form class="from_wrapper text-left">
-        
-                    <div class="row inputset">
-                        <div class="col-sm-4"><label>Email</label></div>
-                        <div class="col-sm-8"><input type="text" placeholder="email@domain.com"></div>
-                        <div class="col-sm-4">
-                           &nbsp;
+
+                                    <div class="modal-content">
+
+
+
+                                        <!-- model body section -->
+
+
+                                        <div class="modal-body">
+
+                                            <button type="button" class="close" data-dismiss="modal" #closeAddExpenseModal>&times;</button>
+
+                                            <section class="forgotpassword text-center">
+
+                                                <div class="center">
+                                                    <h2>change password</h2>
+
+
+                                                    <form class="from_wrapper text-left" [formGroup]="ForgetForm"
+                                                        (ngSubmit)="Forgot()">
+
+                                                        <div class="row inputset" style="height: 100px">
+                                                            <div class="col-sm-4"><label>Email</label></div>
+                                                            <div class="col-sm-8"><input type="text" formControlName="FEmail" (keypress)="onKeyPress($event)" 
+                                                                    placeholder="email@domain.com">
+
+                                                                    <div style="color: crimson;text-align:left" *ngIf="ForgetForm.controls['FEmail'].hasError('required') && ForgetForm.controls['FEmail'].touched">Email is required</div>
+                                                                    <div style="color: crimson;text-align:left" [hidden]="!ForgetForm.controls['FEmail'].errors?.pattern">Email must be a valid email address</div>
+                                                                <!-- <div class="alert alert-danger" [hidden]="!loginForm.controls['lEmail'].errors?.pattern">Email must be a valid email address</div> -->
+                                        
+                                                            </div>
+                                                            
+                                                            <div class="col-sm-4">
+                                                                &nbsp;
+                                                            </div>
+                                                            <div class="col-sm-8">
+                                                                <hr>
+                                                                <div [hidden]="show" class="mt-3 text-left" style="color: crimson;text-align:center" #Ferror ></div>
+                                                            </div>
+                                                        </div>
+                                                          
+                                                        <div class="row justify-content-center mt-5">
+                                                            <!--         
+                                                            <a [routerLink]="['/account']" class="line_btn sblue mr-4">Cancel</a> -->
+                                                            <input type="button" [routerLink]="['/signin']" class="line_btn sblue mr-4" value="Cancel">
+                                                            <!-- <a [routerLink]="['/account']" class="line_btn sblue">Submit</a> -->
+                                                            <button type="submit" [disabled]="ForgetForm.Invalid"
+                                                                class="line_btn sblue">Submit</button>
+    
+                                                        </div>
+
+                                                    </form>
+                                                    
+
+                                                </div>
+
+
+                                            </section>
+
+
+                                        </div>
+
+
+
+                                    </div>
+
+
+                                </div>
+
+
+                            </div>
                         </div>
-                        <div class="col-sm-8">
-                            <hr>
-                        </div>
-                    </div>
-        
-                    
-                </form>
-                <div class="row justify-content-center mt-5">
-        
-                    <a [routerLink]="['/account']" class="line_btn sblue mr-4">Cancel</a>
-                    <a [routerLink]="['/account']" class="line_btn sblue">Submit</a>
-        
-                </div>
-        
-            </div>
-        
-        
-        </section>
-
-
-      </div>
-
-
-
-    </div>
-
-
-  </div>
-
-
-</div>
-                        </div>                       
                     </div>
                 </div>
             </div>
@@ -161,19 +187,15 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                <p>Photo by Jolly Chic.<strong> Shop this look</strong>.</p>
-                </div>                           
+                    <p>Photo by Jolly Chic.<strong> Shop this look</strong>.</p>
+                </div>
             </div>
         </div>
-       
+
     </footer>
-  
-  </section>
 
+</section>
 
-
-
-
-
-
-
+<div class="loading-indicator" *ngIf="ProgressSpinnerDlg">
+        <p-progressSpinner></p-progressSpinner>
+</div>
