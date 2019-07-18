@@ -20,9 +20,13 @@ export class HeaderComponent implements OnInit {
 
   logoimg:string;
   headerimg="assets/layout/images/header_logo.png";
+
   header_ar_img="assets/layout/images/header_logo_ar.png";
   englnfimg="assets/icons/english.png";
   spanlanimg="assets/icons/spanish.png";
+
+  name: string;
+
   constructor(  public langShare: LangShareService,
     public translate: TranslateService,private localStorage: LocalStorageService
     ) { }
@@ -48,6 +52,10 @@ export class HeaderComponent implements OnInit {
             this.islogin=true;
       }
     }
+
+    this.name=localStorage.getItem('username');
+    debugger
+
   }
   toggleLang(lang) {
     this.lang = lang;

@@ -15,8 +15,12 @@ export class HomeComponent implements OnInit {
   slideNo = 0;
   withAnim = true;
   resetAnim = true;
+
   translationMessages: any;
   lang: string;
+
+  name:any;
+
   @ViewChild('headerCarousel') headerCarousel: NguCarousel<any>;
  // @ViewChild('categoryCarousel') categoryCarousel: NguCarousel<any>;
 
@@ -60,6 +64,7 @@ export class HomeComponent implements OnInit {
 
 
   ngOnInit() {
+
     if(this.localStorage.get('lang') != null){
       this.lang = this.localStorage.get('lang');
       this.translate.use(this.lang); 
@@ -67,6 +72,8 @@ export class HomeComponent implements OnInit {
     }
     this.langShare.setTranslate(this.translate);
     this.translation();
+
+  this.name=localStorage.getItem('username');
 
   }
   translation() {

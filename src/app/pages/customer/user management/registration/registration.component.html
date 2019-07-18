@@ -43,8 +43,10 @@
                               </div>
 
                               <div class="row inputset">
+
                                   <div class="col-sm-6"><label>Email</label><span class="required">*</span></div>
                                   <div class="col-sm-6"><input type="text" placeholder="email@domain.com" formControlName="emailid" (focusout)="CheckEmail()" (keyup)="formvalidate()" /></div>
+
                                   <div class="col-sm-12">
                                         <div *ngIf="registrationForm.controls['emailid'].errors && !registrationForm.controls['emailid'].pristine" class="text-danger error float-right">
                                                 <div [hidden]="!registrationForm.controls['emailid'].errors.required">Email Required</div>
@@ -385,7 +387,9 @@
                                 <div class="col-sm-6"><label>Upload Image</label></div>
                                 <div class="col-sm-6">
                                     <input type="file" #uploader (change)="fileChangeEvent($event)" class="" [hidden]=true />
+
                                     <button type="button" (click)="uploader.click()" pButton label="Upload Image" class="btn btn-primary float-right mt-2"  data-toggle="modal" data-target="#myModal" class="btn-small text-right float-right" ></button>                                
+
                                 </div>
                                 <div class="col-sm-12"><hr></div>
                               </div>
