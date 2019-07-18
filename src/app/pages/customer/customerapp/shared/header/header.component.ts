@@ -11,6 +11,7 @@ export class HeaderComponent implements OnInit {
 
   translationMessages: any;
   lang = 'en';
+  currentlang="English";
   showDiv="";
   showlngDiv="";
   useremail:string;
@@ -49,11 +50,13 @@ export class HeaderComponent implements OnInit {
     if(lang=="en")
     {
        this.logoimg=this.headerimg;
+       this.currentlang="English";
 
     }
     else if(lang=="ar")
     {
       this.logoimg=this.header_ar_img;
+      this.currentlang="العربية";
     }
     this.showlngDiv="";
     this.showlngDiv="lang_container"; 

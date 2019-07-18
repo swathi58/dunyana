@@ -7,7 +7,7 @@
                 <ngu-carousel #categoryCarousel [inputs]="categorycarouselConfig" [dataSource]="categorycarouselItems">
                     <div *nguCarouselDef="let item;" class="item wd">
                         <div class="cattile" [ngStyle]="{'background-image':'url('+item.img+')'}">
-                            <p>{{item.name}}</p>
+                            <p class="sliderimg-txt">{{item.name}}</p>
                         </div>
                     </div>
                     <button NguCarouselNext class="rightRs">></button>

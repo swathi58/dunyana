@@ -32,12 +32,30 @@ import {
 import { CustomerAccountComponent } from './account management/customer-account/customer-account.component';
 import { ChangepasswordComponent } from '../user management/changepassword/changepassword.component';
 import { ShopByCategoryComponent } from './customer category management/shop-by-category/shop-by-category.component';
+import { OurStoryComponent } from './About/our-story/our-story.component';
+import { HowDunyanaWorksComponent } from './About/how-dunyana-works/how-dunyana-works.component';
+import { BecomeSellerComponent } from './About/become-seller/become-seller.component';
+import { TermsConditionsComponent } from './About/terms-conditions/terms-conditions.component';
+import { ContactUsComponent } from './About/contact-us/contact-us.component';
+import { FAQComponent } from './About/faq/faq.component';
+import { AboutDunyanaComponent } from './About/about-dunyana/about-dunyana.component';
+import { PrivacyPolicyComponent } from './About/privacy-policy/privacy-policy.component';
+import { OrderingPaymentComponent } from './order management/ordering-payment/ordering-payment.component';
+import { ShippingComponent } from './order management/shipping/shipping.component';
+import { ReturnsComponent } from './order management/returns/returns.component';
+import { PressEnquiriesComponent } from './About/press-enquiries/press-enquiries.component';
+import { PaymentMethodsComponent } from './Payment/payment-methods/payment-methods.component';
+import { CustomerServiceComponent } from './About/customer-service/customer-service.component';
+import { TrackYourPackageComponent } from './order management/track-your-package/track-your-package.component';
+import { DealsPromotionsComponent } from './Deals Management/deals-promotions/deals-promotions.component';
+import { CategoryComponent } from './customer category management/category/category.component';
+
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent, HomeComponent,CustomerappComponent, CategoriessliderComponent, CustomerAccountComponent,ChangepasswordComponent, ShopByCategoryComponent],
+  declarations: [HeaderComponent, FooterComponent, HomeComponent,CustomerappComponent, CategoriessliderComponent, CustomerAccountComponent,ChangepasswordComponent, ShopByCategoryComponent, OurStoryComponent, HowDunyanaWorksComponent, BecomeSellerComponent, TermsConditionsComponent, ContactUsComponent, FAQComponent, AboutDunyanaComponent, PrivacyPolicyComponent, OrderingPaymentComponent, ShippingComponent, ReturnsComponent, PressEnquiriesComponent, PaymentMethodsComponent, CustomerServiceComponent, TrackYourPackageComponent, DealsPromotionsComponent, CategoryComponent],
   exports: [CustomerappComponent,HeaderComponent,FooterComponent,],
   imports: [
     CommonModule,

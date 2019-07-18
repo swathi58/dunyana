@@ -14,11 +14,9 @@ import { HeaderComponent } from '../customer/customerapp/shared/header/header.co
 import { AddCategoriesComponent } from './category management/add-categories/add-categories.component';
 import {DialogModule} from 'primeng/components/dialog/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { OurStoryComponent } from './About/our-story/our-story.component';
-import { DunyanaWorkingProcessComponent } from './About/dunyana-working-process/dunyana-working-process.component';
-import { BecomeSellerComponent } from './About/become-seller/become-seller.component';
+
 @NgModule({
-  declarations: [CategoryListComponent, CategoryDetailsComponent, AddCategoriesComponent, OurStoryComponent, DunyanaWorkingProcessComponent, BecomeSellerComponent],
+  declarations: [CategoryListComponent, CategoryDetailsComponent, AddCategoriesComponent],
   imports: [
     CommonModule,
     TableModule,
