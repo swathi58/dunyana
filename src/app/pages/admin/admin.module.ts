@@ -15,7 +15,6 @@ import { AddCategoriesComponent } from './category management/add-categories/add
 import {DialogModule} from 'primeng/components/dialog/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-
 @NgModule({
   declarations: [CategoryListComponent, CategoryDetailsComponent, AddCategoriesComponent],
   imports: [

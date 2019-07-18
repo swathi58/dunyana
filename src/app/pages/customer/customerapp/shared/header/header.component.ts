@@ -53,7 +53,6 @@ export class HeaderComponent implements OnInit {
     }
 
     this.name=localStorage.getItem('username');
-    debugger
 
   }
   toggleLang(lang) {
