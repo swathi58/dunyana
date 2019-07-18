@@ -19,28 +19,28 @@
                 <div class="row">
                     <div class="col-sm-4 ">
                         <div class="si">
-                            <h4>Sign In<span class="ertxt" #div ></span></h4>
+                            <h4>Sign In<span [hidden]="show" class="ertxt" #div ></span></h4>
                             
                             <form class="from_wrapper" [formGroup]="loginForm" (ngSubmit)="OnLogin()">
-                                <div class="row inputset" style="height: 100px">
+                                <div class="row inputset" >
                                     <div class="col-sm-4"><label>Email</label></div>
                                     <div class="col-sm-8"><input type="text"  placeholder="email@domain.com" formControlName="lEmail"
-                                         id="lEmail" />
+                                         id="lEmail" (keyup)="onKeyPress($event)"/>
                                             
-                                         <div style="color: crimson"  *ngIf="loginForm.controls['lEmail'].hasError('required') && loginForm.controls['lEmail'].touched">Email is required</div>
-                                         <div style="color: crimson"  [hidden]="!loginForm.controls['lEmail'].errors?.pattern">Email must be a valid email address</div>
+                                         <div style="color: crimson;padding-left: 10px;"  *ngIf="loginForm.controls['lEmail'].hasError('required') && loginForm.controls['lEmail'].touched">Email is required</div>
+                                         <div style="color: crimson;padding-left: 10px;"  [hidden]="!loginForm.controls['lEmail'].errors?.pattern">Enter valid email address</div>
 
                                         <div class="col-sm-12">
                                             <hr>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row inputset" style="height: 100px">
+                                <div class="row inputset">
                                     <div class="col-sm-4"><label>Password</label></div>
                                     <div class="col-sm-8">
-                                            <input type="password" class="form-control" formControlName="lPassword" id="lPassword"  placeholder="********">
-                                            <div style="color: crimson"  *ngIf="loginForm.controls['lPassword'].hasError('required') && loginForm.controls['lPassword'].touched">Password is required</div>
-                                             <div style="color: crimson"  [hidden]="!loginForm.controls['lPassword'].errors?.minlength">Password Length Must be Grater Than 6</div> 
+                                            <input type="password" class="form-control" formControlName="lPassword" id="lPassword"  placeholder="********" (keyup)="onKeyPress($event)">
+                                            <div style="color: crimson;padding-left: 10px;"  *ngIf="loginForm.controls['lPassword'].hasError('required') && loginForm.controls['lPassword'].touched">Password is required</div>
+                                             <div style="color: crimson;padding-left: 10px;"  [hidden]="!loginForm.controls['lPassword'].errors?.minlength">Password Length Must be Grater Than 6</div> 
                                         <div class="col-sm-12">
                                             <hr>
                                         </div>
@@ -127,13 +127,13 @@
                                                     <form class="from_wrapper text-left" [formGroup]="ForgetForm"
                                                         (ngSubmit)="Forgot()">
 
-                                                        <div class="row inputset" style="height: 100px">
+                                                        <div class="row inputset">
                                                             <div class="col-sm-4"><label>Email</label></div>
-                                                            <div class="col-sm-8"><input type="text" formControlName="FEmail" (keypress)="onKeyPress($event)" 
+                                                            <div class="col-sm-8"><input type="text" formControlName="FEmail" (keyup)="onKeyPress($event)" 
                                                                     placeholder="email@domain.com">
 
-                                                                    <div style="color: crimson;text-align:left" *ngIf="ForgetForm.controls['FEmail'].hasError('required') && ForgetForm.controls['FEmail'].touched">Email is required</div>
-                                                                    <div style="color: crimson;text-align:left" [hidden]="!ForgetForm.controls['FEmail'].errors?.pattern">Email must be a valid email address</div>
+                                                                    <div style="color: crimson;text-align:left;padding-left: 10px;" *ngIf="ForgetForm.controls['FEmail'].hasError('required') && ForgetForm.controls['FEmail'].touched">Email is required</div>
+                                                                    <div style="color: crimson;text-align:left;padding-left: 10px;" [hidden]="!ForgetForm.controls['FEmail'].errors?.pattern">Email must be a valid email address</div>
                                                                 <!-- <div class="alert alert-danger" [hidden]="!loginForm.controls['lEmail'].errors?.pattern">Email must be a valid email address</div> -->
                                         
                                                             </div>

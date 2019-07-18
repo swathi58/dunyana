@@ -31,9 +31,11 @@ export class LoginComponent implements OnInit {
   @ViewChild('Ferror')Ferror:ElementRef;
   public show = false;
 
-  headerlogo  = 'assets/layout/images/glogo.png';
-  display = 'none';
-  userPostData: User = {
+  userdata:any;
+  
+  headerlogo:string="assets/layout/images/glogo.png";
+  display='none'; //default Variable
+  userPostData:User={
       Email:"",
       FirstName:"",
       LastName:"",
@@ -80,7 +82,8 @@ public langShare: LangShareService,
      this.ForgetForm=this.formBuilder.group({
       FEmail:['', [Validators.required,Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z.-]+\.[a-zA-Z]{2,}$')]]
      });
-     
+     debugger
+     this.ProgressSpinnerDlg=false;
     // ('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{1,}[.]{1}[a-zA-Z]{3,}')
     //[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-zA-Z]{2,}$'
 
@@ -277,7 +280,10 @@ public langShare: LangShareService,
     this.dataservice.login(this.userPostData).subscribe(res => {
       debugger
       this.ProgressSpinnerDlg=false;
+      this.userdata=res['reFirstName'];
+      localStorage.setItem('username',this.userdata);
       //this.messageService.add({severity:'success', summary:'Success Message', detail:res["result"]});
+      this.show=false;
       this.div.nativeElement.innerHTML=res["result"];
       
       this.Resetlog();
@@ -289,7 +295,8 @@ public langShare: LangShareService,
 
        errormsg => {
         this.ProgressSpinnerDlg=false;
-        console.log(errormsg["error"]["result"]);        
+        console.log(errormsg["error"]["result"]);   
+        this.show=false;     
         this.div.nativeElement.innerHTML=errormsg["error"]["result"];
         debugger
         //this.messageService.add({severity:'error', summary:'Error Message', detail:errormsg["error"]["result"]});
