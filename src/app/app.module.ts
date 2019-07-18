@@ -25,6 +25,7 @@ import localeESUS from '@angular/common/locales/es-US';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import {MessageService} from 'primeng/api';
+
 import {
   HttpClientModule,
   HttpClient,
@@ -33,6 +34,8 @@ import {
 import { RouterModule } from '@angular/router';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ChangepasswordComponent } from './pages/customer/user management/changepassword/changepassword.component';
+import { AdminModule } from './pages/admin/admin.module';
+import { AdminComponent } from './pages/admin/admin.component';
 registerLocaleData(localeESUS);
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -62,13 +65,14 @@ export function getAuthServiceConfigs() {
     RegistrationComponent,
     EmailverificationSuccessComponent,
     PageNotFoundComponent,
-    ChangepasswordComponent,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     CustomerappModule,
+    AdminModule,
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
@@ -77,6 +81,7 @@ export function getAuthServiceConfigs() {
     ImageCropperModule,
     DialogModule,
     ButtonModule,
+    
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

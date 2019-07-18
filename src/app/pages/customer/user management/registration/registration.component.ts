@@ -28,6 +28,7 @@ export class RegistrationComponent implements OnInit {
   submitted = false;
   countries:any[]=[]; 
   default: string = 'United States';
+  btndisable:string="disable";
 
   imageChangedEvent: any = '';
   croppedImage: any = '';
@@ -63,7 +64,8 @@ export class RegistrationComponent implements OnInit {
     this.registrationForm=this.formBuilder.group({
       firstname:['',Validators.required],
       lastname:['',Validators.required],
-      emailid:['',[Validators.required,Validators.email]],
+      // emailid:['',[Validators.required,Validators.email]],
+      emailid:['', [Validators.required,Validators.pattern('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{3,}')]],
       mobile:['',[Validators.required,Validators.minLength(10),Validators.maxLength(10)]],
       address:['',Validators.required],
       country:['Select Country',Validators.required],
@@ -145,6 +147,19 @@ saveCropImage()
   console.log(this.finalImage);
   
 }
+
+formvalidate()
+  {
+    if(this.registrationForm.valid)
+    {
+      this.btndisable="line_btn sblue";
+    }
+    else
+    {
+      this.btndisable="disable";
+    }
+  }
+
 ConvertingFormToDto()
 {
 
@@ -166,10 +181,10 @@ CheckEmail()
   //this.registerdto.Email="swathi.chinnala@gmail.com";
   this.ConvertingFormToDto();
   this.userservice.EmailVerification(this.registerdto).subscribe(res=>{
-  this.messageService.add({severity:'success', summary:'Success Message', detail:res["result"]});
+      this.messageService.add({severity:'success', summary:'Success Message', detail:res["result"]});
   },
   errormsg=>{
-    this.messageService.add({severity:'error', summary:'Error Message', detail:errormsg["error"]["result"]});
+      this.messageService.add({severity:'error', summary:'Error Message', detail:errormsg["error"]["result"]});   
   });
 }
 
@@ -178,7 +193,8 @@ this.ConvertingFormToDto();
   this.ProgressSpinnerDlg=true;
   this.userservice.CustomerRegistration(this.registerdto).subscribe(res=>{
   this.ProgressSpinnerDlg=false;
-  this.messageService.add({severity:'success', summary:'Success Message', detail:res["result"]});
+    this.messageService.add({severity:'success', summary:'Success Message', detail:res["result"]});
+
  // this.router.navigateByUrl('/');
  this.ResetForm();
 },
@@ -186,7 +202,6 @@ error=>{
 
   this.ProgressSpinnerDlg=false;
   console.log(error);
-
   this.messageService.add({severity:'error', summary:'Error Message', detail:error["result"]});
 });
  }

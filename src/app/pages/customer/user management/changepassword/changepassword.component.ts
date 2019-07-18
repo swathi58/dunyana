@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ChangepasswordDto } from '../../model/DTOs/ChangepasswordDto';
 import { UsermanagementService } from '../../services/usermanagement.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -11,6 +11,12 @@ import { MessageService } from 'primeng/api';
   styleUrls: ['./changepassword.component.scss']
 })
 export class ChangepasswordComponent implements OnInit {
+  
+  @Input() display: boolean;
+  @Output() displayChange = new EventEmitter();
+
+
+
   changepwdForm:FormGroup;
   btndisable:string="disable";
   changepassword:ChangepasswordDto={
@@ -40,14 +46,19 @@ export class ChangepasswordComponent implements OnInit {
   return pass === confirmPass ? null : { notSame: true }      
 }
 
-  ChangePassword()
+SaveChangePassword()
   {
 
     this.changepassword.Email=localStorage.getItem("Email");
     this.changepassword.PWD=this.changepwdForm.value["PWD"];
     this.changepassword.NPWD=this.changepwdForm.value["NPWD"];
     this.userservice.ChangePassword(this.changepassword).subscribe(res=>{
+      this.FormReset();
       this.messageService.add({severity:'success', summary:'Success Message', detail:res["result"]});
+      setTimeout(() => {
+        this.onClose();
+    }, 1000); 
+ 
     },
     errormsg=>{
       this.messageService.add({severity:'error', summary:'Error Message', detail:errormsg["error"]["result"]});
@@ -64,5 +75,17 @@ export class ChangepasswordComponent implements OnInit {
     {
       this.btndisable="disable";
     }
+  }
+  onClose(){
+    this.displayChange.emit(false);
+  }
+
+  FormReset()
+  {
+    this.changepwdForm.reset({
+      'PWD':'',
+      'NPWD':'',
+      'confirmpassword':''
+    })
   }
 }
