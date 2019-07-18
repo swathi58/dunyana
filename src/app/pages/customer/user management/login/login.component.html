@@ -27,8 +27,8 @@
                                     <div class="col-sm-8"><input type="text"  placeholder="email@domain.com" formControlName="lEmail"
                                          id="lEmail" (keyup)="onKeyPress($event)"/>
                                             
-                                         <div style="color: crimson;padding-left: 10px;"  *ngIf="loginForm.controls['lEmail'].hasError('required') && loginForm.controls['lEmail'].touched">Email is required</div>
-                                         <div style="color: crimson;padding-left: 10px;"  [hidden]="!loginForm.controls['lEmail'].errors?.pattern">Enter valid email address</div>
+                                         <div style="color: crimson;padding-left: 10px;font-size: 13px;"  *ngIf="loginForm.controls['lEmail'].hasError('required') && loginForm.controls['lEmail'].touched">Email is required</div>
+                                         <div style="color: crimson;padding-left: 10px;font-size: 13px;"  [hidden]="!loginForm.controls['lEmail'].errors?.pattern">Enter valid email address</div>
 
                                         <div class="col-sm-12">
                                             <hr>
@@ -39,8 +39,8 @@
                                     <div class="col-sm-4"><label>Password</label></div>
                                     <div class="col-sm-8">
                                             <input type="password" class="form-control" formControlName="lPassword" id="lPassword"  placeholder="********" (keyup)="onKeyPress($event)">
-                                            <div style="color: crimson;padding-left: 10px;"  *ngIf="loginForm.controls['lPassword'].hasError('required') && loginForm.controls['lPassword'].touched">Password is required</div>
-                                             <div style="color: crimson;padding-left: 10px;"  [hidden]="!loginForm.controls['lPassword'].errors?.minlength">Password Length Must be Grater Than 6</div> 
+                                            <div style="color: crimson;padding-left: 10px;font-size: 13px;"  *ngIf="loginForm.controls['lPassword'].hasError('required') && loginForm.controls['lPassword'].touched">Password is required</div>
+                                             <div style="color: crimson;padding-left: 10px;font-size: 13px;"  [hidden]="!loginForm.controls['lPassword'].errors?.minlength">Password Length Must be Grater Than 6</div> 
                                         <div class="col-sm-12">
                                             <hr>
                                         </div>
@@ -60,7 +60,7 @@
                                             class="line_btn sblue">Sign in</button>
 
                                     </div>
-                                    <div class="col-sm-12 col-xl-6">
+                                    <div class="col-sm-12 col-xl-6" style="visibility: hidden">
                                         Sign in with
                                      
 
@@ -121,7 +121,7 @@
                                             <section class="forgotpassword text-center">
 
                                                 <div class="center">
-                                                    <h2>change password</h2>
+                                                    <h2>Forgot password</h2>
 
 
                                                     <form class="from_wrapper text-left" [formGroup]="ForgetForm"
@@ -132,8 +132,8 @@
                                                             <div class="col-sm-8"><input type="text" formControlName="FEmail" (keyup)="onKeyPress($event)" 
                                                                     placeholder="email@domain.com">
 
-                                                                    <div style="color: crimson;text-align:left;padding-left: 10px;" *ngIf="ForgetForm.controls['FEmail'].hasError('required') && ForgetForm.controls['FEmail'].touched">Email is required</div>
-                                                                    <div style="color: crimson;text-align:left;padding-left: 10px;" [hidden]="!ForgetForm.controls['FEmail'].errors?.pattern">Email must be a valid email address</div>
+                                                                    <div style="color: crimson;text-align:left;padding-left: 10px;font-size: 13px;" *ngIf="ForgetForm.controls['FEmail'].hasError('required') && ForgetForm.controls['FEmail'].touched">Email is required</div>
+                                                                    <div style="color: crimson;text-align:left;padding-left: 10px;font-size: 13px;" [hidden]="!ForgetForm.controls['FEmail'].errors?.pattern">Email must be a valid email address</div>
                                                                 <!-- <div class="alert alert-danger" [hidden]="!loginForm.controls['lEmail'].errors?.pattern">Email must be a valid email address</div> -->
                                         
                                                             </div>
@@ -150,10 +150,12 @@
                                                         <div class="row justify-content-center mt-5">
                                                             <!--         
                                                             <a [routerLink]="['/account']" class="line_btn sblue mr-4">Cancel</a> -->
-                                                            <input type="button" [routerLink]="['/signin']" class="line_btn sblue mr-4" value="Cancel">
+                                                            
                                                             <!-- <a [routerLink]="['/account']" class="line_btn sblue">Submit</a> -->
                                                             <button type="submit" [disabled]="ForgetForm.Invalid"
                                                                 class="line_btn sblue">Submit</button>
+
+                                                                <input type="button" [routerLink]="['/signin']" class="line_btn sblue mr-4" value="Cancel">
     
                                                         </div>
 
