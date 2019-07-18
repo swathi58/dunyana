@@ -10,6 +10,9 @@ import {MessageService} from 'primeng/api';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { Router } from '@angular/router';
 import { ChangepasswordDto } from '../../model/DTOs/ChangepasswordDto';
+import { LangShareService } from 'src/app/shared/services/lang-share.service';
+import { TranslateService } from '@ngx-translate/core';
+import { LocalStorageService } from 'angular-web-storage';
 
 @Component({
   selector: 'app-registration',
@@ -17,7 +20,8 @@ import { ChangepasswordDto } from '../../model/DTOs/ChangepasswordDto';
   styleUrls: ['./registration.component.scss']
 })
 export class RegistrationComponent implements OnInit {
-
+  translationMessages: any;
+  lang = 'en';
   headerlogo:string="assets/layout/images/glogo.png";
   ProgressSpinnerDlg:boolean=false;
   registrationForm:FormGroup;
@@ -51,7 +55,8 @@ export class RegistrationComponent implements OnInit {
 
   constructor(private formBuilder:FormBuilder, private userservice:UsermanagementService,
     private messageService: MessageService,private ngxService: NgxUiLoaderService,
-    private router:Router) {  }
+    private router:Router, public langShare: LangShareService,
+    public translate: TranslateService,private localStorage: LocalStorageService) {  }
 
   ngOnInit() {
 
@@ -78,9 +83,24 @@ export class RegistrationComponent implements OnInit {
 ];
 
 this.registrationForm.controls['country'].setValue(this.countries[0]["label"], {onlySelf: true});
+
+if(this.localStorage.get('lang') != null){
+  this.lang = this.localStorage.get('lang');
+  this.translate.use(this.lang); 
+  
+}
+this.langShare.setTranslate(this.translate);
+this.translation();
 }
 
-
+translation() {
+  this.langShare.translate$.subscribe(translate => {
+    this.translate = translate;
+    translate.get('Global').subscribe(data => {
+      this.translationMessages = data;
+    });
+  });
+}
 _keyPress(event: any) {
   const pattern = /[0-9\+\-\ ]/;
   let inputChar = String.fromCharCode(event.charCode);

@@ -14,7 +14,7 @@ export class HeaderComponent implements OnInit {
   lang = 'en';
   showDiv="";
   showlngDiv="";
-  useremail:string;
+  useremail:string; 
   islogin:boolean=false;
 
   logoimg:string;

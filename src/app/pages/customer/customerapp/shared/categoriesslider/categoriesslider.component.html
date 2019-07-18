@@ -3,7 +3,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
-                <h2>Shop by category</h2>
+                <h2>{{'Shopbycategory' | translate }} </h2>
                 <ngu-carousel #categoryCarousel [inputs]="categorycarouselConfig" [dataSource]="categorycarouselItems">
                     <div *nguCarouselDef="let item;" class="item wd">
                         <div class="cattile" [ngStyle]="{'background-image':'url('+item.img+')'}">

@@ -83,7 +83,7 @@
       
                         </ul>
                         <div class="search_container" [ngClass]="showDiv">
-                            <input type="text" placeholder="Search our brands" />
+                            <input type="text" placeholder="{{ 'Searchbrands' | translate }}" />
                             <a class="closebtn" (click)="closesearch()"></a>
                             <a class="filterbtn"></a>
                         </div>
@@ -102,7 +102,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6">
-                        <a [routerLink]="['/customer/home']" class="site-logo"><img [src]="lang =='en' ? 'assets/layout/images/header_logo.png':'assets/layout/images/header_logo_ar.png'" alt="dunyaya" /></a>
+                        <a [routerLink]="['/customer/home']" class="site-logo"><img [src]="lang =='en' ? 'assets/layout/images/header_logo.png':'assets/layout/images/header_logo_ar.png'" alt="dunyana" /></a>
                     </div>
                     <div class="col-sm-6 right-align">
                         <ul class="user-actions">

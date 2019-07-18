@@ -4,7 +4,7 @@ import { NguCarouselModule } from '@ngu/carousel';
 import 'hammerjs';
 import {ToastModule} from 'primeng/toast';
 import { MessageService } from 'primeng/components/common/messageservice';
-import { NgxUiLoaderModule } from  'ngx-ui-loader';
+import { NgxUiLoaderModule } from 'ngx-ui-loader';
 
 import { CustomerappRoutingModule } from './customerapp-routing.module';
 import { HeaderComponent } from './shared/header/header.component';
@@ -30,7 +30,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 }
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent, HomeComponent,CustomerappComponent, CategoriessliderComponent],
+  declarations: [HeaderComponent, FooterComponent, HomeComponent, CustomerappComponent, CategoriessliderComponent],
   exports: [CustomerappComponent],
   imports: [
     CommonModule,
@@ -46,6 +46,6 @@ export function HttpLoaderFactory(http: HttpClient) {
       },
     }),
   ],
-  providers:[MessageService]
+  providers: [MessageService]
 })
 export class CustomerappModule { }

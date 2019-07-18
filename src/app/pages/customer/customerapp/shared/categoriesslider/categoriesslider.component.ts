@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { NguCarousel, NguCarouselConfig } from '@ngu/carousel';
 import { DomSanitizer } from '@angular/platform-browser';
+import { LangShareService } from 'src/app/shared/services/lang-share.service';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-categoriesslider',
   templateUrl: './categoriesslider.component.html',
@@ -24,13 +26,14 @@ export class CategoriessliderComponent implements OnInit {
     velocity: 0.2
   }
 
-  categorycarouselItems = [{name:1,img:"assets/layout/images/cat_img_fash.jpg"}, {name:2,img:"assets/layout/images/cat_img_shoes.jpg"},
-  {name:3,img:"assets/layout/images/cat_img_sports.jpg"},{name:4,img:"assets/layout/images/cat_img_beauty.jpg"},
-  {name:5,img:"assets/layout/images/cat_img_virtual.jpg"},{name:6,img:"assets/layout/images/cat_img_fash.jpg"},
-  {name:7,img:"assets/layout/images/cat_img_shoes.jpg"},{name:8,img:"assets/layout/images/cat_img_sports.jpg"},
-  {name:9,img:"assets/layout/images/cat_img_beauty.jpg"}];
+  categorycarouselItems = [{name:'Fashion',img:"assets/layout/images/cat_img_fash.jpg"}, {name:'Shoes',img:"assets/layout/images/cat_img_shoes.jpg"},
+  {name:'Sports',img:"assets/layout/images/cat_img_sports.jpg"},{name:'Beauty',img:"assets/layout/images/cat_img_beauty.jpg"},
+  {name:'Virtual',img:"assets/layout/images/cat_img_virtual.jpg"},{name:'Fashion',img:"assets/layout/images/cat_img_fash.jpg"},
+  {name:'Shoes',img:"assets/layout/images/cat_img_shoes.jpg"},{name:'Sports',img:"assets/layout/images/cat_img_sports.jpg"},
+  {name:'Beauty',img:"assets/layout/images/cat_img_beauty.jpg"}];
 
-  constructor(private cdr: ChangeDetectorRef,private sanitizer: DomSanitizer) { }
+  constructor(private cdr: ChangeDetectorRef,private sanitizer: DomSanitizer, public langShare: LangShareService,
+    public translate: TranslateService) { }
 
   ngOnInit() {
   }

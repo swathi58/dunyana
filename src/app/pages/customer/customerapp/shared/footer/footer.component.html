@@ -2,7 +2,7 @@
   <div class="container">
       <div class="row">
           <div class="col-md-7 comp_info">
-              <a [routerLink]="['/customer/home']"><img [src]="imgfooter" alt="dunyana" /></a>
+              <a [routerLink]="['/customer/home']"><img [src]="translate.store.currentLang =='en' ? 'assets/layout/images/header_logo.png':'assets/layout/images/header_logo_ar.png'" alt="dunyana" /></a>
               <p>+966 345 678 903<br> <a href="mailto:info@dunyana.com">info@dunyana.com</a></p>
               <ul class="social">
                   <li><a href="#"><i class="icomoon icon-fb_logo"></i></a></li>
@@ -13,15 +13,15 @@
           </div>
           <div class="col-md-5 ftlinks">
               <ul>
-                  <li><a href="#">Contact Us</a></li>
-                  <li><a href="#">Ordering & Payment</a></li>
-                  <li><a href="#">Shipping</a></li>
-                  <li><a href="#">Returns</a></li>
-                  <li><a href="#">FAQ</a></li>
-                  <li><a href="#">About Dunyana</a></li>
-                  <li><a href="#">Privacy Policy</a></li>
-                  <li><a href="#">Terms & Conditions</a></li>
-                  <li><a href="#">Press Enquiries</a></li>
+                  <li><a href="#">{{ 'ContactUs' | translate }} </a></li>
+                  <li><a href="#">{{ 'Ordering&Payment' | translate }}</a></li>
+                  <li><a href="#"> {{ 'Shipping' | translate }}</a></li>
+                  <li><a href="#">{{ 'Returns' | translate }}</a></li>
+                  <li><a href="#">{{ 'FAQ' | translate }}</a></li>
+                  <li><a href="#">{{ 'AboutDunyana' | translate }}</a></li>
+                  <li><a href="#">{{ 'PrivacyPolicy' | translate }}</a></li>
+                  <li><a href="#">{{ 'Terms&Conditions' | translate }}</a></li>
+                  <li><a href="#">{{ 'PressEnquiries' | translate }}</a></li>
               </ul>
           </div>
       </div>
@@ -36,7 +36,7 @@
   <div class="container">
       <div class="row">
           <div class="col-sm-12 fttxt">
-              <p>&copy; Dunyana. All Rights Reserved. 2019.</p>
+              <p>&copy; {{ 'AllRights' | translate }}</p>
           </div>
       </div>
   </div>
