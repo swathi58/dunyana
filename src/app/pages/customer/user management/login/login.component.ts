@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, ElementRef, ViewChild } from '@angular/core';
 import { User } from '../../model/user';
 import { UsermanagementService } from '../../services/usermanagement.service';
 import { AuthServiceConfig, FacebookLoginProvider, GoogleLoginProvider,AuthService,SocialLoginModule } from 'angularx-social-login';
@@ -8,7 +8,8 @@ import {MessageService} from 'primeng/api';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { Observable, Observer } from 'rxjs';
-
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import { NG_FORM_SELECTOR_WARNING } from '@angular/forms/src/directives';
 
 @Component({
   selector: 'app-login',
@@ -17,8 +18,18 @@ import { Observable, Observer } from 'rxjs';
 })
 export class LoginComponent implements OnInit {
 
-  headerlogo:string="assets/layout/images/glogo.png";
 
+
+
+  loginForm:FormGroup;
+  ForgetForm:FormGroup;
+  @ViewChild('div') div:ElementRef;
+  @ViewChild('closeAddExpenseModal') closeAddExpenseModal: ElementRef;
+  @ViewChild('Ferror')Ferror:ElementRef;
+  public show = false;
+
+  headerlogo:string="assets/layout/images/glogo.png";
+  display='none'; //default Variable
   userPostData:User={
       Email:"",
       FirstName:"",
@@ -35,8 +46,6 @@ export class LoginComponent implements OnInit {
       PWD:"",
       Type:""
 
-
-
   };
   public responseData: any;
   base64textString: string;
@@ -44,21 +53,31 @@ export class LoginComponent implements OnInit {
   Image: any;
   isBrowser: boolean;
   base64Image: any;
+  submitted: boolean=false;
+  ProgressSpinnerDlg: boolean;
 
  
 
   constructor(private dataservice:UsermanagementService,private socialAuthService: AuthService,
-
-    private router: Router,  private messageService: MessageService) {
+private router: Router,  private messageService: MessageService,private formBuilder: FormBuilder, ) {
 
       this.dataservice.sessionIn();
 
      }
 
   ngOnInit() {
-  
-  
-  
+       
+    this.loginForm = this.formBuilder.group({      
+       lEmail:['', [Validators.required,Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z.-]+\.[a-zA-Z]{2,}$')]],
+       lPassword: ['', Validators.compose([Validators.required, Validators.minLength(6)])]      
+     });
+
+     this.ForgetForm=this.formBuilder.group({
+      FEmail:['', [Validators.required,Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z.-]+\.[a-zA-Z]{2,}$')]]
+     });
+     debugger
+    // ('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{1,}[.]{1}[a-zA-Z]{3,}')
+    //[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-zA-Z]{2,}$'
 }
 
 
@@ -168,11 +187,13 @@ export class LoginComponent implements OnInit {
 
     this.dataservice.registeruser(this.userPostData).subscribe(res => {
       this.messageService.add({severity:'success', summary:'Success Message', detail:res["result"]});
+      this.div.nativeElement.innerHTML =res["result"];
       this.router.navigateByUrl("customer/home");
        },
        errormsg => {
         
         console.log(errormsg["error"]["result"]);
+        this.div.nativeElement.innerHTML=errormsg["error"]["result"];
         this.messageService.add({severity:'error', summary:'Error Message', detail:errormsg["error"]["result"]});
            //this.router.navigateByUrl("customer/home");
   
@@ -223,40 +244,103 @@ export class LoginComponent implements OnInit {
     ctx.drawImage(img, 0, 0);
     var dataURL = canvas.toDataURL("image/png");
     return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
-    debugger
+    
   }
 
-  OnLogin(email,password) {  
-    this.userPostData.Email = email;
-    this.userPostData.PWD = password;
+  OnLogin() {  
+    debugger
+    this.submitted = true;
+    this.ProgressSpinnerDlg=true;
+    
+    if (this.loginForm.invalid) {
+      return;
+    }
+    const loginPayload = {
+      username: this.loginForm.controls.lEmail.value,
+      password: this.loginForm.controls.lPassword.value
+    }
+    this.userPostData.Email = this.loginForm.controls.lEmail.value;
+    this.userPostData.PWD = this.loginForm.controls.lPassword.value;
 
        debugger
 
     this.dataservice.login(this.userPostData).subscribe(res => {
       debugger
-      this.messageService.add({severity:'success', summary:'Success Message', detail:res["result"]});
-      //this.router.navigateByUrl("customer/home");
+      this.ProgressSpinnerDlg=false;
+      //this.messageService.add({severity:'success', summary:'Success Message', detail:res["result"]});
+      this.div.nativeElement.innerHTML=res["result"];
+      
+      this.Resetlog();
+      this.router.navigateByUrl("customer/home");
        },       
       //  error=>{
       //    this.messageService.add({severity:'error', summary:'Error Message', detail:error["result"]});
       //  });
 
        errormsg => {
-        
-        console.log(errormsg["error"]["result"]);
-        this.messageService.add({severity:'error', summary:'Error Message', detail:errormsg["error"]["result"]});
+        this.ProgressSpinnerDlg=false;
+        console.log(errormsg["error"]["result"]);        
+        this.div.nativeElement.innerHTML=errormsg["error"]["result"];
+        debugger
+        //this.messageService.add({severity:'error', summary:'Error Message', detail:errormsg["error"]["result"]});
            //this.router.navigateByUrl("customer/home");
   
        });
 
   }
 
-  sendlink(email){
-    this.userPostData.Email = email;
+  Forgot(){
+    debugger
+    this.userPostData.Email = this.ForgetForm.controls.FEmail.value;
+    this.ProgressSpinnerDlg=true;
+    if (this.ForgetForm.invalid) {
+      return;
+    }
+    this.dataservice.forget(this.userPostData).subscribe(res => {
+      debugger
+      this.ProgressSpinnerDlg=false;
+      //this.messageService.add({severity:'success', summary:'Success Message', detail:res["result"]});
+      this.show=false;
+      this.Ferror.nativeElement.innerHTML=res["result"];
+      this.ResetForgot();
+      this.closeAddExpenseModal.nativeElement.click();
+      alert(res["result"]);
+      this.router.navigateByUrl("customer/home");
+     
+       },       
+      //  error=>{
+      //    this.messageService.add({severity:'error', summary:'Error Message', detail:error["result"]});
+      //  });
+
+       errormsg => {
+        this.ProgressSpinnerDlg=false;
+        console.log(errormsg["error"]["result"]);
+        //this.messageService.add({severity:'error', summary:'Error Message', detail:errormsg["error"]["result"]});
+        this.show=false;
+        this.Ferror.nativeElement.innerHTML=errormsg["error"]["result"];
+           //this.router.navigateByUrl("customer/home");
+  
+       });
   }
-  
 
+  onKeyPress(event:any) {
+    debugger
+    this.show=true;
+  }
 
-  
+  Resetlog() {
+    this.loginForm.reset({
+      'lEmail': '',
+      'lPassword': ''
+    })
+  }
+
+  ResetForgot(){
+    this.ForgetForm.reset({
+      'FEmail':''
+      
+
+    })
+  }
 
 }
