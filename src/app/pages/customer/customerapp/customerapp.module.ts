@@ -21,24 +21,24 @@ import { registerLocaleData } from '../../../../../node_modules/@angular/common'
 import localeESUS from '@angular/common/locales/es-US';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {DialogModule} from 'primeng/components/dialog/dialog';
+import {ProgressSpinnerModule} from 'primeng/progressspinner';
 
 import {
   HttpClientModule,
   HttpClient,
   HTTP_INTERCEPTORS,
 } from '@angular/common/http';
-import { CategoryListComponent } from './Category Management/category-list/category-list.component';
-import { CategoryDetailsComponent } from './Category Management/category-details/category-details.component';
+
 import { CustomerAccountComponent } from './account management/customer-account/customer-account.component';
 import { ChangepasswordComponent } from '../user management/changepassword/changepassword.component';
+import { ShopByCategoryComponent } from './customer category management/shop-by-category/shop-by-category.component';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent, HomeComponent,CustomerappComponent, CategoriessliderComponent,
-     CategoryListComponent, CategoryDetailsComponent, CustomerAccountComponent,ChangepasswordComponent],
-  exports: [CustomerappComponent],
+  declarations: [HeaderComponent, FooterComponent, HomeComponent,CustomerappComponent, CategoriessliderComponent, CustomerAccountComponent,ChangepasswordComponent, ShopByCategoryComponent],
+  exports: [CustomerappComponent,HeaderComponent,FooterComponent,],
   imports: [
     CommonModule,
     CustomerappRoutingModule,
@@ -48,6 +48,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     NgxUiLoaderModule,
     FormsModule,
     ReactiveFormsModule,
+    ProgressSpinnerModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -56,6 +57,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       },
     }),
   ],
-  providers:[MessageService]
+
+  
 })
 export class CustomerappModule { }

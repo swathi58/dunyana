@@ -247,3 +247,66 @@ body .ui-dropdown .ui-dropdown-trigger {
     content: "\e902";
     font-size: 22px;
 }
+
+
+
+.changepassword .ui-dialog .ui-dialog-titlebar {
+    border: 0;
+    background-color: #ffffff;
+    color: #ffffff;
+    padding: 1em;
+    font-weight: 700;
+    border-bottom: 0 none;
+    border-radius: 20px 20px 0 0;
+}
+
+.changepassword .ui-dialog .ui-dialog-titlebar .ui-dialog-title {
+    display: none;
+}
+
+.changepassword .ui-dialog .ui-dialog-content {
+    border: 0;
+    padding: 0px 60px 30px;
+    border-radius: 0 0 20px 20px;
+}
+
+.changepassword h2 {
+    color: #00c0f3;
+    font-size: 20pt;
+    margin-bottom: 30pt;
+}
+
+.changepassword label {
+    //color: #4f5b69;
+    font-size: 11pt;
+}
+
+.changepassword>p:last-child {
+    font-family: 'teshrin_arltmedium', sans-serif;
+    margin-top: 50px;
+}
+
+.pi-window-maximize:before,
+.pi-window-minimize:before {
+    padding: 0;
+    background-color: transparent;
+    border: 0;
+    font-weight: lighter;
+    font-size: 35px;
+    line-height: 40px;
+    outline: none;
+}
+
+.pi-times:before {
+    color: #00c0f3;
+    padding: 0;
+    background-color: transparent;
+    border: 0;
+    font-weight: lighter;
+    outline: none;
+    font-size: 41px;
+}
+
+body .ui-widget-overlay {
+    background-color: #00c0f3;
+}

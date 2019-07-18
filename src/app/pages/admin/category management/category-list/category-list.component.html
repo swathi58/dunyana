@@ -1,0 +1,26 @@
+<h3 class="first">Basic</h3>
+<p-table [value]="cars">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Vin</th>
+            <th>Year</th>
+            <th>Brand</th>
+            <th>Color</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-car>
+        <tr>
+            <td>{{car.vin}}</td>
+            <td>{{car.year}}</td>
+            <td>{{car.brand}}</td>
+            <td>{{car.color}}</td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="summary" let-rowData>
+      <div style="text-align:left">
+          <button type="button" pButton icon="fa fa-plus" (click)="Addcategories()" label="Add">Add</button>
+      </div>
+  </ng-template>    
+</p-table>
+
+<app-add-categories [display]="display" (displayChange)="onDialogClose($event)"></app-add-categories>

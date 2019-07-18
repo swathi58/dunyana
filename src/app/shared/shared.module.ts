@@ -3,8 +3,10 @@ import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/components/button/button';
 import {DropdownModule} from 'primeng/dropdown';
 import {DialogModule} from 'primeng/components/dialog/dialog';
+import {TableModule} from 'primeng/table';
 import {ToastModule} from 'primeng/toast';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
+import {InputTextModule} from 'primeng/inputtext';
 const COMMON_MODULES = [
 
   ButtonModule,
@@ -12,7 +14,8 @@ const COMMON_MODULES = [
   DialogModule,
   ToastModule,
   ProgressSpinnerModule,
-  
+  TableModule,
+  InputTextModule
 ]
 
 

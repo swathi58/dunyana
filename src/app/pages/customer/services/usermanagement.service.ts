@@ -14,11 +14,6 @@ export class UsermanagementService {
 
   constructor(private http: HttpClient,public router:Router) {}
 
-
-  public postDetails(Bank: registration): Observable<registration> {
-    return this.http.post<registration>(environment.API_URL + `Bank`, Bank);
-  }
-
   public test(): Observable<any> {
     return this.http.get<any>(environment.API_URL + 'lookup');
   }
@@ -35,13 +30,22 @@ export class UsermanagementService {
     return this.http.post<RegistrationDto>(environment.API_URL + 'CustomerRegistration/EmailCheckValidation', registration);
   }
 
-
   public ChangePassword(changepassword: ChangepasswordDto): Observable<ChangepasswordDto> {
     return this.http.post<ChangepasswordDto>(environment.API_URL + 'CustomerRegistration/ChangePassword', changepassword);
   }
 
+  public GetProfileInformation(registration: RegistrationDto): Observable<RegistrationDto> {
+    return this.http.post<RegistrationDto>(environment.API_URL + 'CustomerRegistration/GetProfileDetails', registration);
+  }
 
+  // public GetProfileInformation(Email): Observable<any[]> {
+  //   return this.http.get<any[]>(environment.API_URL + 'CustomerRegistration/GetProfileDetails/'+Email);
+  // }
   
+  // public GetProfileInformation(registration: RegistrationDto): Observable<any[]> {
+  //   return this.http.get<registration>(environment.API_URL + 'CustomerRegistration/GetProfileDetails/'+registration);
+  // }
+
   // mallesh api code
   
   async storeData(data) {

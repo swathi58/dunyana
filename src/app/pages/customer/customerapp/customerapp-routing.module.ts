@@ -6,8 +6,8 @@ import { RegistrationComponent } from '../user management/registration/registrat
 import { CustomerappComponent } from './customerapp.component';
 import { EmailverificationSuccessComponent } from '../user management/emailverification-success/emailverification-success.component';
 import { ChangepasswordComponent } from '../user management/changepassword/changepassword.component';
-import { CategoryListComponent } from './Category Management/category-list/category-list.component';
 import { CustomerAccountComponent } from './account management/customer-account/customer-account.component';
+import { ShopByCategoryComponent } from './customer category management/shop-by-category/shop-by-category.component';
 
 
 const routes: Routes = [
@@ -19,14 +19,17 @@ const routes: Routes = [
       path:"home",
       component:HomeComponent
     },
-    {
-      path:"test",
-      component:CategoryListComponent
-    },
+    // {
+    //   path:"test",
+    //   component:CategoryListComponent
+    // },
     {
       path:"customeraccount",
       component:CustomerAccountComponent
-
+    },
+    {
+      path:"shop-by-category",
+      component:ShopByCategoryComponent
     }
   ]
 },
