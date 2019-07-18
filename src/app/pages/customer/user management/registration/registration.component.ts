@@ -30,7 +30,7 @@ export class RegistrationComponent implements OnInit {
   croppedImage: any = '';
   finalImage:any='';
   display: boolean = false;
-
+  termesdialogdisplay: boolean = false;
   registerdto:RegistrationDto={
     Id:0,
     FirstName:null,
@@ -202,4 +202,11 @@ error=>{
     'password':'',
   });
  }
+
+ showTermsDialog() {
+  this.termesdialogdisplay = true;
+}
+ontemsDialogClose(event) {
+ this.termesdialogdisplay = event;
+}
 }

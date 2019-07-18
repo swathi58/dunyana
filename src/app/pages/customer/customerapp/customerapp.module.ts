@@ -56,7 +56,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 @NgModule({
   declarations: [HeaderComponent, FooterComponent, HomeComponent,CustomerappComponent, CategoriessliderComponent, CustomerAccountComponent,ChangepasswordComponent, ShopByCategoryComponent, OurStoryComponent, HowDunyanaWorksComponent, BecomeSellerComponent, TermsConditionsComponent, ContactUsComponent, FAQComponent, AboutDunyanaComponent, PrivacyPolicyComponent, OrderingPaymentComponent, ShippingComponent, ReturnsComponent, PressEnquiriesComponent, PaymentMethodsComponent, CustomerServiceComponent, TrackYourPackageComponent, DealsPromotionsComponent, CategoryComponent],
-  exports: [CustomerappComponent,HeaderComponent,FooterComponent,],
+  exports: [CustomerappComponent,HeaderComponent,FooterComponent,TermsConditionsComponent],
   imports: [
     CommonModule,
     CustomerappRoutingModule,

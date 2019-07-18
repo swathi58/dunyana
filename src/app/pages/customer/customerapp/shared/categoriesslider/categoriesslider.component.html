@@ -6,7 +6,7 @@
                 <h2>Shop by category</h2>
                 <ngu-carousel #categoryCarousel [inputs]="categorycarouselConfig" [dataSource]="categorycarouselItems">
                     <div *nguCarouselDef="let item;" class="item wd">
-                        <div class="cattile" [ngStyle]="{'background-image':'url('+item.img+')'}">
+                        <div class="cattile" [ngStyle]="{'background-image':'url('+item.img+')'}" (click)="navigatetocategory(item.name)">
                             <p class="sliderimg-txt">{{item.name}}</p>
                         </div>
                     </div>

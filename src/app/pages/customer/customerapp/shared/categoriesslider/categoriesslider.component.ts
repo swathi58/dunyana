@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { NguCarousel, NguCarouselConfig } from '@ngu/carousel';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Router, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-categoriesslider',
   templateUrl: './categoriesslider.component.html',
@@ -30,7 +31,7 @@ export class CategoriessliderComponent implements OnInit {
   {name:"Shoes",img:"assets/layout/images/cat_img_shoes.jpg"},{name:"Sports & Fitness",img:"assets/layout/images/cat_img_sports.jpg"},
   {name:"Accessories & Beauty",img:"assets/layout/images/cat_img_beauty.jpg"}];
 
-  constructor(private cdr: ChangeDetectorRef,private sanitizer: DomSanitizer) { }
+  constructor(private cdr: ChangeDetectorRef,private sanitizer: DomSanitizer,private route:Router) { }
 
   ngOnInit() {
   }
@@ -39,4 +40,8 @@ export class CategoriessliderComponent implements OnInit {
     this.categoryCarousel.moveTo(slide, !this.withAnim);
   }
 
+  navigatetocategory(catname)
+  {
+    this.route.navigateByUrl('customer/category/'+catname);
+  }
 }

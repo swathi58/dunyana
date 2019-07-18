@@ -23,6 +23,7 @@ import { DealsPromotionsComponent } from './Deals Management/deals-promotions/de
 import { TrackYourPackageComponent } from './order management/track-your-package/track-your-package.component';
 import { PaymentMethodsComponent } from './Payment/payment-methods/payment-methods.component';
 import { CustomerServiceComponent } from './About/customer-service/customer-service.component';
+import { CategoryComponent } from './customer category management/category/category.component';
 
 
 const routes: Routes = [
@@ -105,6 +106,10 @@ const routes: Routes = [
     {
       path:"press-enquiries",
       component:PressEnquiriesComponent
+    },
+    {
+      path:"category/:catname",
+      component:CategoryComponent
     },
   ]
 },
