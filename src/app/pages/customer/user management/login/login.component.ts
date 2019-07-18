@@ -28,6 +28,8 @@ export class LoginComponent implements OnInit {
   @ViewChild('Ferror')Ferror:ElementRef;
   public show = false;
 
+  userdata:any;
+  
   headerlogo:string="assets/layout/images/glogo.png";
   display='none'; //default Variable
   userPostData:User={
@@ -76,6 +78,7 @@ private router: Router,  private messageService: MessageService,private formBuil
       FEmail:['', [Validators.required,Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z.-]+\.[a-zA-Z]{2,}$')]]
      });
      debugger
+     this.ProgressSpinnerDlg=false;
     // ('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{1,}[.]{1}[a-zA-Z]{3,}')
     //[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-zA-Z]{2,}$'
 }
@@ -267,7 +270,10 @@ private router: Router,  private messageService: MessageService,private formBuil
     this.dataservice.login(this.userPostData).subscribe(res => {
       debugger
       this.ProgressSpinnerDlg=false;
+      this.userdata=res['reFirstName'];
+      localStorage.setItem('username',this.userdata);
       //this.messageService.add({severity:'success', summary:'Success Message', detail:res["result"]});
+      this.show=false;
       this.div.nativeElement.innerHTML=res["result"];
       
       this.Resetlog();
@@ -279,7 +285,8 @@ private router: Router,  private messageService: MessageService,private formBuil
 
        errormsg => {
         this.ProgressSpinnerDlg=false;
-        console.log(errormsg["error"]["result"]);        
+        console.log(errormsg["error"]["result"]);   
+        this.show=false;     
         this.div.nativeElement.innerHTML=errormsg["error"]["result"];
         debugger
         //this.messageService.add({severity:'error', summary:'Error Message', detail:errormsg["error"]["result"]});
