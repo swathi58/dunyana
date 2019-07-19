@@ -7,12 +7,13 @@ import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { User } from '../model/user';
 import { ChangepasswordDto } from '../model/DTOs/ChangepasswordDto';
+import { LocalStorageService } from 'angular-web-storage';
 @Injectable({
   providedIn: 'root'
 })
 export class UsermanagementService {
 
-  constructor(private http: HttpClient,public router:Router) {}
+  constructor(private http: HttpClient,public router:Router,private localStorage: LocalStorageService) {}
 
   public test(): Observable<any> {
     return this.http.get<any>(environment.API_URL + 'lookup');
@@ -49,13 +50,13 @@ export class UsermanagementService {
   // mallesh api code
   
   async storeData(data) {
-    localStorage.setItem('userData', JSON.stringify(data));
+    this.localStorage.set('userData', JSON.stringify(data));
     const newData = await this.getData();
     return this.router.navigate(['/Home'], newData);
   }
 
   getData() {
-    return JSON.parse(localStorage.getItem('userData'));
+    return JSON.parse(this.localStorage.get('userData'));
   }
 
   sessionIn() {

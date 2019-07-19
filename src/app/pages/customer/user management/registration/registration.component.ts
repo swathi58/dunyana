@@ -156,21 +156,23 @@ ConvertingFormToDto()
 
 }
 
-  CheckEmail() {
-    //this.registerdto.Email="swathi.chinnala@gmail.com";
-    this.ConvertingFormToDto();
-   
-    if(this.registerdto.Email.length>0)
-    {
-      this.userservice.EmailVerification(this.registerdto).subscribe(res => {
-        this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
-      },
-        errormsg => {
-          this.messageService.add({ severity: 'error', summary: 'Error Message', detail: errormsg["error"]["result"] });
-        });
+CheckEmail() {
+  //this.registerdto.Email="swathi.chinnala@gmail.com";
+  this.ConvertingFormToDto();
+ 
+  if (this.registerdto.Email.length > 0)
+  {
+    if (this.registerdto.Email.match('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}')) {
+    this.userservice.EmailVerification(this.registerdto).subscribe(res => {
+      this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
+    },
+      errormsg => {
+        this.messageService.add({ severity: 'error', summary: 'Error Message', detail: errormsg["error"]["result"] });
+      });
     }
-
   }
+
+}
 
 addcustomer() {
 this.ConvertingFormToDto();

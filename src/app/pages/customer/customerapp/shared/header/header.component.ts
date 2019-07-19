@@ -54,15 +54,12 @@ export class HeaderComponent implements OnInit {
     this.langShare.setTranslate(this.translate);
     this.translation();
 
-
-    if(localStorage.length>0)
-    {
-      if(localStorage.getItem("username"))
+      if(this.localStorage.get("username"))
       {
             this.useremail=this.localStorage.get("username");
             this.islogin=true;
       }
-    }
+    
 
   }
   toggleLang(lang) {

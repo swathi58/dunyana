@@ -73,7 +73,7 @@ export class HomeComponent implements OnInit {
     this.langShare.setTranslate(this.translate);
     this.translation();
 
-  this.name=localStorage.getItem('username');
+  this.name= this.localStorage.get('username');
 
   }
   translation() {
