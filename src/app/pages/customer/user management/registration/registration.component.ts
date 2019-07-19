@@ -127,20 +127,16 @@ showDialog() {
   this.display = true;
 }
 
-saveCropImage()
-{
-  this.finalImage=this.croppedImage;
-}
+  saveCropImage() {
+    this.finalImage = this.croppedImage;
+  }
 
-formvalidate()
-  {
-    if(this.registrationForm.valid)
-    {
-      this.btndisable="line_btn sblue";
+  formvalidate() {
+    if (this.registrationForm.valid) {
+      this.btndisable = "line_btn sblue";
     }
-    else
-    {
-      this.btndisable="disable";
+    else {
+      this.btndisable = "disable";
     }
   }
 
@@ -160,17 +156,21 @@ ConvertingFormToDto()
 
 }
 
-CheckEmail()
-{
-  //this.registerdto.Email="swathi.chinnala@gmail.com";
-  this.ConvertingFormToDto();
-  this.userservice.EmailVerification(this.registerdto).subscribe(res=>{
-      this.messageService.add({severity:'success', summary:'Success Message', detail:res["result"]});
-  },
-  errormsg=>{
-      this.messageService.add({severity:'error', summary:'Error Message', detail:errormsg["error"]["result"]});   
-  });
-}
+  CheckEmail() {
+    //this.registerdto.Email="swathi.chinnala@gmail.com";
+    this.ConvertingFormToDto();
+   
+    if(this.registerdto.Email.length>0)
+    {
+      this.userservice.EmailVerification(this.registerdto).subscribe(res => {
+        this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
+      },
+        errormsg => {
+          this.messageService.add({ severity: 'error', summary: 'Error Message', detail: errormsg["error"]["result"] });
+        });
+    }
+
+  }
 
 addcustomer() {
 this.ConvertingFormToDto();
@@ -191,22 +191,21 @@ error=>{
  }
 
 
- ResetForm()
- {
+  ResetForm() {
 
-  this.registrationForm.reset({
-    'firstname':'',
-    'lastname':'',
-    'mobile':'',
-    'emailid':'',
-    'address':'',
-    'country':'Select Country',
-    'city':'',
-    'confirmpassword':'',
-    'password':'',
-  });
-  this.finalImage="";
- }
+    this.registrationForm.reset({
+      'firstname': '',
+      'lastname': '',
+      'mobile': '',
+      'emailid': '',
+      'address': '',
+      'country': 'Select Country',
+      'city': '',
+      'confirmpassword': '',
+      'password': '',
+    });
+    this.finalImage = "";
+  }
 
  showTermsDialog() {
   this.termesdialogdisplay = true;

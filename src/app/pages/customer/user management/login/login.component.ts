@@ -1,7 +1,7 @@
 import { Component, OnInit, EventEmitter, Output, ElementRef, ViewChild } from '@angular/core';
 import { User } from '../../model/user';
 import { UsermanagementService } from '../../services/usermanagement.service';
-import { AuthServiceConfig, FacebookLoginProvider, GoogleLoginProvider,AuthService,SocialLoginModule } from 'angularx-social-login';
+import { AuthService } from 'angularx-social-login';
 
 //import{ToastrService}from 'ngx-toastr';
 import {MessageService} from 'primeng/api';
@@ -10,6 +10,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, Observer } from 'rxjs';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { NG_FORM_SELECTOR_WARNING } from '@angular/forms/src/directives';
+import { TranslateService } from '@ngx-translate/core';
+import { LocalStorageService } from 'angular-web-storage';
 
 @Component({
 selector: 'app-login',
@@ -20,13 +22,14 @@ export class LoginComponent implements OnInit {
 
 
 
-
-loginForm:FormGroup;
-ForgetForm:FormGroup;
-@ViewChild('div') div:ElementRef;
-@ViewChild('closeAddExpenseModal') closeAddExpenseModal: ElementRef;
-@ViewChild('Ferror')Ferror:ElementRef;
-public show = false;
+  forgotspinner:boolean=true;
+  forgotresmsg:any;
+  loginForm: FormGroup;
+  ForgetForm: FormGroup;
+  @ViewChild('div') div: ElementRef;
+  @ViewChild('closeAddExpenseModal') closeAddExpenseModal: ElementRef;
+  @ViewChild('Ferror') Ferror: ElementRef;
+  public show = false;
 
 userdata:any;
 
@@ -60,8 +63,8 @@ ProgressSpinnerDlg: boolean;
 display: boolean = false;
 btndisable:string="disable";
 btnfdisable:string="disable";
-constructor(private dataservice:UsermanagementService,private socialAuthService: AuthService,
-private router: Router, private messageService: MessageService,private formBuilder: FormBuilder, ) {
+constructor(private dataservice:UsermanagementService,public translate: TranslateService,private localStorage: LocalStorageService,
+private router: Router,private formBuilder: FormBuilder, private messageService: MessageService ) {
 
 this.dataservice.sessionIn();
 
@@ -242,30 +245,26 @@ this.ProgressSpinnerDlg=false;
 // var dataURL = canvas.toDataURL("image/png");
 // return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
 
-// }
-validateform(){
-  if(this.loginForm.valid)
-  {
-    this.btndisable="line_btn sblue";
+  // }
+  validateform() {
+    if (this.loginForm.valid) {
+      this.btndisable = "line_btn sblue";
+    }
+    else {
+      this.btndisable = "disable";
+    }
   }
-  else
-  {
-    this.btndisable="disable";
-  }
-}
 
-validateForgetform(){
+  validateForgetform() {
 
-  if(this.ForgetForm.valid)
-  {
-    this.btnfdisable="line_btn sblue";
+    if (this.ForgetForm.valid) {
+      this.btnfdisable = "line_btn sblue";
+    }
+    else {
+      this.btnfdisable = "disable";
+
+    }
   }
-  else
-  {
-    this.btnfdisable="disable";
-  
-  }
-}
 
 OnLogin() { 
 
@@ -289,8 +288,8 @@ this.dataservice.login(this.userPostData).subscribe(res => {
 
 this.ProgressSpinnerDlg=false;
 this.userdata=res['reFirstName'];
-localStorage.setItem('username',this.userdata);
-localStorage.setItem('Email',res['reEmail']);
+this.localStorage.set('username',this.userdata);
+this.localStorage.set('Email',res['reEmail']);
 //this.messageService.add({severity:'success', summary:'Success Message', detail:res["result"]});
 this.show=false;
 this.div.nativeElement.innerHTML=res["result"];
@@ -315,37 +314,39 @@ this.div.nativeElement.innerHTML=errormsg["error"]["result"];
 
 }
 
-Forgot(){
+  Forgot() {
+    this.forgotspinner=false;
+    this.userPostData.Email = this.ForgetForm.controls.FEmail.value;
+    this.ProgressSpinnerDlg = true;
+    if (this.ForgetForm.invalid) {
+      return;
+    }
 
-this.userPostData.Email = this.ForgetForm.controls.FEmail.value;
-this.ProgressSpinnerDlg=true;
-if (this.ForgetForm.invalid) {
-return;
-}
+    this.dataservice.forget(this.userPostData).subscribe(res => {     
+      this.messageService.add({severity:'success', summary:'Success Message', detail:res["result"]});
+      this.show = false;
+     // this.Ferror.nativeElement.innerHTML = res["result"];
+      this.ResetForgot();
+     
+      //alert(res["result"]);
+    //  this.ProgressSpinnerDlg = false;
+      this.forgotspinner=true;
+      this.forgotresmsg=res["result"];
+      this.closeAddExpenseModal.nativeElement.click();
+      //this.router.navigateByUrl("customer/home");
 
-this.dataservice.forget(this.userPostData).subscribe(res => {
+    },
+      // error=>{
+      // this.messageService.add({severity:'error', summary:'Error Message', detail:error["result"]});
+      // });
 
-this.ProgressSpinnerDlg=false;
-//this.messageService.add({severity:'success', summary:'Success Message', detail:res["result"]});
-this.show=false;
-this.Ferror.nativeElement.innerHTML=res["result"];
-this.ResetForgot();
-this.closeAddExpenseModal.nativeElement.click();
-//alert(res["result"]);
-this.router.navigateByUrl("customer/home");
-
-}, 
-// error=>{
-// this.messageService.add({severity:'error', summary:'Error Message', detail:error["result"]});
-// });
-
-errormsg => {
-this.ProgressSpinnerDlg=false;
-console.log(errormsg["error"]["result"]);
-//this.messageService.add({severity:'error', summary:'Error Message', detail:errormsg["error"]["result"]});
-this.show=false;
-this.Ferror.nativeElement.innerHTML=errormsg["error"]["result"];
-//this.router.navigateByUrl("customer/home");
+      errormsg => {
+        this.forgotspinner=true;
+        console.log(errormsg["error"]["result"]);
+        //this.messageService.add({severity:'error', summary:'Error Message', detail:errormsg["error"]["result"]});
+        this.show = false;
+        this.Ferror.nativeElement.innerHTML = errormsg["error"]["result"];
+        //this.router.navigateByUrl("customer/home");
 
 });
 }

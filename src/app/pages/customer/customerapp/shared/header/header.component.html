@@ -111,7 +111,7 @@
                             <li class="cat"><a [routerLink]="['/customer/shop-by-category']">{{ 'Shopby' | translate }} <strong>{{ 'Category' | translate }}</strong></a></li>
                             <!-- <li class="del"><a [routerLink]="['/customer/test']">{{ 'Deliverto' | translate }} <strong>{{ 'SaudiArabia' | translate }}</strong><i class="icon-arrows"></i> </a></li> -->
                             <li class="ac" [hidden]="islogin"><a [routerLink]="['/signin']">{{ 'Hithere' | translate }},  <strong>{{ 'Signin' | translate }}</strong></a></li>
-                            <li class="ac" [hidden]="!islogin" [routerLink]="['/customer/customeraccount']"><a>{{'Welcome' | translate}}{{ useremail | translate }},  <strong>{{ 'Account' | translate }}</strong></a></li>
+                            <li class="ac" [hidden]="!islogin" [routerLink]="['/customer/customeraccount']"><a>{{'Welcome' | translate}}{{' '|translate}}{{ useremail | translate }},  <strong>{{ 'Account' | translate }}</strong></a></li>
                             <li class="ac" [hidden]="!islogin"(click)=logout()><a> <strong>{{ 'Logout' | translate }}</strong></a></li>
                             <li class="cart" style="display: none">
                                 <div class="icon-cart"><span>12</span></div>

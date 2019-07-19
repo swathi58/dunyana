@@ -19,7 +19,7 @@ const routes: Routes = [
   //   component:EmailverificationSuccessComponent
   // }
 {
-  path:"404",
+  path:"error",
   component:PageNotFoundComponent
 }
 ];
@@ -36,7 +36,7 @@ export class AppRoutingModule {
   this.router.errorHandler = (error: any) => {
 		let routerError = error.toString();
             if (routerError.indexOf('Cannot match any routes') >= 0 ) {
-                this.router.navigate(['/404']);
+                this.router.navigate(['/error']);
             } else {
                 throw error;
             }
