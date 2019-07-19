@@ -145,7 +145,7 @@ strong {
         padding-top: 5px;
     }
     label {
-        font-size: 14pt;
+        font-size: 12pt;
         margin: 0;
         line-height: 44px;
         font-family: $lightfont;
@@ -309,4 +309,85 @@ body .ui-dropdown .ui-dropdown-trigger {
 
 body .ui-widget-overlay {
     background-color: #00c0f3;
+}
+
+
+//slider
+.radius {
+    border-radius: 100%;
+    cursor: pointer;
+}
+.carouselSlider .ui-carousel .ui-carousel-viewport {
+    border: none;
+    padding: 0;
+    margin: auto!important;
+    -webkit-box-flex: 0;
+    flex: 0 0 91.666667%;
+    max-width: 91.666667%;
+}
+
+.carouselSlider .ui-carousel .ui-carousel-viewport .ui-carousel-items .ui-carousel-item {
+    border: none;
+    text-align: center;
+}
+
+.carouselSlider .ui-carousel .ui-carousel-header {
+    background-color: #ffffff;
+    border: none;
+}
+
+.carouselSlider .ui-carousel .ui-carousel-header .ui-carousel-header-title {
+    padding: 0;
+    display: none;
+}
+
+.carouselSlider .ui-carousel .ui-carousel-viewport .ui-carousel-items .ui-carousel-item .ui-grid {
+    position: relative;
+}
+
+.carouselSlider .ui-carousel .ui-carousel-viewport .ui-carousel-items .ui-carousel-item .ui-grid .desc {
+    position: absolute;
+    z-index: 2;
+    color: white;
+    top: 40%;
+    font-size: 21pt;
+    font-family: 'teshrin_arltmedium', sans-serif;
+    text-align: center;
+}
+
+.carouselSlider .ui-carousel .ui-carousel-page-links .ui-carousel-page-link,
+.ui-carousel .ui-carousel-mobiledropdown {
+    display: none;
+    opacity: 0;
+}
+
+.carouselSlider .ui-carousel .ui-carousel-prev-button {
+    float: left;
+    background-image: url("assets/layout/images/svg/arrows.svg");
+    font-size: 46px;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 45%;
+    font-size: 0;
+    width: 45px;
+    height: 45px;
+    left: 0;
+    z-index: 1;
+}
+
+.carouselSlider .ui-carousel .ui-carousel-next-button {
+    float: right;
+    background-image: url("assets/layout/images/svg/arrows.svg");
+    transform: rotate(180deg);
+    font-size: 46px;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 45%;
+    right: 0;
+    font-size: 0;
+    width: 45px;
+    height: 45px;
+    z-index: 1;
 }

@@ -45,6 +45,13 @@
  "PressEnquiries":"Press Enquiries",
  "Shopbycategory":"Shop by category",
  "Searchbrands":"Search our brands",
- "AllRights":"Dunyana. All Rights Reserved. 2019."
+ "AllRights":"Dunyana. All Rights Reserved. 2019.",
+ "Fashion":"Fashion",
+ "Shoes":"Shoes",
+ "SportsFitness":"Sports Fitness",
+ "Accessories&Beauty":"Accessories & Beauty",
+ "VirtualMall":"Virtual Mall",
+ "Logout":"Logout",
+ "Account":"Account"
 
 }

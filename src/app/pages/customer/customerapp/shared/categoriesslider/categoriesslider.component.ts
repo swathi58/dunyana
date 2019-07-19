@@ -43,19 +43,19 @@ export class CategoriessliderComponent implements OnInit {
     this.items = [
       {vin: 'Fashion', brand: 'cat_img_beauty'},
       {vin: 'Shoes', brand: 'cat_img_fash'},
-      {vin: 'Sports Fitness', brand: 'cat_img_shoes'},
-      {vin: 'Accessories & Beauty',  brand: 'cat_img_sports'},
-      {vin: 'Virtual Mall',  brand: 'cat_img_virtual'},
+      {vin: 'SportsFitness', brand: 'cat_img_shoes'},
+      {vin: 'Accessories&Beauty',  brand: 'cat_img_sports'},
+      {vin: 'VirtualMall',  brand: 'cat_img_virtual'},
       {vin: 'Fashion', brand: 'cat_img_beauty'},
       {vin: 'Shoes', brand: 'cat_img_fash'},
-      {vin: 'Sports Fitness',  brand: 'cat_img_shoes'},
-      {vin: 'Accessories & Beauty',brand: 'cat_img_sports'},
-      {vin: 'Virtual Mall', brand: 'cat_img_virtual'},
+      {vin: 'SportsFitness',  brand: 'cat_img_shoes'},
+      {vin: 'Accessories&Beauty',brand: 'cat_img_sports'},
+      {vin: 'VirtualMall', brand: 'cat_img_virtual'},
       {vin: 'Fashion',  brand: 'cat_img_beauty'},
       {vin: 'Shoes',  brand: 'cat_img_fash'},
-      {vin: 'Sports Fitness',  brand: 'cat_img_shoes'},
-      {vin: 'Accessories & Beauty', brand: 'cat_img_sports'},
-      {vin: 'Virtual Mall',  brand: 'cat_img_virtual'}
+      {vin: 'SportsFitness',  brand: 'cat_img_shoes'},
+      {vin: 'Accessories&Beauty', brand: 'cat_img_sports'},
+      {vin: 'VirtualMall',  brand: 'cat_img_virtual'}
   ];
 
    }

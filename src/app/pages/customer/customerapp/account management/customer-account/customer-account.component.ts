@@ -28,7 +28,10 @@ export class CustomerAccountComponent implements OnInit {
     GoogleID:null,
     PWD:null,
     Type:null,
-    EmailVerified:0
+    EmailVerified:0,
+    Status:0,
+    EncId:null,
+    NPWD:null
   }
 
 profiledata=this.registerdto;

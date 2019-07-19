@@ -1,5 +1,5 @@
 {
-  "Welcome": "",
+  "Welcome": "أهلا بك   ",
   "Greeting": "تحية",
   "Ourstory": "قصتنا",
  "HowDunyanaworks": "كيف تعمل دانيانا",
@@ -45,5 +45,12 @@
  "PressEnquiries":"استفسارات الصحافة",
  "Shopbycategory":"تسوق حسب الاقسام",
  "Searchbrands":"ابحث عن علاماتنا التجارية",
- "AllRights":"دانيانا جميع الحقوق محفوظة. 2019."
+ "AllRights":"دانيانا جميع الحقوق محفوظة. 2019.",
+ "Fashion":"موضه",
+ "Shoes":"أحذية",
+ "SportsFitness":"اللياقة الرياضية",
+ "Accessories&Beauty":"اكسسوارات و الجمال",
+ "VirtualMall":"مول الظاهري",
+ "Logout":"الخروج",
+ "Account":"الحساب"
 }

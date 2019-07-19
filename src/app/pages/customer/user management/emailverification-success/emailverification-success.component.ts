@@ -27,16 +27,21 @@ export class EmailverificationSuccessComponent implements OnInit {
     GoogleID:null,
     PWD:null,
     Type:null,
-    EmailVerified:0
+    EmailVerified:0,
+    Status:0,
+    EncId:null,
+    NPWD:null
   }
  
   constructor( private route: ActivatedRoute,private userservice:UsermanagementService,private router: Router) { }
 
   ngOnInit() {
    console.log(this.route.snapshot.params['emailid']);
-   this.registerdto.Email=this.route.snapshot.params['emailid'];
+   this.registerdto.EncId=this.route.snapshot.params['emailid'];
    this.registerdto.EmailVerified=1;
-   this.userservice.EmailVerificationUpdate( this.registerdto).subscribe(res=>{
+   //this.registerdto.EncId="mVK1hxVmQALMG9qZR7wllw==";
+   console.log(this.registerdto.EncId);
+   this.userservice.EmailVerificationUpdate(this.registerdto).subscribe(res=>{
      
      localStorage.setItem("Email",res["reEmail"]);
     setTimeout(() => {

@@ -15,4 +15,7 @@ export class RegistrationDto
     GoogleID:string;
     PWD:string;
     Type:string;
+    Status :number;
+    NPWD:string;
+    EncId:string;
 }

@@ -80,8 +80,9 @@
                         <ul class="lang">
                                
                             <li class="search"><a id="srhLink" (click)="displaysearch()">{{ 'Search' | translate }}</a></li>
-                            <li><a href="javascript:void(0)" class="langSel" (click)="toggleLang(lang); displaylang()">{{translate.store.currentLang =='en' ? 'English':'العربية'}}</a></li>
-      
+                            <!-- <li><a href="javascript:void(0)" class="langSel" (click)="toggleLang(lang); displaylang()">{{translate.store.currentLang =='en' ? 'English':'العربية'}}</a></li> -->
+                            <li><a href="javascript:void(0)" class="langSel" (click)="toggleLang(lang); displaylang()">{{currentlang}}</a></li>
+
                         </ul>
                         <div class="search_container" [ngClass]="showDiv">
                             <input type="text" placeholder="{{ 'Searchbrands' | translate }}" />
@@ -110,7 +111,7 @@
                             <li class="cat"><a [routerLink]="['/customer/shop-by-category']">{{ 'Shopby' | translate }} <strong>{{ 'Category' | translate }}</strong></a></li>
                             <!-- <li class="del"><a [routerLink]="['/customer/test']">{{ 'Deliverto' | translate }} <strong>{{ 'SaudiArabia' | translate }}</strong><i class="icon-arrows"></i> </a></li> -->
                             <li class="ac" [hidden]="islogin"><a [routerLink]="['/signin']">{{ 'Hithere' | translate }},  <strong>{{ 'Signin' | translate }}</strong></a></li>
-                            <li class="ac" [hidden]="!islogin" [routerLink]="['/customer/customeraccount']"><a>{{'Welcome ' | translate}}{{ useremail | translate }},  <strong>{{ 'Account' | translate }}</strong></a></li>
+                            <li class="ac" [hidden]="!islogin" [routerLink]="['/customer/customeraccount']"><a>{{'Welcome' | translate}}{{ useremail | translate }},  <strong>{{ 'Account' | translate }}</strong></a></li>
                             <li class="ac" [hidden]="!islogin"(click)=logout()><a> <strong>{{ 'Logout' | translate }}</strong></a></li>
                             <li class="cart" style="display: none">
                                 <div class="icon-cart"><span>12</span></div>
