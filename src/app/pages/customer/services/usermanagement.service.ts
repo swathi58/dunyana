@@ -7,12 +7,13 @@ import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { User } from '../model/user';
 import { ChangepasswordDto } from '../model/DTOs/ChangepasswordDto';
+import { LocalStorageService } from 'angular-web-storage';
 @Injectable({
   providedIn: 'root'
 })
 export class UsermanagementService {
 
-  constructor(private http: HttpClient,public router:Router) {}
+  constructor(private http: HttpClient,public router:Router,private localStorage: LocalStorageService) {}
 
   public test(): Observable<any> {
     return this.http.get<any>(environment.API_URL + 'lookup');
@@ -49,14 +50,13 @@ export class UsermanagementService {
   // mallesh api code
   
   async storeData(data) {
-    localStorage.setItem('userData', JSON.stringify(data));
+    this.localStorage.set('userData', JSON.stringify(data));
     const newData = await this.getData();
-    debugger
     return this.router.navigate(['/Home'], newData);
   }
 
   getData() {
-    return JSON.parse(localStorage.getItem('userData'));
+    return JSON.parse(this.localStorage.get('userData'));
   }
 
   sessionIn() {
@@ -88,7 +88,6 @@ Loginapi(login) {
     return this.http.post(environment.API_URL +'CustomerRegistration/'+'UsersLoginAuthenticate', login, { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) });
   }
   registeruser(user:User):Observable<User>{
-    debugger
     const body : User = {
       Email:user.Email,
       FirstName:user.FirstName,
@@ -109,7 +108,7 @@ Loginapi(login) {
     }
 
     var reqHeader = new HttpHeaders({'No-Auth':'True'});
-      debugger
+    
     return this.http.post<User>(environment.API_URL+'CustomerRegistration/'+'InsertRegistrationDetails',body,{headers : reqHeader});
     
   }
@@ -118,7 +117,6 @@ Loginapi(login) {
   postData(credentials, type) {
     return new Promise((resolve, reject) => {
       const headers = new HttpHeaders();
-      debugger
       this.http.post(environment.API_URL + type, JSON.stringify(credentials), {headers: headers})
         .subscribe(res => {
           //resolve(res.json());
@@ -132,14 +130,12 @@ Loginapi(login) {
   //http://125.62.198.229:5000/api/CustomerRegistration/UsersLoginAuthenticate(Parameters:Email,PWD)
     login(user:User) {
       var reqHeader = new HttpHeaders({'No-Auth':'True'});
-      debugger
     return this.http.post<User>(environment.API_URL+'CustomerRegistration/'+'UsersLoginAuthenticate',user,{headers : reqHeader});
       
      }
 
      forget(user:User) {
       var reqHeader = new HttpHeaders({'No-Auth':'True'});
-      debugger
     return this.http.post<User>(environment.API_URL+'CustomerRegistration/'+'ForgotPassword',user,{headers : reqHeader});
       
      }

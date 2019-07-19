@@ -111,8 +111,27 @@ const routes: Routes = [
       path:"category/:catname",
       component:CategoryComponent
     },
+
   ]
 },
+
+  {
+    path:"signin",
+    component:LoginComponent
+  },
+  {
+    path:"signup",
+    component:RegistrationComponent
+  },
+  {
+    path:"emailverify/:emailid",
+    component:EmailverificationSuccessComponent
+  },
+  {
+    path:"changepassword",
+    component:ChangepasswordComponent
+  }
+
 ];
 
 @NgModule({

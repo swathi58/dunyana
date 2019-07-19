@@ -4,7 +4,7 @@ import { NguCarouselModule } from '@ngu/carousel';
 import 'hammerjs';
 import {ToastModule} from 'primeng/toast';
 import { MessageService } from 'primeng/components/common/messageservice';
-import { NgxUiLoaderModule } from  'ngx-ui-loader';
+import { NgxUiLoaderModule } from 'ngx-ui-loader';
 
 import { CustomerappRoutingModule } from './customerapp-routing.module';
 import { HeaderComponent } from './shared/header/header.component';
@@ -61,14 +61,17 @@ export function HttpLoaderFactory(http: HttpClient) {
   imports: [
     CommonModule,
     CustomerappRoutingModule,
+
+    CommonModule,
+    CustomerappRoutingModule,
     NguCarouselModule,
     DialogModule,
     ToastModule,
     NgxUiLoaderModule,
     FormsModule,
+    CarouselModule,
     ReactiveFormsModule,
     ProgressSpinnerModule,
-    CarouselModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -77,7 +80,6 @@ export function HttpLoaderFactory(http: HttpClient) {
       },
     }),
   ],
-
-  
+  providers: [MessageService]
 })
 export class CustomerappModule { }

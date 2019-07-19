@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
+import { LocalStorageService } from 'angular-web-storage';
 @Component({
   selector: 'app-customerapp',
   templateUrl: './customerapp.component.html',
@@ -8,10 +8,12 @@ import { Router } from '@angular/router';
 })
 export class CustomerappComponent implements OnInit {
 
-  constructor(private router :Router) { }
+  constructor(private router :Router, private localStorage: LocalStorageService) { }
 
-  ngOnInit() {
+  ngOnInit() { 
+    if (this.localStorage.get('Email') === null ) {
       this.router.navigateByUrl('customer/home');
+    }
   }
 
 }

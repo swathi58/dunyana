@@ -3,7 +3,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
-                <h2>Shop by category</h2>
+                 <h2>{{'Shopbycategory' | translate }} </h2>
                 <ngu-carousel #categoryCarousel [inputs]="categorycarouselConfig" [dataSource]="categorycarouselItems">
                     <div *nguCarouselDef="let item;" class="item wd">
                         <div class="cattile" [ngStyle]="{'background-image':'url('+item.img+')'}" (click)="navigatetocategory(item.name)">
@@ -21,15 +21,15 @@
 
 
 <section class="container-fluid carouselSlider category">
-        <h2>Shop by category</h2>
+        <h2>{{ 'Shopbycategory' | translate }}</h2>
         <p-carousel headerText="items" [value]="items" numVisible="5" responsive="true" circular="true">
             <ng-template let-item pTemplate="item">
-                <div class="ui-grid ui-grid-responsive" (click)="navigatetocategory(item.vin)">
+                <div class="ui-grid ui-grid-responsive imgsty" (click)="navigatetocategory(item.vin)">
                     <div class="ui-grid-row">
                         <div class="ui-grid-col-12"><img src="assets/layout/images/{{item.brand}}.jpg" width="210" class="radius"></div>
                     </div>
                     <div class="ui-grid-row">
-                        <div class="ui-grid-col-12 desc">{{item.vin}}</div>
+                        <div class="ui-grid-col-12 desc">{{item.vin | translate }}</div>
                     </div>
                 </div>
             </ng-template>

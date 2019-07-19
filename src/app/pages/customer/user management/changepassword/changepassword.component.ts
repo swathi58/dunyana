@@ -4,7 +4,8 @@ import { UsermanagementService } from '../../services/usermanagement.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MustMatch } from 'src/app/shared/validators/PasswordMustMatchvalidator';
 import { MessageService } from 'primeng/api';
-
+import { LocalStorageService } from 'angular-web-storage';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-changepassword',
   templateUrl: './changepassword.component.html',
@@ -25,7 +26,8 @@ export class ChangepasswordComponent implements OnInit {
     NPWD:null
   }
 
-  constructor(private userservice:UsermanagementService,private formBuilder:FormBuilder,private messageService: MessageService) { }
+  constructor(private userservice:UsermanagementService,private formBuilder:FormBuilder,private messageService: MessageService,
+    private localStorage: LocalStorageService,public router:Router) { }
 
   ngOnInit() {
     this.changepwdForm=this.formBuilder.group({
@@ -49,7 +51,7 @@ export class ChangepasswordComponent implements OnInit {
 SaveChangePassword()
   {
 
-    this.changepassword.Email=localStorage.getItem("Email");
+    this.changepassword.Email=this.localStorage.get("Email");
     this.changepassword.PWD=this.changepwdForm.value["PWD"];
     this.changepassword.NPWD=this.changepwdForm.value["NPWD"];
     this.userservice.ChangePassword(this.changepassword).subscribe(res=>{
@@ -57,6 +59,7 @@ SaveChangePassword()
       this.messageService.add({severity:'success', summary:'Success Message', detail:res["result"]});
       setTimeout(() => {
         this.onClose();
+        this.router.navigateByUrl("signin");
     }, 1000); 
  
     },
@@ -79,7 +82,9 @@ SaveChangePassword()
   onClose(){
     this.displayChange.emit(false);
   }
-
+  redirectCustomer(){ 
+    this.displayChange.emit(false);
+  }
   FormReset()
   {
     this.changepwdForm.reset({

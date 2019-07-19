@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit } from '@angular/core';
 import { LangShareService } from 'src/app/shared/services/lang-share.service';
 import { TranslateService } from '@ngx-translate/core';
 import { LocalStorageService } from 'angular-web-storage';
@@ -42,27 +42,27 @@ export class HeaderComponent implements OnInit {
       if(this.lang=="en")
       {
          this.logoimg=this.headerimg;
+
          this.currentlang="English";
   
       }
       else if(this.lang=="ar")
       {
-        this.logoimg=this.header_ar_img;
+
+       // this.logoimg=this.header_ar_img;
+
         this.currentlang="العربية";
       }
     }
     this.langShare.setTranslate(this.translate);
     this.translation();
 
-
-    if(localStorage.length>0)
-    {
-      if(localStorage.getItem("username"))
+      if(this.localStorage.get("username"))
       {
-            this.useremail=localStorage.getItem("username");
+            this.useremail=this.localStorage.get("username");
             this.islogin=true;
       }
-    }
+    
 
   }
   toggleLang(lang) {
@@ -110,7 +110,9 @@ this.showlngDiv="showDiv";
 
   logout()
   {
-    this.localStorage.clear();
+    this.localStorage.remove("username");
+    this.localStorage.remove("Email");
+   // this.localStorage.clear();
     this.islogin=false;
     this.router.navigateByUrl('customer/home');
    // this.ngOnInit();

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { UsermanagementService } from '../../../services/usermanagement.service';
 import { RegistrationDto } from '../../../model/DTOs/RegistraionDto';
-
+import { LocalStorageService } from 'angular-web-storage';
 @Component({
   selector: 'app-customer-account',
   templateUrl: './customer-account.component.html',
@@ -32,15 +32,16 @@ export class CustomerAccountComponent implements OnInit {
     Status:0,
     NPWD:null,
     EncId:null
+
   }
 
 profiledata=this.registerdto;
-  constructor(private userservice:UsermanagementService) { }
+  constructor(private userservice:UsermanagementService,private localStorage: LocalStorageService) { }
 
   ngOnInit() {
     console.log("account calling");
     //this.ProgressSpinnerDlg=true;
-   this.registerdto.Email=localStorage.getItem("Email");
+   this.registerdto.Email=this.localStorage.get("Email");
     this.userservice.GetProfileInformation(this.registerdto).subscribe(res=>{
       this.profiledata.Image='data:image/png;base64,'+res["image"];
       this.profiledata.FirstName=res["firstName"];

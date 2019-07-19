@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { NguCarousel, NguCarouselConfig } from '@ngu/carousel';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router, ActivatedRoute } from '@angular/router';
+import { LangShareService } from 'src/app/shared/services/lang-share.service';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-categoriesslider',
   templateUrl: './categoriesslider.component.html',
@@ -34,24 +36,26 @@ export class CategoriessliderComponent implements OnInit {
   {name:"Shoes",img:"assets/layout/images/cat_img_shoes.jpg"},{name:"Sports & Fitness",img:"assets/layout/images/cat_img_sports.jpg"},
   {name:"Accessories & Beauty",img:"assets/layout/images/cat_img_beauty.jpg"}];
 
-  constructor(private cdr: ChangeDetectorRef,private sanitizer: DomSanitizer,private route:Router) {
+  constructor(private cdr: ChangeDetectorRef,private sanitizer: DomSanitizer,private route:Router,
+    public langShare: LangShareService,
+    public translate: TranslateService) {
 
     this.items = [
       {vin: 'Fashion', brand: 'cat_img_beauty'},
       {vin: 'Shoes', brand: 'cat_img_fash'},
-      {vin: 'Sports Fitness', brand: 'cat_img_shoes'},
-      {vin: 'Accessories & Beauty',  brand: 'cat_img_sports'},
-      {vin: 'Virtual Mall',  brand: 'cat_img_virtual'},
+      {vin: 'SportsFitness', brand: 'cat_img_shoes'},
+      {vin: 'Accessories&Beauty',  brand: 'cat_img_sports'},
+      {vin: 'VirtualMall',  brand: 'cat_img_virtual'},
       {vin: 'Fashion', brand: 'cat_img_beauty'},
       {vin: 'Shoes', brand: 'cat_img_fash'},
-      {vin: 'Sports Fitness',  brand: 'cat_img_shoes'},
-      {vin: 'Accessories & Beauty',brand: 'cat_img_sports'},
-      {vin: 'Virtual Mall', brand: 'cat_img_virtual'},
+      {vin: 'SportsFitness',  brand: 'cat_img_shoes'},
+      {vin: 'Accessories&Beauty',brand: 'cat_img_sports'},
+      {vin: 'VirtualMall', brand: 'cat_img_virtual'},
       {vin: 'Fashion',  brand: 'cat_img_beauty'},
       {vin: 'Shoes',  brand: 'cat_img_fash'},
-      {vin: 'Sports Fitness',  brand: 'cat_img_shoes'},
-      {vin: 'Accessories & Beauty', brand: 'cat_img_sports'},
-      {vin: 'Virtual Mall',  brand: 'cat_img_virtual'}
+      {vin: 'SportsFitness',  brand: 'cat_img_shoes'},
+      {vin: 'Accessories&Beauty', brand: 'cat_img_sports'},
+      {vin: 'VirtualMall',  brand: 'cat_img_virtual'}
   ];
 
    }

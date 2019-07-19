@@ -10,6 +10,8 @@ import {MessageService} from 'primeng/api';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { Router } from '@angular/router';
 import { ChangepasswordDto } from '../../model/DTOs/ChangepasswordDto';
+import { TranslateService } from '@ngx-translate/core';
+import { LocalStorageService } from 'angular-web-storage';
 
 @Component({
   selector: 'app-registration',
@@ -48,13 +50,15 @@ export class RegistrationComponent implements OnInit {
     Type:null,
     EmailVerified:0,
     Status:0,
-    NPWD:null,
-    EncId:null
+    EncId:null,
+    NPWD:null
+
   }
 
 
   constructor(private formBuilder:FormBuilder, private userservice:UsermanagementService,
     private messageService: MessageService,private ngxService: NgxUiLoaderService,
+    public translate: TranslateService,private localStorage: LocalStorageService,
     private router:Router) {  }
 
   ngOnInit() {
@@ -124,20 +128,16 @@ showDialog() {
   this.display = true;
 }
 
-saveCropImage()
-{
-  this.finalImage=this.croppedImage;
-}
+  saveCropImage() {
+    this.finalImage = this.croppedImage;
+  }
 
-formvalidate()
-  {
-    if(this.registrationForm.valid)
-    {
-      this.btndisable="line_btn sblue";
+  formvalidate() {
+    if (this.registrationForm.valid) {
+      this.btndisable = "line_btn sblue";
     }
-    else
-    {
-      this.btndisable="disable";
+    else {
+      this.btndisable = "disable";
     }
   }
 
@@ -157,16 +157,22 @@ ConvertingFormToDto()
 
 }
 
-CheckEmail()
-{
+CheckEmail() {
   //this.registerdto.Email="swathi.chinnala@gmail.com";
   this.ConvertingFormToDto();
-  this.userservice.EmailVerification(this.registerdto).subscribe(res=>{
-      this.messageService.add({severity:'success', summary:'Success Message', detail:res["result"]});
-  },
-  errormsg=>{
-      this.messageService.add({severity:'error', summary:'Error Message', detail:errormsg["error"]["result"]});   
-  });
+ 
+  if (this.registerdto.Email.length > 0)
+  {
+    if (this.registerdto.Email.match('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}')) {
+    this.userservice.EmailVerification(this.registerdto).subscribe(res => {
+      this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
+    },
+      errormsg => {
+        this.messageService.add({ severity: 'error', summary: 'Error Message', detail: errormsg["error"]["result"] });
+      });
+    }
+  }
+
 }
 
 addcustomer() {
@@ -188,22 +194,21 @@ error=>{
  }
 
 
- ResetForm()
- {
+  ResetForm() {
 
-  this.registrationForm.reset({
-    'firstname':'',
-    'lastname':'',
-    'mobile':'',
-    'emailid':'',
-    'address':'',
-    'country':'Select Country',
-    'city':'',
-    'confirmpassword':'',
-    'password':'',
-  });
-  this.finalImage="";
- }
+    this.registrationForm.reset({
+      'firstname': '',
+      'lastname': '',
+      'mobile': '',
+      'emailid': '',
+      'address': '',
+      'country': 'Select Country',
+      'city': '',
+      'confirmpassword': '',
+      'password': '',
+    });
+    this.finalImage = "";
+  }
 
  showTermsDialog() {
   this.termesdialogdisplay = true;

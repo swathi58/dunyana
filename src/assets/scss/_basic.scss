@@ -145,7 +145,7 @@ strong {
         padding-top: 5px;
     }
     label {
-        font-size: 14pt;
+        font-size: 12pt;
         margin: 0;
         line-height: 44px;
         font-family: $lightfont;
@@ -312,10 +312,10 @@ body .ui-widget-overlay {
 }
 
 
-
 //slider
 .radius {
     border-radius: 100%;
+    cursor: pointer;
 }
 .carouselSlider .ui-carousel .ui-carousel-viewport {
     border: none;
@@ -353,7 +353,6 @@ body .ui-widget-overlay {
     font-size: 21pt;
     font-family: 'teshrin_arltmedium', sans-serif;
     text-align: center;
-    cursor: pointer;
 }
 
 .carouselSlider .ui-carousel .ui-carousel-page-links .ui-carousel-page-link,
