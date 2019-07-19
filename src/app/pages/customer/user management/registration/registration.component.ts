@@ -10,6 +10,8 @@ import {MessageService} from 'primeng/api';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { Router } from '@angular/router';
 import { ChangepasswordDto } from '../../model/DTOs/ChangepasswordDto';
+import { TranslateService } from '@ngx-translate/core';
+import { LocalStorageService } from 'angular-web-storage';
 
 @Component({
   selector: 'app-registration',
@@ -52,6 +54,7 @@ export class RegistrationComponent implements OnInit {
 
   constructor(private formBuilder:FormBuilder, private userservice:UsermanagementService,
     private messageService: MessageService,private ngxService: NgxUiLoaderService,
+    public translate: TranslateService,private localStorage: LocalStorageService,
     private router:Router) {  }
 
   ngOnInit() {

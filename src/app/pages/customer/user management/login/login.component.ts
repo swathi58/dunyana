@@ -1,8 +1,9 @@
 import { Component, OnInit, EventEmitter, Output, ElementRef, ViewChild } from '@angular/core';
 import { User } from '../../model/user';
 import { UsermanagementService } from '../../services/usermanagement.service';
-import { AuthServiceConfig, FacebookLoginProvider, GoogleLoginProvider,AuthService,SocialLoginModule } from 'angularx-social-login';
-
+import { AuthService } from 'angularx-social-login';
+import { TranslateService } from '@ngx-translate/core';
+import { LocalStorageService } from 'angular-web-storage';
 //import{ToastrService}from 'ngx-toastr';
 import {MessageService} from 'primeng/api';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -61,6 +62,7 @@ display: boolean = false;
 btndisable:string="disable";
 btnfdisable:string="disable";
 constructor(private dataservice:UsermanagementService,private socialAuthService: AuthService,
+  public translate: TranslateService,private localStorage: LocalStorageService,
 private router: Router, private messageService: MessageService,private formBuilder: FormBuilder, ) {
 
 this.dataservice.sessionIn();
