@@ -5,6 +5,9 @@ import { EmailverificationSuccessComponent } from './pages/customer/user managem
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { CustomerappRoutingModule } from './pages/customer/customerapp/customerapp-routing.module';
 import {} from './pages/customer/customerapp/customerapp.module';
+import { LoginComponent } from './pages/customer/user management/login/login.component';
+import { RegistrationComponent } from './pages/customer/user management/registration/registration.component';
+import { ChangepasswordComponent } from './pages/customer/user management/changepassword/changepassword.component';
 
 
 
@@ -15,10 +18,32 @@ const routes: Routes = [
     component:CustomerappComponent
     //loadChildren:'./pages/customer/customerapp/customerapp.module#CustomerappModule',
   },
+
+//   {
+//     path: 'customer',
+//     loadChildren: 'app/admin/admin.module#AdminModule'
+//  },
   // {
   //   path:"emailverificationcompleted/:emailid",
   //   component:EmailverificationSuccessComponent
   // }
+
+  {
+    path:"signin",
+    component:LoginComponent
+  },
+  {
+    path:"signup",
+    component:RegistrationComponent
+  },
+  {
+    path:"emailverificationcompleted/:emailid",
+    component:EmailverificationSuccessComponent
+  },
+  {
+    path:"changepassword",
+    component:ChangepasswordComponent
+  },
 {
   path:"404",
   component:PageNotFoundComponent

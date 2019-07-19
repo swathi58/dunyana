@@ -39,7 +39,17 @@ export class HeaderComponent implements OnInit {
     if(this.localStorage.get('lang') != null){
       this.lang = this.localStorage.get('lang');
       this.translate.use(this.lang); 
-      
+      if(this.lang=="en")
+      {
+         this.logoimg=this.headerimg;
+         this.currentlang="English";
+  
+      }
+      else if(this.lang=="ar")
+      {
+        this.logoimg=this.header_ar_img;
+        this.currentlang="العربية";
+      }
     }
     this.langShare.setTranslate(this.translate);
     this.translation();

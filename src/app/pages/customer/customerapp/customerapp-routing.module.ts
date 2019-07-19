@@ -113,27 +113,10 @@ const routes: Routes = [
     },
   ]
 },
- 
-  {
-    path:"signin",
-    component:LoginComponent
-  },
-  {
-    path:"signup",
-    component:RegistrationComponent
-  },
-  {
-    path:"emailverificationcompleted/:emailid",
-    component:EmailverificationSuccessComponent
-  },
-  {
-    path:"changepassword",
-    component:ChangepasswordComponent
-  }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
 export class CustomerappRoutingModule { }

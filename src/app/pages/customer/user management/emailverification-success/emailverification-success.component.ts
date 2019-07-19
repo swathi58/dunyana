@@ -27,14 +27,18 @@ export class EmailverificationSuccessComponent implements OnInit {
     GoogleID:null,
     PWD:null,
     Type:null,
-    EmailVerified:0
+    EmailVerified:0,
+    Status:0,
+    NPWD:null,
+    EncId:null
   }
  
   constructor( private route: ActivatedRoute,private userservice:UsermanagementService,private router: Router) { }
 
   ngOnInit() {
    console.log(this.route.snapshot.params['emailid']);
-   this.registerdto.Email=this.route.snapshot.params['emailid'];
+  // this.registerdto.Email=this.route.snapshot.params['emailid'];
+  this.registerdto.EncId=this.route.snapshot.params['emailid'];
    this.registerdto.EmailVerified=1;
    this.userservice.EmailVerificationUpdate( this.registerdto).subscribe(res=>{
      

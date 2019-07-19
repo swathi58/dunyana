@@ -317,7 +317,7 @@ private router: Router,  private messageService: MessageService,private formBuil
       this.ResetForgot();
       this.closeAddExpenseModal.nativeElement.click();
       alert(res["result"]);
-      this.router.navigateByUrl("customer/home");
+      this.router.navigateByUrl("/customer/customeraccount");
      
        },       
       //  error=>{
