@@ -59,7 +59,7 @@ export class HeaderComponent implements OnInit {
     {
       if(localStorage.getItem("username"))
       {
-            this.useremail=localStorage.getItem("username");
+            this.useremail=this.localStorage.get("username");
             this.islogin=true;
       }
     }
