@@ -27,7 +27,7 @@ export class RegistrationComponent implements OnInit {
   countries:any[]=[]; 
   default: string = 'United States';
   btndisable:string="disable";
-
+  imageupload:boolean=true;
   imageChangedEvent: any = '';
   croppedImage: any = '';
   finalImage:any='';
@@ -110,6 +110,7 @@ checkPasswords(group: FormGroup) { // here we have the 'passwords' group
 
  fileChangeEvent(event: any): void {
   this.imageChangedEvent = event;
+
 }
 imageCropped(event: ImageCroppedEvent) {
   this.croppedImage = event.base64;
@@ -117,6 +118,7 @@ imageCropped(event: ImageCroppedEvent) {
 }
 imageLoaded() {
   // show cropper
+  this.imageupload=false;
 }
 cropperReady() {
   // cropper ready

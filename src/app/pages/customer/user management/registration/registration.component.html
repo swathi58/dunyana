@@ -348,7 +348,7 @@
 
                                 <div class="row inputset">
                                     <div class="col-sm-6"><label>City</label><span class="required">*</span></div>
-                                    <div class="col-sm-6"><input type="text" placeholder="Raza" formControlName="city" (keyup)="formvalidate()"/></div>
+                                    <div class="col-sm-6"><input type="text" placeholder="City" formControlName="city" (keyup)="formvalidate()"/></div>
                                     <div class="col-sm-12">
                                           <div *ngIf="registrationForm.controls['city'].errors && !registrationForm.controls['city'].pristine" class="text-danger error-msg float-right">
                                                   <div [hidden]="!registrationForm.controls['city'].errors.required">City Required</div>
@@ -386,7 +386,7 @@
                               <div class="row inputset">
                                 <div class="col-sm-6"><label>Upload Image</label></div>
                                 <div class="col-sm-6">
-                                    <input type="file" #uploader (change)="fileChangeEvent($event)" class="" [hidden]=true />
+                                    <input type="file" #uploader (change)="fileChangeEvent($event)" class="" [hidden]=true accept="image/x-png,image/gif,image/jpeg" />
 
                                     <button type="button" (click)="uploader.click()" pButton label="Upload Image" class="btn btn-primary float-right mt-2"  data-toggle="modal" data-target="#myModal" class="btn-small text-right float-right" ></button>                                
 
@@ -476,7 +476,7 @@
 
             <!-- Modal footer -->
             <div class="modal-footer">
-                    <button type="button" (click)="saveCropImage()" pButton icon="pi pi-info-circle" label="Save" class="btn btn-primary btn-sm" data-dismiss="modal" ></button>
+                    <button type="button" (click)="saveCropImage()" pButton icon="pi pi-info-circle" label="Save" class="btn btn-primary btn-sm" [hidden]="imageupload" data-dismiss="modal" ></button>
               <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
             </div>
 
