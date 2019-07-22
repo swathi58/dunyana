@@ -79,10 +79,10 @@ export class RegistrationComponent implements OnInit {
    }
  );
   
- this.countries=[
+ this.countries=[  
+  {label:'KSA',value:'KSA'},
   {label:'United States',value:'United States'},
-  {label:'United Kingdom',value:'United Kingdom'},
-  {label:'Afghanistan',value:'Afghanistan'}
+  {label:'United Kingdom',value:'United Kingdom'}
 ];
 
 this.registrationForm.controls['country'].setValue(this.countries[0]["label"], {onlySelf: true});
