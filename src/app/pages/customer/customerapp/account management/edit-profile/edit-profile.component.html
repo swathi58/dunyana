@@ -1,0 +1,166 @@
+<div class="changepassword">
+  <p-dialog header="Edit Profile" [(visible)]="display" [modal]="true" [responsive]="true" [style]="{width: '475px'}"  [closeOnEscape]="true"  (onHide)="onClose()">
+
+      <form class="from_wrapper" [formGroup]="EditprofileForm" novalidate>
+
+          <div class="row inputset">
+              <div class="col-sm-6"><label>First Name</label><span class="required">*</span></div>
+              <div class="col-sm-6"><input type="text" placeholder="Ali" formControlName="firstname" (keyup)="formvalidate()"> </div>
+                <div class="col-sm-12">
+                        <div *ngIf="EditprofileForm.controls['firstname'].errors && !EditprofileForm.controls['firstname'].pristine" class="text-danger float-right error-msg">
+                                <div [hidden]="!EditprofileForm.controls['firstname'].errors.required">FirstName Required</div>
+                              </div>
+                              <!-- <p *ngIf="EditprofileForm.get('firstname').hasError('required') && EditprofileForm.submitted">Name is required</p> -->
+                </div>
+              <div class="col-sm-12"><hr></div>
+          </div>
+        <div class="row inputset">
+          <div class="col-sm-6"><label>Last  Name</label><span class="required">*</span></div>
+          <div class="col-sm-6"><input type="text" placeholder="Raza" formControlName="lastname" (keyup)="formvalidate()"/></div>
+          <div class="col-sm-12">
+                <div *ngIf="EditprofileForm.controls['lastname'].errors && !EditprofileForm.controls['lastname'].pristine" class="text-danger float-right error-msg">
+                        <div [hidden]="!EditprofileForm.controls['lastname'].errors.required">LasttName Required</div>
+                </div>
+          </div>
+          <div class="col-sm-12"><hr></div>
+      </div>
+
+      <div class="row inputset">
+          <div class="col-sm-6"><label>Mobile</label><span class="required">*</span></div>
+          <div class="col-sm-6"><input type="text" [maxlength]="10" placeholder="9876543210" formControlName="mobile" (keypress)="_keyPress($event)" (keyup)="formvalidate()"/></div>
+          <div class="col-sm-12">
+                <div *ngIf="EditprofileForm.controls['mobile'].errors && !EditprofileForm.controls['mobile'].pristine" class="text-danger error-msg float-right">
+                        <div [hidden]="!EditprofileForm.controls['mobile'].errors.required">Mobile Number Required</div>
+                        <div [hidden]="!EditprofileForm.controls['mobile'].errors?.minlength && !EditprofileForm.controls['mobile'].errors?.maxlength">Enter correct Mobile Number</div>
+                </div>
+          </div>
+          <div class="col-sm-12"><hr></div>
+      </div>
+
+
+
+      <div class="row inputset">
+          <div class="col-sm-6"><label>Address</label><span class="required">*</span></div>
+          <div class="col-sm-6"><textarea placeholder="Address" rows="2" formControlName="address" (keyup)="formvalidate()"></textarea></div>
+         <div class="col-sm-12">
+                <div *ngIf="EditprofileForm.controls['address'].errors && !EditprofileForm.controls['address'].pristine" class="text-danger error-msg float-right">
+                        <div [hidden]="!EditprofileForm.controls['address'].errors.required">Address Required</div>
+                </div>
+         </div>
+          <div class="col-sm-12"><hr></div>
+      </div>
+
+
+      <div class="row inputset">
+              <div class="col-sm-6"><label>Country</label><span class="required">*</span></div>
+              <div class="col-sm-6">
+                <p-dropdown [options]="countries" formControlName="country" [autoWidth]="false" placeholder="Select Country" [filter]="false">
+                    <option *ngFor="let c of countries" [ngValue]="c">{{c}}</option>
+                </p-dropdown>      
+              </div>
+              <div class="col-sm-12"><hr></div>
+        </div>
+
+
+
+        <div class="row inputset">
+            <div class="col-sm-6"><label>City</label><span class="required">*</span></div>
+            <div class="col-sm-6"><input type="text" placeholder="City" formControlName="city" (keyup)="formvalidate()"/></div>
+            <div class="col-sm-12">
+                  <div *ngIf="EditprofileForm.controls['city'].errors && !EditprofileForm.controls['city'].pristine" class="text-danger error-msg float-right">
+                          <div [hidden]="!EditprofileForm.controls['city'].errors.required">City Required</div>
+                  </div>
+            </div>
+            <div class="col-sm-12"><hr></div>
+        </div>
+
+        <div class="row inputset">
+            <div class="col-sm-6"><label>Change Image</label></div>
+            <div class="col-sm-6">
+                <input type="file" #uploader (change)="fileChangeEvent($event)" class="" [hidden]=true />
+
+                <button type="button" (click)="uploader.click()" pButton label="Upload Image" class="btn btn-primary"  data-toggle="modal" data-target="#myModal" class="btn-small" ></button>                                
+
+            </div>
+            <div class="col-sm-12"><hr></div>
+          </div>
+
+          <div class="row inputset">
+                <div class="col-sm-12">
+                        <img [src]="finalImage" class="uploadimgsty" />
+                </div>
+            </div>
+
+          <div class="row justify-content-center mt-4">
+
+              <button class="line_btn sblue mr-4" [ngClass]="btndisable" (click)="Updateprofiledata()">Update</button>
+              <button (click)="redirectCustomer()" class="line_btn sblue">Cancel</button>
+
+          </div>
+      </form>
+      <!-- <section class="changepassword text-center">
+
+          <div class="center col-md-3">
+              <h2>change password</h2>
+      
+              
+          </div>
+      </section>
+   
+       -->
+
+
+  </p-dialog>
+
+</div>
+
+<p-toast></p-toast>
+
+      <!-- The Modal -->
+      <div class="modal" id="myModal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+  
+              <!-- Modal Header -->
+              <div class="modal-header">
+                <h4 class="modal-title">Profile Photo</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+  
+              <!-- Modal body -->
+              <div class="modal-body">
+                      <div class="row inputset">
+  
+                             <div class="col-sm-12">
+                                  <image-cropper
+                                  [imageChangedEvent]="imageChangedEvent"
+                                  [maintainAspectRatio]="true"
+                                  [aspectRatio]="4 / 3"
+                                  [resizeToWidth]="150"
+                                  [resizeToHeight]="150"
+                                  format="png"
+                                  (imageCropped)="imageCropped($event)"
+                                  (imageLoaded)="imageLoaded()"
+                                  (cropperReady)="cropperReady()"
+                                  (loadImageFailed)="loadImageFailed()"
+                                  [roundCropper]="true"
+                              ></image-cropper>
+                             </div>
+                              <div class="col-sm-12">
+                                      <img [src]="croppedImage" class="uploadimgsty" />
+                              </div>
+                          </div>
+              </div>
+  
+              <!-- Modal footer -->
+              <div class="modal-footer">
+                  <button class="line_btn sblue mr-4" [ngClass]="btndisable"  (click)="saveCropImage()"  data-dismiss="modal" >Save</button>
+                  <button (click)="redirectCustomer()" class="line_btn sblue"  data-dismiss="modal">Close</button>
+    
+                      <!-- <button type="button" (click)="saveCropImage()" pButton icon="pi pi-info-circle" label="Save" class="btn btn-primary btn-sm" data-dismiss="modal" ></button>
+                <button type="button" class="btn btn-danger btn-sm" pButton data-dismiss="modal">Close</button> -->
+              </div>
+  
+            </div>
+          </div>
+        </div>

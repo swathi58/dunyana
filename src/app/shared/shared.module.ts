@@ -7,6 +7,8 @@ import {TableModule} from 'primeng/table';
 import {ToastModule} from 'primeng/toast';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import {InputTextModule} from 'primeng/inputtext';
+import { ImageCropperModule } from 'ngx-image-cropper';
+import {CarouselModule} from 'primeng/carousel';
 const COMMON_MODULES = [
 
   ButtonModule,
@@ -15,7 +17,9 @@ const COMMON_MODULES = [
   ToastModule,
   ProgressSpinnerModule,
   TableModule,
-  InputTextModule
+  InputTextModule,
+  ImageCropperModule,
+  CarouselModule
 ]
 
 

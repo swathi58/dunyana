@@ -1,0 +1,121 @@
+<section class="shopping_banner">
+    
+    <ngu-carousel #headerCarousel [inputs]="carouselConfig" [dataSource]="headercarouselItems">
+        <div *nguCarouselDef="let item;" class="item">
+            <div class="item" [ngStyle]="{'background-image':'url('+item.img+')'}">
+                <div class="text_container">
+                    <div class="container">
+
+                        <div class="row">
+                            <div class="col-sm-12 col-xl-12 p-o">
+                              <h1>{{ 'allyourfavourite' | translate }}<br/> {{ 'brandsinoneplace' | translate }} <br/><strong>{{ 'shoptheworld'  | translate }}</strong></h1>
+
+                                <p><a [routerLink]="['/customer/shop-by-category']" class="line_btn lwhite">{{ 'Explorecategories' | translate }}</a></p>
+
+                                <p><a href="#" class="line_btn lwhite">{{ 'Explorecategories' | translate }}</a></p>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <button NguCarouselNext class="rightRs">></button>
+  <button NguCarouselPrev class="leftRs"><</button> -->
+        <!-- <ul class="myPoint" NguCarouselPoint>
+    <li *ngFor="let j of myCarousel.pointNumbers; let j = index" [class.active]="j==myCarousel.activePoint" (click)="myCarousel.moveTo(j)"></li>
+  </ul> -->
+    </ngu-carousel>
+</section>
+
+<section class="qkLinks">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <ul class="ql">
+
+                    <li class=" it">
+                        <a href="#"></a>
+                        <h2 class="text-center">Eid offers</h2>
+                        <h1 class="text-center">Buy 2 and get 1 free*</h1>
+                        <p class="text-center">*Terms & condtions apply.</p>
+                        <i class="icomoon icon-light"></i>
+                        <i class="icomoon icon-light second"></i>
+                        <i class="icomoon icon-moon"></i>
+
+                    </li>
+
+
+                </ul>
+
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<app-categoriesslider></app-categoriesslider>
+
+<section>
+    <div class="container-fluid">
+        <hr/>
+    </div>
+</section>
+
+
+<section class="category brands">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-10 offset-md-1">
+                <h2>Brands</h2>
+                <p class="text-center">
+                    All | Accesories & Beauty Books & Magazines Fashion Sports & Fitness <br>Appliances & Electronics Gifts, Gadgets & Toys Phones & Accessories Shoes Virtual Mall
+                </p>
+                <p class="text-center let-space"># <strong>A</strong> B C D E F G H I J K L M N O P Q R S T U V W X Y Z</p>
+            </div>
+        </div>
+        <hr/>
+    </div>
+
+
+</section>
+
+
+<section class="">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card mb-4 box-shadow"><img alt="Thumbnail [100%x225]" class="card-img-top" src="../../../../../assets/layout/images/brand-img1.jpg">
+                    <div class="card-body">
+                        <p class="card-text">Apple</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card mb-4 box-shadow"><img alt="Thumbnail [100%x225]" class="card-img-top" src="../../../../../assets/layout/images/brand-img2.jpg">
+                    <div class="card-body">
+                        <p class="card-text">Adidas</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card mb-4 box-shadow"><img alt="Thumbnail [100%x225]" class="card-img-top" src="../../../../../assets/layout/images/brand-img3.jpg">
+                    <div class="card-body">
+                        <p class="card-text">Anne Klein</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card mb-4 box-shadow"><img alt="Thumbnail [100%x225]" class="card-img-top" src="../../../../../assets/layout/images/brand-img4.jpg">
+                    <div class="card-body">
+                        <p class="card-text">Anthropologie</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>

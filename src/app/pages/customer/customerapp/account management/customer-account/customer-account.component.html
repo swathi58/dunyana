@@ -67,7 +67,7 @@
                       <p>Email ID<br> <span>{{profiledata.Email}}</span></p>
 
                       <p class="text-blue float-left"><a (click)="showDialog()">change password </a></p>
-                      <p class="text-blue float-right edit"><a href="#"><i class="text-blue icon-edit f-big mr-2"></i>Edit</a></p>
+                      <p class="text-blue float-right edit"><a (click)="showEditDialog()"><i class="text-blue icon-edit f-big mr-2"></i>Edit</a></p>
 
                   </div>
 
@@ -168,7 +168,9 @@
           </div>
 
       </div>
-
+<div>
+        <app-categoriesslider></app-categoriesslider>
+</div>
   </div>
 </div>
 
@@ -176,6 +178,7 @@
         <p-progressSpinner></p-progressSpinner>
 </div>
 </section>
-<!-- <app-categoriesslide></app-categoriesslide> -->
+
 </main>
 <app-changepassword [display]="display" (displayChange)="onDialogClose($event)"></app-changepassword>
+<app-edit-profile [display]="editdialogdisplay" (displayChange)="onEditDialogClose($event)" ></app-edit-profile>

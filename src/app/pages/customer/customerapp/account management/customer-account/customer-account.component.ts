@@ -10,6 +10,9 @@ import { LocalStorageService } from 'angular-web-storage';
 export class CustomerAccountComponent implements OnInit {
 
   display: boolean = false;
+  editdialogdisplay:boolean=false;
+
+  test:string="test";
 
   ProgressSpinnerDlg:boolean=false;
 
@@ -38,7 +41,6 @@ profiledata=this.registerdto;
   constructor(private userservice:UsermanagementService,private localStorage: LocalStorageService) { }
 
   ngOnInit() {
-    console.log("account calling");
     //this.ProgressSpinnerDlg=true;
    this.registerdto.Email=this.localStorage.get("Email");
     this.userservice.GetProfileInformation(this.registerdto).subscribe(res=>{
@@ -60,6 +62,15 @@ profiledata=this.registerdto;
 }
 onDialogClose(event) {
    this.display = event;
+}
+
+showEditDialog()
+{
+  this.editdialogdisplay=true;
+}
+
+onEditDialogClose(event) {
+  this.editdialogdisplay = event;
 }
 
 }

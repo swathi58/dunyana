@@ -149,3 +149,14 @@ $teshrin_arltmedium-font-path: "../src/assets/scss/fonts/teshrinarlt-medium-webf
     margin-left: -0.98828125em;
     color: white;
 }
+
+
+.icon-light:before {
+    content: "\e915";
+    color: #ffffff;
+}
+
+.icon-moon:before {
+    content: "\e918";
+    color: #ffffff;
+}

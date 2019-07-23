@@ -50,19 +50,22 @@ import { TrackYourPackageComponent } from './order management/track-your-package
 import { DealsPromotionsComponent } from './Deals Management/deals-promotions/deals-promotions.component';
 import { CategoryComponent } from './customer category management/category/category.component';
 import {CarouselModule} from 'primeng/carousel';
+import { EditProfileComponent } from './account management/edit-profile/edit-profile.component';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { ShoppingComponent } from './shopping/shopping.component';
+
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent, HomeComponent,CustomerappComponent, CategoriessliderComponent, CustomerAccountComponent,ChangepasswordComponent, ShopByCategoryComponent, OurStoryComponent, HowDunyanaWorksComponent, BecomeSellerComponent, TermsConditionsComponent, ContactUsComponent, FAQComponent, AboutDunyanaComponent, PrivacyPolicyComponent, OrderingPaymentComponent, ShippingComponent, ReturnsComponent, PressEnquiriesComponent, PaymentMethodsComponent, CustomerServiceComponent, TrackYourPackageComponent, DealsPromotionsComponent, CategoryComponent],
+  declarations: [HeaderComponent, FooterComponent, HomeComponent,CustomerappComponent, CategoriessliderComponent, CustomerAccountComponent,ChangepasswordComponent, ShopByCategoryComponent, OurStoryComponent, HowDunyanaWorksComponent, BecomeSellerComponent, TermsConditionsComponent, ContactUsComponent, FAQComponent, AboutDunyanaComponent, PrivacyPolicyComponent, OrderingPaymentComponent, ShippingComponent, ReturnsComponent, PressEnquiriesComponent, PaymentMethodsComponent, CustomerServiceComponent, TrackYourPackageComponent, DealsPromotionsComponent, CategoryComponent, EditProfileComponent, ShoppingComponent],
   exports: [CustomerappComponent,HeaderComponent,FooterComponent,TermsConditionsComponent],
   imports: [
     CommonModule,
     CustomerappRoutingModule,
-
-    CommonModule,
+    SharedModule,
     CustomerappRoutingModule,
     NguCarouselModule,
     DialogModule,

@@ -1,113 +1,191 @@
 
 
-.text-danger{
-   // float: right;
-}
-.uploadimgsty{
-  border-radius: 100%;
-   // width: 106px;
-   // height: 106px;
-}
-.upldbtnsty{
-   background-color: #5f5a5a;
-   height: 28px;
-   padding: 0;
-   margin-top: 10px;
-   float: right;
-}
+// .text-danger{
+//    // float: right;
+// }
+// .uploadimgsty{
+//   border-radius: 100%;
+//    // width: 106px;
+//    // height: 106px;
+// }
+// .upldbtnsty{
+//    background-color: #5f5a5a;
+//    height: 28px;
+//    padding: 0;
+//    margin-top: 10px;
+//    float: right;
+// }
 
 
-//spinner styles
-.loading-indicator {
-   position: fixed;
-   z-index: 999;
-   height: 2em;
-   width: 2em;
-   overflow: show;
-   margin: auto;
-   top: 0;
-   left: 0;
-   bottom: 0;
-   right: 0;
-   }
+// //spinner styles
+// .loading-indicator {
+//    position: fixed;
+//    z-index: 999;
+//    height: 2em;
+//    width: 2em;
+//    overflow: show;
+//    margin: auto;
+//    top: 0;
+//    left: 0;
+//    bottom: 0;
+//    right: 0;
+//    }
    
-   /* Transparent Overlay */
-   .loading-indicator:before {
-   content: '';
-   display: block;
-   position: fixed;
-   top: 0;
-   left: 0;
-   width: 100%;
-   height: 100%;
-   background-color: rgba(0,0,0,0.53);
-   }
+//    /* Transparent Overlay */
+//    .loading-indicator:before {
+//    content: '';
+//    display: block;
+//    position: fixed;
+//    top: 0;
+//    left: 0;
+//    width: 100%;
+//    height: 100%;
+//    background-color: rgba(0,0,0,0.53);
+//    }
 
-   .required{
-      color: red;
-   }
-   .disable{
-      opacity: 0.5;
-      pointer-events: none;
+//    .required{
+//       color: red;
+//    }
+//    .disable{
+//       opacity: 0.5;
+//       pointer-events: none;
       
-   }
+//    }
 
 
- .ui-dropdown-panel .ui-dropdown-items .ui-dropdown-item.ui-state-highlight,
- .ui-dropdown-panel .ui-dropdown-items .ui-dropdown-item-group.ui-state-highlight {
-    color: #ffffff;
-    background-color: #00c0f3;
-    transition: 0s;
-}
+//  .ui-dropdown-panel .ui-dropdown-items .ui-dropdown-item.ui-state-highlight,
+//  .ui-dropdown-panel .ui-dropdown-items .ui-dropdown-item-group.ui-state-highlight {
+//     color: #ffffff;
+//     background-color: #00c0f3;
+//     transition: 0s;
+// }
 
- .ui-dropdown-panel .ui-dropdown-items .ui-dropdown-item,
- .ui-dropdown-panel .ui-dropdown-items .ui-dropdown-item-group {
-    margin: 0;
-    padding: 9px 0.857em;
-    transition: 0s;
-}
+//  .ui-dropdown-panel .ui-dropdown-items .ui-dropdown-item,
+//  .ui-dropdown-panel .ui-dropdown-items .ui-dropdown-item-group {
+//     margin: 0;
+//     padding: 9px 0.857em;
+//     transition: 0s;
+// }
 
- .ui-dropdown {
-    transition: 0s;
-    border: none;
-}
+//  .ui-dropdown {
+//     transition: 0s;
+//     border: none;
+// }
 
- .ui-dropdown label.ui-dropdown-label {
-    cursor: pointer;
-    margin: 0;
-    padding: 0 0 0 10px;
-    border: 0;
-    outline: none;
-    font-size: 14px;
-    transition: 0s;
-}
+//  .ui-dropdown label.ui-dropdown-label {
+//     cursor: pointer;
+//     margin: 0;
+//     padding: 0 0 0 10px;
+//     border: 0;
+//     outline: none;
+//     font-size: 14px;
+//     transition: 0s;
+// }
 
- .ui-dropdown .ui-dropdown-trigger {
-    color: #00c0f3;
-    transition: 0s;
-}
+//  .ui-dropdown .ui-dropdown-trigger {
+//     color: #00c0f3;
+//     transition: 0s;
+// }
 
-.ui-dropdown .ui-dropdown-trigger .ui-dropdown-trigger-icon {
-    margin-top: -.9em;
-    margin-left: -.9em;
-}
+// .ui-dropdown .ui-dropdown-trigger .ui-dropdown-trigger-icon {
+//     margin-top: -.9em;
+//     margin-left: -.9em;
+// }
 
-.pi-chevron-down:before {
-    content: "\e902";
-    font-size: 22px;
-}
-.line_btn sblue{
-outline: none;
-}
+// .pi-chevron-down:before {
+//     content: "\e902";
+//     font-size: 22px;
+// }
+// .line_btn sblue{
+// outline: none;
+// }
 
-.error-msg {
-   color: crimson;
-   //text-align: left;
-   //padding-left: 10px;
-   font-size: 10pt;
-}
+// .error-msg {
+//    color: crimson;
+//    //text-align: left;
+//    //padding-left: 10px;
+//    font-size: 10pt;
+// }
 
-.signin .signin_wrap .si
-{
-  // height: 1125px;
-}
+// .signin .signin_wrap .si
+// {
+//   // height: 1125px;
+// }
+
+* {
+   box-sizing: border-box;
+ }
+ 
+ body {
+   background-color: #f1f1f1;
+ }
+ 
+ #regForm {
+   background-color: #ffffff;
+   margin: 100px auto;
+   font-family: Raleway;
+   padding: 40px;
+   width: 70%;
+   min-width: 300px;
+ }
+ 
+ h1 {
+   text-align: center;  
+ }
+ 
+ input {
+   padding: 10px;
+   width: 100%;
+   font-size: 17px;
+   font-family: Raleway;
+   border: 1px solid #aaaaaa;
+ }
+ 
+ /* Mark input boxes that gets an error on validation: */
+ input.invalid {
+   background-color: #ffdddd;
+ }
+ 
+ /* Hide all steps by default: */
+ .tab {
+   display: none;
+ }
+ 
+ button {
+   background-color: #4CAF50;
+   color: #ffffff;
+   border: none;
+   padding: 10px 20px;
+   font-size: 17px;
+   font-family: Raleway;
+   cursor: pointer;
+ }
+ 
+ button:hover {
+   opacity: 0.8;
+ }
+ 
+ #prevBtn {
+   background-color: #bbbbbb;
+ }
+ 
+ /* Make circles that indicate the steps of the form: */
+ .step {
+   height: 15px;
+   width: 15px;
+   margin: 0 2px;
+   background-color: #bbbbbb;
+   border: none;  
+   border-radius: 50%;
+   display: inline-block;
+   opacity: 0.5;
+ }
+ 
+ .step.active {
+   opacity: 1;
+ }
+ 
+ /* Mark the steps that are finished and valid: */
+ .step.finish {
+   background-color: #4CAF50;
+ }

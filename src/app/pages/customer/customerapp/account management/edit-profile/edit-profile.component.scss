@@ -1,0 +1,28 @@
+// @media screen and (max-width: 475px) {
+//     .changepassword .center {
+//         padding: 30px 30px 0 30px;
+//     }
+// }
+
+
+.disable{
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.line_btn {
+    &.sblue {
+         background-position: 8px 40px;
+         background-color:transparent;
+         border:none;
+         outline: none;
+
+             &:hover {
+            background-position: 8px -20px;
+
+        }
+     
+    }
+
+   
+}

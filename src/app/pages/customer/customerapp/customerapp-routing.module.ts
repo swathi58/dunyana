@@ -24,6 +24,7 @@ import { TrackYourPackageComponent } from './order management/track-your-package
 import { PaymentMethodsComponent } from './Payment/payment-methods/payment-methods.component';
 import { CustomerServiceComponent } from './About/customer-service/customer-service.component';
 import { CategoryComponent } from './customer category management/category/category.component';
+import { ShoppingComponent } from './shopping/shopping.component';
 
 
 const routes: Routes = [
@@ -130,7 +131,11 @@ const routes: Routes = [
   {
     path:"changepassword",
     component:ChangepasswordComponent
-  }
+  },
+  {
+    path:"shopping",
+    component:ShoppingComponent
+  },
 ];
 
 @NgModule({
