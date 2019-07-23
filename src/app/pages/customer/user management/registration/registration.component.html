@@ -21,11 +21,12 @@
                           <form class="from_wrapper" [formGroup]="registrationForm" (ngSubmit)="addcustomer()" novalidate>
                               <div class="row inputset">
                                   <div class="col-sm-6"><label>First Name</label><span class="required">*</span></div>
-                                  <div class="col-sm-6"><input type="text" placeholder="Ali" formControlName="firstname" (keyup)="formvalidate()"> </div>
+                                  <div class="col-sm-6"><input type="text" placeholder="Ali" formControlName="firstname" (keyup)="formvalidate()" /> </div>
                                     <div class="col-sm-12">
                                             <div *ngIf="registrationForm.controls['firstname'].errors && !registrationForm.controls['firstname'].pristine" class="text-danger float-right error-msg">
                                                     <div [hidden]="!registrationForm.controls['firstname'].errors.required">FirstName Required</div>
                                                   </div>
+                                                  <div  [hidden]="!registrationForm.controls['firstname'].errors?.pattern" class="text-danger float-right error-msg">Spaces Not Allowed</div>
                                                   <!-- <p *ngIf="registrationForm.get('firstname').hasError('required') && registrationForm.submitted">Name is required</p> -->
                                     </div>
                                   <div class="col-sm-12"><hr></div>
@@ -33,11 +34,14 @@
 
                               <div class="row inputset">
                                   <div class="col-sm-6"><label>Last  Name</label><span class="required">*</span></div>
-                                  <div class="col-sm-6"><input type="text" placeholder="Raza" formControlName="lastname" (keyup)="formvalidate()"/></div>
+                                  <div class="col-sm-6"><input type="text" placeholder="Raza" formControlName="lastname" (keyup)="formvalidate()" /></div>
                                   <div class="col-sm-12">
                                         <div *ngIf="registrationForm.controls['lastname'].errors && !registrationForm.controls['lastname'].pristine" class="text-danger float-right error-msg">
                                                 <div [hidden]="!registrationForm.controls['lastname'].errors.required">LasttName Required</div>
                                         </div>
+                                        <div  [hidden]="!registrationForm.controls['lastname'].errors?.pattern" class="text-danger float-right error-msg">Spaces Not Allowed</div>
+                                        
+                                        
                                   </div>
                                   <div class="col-sm-12"><hr></div>
                               </div>

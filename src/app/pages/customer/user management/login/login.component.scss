@@ -237,6 +237,7 @@ padding-right: 15px;
     -webkit-box-shadow: rgba(255,255,255, 0.75) 1.5em 0 0 0, rgba(255,255,255, 0.75) 1.1em 1.1em 0 0, rgba(255,255,255, 0.75) 0 1.5em 0 0, rgba(255,255,255, 0.75) -1.1em 1.1em 0 0, rgba(255,255,255, 0.75) -1.5em 0 0 0, rgba(255,255,255, 0.75) -1.1em -1.1em 0 0, rgba(255,255,255, 0.75) 0 -1.5em 0 0, rgba(255,255,255, 0.75) 1.1em -1.1em 0 0;
   box-shadow: rgba(255,255,255, 0.75) 1.5em 0 0 0, rgba(255,255,255, 0.75) 1.1em 1.1em 0 0, rgba(255,255,255, 0.75) 0 1.5em 0 0, rgba(255,255,255, 0.75) -1.1em 1.1em 0 0, rgba(255,255,255, 0.75) -1.5em 0 0 0, rgba(255,255,255, 0.75) -1.1em -1.1em 0 0, rgba(255,255,255, 0.75) 0 -1.5em 0 0, rgba(255,255,255, 0.75) 1.1em -1.1em 0 0;
   }
+
   
   /* Animation */
   
@@ -304,3 +305,26 @@ padding-right: 15px;
       transform: rotate(360deg);
     }
   }
+
+
+  
+section.signin_wrap{
+  position: relative;
+}
+
+.signin {
+  .signin_wrap{
+    .si{
+      position: absolute;
+    }
+  }
+} 
+
+
+  
+    footer.trans{
+    position: fixed;
+    bottom: 2rem;
+  }
+
+

@@ -26,9 +26,9 @@
                     <div class="col-sm-8"><input type="text" placeholder="email@domain.com" formControlName="lEmail"
                         id="lEmail" (keyup)="onKeyPress($event);validateform()" />
   
-                      <div class="login-error"
+                      <!-- <div class="login-error"
                         *ngIf="loginForm.controls['lEmail'].hasError('required') && loginForm.controls['lEmail'].touched">
-                        Email is required</div>
+                        Email is required</div> -->
                       <div class="login-error" [hidden]="!loginForm.controls['lEmail'].errors?.pattern">Enter valid email
                         address</div>
   
@@ -41,13 +41,12 @@
                   <div class="row inputset">
                     <div class="col-sm-4"><label>Password</label><span class="required">*</span></div>
                     <div class="col-sm-8">
-                      <input type="password" class="form-control" formControlName="lPassword" id="lPassword"
+                      <input type="password"  formControlName="lPassword" id="lPassword"
                         placeholder="********" (keyup)="onKeyPress($event);validateform()">
-                      <div class="login-error"
+                      <!-- <div class="login-error"
                         *ngIf="loginForm.controls['lPassword'].hasError('required') && loginForm.controls['lPassword'].touched">
-                        Password is required</div>
-                      <div class="login-error" [hidden]="!loginForm.controls['lPassword'].errors?.minlength">Password Must
-                        be More Than 6</div>
+                        Password is required</div> -->
+                      <div class="login-error" [hidden]="!loginForm.controls['lPassword'].errors?.minlength">Password Length Must be Grater Than 6</div>
   
                     </div>
                     <div class="col-sm-12">
