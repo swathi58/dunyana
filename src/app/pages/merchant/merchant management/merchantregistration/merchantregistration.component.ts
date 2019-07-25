@@ -1,74 +1,68 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder,FormGroup,Validator, Validators} from '@angular/forms';
-
-import { MustMatch } from 'src/app/shared/validators/PasswordMustMatchvalidator';
-import { RegistrationDto } from '../../model/DTOs/RegistraionDto';
-
-import { ImageCroppedEvent } from 'ngx-image-cropper';
-import { UsermanagementService } from '../../services/usermanagement.service';
-import {MessageService} from 'primeng/api';
+import{FormGroup, FormBuilder, Validators}from '@angular/forms';
+import { MerchantDto } from '../../modal/MerchantDto';
+import { UsermanagementService } from 'src/app/pages/customer/services/usermanagement.service';
+import { MessageService } from 'primeng/api';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { Router } from '@angular/router';
-import { ChangepasswordDto } from '../../model/DTOs/ChangepasswordDto';
-import { TranslateService } from '@ngx-translate/core';
-import { LocalStorageService } from 'angular-web-storage';
-
+import { MustMatch } from 'src/app/shared/validators/PasswordMustMatchvalidator';
+import { ImageCroppedEvent } from 'ngx-image-cropper';
 @Component({
-  selector: 'app-registration',
-  templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.scss']
+  selector: 'app-merchantregistration',
+  templateUrl: './merchantregistration.component.html',
+  styleUrls: ['./merchantregistration.component.scss']
 })
-export class RegistrationComponent implements OnInit {
-
+export class MerchantregistrationComponent implements OnInit {
+  btndisable:string="disable";
   headerlogo:string="assets/layout/images/glogo.png";
   ProgressSpinnerDlg:boolean=false;
-  registrationForm:FormGroup;
+  merchantForm:FormGroup;
   submitted = false;
   countries:any[]=[]; 
+  categories:any[]=[];
   default: string = 'United States';
-  btndisable:string="disable";
+  popup:string="";
+ // popup:boolean=false;
 
   imageChangedEvent: any = '';
   croppedImage: any = '';
   finalImage:any='';
+
+  iconimage:any='';
+  croppediconImage:any='';
+
   display: boolean = false;
   termesdialogdisplay: boolean = false;
-  registerdto:RegistrationDto={
+  merchantDto:MerchantDto={
     Id:0,
-    FirstName:null,
-    LastName:null,
-    Email:null,
-    Mobile:null,
+    Name :null,
+    RegNo:null,
     Address:null,
+    Website :null,
     Country:null,
-    City:null,
-    Image:null,
-    LoginType:null,
-    FBID:null,
-    GoogleID:null,
-    PWD:null,
-    Type:null,
-    EmailVerified:0,
-    Status:0,
-    EncId:null,
-    NPWD:null  }
-
+    SPOCName :null,
+    Mobile:null,
+    Email:null,
+    IsLegalApproved:0,
+    Image :null
+   }
 
   constructor(private formBuilder:FormBuilder, private userservice:UsermanagementService,
     private messageService: MessageService,private ngxService: NgxUiLoaderService,
-    private router:Router) {  }
+    private router:Router) { }
 
   ngOnInit() {
 
-    this.registrationForm=this.formBuilder.group({
-      firstname:['',Validators.required],
-      lastname:['',Validators.required],
-      // emailid:['',[Validators.required,Validators.email]],
+    this.merchantForm=this.formBuilder.group({
+      Name:['',Validators.required],
+      Website:['',Validators.required],
+      Company:['',Validators.required],
       emailid:['', [Validators.required,Validators.pattern('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}')]],
       mobile:['',[Validators.required,Validators.minLength(10),Validators.maxLength(10)]],
       address:['',Validators.required],
       country:['Select Country',Validators.required],
-      city:['',Validators.required],
+      categories:['select categories',Validators.required],
+      Sell:['',Validators.required],
       password:['',[Validators.required,Validators.minLength(6)]],
       confirmpassword:['',Validators.required,Validators.minLength(6)]
  },
@@ -78,12 +72,20 @@ export class RegistrationComponent implements OnInit {
  );
   
  this.countries=[
-  {label:'United States',value:'United States'},
+  {label:'India',value:'India'},
   {label:'United Kingdom',value:'United Kingdom'},
   {label:'Afghanistan',value:'Afghanistan'}
 ];
 
-this.registrationForm.controls['country'].setValue(this.countries[0]["label"], {onlySelf: true});
+this.categories=[
+  {label:'Accessories&Beauty',value:'Accessories&Beauty'},
+  {label:'Fashion',value:'Fashion'},
+  {label:'Shoes',value:'Shoes'},
+  {label:'SportsFitness',value:'SportsFitness'},
+  {label:'VirtualMall',value:'VirtualMall'}
+]
+
+this.merchantForm.controls['country'].setValue(this.countries[0]["label"], {onlySelf: true});
 }
 
 
@@ -110,6 +112,7 @@ checkPasswords(group: FormGroup) { // here we have the 'passwords' group
 }
 imageCropped(event: ImageCroppedEvent) {
   this.croppedImage = event.base64;
+  this.croppediconImage=event.base64;
 
 }
 imageLoaded() {
@@ -128,13 +131,23 @@ showDialog() {
 saveCropImage()
 {
   this.finalImage=this.croppedImage;
+
+ this.popup="ht-auto";
   console.log(this.finalImage);
   
 }
 
+saveiconCropImage(){
+  this.iconimage=this.croppediconImage;
+
+  this.popup="ht-auto";
+   console.log(this.iconimage);
+   
+}
+
 formvalidate()
   {
-    if(this.registrationForm.valid)
+    if(this.merchantForm.valid)
     {
       this.btndisable="line_btn sblue";
     }
@@ -144,27 +157,11 @@ formvalidate()
     }
   }
 
-ConvertingFormToDto()
-{
-
-  this.registerdto.FirstName=this.registrationForm.value["firstname"];
-  this.registerdto.LastName=this.registrationForm.value["lastname"];
-  this.registerdto.Mobile=this.registrationForm.value["mobile"];
-  this.registerdto.Email=this.registrationForm.value["emailid"];
-  this.registerdto.Address=this.registrationForm.value["address"];
-  this.registerdto.Country=this.registrationForm.value["country"];
-  this.registerdto.City=this.registrationForm.value["city"];
-  this.registerdto.PWD=this.registrationForm.value["password"];
-  this.registerdto.Image=this.finalImage.replace(/^data:image\/[a-z]+;base64,/, "");
-  this.registerdto.LoginType="D";
-
-}
-
-CheckEmail()
+  CheckEmail()
 {
   //this.registerdto.Email="swathi.chinnala@gmail.com";
   this.ConvertingFormToDto();
-  this.userservice.EmailVerification(this.registerdto).subscribe(res=>{
+  this.userservice.MerchantEmailVerification(this.merchantDto).subscribe(res=>{
       this.messageService.add({severity:'success', summary:'Success Message', detail:res["result"]});
   },
   errormsg=>{
@@ -172,10 +169,29 @@ CheckEmail()
   });
 }
 
-addcustomer() {
+ConvertingFormToDto()
+{
+
+  this.merchantDto.Name=this.merchantForm.value["Name"];
+  this.merchantDto.RegNo=this.merchantForm.value["RegNo"];
+  this.merchantDto.Address=this.merchantForm.value["address"];
+  this.merchantDto.Website=this.merchantForm.value["Website"];
+  this.merchantDto.Country=this.merchantForm.value["country"];    
+  this.merchantDto.SPOCName=this.merchantForm.value["SPOCName"];
+  this.merchantDto.Mobile=this.merchantForm.value["mobile"];
+  this.merchantDto.Email=this.merchantForm.value["emailid"];
+  this.merchantDto.IsLegalApproved=this.merchantForm.value["IsLegalApproved"];
+  this.merchantDto.Image=this.finalImage.replace(/^data:image\/[a-z]+;base64,/, "");
+  
+
+}
+
+
+
+addmerchent() {
 this.ConvertingFormToDto();
   this.ProgressSpinnerDlg=true;
-  this.userservice.CustomerRegistration(this.registerdto).subscribe(res=>{
+  this.userservice.merchentRegistration(this.merchantDto).subscribe(res=>{
   this.ProgressSpinnerDlg=false;
     this.messageService.add({severity:'success', summary:'Success Message', detail:res["result"]});
 
@@ -196,7 +212,7 @@ error=>{
  ResetForm()
  {
 
-  this.registrationForm.reset({
+  this.merchantForm.reset({
     'firstname':'',
     'lastname':'',
     'mobile':'',
@@ -215,4 +231,5 @@ error=>{
 ontemsDialogClose(event) {
  this.termesdialogdisplay = event;
 }
+
 }

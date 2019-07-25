@@ -1,0 +1,28 @@
+<h3 class="first"></h3>
+<p-table [value]="banersdata">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Country</th>
+            <th>Image</th>
+            <th>Language</th>
+            <th>StartDate</th>
+            <th>EndDate</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-baners>
+        <tr>
+            <td>{{baners.Country}}</td>
+            <td>{{baners.Image}}</td>
+            <td>{{baners.Language}}</td>
+            <td>{{baners.StartDate}}</td>
+            <td>{{baners.EndDate}}</td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="summary" let-rowData>
+      <div style="text-align:left">
+          <button type="button" pButton icon="fa fa-plus" (click)="Addbanners()" label="Add"></button>
+      </div>
+  </ng-template>    
+</p-table>
+
+<app-add-banners [display]="display" (displayChange)="onDialogClose($event)"></app-add-banners>

@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { User } from '../model/user';
 import { ChangepasswordDto } from '../model/DTOs/ChangepasswordDto';
 import { LocalStorageService } from 'angular-web-storage';
+import { MerchantDto } from '../../merchant/modal/MerchantDto';
 @Injectable({
   providedIn: 'root'
 })
@@ -81,6 +82,10 @@ export class UsermanagementService {
     return this.router.navigate(['/Home']);
   }
 
+  public merchentRegistration(merchantDto: MerchantDto): Observable<MerchantDto> {
+    return this.http.post<MerchantDto>(environment.API_URL + 'CustomerRegistration/InsertRegistrationDetails', registration);
+  }
+
 Loginapi(login) {
     var body = login;
    
@@ -139,5 +144,9 @@ Loginapi(login) {
     return this.http.post<User>(environment.API_URL+'CustomerRegistration/'+'ForgotPassword',user,{headers : reqHeader});
       
      }
+
+     public MerchantEmailVerification(registration: MerchantDto): Observable<MerchantDto> {
+      return this.http.post<MerchantDto>(environment.API_URL + 'CustomerRegistration/EmailCheckValidation', registration);
+    }
 
 }

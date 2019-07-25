@@ -4,7 +4,7 @@ import { CustomerappComponent } from './pages/customer/customerapp/customerapp.c
 import { EmailverificationSuccessComponent } from './pages/customer/user management/emailverification-success/emailverification-success.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { CustomerappRoutingModule } from './pages/customer/customerapp/customerapp-routing.module';
-import {} from './pages/customer/customerapp/customerapp.module';
+import {MerchantregistrationComponent} from './pages/merchant/merchant management/merchantregistration/merchantregistration.component';
 
 
 
@@ -21,6 +21,10 @@ const routes: Routes = [
 {
   path:"error",
   component:PageNotFoundComponent
+},
+{
+  path:"merchant",
+  component:MerchantregistrationComponent
 }
 ];
 

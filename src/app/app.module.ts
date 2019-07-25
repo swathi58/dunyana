@@ -18,7 +18,6 @@ import { RegistrationComponent } from './pages/customer/user management/registra
 import { SharedModule } from './shared/shared.module';
 import { EmailverificationSuccessComponent } from './pages/customer/user management/emailverification-success/emailverification-success.component';
 import {DialogModule} from 'primeng/dialog';
-import {ButtonModule, Button} from 'primeng/button';
 import { LangShareService } from '../app/shared/services/lang-share.service';
 import { registerLocaleData } from '../../node_modules/@angular/common';
 import localeESUS from '@angular/common/locales/es-US';
@@ -36,6 +35,9 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { ChangepasswordComponent } from './pages/customer/user management/changepassword/changepassword.component';
 import { AdminModule } from './pages/admin/admin.module';
 import { AdminComponent } from './pages/admin/admin.component';
+import{MerchantregistrationComponent}from './pages/merchant/merchant management/merchantregistration/merchantregistration.component'
+import{merchantModule}from './pages/merchant/merchant.module';
+import { ForgotpasswordComponent } from './pages/customer/user management/forgotpassword/forgotpassword.component';
 
 registerLocaleData(localeESUS);
 
@@ -67,6 +69,8 @@ export function getAuthServiceConfigs() {
     EmailverificationSuccessComponent,
     PageNotFoundComponent,
     AdminComponent,
+    MerchantregistrationComponent,
+    ForgotpasswordComponent,
   ],
   imports: [
     BrowserModule,
@@ -74,6 +78,7 @@ export function getAuthServiceConfigs() {
     AppRoutingModule,
     CustomerappModule,
     AdminModule,
+    merchantModule,
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
@@ -81,7 +86,8 @@ export function getAuthServiceConfigs() {
     SocialLoginModule,
     ImageCropperModule,
     DialogModule,
-    ButtonModule,
+  
+    
     
     TranslateModule.forRoot({
       loader: {

@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CategoryListComponent } from './category management/category-list/category-list.component';
 import { AdminComponent } from './admin.component';
+import{BannersListComponent}from './banner management/banners-list/banners-list.component';
+
 
 const routes: Routes = [
   {
@@ -12,6 +14,10 @@ const routes: Routes = [
         path:"categorylist",
         component:CategoryListComponent
       },
+      {
+        path:"bannerlist",
+        component:BannersListComponent
+      }
       
     ]
   },

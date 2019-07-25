@@ -22,18 +22,15 @@
   
                 <form class="from_wrapper" [formGroup]="loginForm" (ngSubmit)="OnLogin()">
                   <div class="row inputset">
-                    <div class="col-sm-4"><label>Email</label><span class="required">*</span></div>
-                    <div class="col-sm-8"><input type="text" placeholder="email@domain.com" formControlName="lEmail"
-                        id="lEmail" (keyup)="onKeyPress($event);validateform()" />
+                    <div class="col-sm-4"><label>Country</label><span class="required">*</span></div>
+                    <div class="col-sm-8"><input type="text" placeholder="email@domain.com" formControlName="Country"
+                        id="Country" (keyup)="onKeyPress($event);validateform()" />
   
                       <div class="login-error"
-                        *ngIf="loginForm.controls['lEmail'].hasError('required') && loginForm.controls['lEmail'].touched">
-                        Email is required</div>
-                      <div class="login-error" [hidden]="!loginForm.controls['lEmail'].errors?.pattern">Enter valid email
-                        address</div>
-  
-  
+                        *ngIf="loginForm.controls['Country'].hasError('required') && loginForm.controls['Country'].touched">
+                        Email is required</div>                
                     </div>
+                    
                     <div class="col-sm-12">
                       <hr>
                     </div>

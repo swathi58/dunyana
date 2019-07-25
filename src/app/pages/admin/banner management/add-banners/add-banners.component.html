@@ -1,0 +1,158 @@
+<p-dialog header="Add banners" [(visible)]="display" [modal]="true" [responsive]="true" [style]="{width: '800px'}"
+  [closeOnEscape]="true" (onHide)="onClose()">
+
+  <!-- <form [formGroup]="bannerForm">
+    
+        <div formArrayName="banner">
+         
+            <label>
+              <div class="row">
+    
+                <div class="col-lg-2">
+                  <p-dropdown [options]="bancountry" formControlName="Country" [autoWidth]="false"
+                    placeholder="Select Country" [filter]="false">
+                    <option *ngFor="let c of bancountry" [ngValue]="c">{{c}}</option>
+                  </p-dropdown>
+                </div>
+    
+                <div class="col-lg-2">
+                  <input type="text" pInputText class="form-control" formControlName="Image" />
+                </div>
+    
+    
+                <div class="col-lg-2">
+                  <p-dropdown [options]="banlanguage" formControlName="language" [autoWidth]="false"
+                    placeholder="Select language" [filter]="false">
+                    <option *ngFor="let l of banlanguage" [ngValue]="l">{{l}}</option>
+                  </p-dropdown>
+                </div>
+    
+    
+                <div class="col-lg-2">
+                  <p-radioButton name="bannerselect" value="Yes" formControlName="IsDefault" inputId="opt1">
+                  </p-radioButton>
+                  <p-radioButton name="bannerselect" value="No" formControlName="IsDefault" inputId="opt2"></p-radioButton>
+                </div>
+    
+                <div class="col-lg-2">
+                  <p-dropdown [options]="bannerstatus" formControlName="Status" [autoWidth]="false"
+                    placeholder="Select Status" [filter]="false">
+                    <option *ngFor="let b of bannerstatus" [ngValue]="b">{{b}}</option>
+                  </p-dropdown>
+                </div>
+              </div>
+            </label>
+          
+          
+          <button type="button" (click)="addbanner()" [disabled]="!bannerForm.valid">Add banners</button>
+        </div>
+    
+      </form> -->
+
+  <form class="from_wrapper" [formGroup]="bannerForm" (ngSubmit)="OnLogin()">
+    <div class="row inputset">
+      <div class="col-sm-4"><label>Country</label><span class="required">*</span></div>
+      <div class="col-sm-8">
+        <!-- <input type="text" formControlName="Country" id="Country"(keyup)="validateform()" /> -->
+      
+         <p-dropdown [options]="bancountry" formControlName="Country" [autoWidth]="false"
+         placeholder="Select Country" [filter]="false">
+         <option *ngFor="let c of bancountry" [ngValue]="c">{{c}}</option>
+       </p-dropdown>
+       
+      <div class="col-sm-12">
+        <hr>
+      </div>
+    </div>
+    </div>
+    <div class="row inputset">
+      <div class="col-sm-4"><label>language</label><span class="required">*</span></div>
+      <div class="col-sm-8">
+          <p-dropdown [options]="banlanguage" formControlName="language" [autoWidth]="false"
+                placeholder="Select language" [filter]="false">
+                <option *ngFor="let l of banlanguage" [ngValue]="l">{{l}}</option>
+              </p-dropdown>
+
+
+      </div>
+      <div class="col-sm-12">
+        <hr>
+      </div>
+
+
+    </div>
+
+    <div class="row inputset">
+        <div class="col-sm-4"><label>Default Banner</label><span class="required">*</span></div>
+        <div class="col-sm-8">
+            Yes
+            <p-radioButton name="bannerselect" value="1" formControlName="IsDefault" inputId="opt1">
+              </p-radioButton>
+              NO
+              <p-radioButton name="bannerselect" value="0" formControlName="IsDefault" inputId="opt2"></p-radioButton>
+  
+        </div>
+        <div class="col-sm-12">
+          <hr>
+        </div>
+  
+        
+      </div>
+
+      <div class="row inputset">
+          <div class="col-sm-4"><label>Banner Status</label><span class="required">*</span></div>
+          <div class="col-sm-8">
+              <p-dropdown [options]="bannerstatus" formControlName="Status" [autoWidth]="false"
+                placeholder="Select Status" [filter]="false">
+                <option *ngFor="let b of bannerstatus" [ngValue]="b">{{b}}</option>
+              </p-dropdown>
+    
+          </div>
+          <div class="col-sm-12">
+            <hr>
+          </div>
+    
+          
+        </div>
+          
+      
+          <div class="row inputset">
+              <div class="col-sm-4"><label>Upload Banner</label></div>
+              <div class="col-sm-8">
+                  <p-fileUpload name="myfile[]" url="./upload.php"></p-fileUpload>
+
+              </div>
+              <div class="col-sm-12"><hr></div>
+            </div>
+            
+            <div class="row inputset">
+                <div class="col-sm-4"><label>Start Date</label></div>
+                <div class="col-sm-8">
+                    <!-- <p-calendar formControlName="StartDate" [numberOfMonths]="3" [(ngModel)]="dates" dateFormat="dd.mm.yy"></p-calendar> -->
+                </div>
+                <div class="col-sm-12"><hr></div>
+              </div>
+
+              <div class="row inputset">
+                  <div class="col-sm-4"><label>EndDate</label></div>
+                  <div class="col-sm-8">
+                      <!-- <p-calendar formControlName="EndDate"  dateFormat="dd.mm.yy"></p-calendar> -->
+                      <p-calendar [(ngModel)]="date1"></p-calendar>
+
+                  </div>
+                  <div class="col-sm-12"><hr></div>
+                </div>
+
+ <button type="submit" [disabled]="bannerForm.invalid" class="sblue" [ngClass]="btndisable"
+    >Add banner</button>
+    <!-- <p-button class="line_btn sblue" label="Add banner" [disabled]="bannerForm.invalid">
+    </p-button> -->
+
+  </form>
+
+  <p-footer>
+    <button type="button" pButton icon="pi pi-check" (click)="display=false" label="Yes"></button>
+    <button type="button" pButton icon="pi pi-close" (click)="display=false" label="No"
+      class="ui-button-secondary"></button>
+  </p-footer>
+</p-dialog>
