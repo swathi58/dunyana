@@ -6,6 +6,7 @@ import { MustMatch } from 'src/app/shared/validators/PasswordMustMatchvalidator'
 import { MessageService } from 'primeng/api';
 import { LocalStorageService } from 'angular-web-storage';
 import { Router } from '@angular/router';
+import { RegistrationDto } from '../../model/DTOs/RegistraionDto';
 @Component({
   selector: 'app-changepassword',
   templateUrl: './changepassword.component.html',
@@ -20,10 +21,31 @@ export class ChangepasswordComponent implements OnInit {
 
   changepwdForm:FormGroup;
   btndisable:string="disable";
-  changepassword:ChangepasswordDto={
-    Email:null,
-    PWD:null,
-    NPWD:null
+  // changepassword:ChangepasswordDto={
+  //   Email:null,
+  //   PWD:null,
+  //   NPWD:null
+  // }
+  registerdto: RegistrationDto = {
+    Id: 0,
+    FirstName: null,
+    LastName: null,
+    Email: null,
+    Mobile: null,
+    Address: null,
+    Country: null,
+    City: null,
+    Image: null,
+    LoginType: null,
+    FBID: null,
+    GoogleID: null,
+    PWD: null,
+    Type: null,
+    EmailVerified: 0,
+    Status: 0,
+   // EncId: null,
+   // NPWD: null,
+    OTP: 0
   }
 
   constructor(private userservice:UsermanagementService,private formBuilder:FormBuilder,private messageService: MessageService,
@@ -31,8 +53,7 @@ export class ChangepasswordComponent implements OnInit {
 
   ngOnInit() {
     this.changepwdForm=this.formBuilder.group({
-
-     
+ 
       PWD:['',[Validators.required,Validators.minLength(6)]],
       NPWD:['',[Validators.required,Validators.minLength(6)]],
       confirmpassword:['',Validators.required]
@@ -51,21 +72,31 @@ export class ChangepasswordComponent implements OnInit {
 SaveChangePassword()
   {
 
-    this.changepassword.Email=this.localStorage.get("Email");
-    this.changepassword.PWD=this.changepwdForm.value["PWD"];
-    this.changepassword.NPWD=this.changepwdForm.value["NPWD"];
-    this.userservice.ChangePassword(this.changepassword).subscribe(res=>{
-      this.FormReset();
-      this.messageService.add({severity:'success', summary:'Success Message', detail:res["result"]});
-      setTimeout(() => {
-        this.onClose();
-        this.router.navigateByUrl("signin");
-    }, 1000); 
- 
-    },
-    errormsg=>{
-      this.messageService.add({severity:'error', summary:'Error Message', detail:errormsg["error"]["result"]});
-    });
+    this.registerdto.Email=this.localStorage.get("Email");
+    let oldpwd=this.localStorage.get("PWD");
+    if(oldpwd===this.changepwdForm.value["PWD"])
+    {
+      this.registerdto.PWD=this.changepwdForm.value["PWD"];
+      this.userservice.ChangePassword(this.registerdto).subscribe(res=>{
+        this.FormReset();
+        this.messageService.add({severity:'success', summary:'Success Message', detail:res["result"]});
+        setTimeout(() => {
+          this.onClose();
+          this.router.navigateByUrl("signin");
+      }, 1000); 
+   
+      },
+      errormsg=>{
+        this.messageService.add({severity:'error', summary:'Error Message', detail:errormsg["error"]["result"]});
+      });
+    }
+    else
+    {
+      this.messageService.add({severity:'error', summary:'Error Message', detail:"Invalid Old Password"});
+    }
+    
+   
+    
   }
 
   formvalidate()

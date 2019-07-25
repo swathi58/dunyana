@@ -16,7 +16,7 @@ export class RegistrationDto
     PWD:string;
     Type:string;
     Status :number;
-    NPWD:string;
+    //NPWD:string;
     OTP: number;
-    EncId:string;
+   // EncId:string;
 }

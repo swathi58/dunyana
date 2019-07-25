@@ -33,8 +33,8 @@ export class CustomerAccountComponent implements OnInit {
     Type:null,
     EmailVerified:0,
     Status:0,
-    EncId:null,
-    NPWD:null,
+   // EncId:null,
+   // NPWD:null,
     OTP:0
   }
 
@@ -75,6 +75,8 @@ GetProfiledata()
       this.profiledata.Email=res["email"];
       this.profiledata.Id=res["id"];
       this.profiledata.Mobile=res["mobile"];
+      this.localStorage.set("PWD",res["pwd"]);
+      this.profiledata.PWD=res["pwd"];
       this.ProgressSpinnerDlg=false;
      // console.log(this.profiledata["image"]);
     });

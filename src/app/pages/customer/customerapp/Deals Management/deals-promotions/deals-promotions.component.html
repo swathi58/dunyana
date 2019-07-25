@@ -1,22 +1,104 @@
-
 <section class="accounts">
     <div class="text_container">
         <div class="container">
-  
+
             <div class="row">
                 <div class="col-xl-12 leftPanel">
-  
+
                     <h2>Deals And Promotions <span class="font-weight-bold"></span></h2>
-                    <p class="small">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ut finibus ligula, et vestibulum libero. Maecenas lectus diam, sagittis in iaculis et, ultrices eget mi. Mauris quam leo, auctor eget sapien sit amet, ullamcorper elementum
-                        mauris. Vivamus euismod lorem sed diam vehicula, eu feugiat arcu vestibulum. Nam eu purus aliquam dolor lobortis sollicitudin rutrum at tellus. In lobortis massa sodales neque congue consectetur. Morbi tempus vel lacus id tincidunt.</p>
-  
+                    <p class="small">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ut finibus
+                        ligula, et vestibulum libero. Maecenas lectus diam, sagittis in iaculis et, ultrices eget mi.
+                        Mauris quam leo, auctor eget sapien sit amet, ullamcorper elementum
+                        mauris. Vivamus euismod lorem sed diam vehicula, eu feugiat arcu vestibulum. Nam eu purus
+                        aliquam dolor lobortis sollicitudin rutrum at tellus. In lobortis massa sodales neque congue
+                        consectetur. Morbi tempus vel lacus id tincidunt.</p>
+
                 </div>
-  
-  
             </div>
-  
+            <section class="">
+                <!-- <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card mb-4 box-shadow"><img alt="Thumbnail [100%x225]" class="card-img-top" src="../../../../../assets/layout/images/brand-img1.jpg">
+                                <div class="card-body">
+                                    <p class="card-text">Apple</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card mb-4 box-shadow"><img alt="Thumbnail [100%x225]" class="card-img-top" src="../../../../../assets/layout/images/brand-img2.jpg">
+                                <div class="card-body">
+                                    <p class="card-text">Adidas</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card mb-4 box-shadow"><img alt="Thumbnail [100%x225]" class="card-img-top" src="../../../../../assets/layout/images/brand-img3.jpg">
+                                <div class="card-body">
+                                    <p class="card-text">Anne Klein</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card mb-4 box-shadow"><img alt="Thumbnail [100%x225]" class="card-img-top" src="../../../../../assets/layout/images/brand-img4.jpg">
+                                <div class="card-body">
+                                    <p class="card-text">Anthropologie</p>
+                                </div>
+                            </div>
+                        </div>
+            
+                    </div>
+                </div> -->
+
+
+                            <!-- <p-table [columns]="cols" [value]="cars" [paginator]="true" [rows]="10">
+                                    <ng-template pTemplate="body" let-rowData let-columns="columns">
+                                        <tr>
+                                            <td></td>
+                        
+                                        </tr>
+                                    </ng-template>
+                                </p-table> -->
+
+                    <!-- <p-paginator [rows]="4" [totalRecords]="totaldealsRecords"></p-paginator> -->
+                    <div class="container-fluid">
+                            <div class="row">
+                                    <div class="col-md-6" *ngFor="let deal of pagedItems">
+                                            <div class="card mb-4 box-shadow"><img alt="Thumbnail [100%x225]"
+                                                    class="card-img-top"
+                                                    [src]="deal.image">
+                                                <div class="card-body">
+                                                    <p class="card-text">{{deal.country}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                            </div>
+                                <!-- pager -->
+            <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+                    <li [ngClass]="{disabled:pager.currentPage === 1}">
+                        <a (click)="setPage(1)">First</a>
+                    </li>
+                    <li [ngClass]="{disabled:pager.currentPage === 1}">
+                        <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+                    </li>
+                    <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                        <a (click)="setPage(page)">{{page}}</a>
+                    </li>
+                    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                        <a (click)="setPage(pager.currentPage + 1)">Next</a>
+                    </li>
+                    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                        <a (click)="setPage(pager.totalPages)">Last</a>
+                    </li>
+                </ul>
+                        </div>
+
+
+
+            </section>
+
         </div>
     </div>
-  
-  
-  </section>
+
+
+</section>

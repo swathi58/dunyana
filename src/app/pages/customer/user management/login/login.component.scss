@@ -304,3 +304,20 @@ padding-right: 15px;
       transform: rotate(360deg);
     }
   }
+
+  :host {
+    ::ng-deep {
+       .ui-state-disabled,
+       .ui-widget:disabled {
+           opacity: 1;
+       }
+   }
+}
+
+.signin_wrap {
+   min-height: 640px;
+}
+
+footer.trans {
+   margin-top: 68px;
+}

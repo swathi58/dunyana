@@ -17,13 +17,13 @@
 
         <div class="container">
             <div class="row">
-                <div class="col-sm-4 p-0">
+                <div class="col-sm-4">
                     <div class="si">
                     
                         <a class="backBtn" (click)="prevclick()" [ngClass]="prevbtn" href="#demo" data-slide="prev">
                             <i class="icomoon icon-arrows"></i>
                         </a>
-                        <h4 class="_top" [ngClass]="topheader">Get Started</h4>
+                        <h4 [ngClass]="topheader">Get Started</h4>
 
 
                             <div id="demo" class="carousel" data-ride="carousel" data-interval="false">
@@ -178,7 +178,7 @@
                                     </div>
 
                                     <div class="carousel-item">
-                                        <div class="center col-md-12 text-center">
+                                        <div class="center col-md-12 p-0 text-center">
 
                                             <img class="text-center" [src]="checkinfo">
                                             <h2>Success!</h2>
@@ -199,7 +199,7 @@
 
 
                             <div class="row btns" [hidden]="hidenextbtn">
-                                <div class="col-sm-9 m-auto">
+                                <div class="col-sm-11 m-auto">
                                         <!-- <p-button class="timersty" [label]="timerbtntext" [hidden]="timerbtndisplay"></p-button> -->
                                         <p-button class="line_btn sblue" [label]="submitbtntext" href="#demo" data-slide="next" [ngClass]="btndisable" (click)="addcustomer()"></p-button>
 

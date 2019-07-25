@@ -31,7 +31,7 @@ export class UsermanagementService {
 
   public InsertCustomer(registration: RegistrationDto): Observable<RegistrationDto> {
     // return this.http.post<RegistrationDto>(environment.API_URL + 'Customer/InsertRegistrationDetails', registration);
-    return this.http.post<RegistrationDto>(environment.API_URL + 'Customer/InsertRegistrationOTP', registration);
+    return this.http.post<RegistrationDto>(environment.API_URL + 'Customer/InsertCustomer', registration);
 
   }
 
@@ -43,8 +43,8 @@ export class UsermanagementService {
     return this.http.post<RegistrationDto>(environment.API_URL + 'Customer/EmailCheckValidation', registration);
   }
 
-  public ChangePassword(changepassword: ChangepasswordDto): Observable<ChangepasswordDto> {
-    return this.http.post<ChangepasswordDto>(environment.API_URL + 'Customer/ChangePassword', changepassword);
+  public ChangePassword(changepassword: RegistrationDto): Observable<RegistrationDto> {
+    return this.http.post<RegistrationDto>(environment.API_URL + 'Customer/ChangePassword', changepassword);
   }
 
   public GetProfileInformation(registration: RegistrationDto): Observable<RegistrationDto> {

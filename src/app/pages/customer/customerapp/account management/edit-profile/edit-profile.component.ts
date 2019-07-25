@@ -42,8 +42,8 @@ export class EditProfileComponent implements OnInit {
     Type:null,
     EmailVerified:0,
     Status:0,
-    EncId:null,
-    NPWD:null,
+    //EncId:null,
+   // NPWD:null,
     OTP:0
   }
   profiledata=this.registerdto;

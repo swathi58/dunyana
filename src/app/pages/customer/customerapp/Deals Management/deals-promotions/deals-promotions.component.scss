@@ -1,3 +1,110 @@
 section.accounts .text_container .leftPanel p.small {
     font-size: 14pt;
 }
+
+
+section.shopping_banner {
+    .item {
+        .text_container {
+            .line_btn {
+                margin-top: 320px;
+            }
+        }
+    }
+}
+
+section.shopping_banner {
+    .item {
+        height: 740px;
+    }
+}
+
+section.qkLinks {
+    .ql {
+        .it {
+            h2 {
+                font-family: 'teshrin_arltlight';
+                margin-bottom: 0;
+                margin-top: 30px;
+            }
+            h1 {
+                font-family: 'teshrin_arltmedium';
+            }
+            overflow: hidden;
+            i.icon-light {
+                right: 7%;
+                left: unset;
+                font-size: 215px;
+                top: -32%;
+            }
+            i.second {
+                right: 15%;
+                left: unset;
+                font-size: 275px;
+                top: -25%;
+            }
+            i.icon-moon {
+                font-size: 170px;
+                left: 10%;
+            }
+        }
+    }
+}
+
+section.brands {
+    padding-bottom: 45px;
+    p {
+        color: #4f5b69;
+        font-size: 18pt;
+    }
+    hr {
+        opacity: 0.5;
+    }
+    .let-space {
+        letter-spacing: 1pt;
+    }
+}
+
+.card-body {
+    padding: 2rem;
+    background: #4f5b69;
+    color: white;
+    font-size: 14pt;
+    font-family: 'teshrin_arltmedium';
+}
+
+.pagination {
+    display: inline-block;
+    padding-left: 0;
+    margin: 20px 0;
+    border-radius: 4px;
+}
+
+.pagination>li {
+    display: inline;
+}
+.pagination>li:first-child>a, .pagination>li:first-child>span {
+    margin-left: 0;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+.pagination>.disabled>a, .pagination>.disabled>a:focus, .pagination>.disabled>a:hover, .pagination>.disabled>span, .pagination>.disabled>span:focus, .pagination>.disabled>span:hover {
+    color: #777;
+    cursor: not-allowed;
+    background-color: #fff;
+    border-color: #ddd;
+}
+.pagination>li>a, .pagination>li>span {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    color: #337ab7;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+a {
+    cursor: pointer;
+}

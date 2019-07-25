@@ -9,6 +9,8 @@ import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import {InputTextModule} from 'primeng/inputtext';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import {CarouselModule} from 'primeng/carousel';
+import {PaginatorModule} from 'primeng/paginator';
+
 const COMMON_MODULES = [
 
   ButtonModule,
@@ -19,7 +21,8 @@ const COMMON_MODULES = [
   TableModule,
   InputTextModule,
   ImageCropperModule,
-  CarouselModule
+  CarouselModule,
+  PaginatorModule
 ]
 
 

@@ -14,6 +14,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { LocalStorageService } from 'angular-web-storage';
 import { OTP } from '../../model/OTP';
 import { IfStmt } from '@angular/compiler';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-registration',
@@ -23,7 +24,7 @@ import { IfStmt } from '@angular/compiler';
 export class RegistrationComponent implements OnInit {
 
   headerlogo: string = "assets/layout/images/glogo.png";
-  checkinfo:string="assets/layout/images/svg/success.svg";
+  checkinfo: string = "assets/layout/images/svg/success.svg";
   ProgressSpinnerDlg: boolean = false;
   registrationForm: FormGroup;
   FirstregistrationForm: FormGroup;
@@ -32,12 +33,12 @@ export class RegistrationComponent implements OnInit {
   default: string = 'United States';
   btndisable: string = "disable";
   currentIndex: string;
-  hidenextbtn:boolean=false;
+  hidenextbtn: boolean = false;
   activetab: string = "active";
   submitbtntext: string = "Next";
   timerbtntext: string = "Resend in";
   prevbtn: string = "none";
-  topheader:string="_top";
+  topheader: string = "";
 
   timerbtndisplay: boolean = true;
   imageChangedEvent: any = '';
@@ -64,12 +65,12 @@ export class RegistrationComponent implements OnInit {
     Type: null,
     EmailVerified: 0,
     Status: 0,
-    EncId: null,
-    NPWD: null,
+   // EncId: null,
+   // NPWD: null,
     OTP: 0
   }
 
-  Otp: string=null;
+  Otp: string = null;
   cars: any[];
   constructor(private formBuilder: FormBuilder, private userservice: UsermanagementService,
     private messageService: MessageService, private ngxService: NgxUiLoaderService,
@@ -167,13 +168,18 @@ export class RegistrationComponent implements OnInit {
           if (this.registerdto.LastName.length - 1 > -1) {
             this.btndisable = "line_btn sblue";
           }
+          if (this.registerdto.LastName.length == 0) {
+            this.btndisable = "disable";
+          }
+        }
+        else {
+          this.btndisable = "disable";
         }
       }
       else {
         this.btndisable = "disable";
       }
     }
-
     else {
       this.btndisable = "disable";
     }
@@ -182,15 +188,22 @@ export class RegistrationComponent implements OnInit {
   formauthdatavalidate() {
 
     if (this.registerdto.Email != null) {
-      if (this.registerdto.Email.length - 1 > -1) {
         if (this.registerdto.Email.match('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}')) {
           if (this.registerdto.PWD != null) {
             if (this.registerdto.PWD.length >= 6) {
-              this.btndisable = "line_btn sblue";
+             // this.CheckEmail();
+               this.btndisable = "line_btn sblue";
+            }
+            if(this.registerdto.PWD.length==0 || this.registerdto.PWD.length<6)
+            {
+              this.btndisable = "disable";
             }
           }
         }
-      }
+        else {
+          this.btndisable = "disable";
+        }
+
     }
     else {
       this.btndisable = "disable";
@@ -205,9 +218,17 @@ export class RegistrationComponent implements OnInit {
           if (this.registerdto.Address.length - 1 > -1) {
             this.btndisable = "line_btn sblue";
           }
+          else if(this.registerdto.Address.length==0)
+          {
+            this.btndisable = "disable";
+          }
         }
       }
-    }
+      else if(this.registerdto.City.length===0)
+      {
+        this.btndisable = "disable";
+      }
+    } 
     else {
       this.btndisable = "disable";
     }
@@ -217,17 +238,36 @@ export class RegistrationComponent implements OnInit {
       if (this.registerdto.Mobile.length == 10) {
         this.btndisable = "line_btn sblue";
       }
+      else if(this.registerdto.Mobile.length<=9)
+      {
+        this.btndisable = "disable";
+      }
     }
     else {
       this.btndisable = "disable";
     }
   }
   otpformvalidate() {
-    console.log(this.Otp);
+   
     if (this.Otp != null) {
-      console.log(this.Otp.length);
-
-        this.btndisable = "line_btn sblue";
+      console.log(this.Otp.toString().length);
+      if(this.Otp.toString().length==6)
+      {
+        if(this.Otp==this.registerdto.OTP.toString())
+        {
+          this.btndisable = "line_btn sblue";
+        }
+        else
+        {
+          this.messageService.add({ severity: 'error', summary: 'Error Message', detail: "Invalid OTP" });
+          this.btndisable = "disable";
+        }
+       
+      }
+      else
+      {
+        this.btndisable = "disable";
+      }
       
     }
     else {
@@ -245,7 +285,7 @@ export class RegistrationComponent implements OnInit {
 
         if (Number.parseInt(this.currentIndex) == 1) {
           this.prevbtn = "none";
-
+          this.topheader = "";
         }
         else {
           this.prevbtn = "backBtn";
@@ -294,18 +334,28 @@ export class RegistrationComponent implements OnInit {
   CheckEmail() {
     //this.registerdto.Email="swathi.chinnala@gmail.com";
     this.ConvertingFormToDto();
-
-    if (this.registerdto.Email.length > 0) {
-      if (this.registerdto.Email.match('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}')) {
-        this.userservice.EmailVerification(this.registerdto).subscribe(res => {
-          this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
-        },
-          errormsg => {
-            this.messageService.add({ severity: 'error', summary: 'Error Message', detail: errormsg["error"]["result"] });
-          });
+      if(this.registerdto.Email!=null)
+      {
+        if (this.registerdto.Email.match('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}')) {
+          this.userservice.EmailVerification(this.registerdto).subscribe(res => {
+            if(res["result"]==="Email is valid")
+            {      
+            this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
+            //this.btndisable = "line_btn sblue";
+            }
+            else if(res["result"]==="EmailId is already registred")
+            {
+              this.messageService.add({ severity: 'error', summary: 'Error Message', detail: res["result"] });
+              this.btndisable = "disable";
+            }
+          },
+            errormsg => {
+              this.messageService.add({ severity: 'error', summary: 'Error Message', detail: errormsg["error"]["result"] });
+              this.btndisable = "disable";
+  
+            });
+        }
       }
-    }
-
   }
 
   addcustomer() {
@@ -336,7 +386,7 @@ export class RegistrationComponent implements OnInit {
           }
           else if (Number.parseInt(this.currentIndex) == 3) {
             this.ConvertingFormToDto();
-            console.log("3 th one");
+           
             this.userservice.SendOTP(this.registerdto).subscribe(res => {
               // this.ProgressSpinnerDlg = false;             
               this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
@@ -356,29 +406,27 @@ export class RegistrationComponent implements OnInit {
           }
 
           else if (Number.parseInt(this.currentIndex) == 4) {
-            this.hidenextbtn=true;
+            this.hidenextbtn = true;
             this.prevbtn = "none";
-            this.topheader="none";
-            let otp =Number.parseInt(this.Otp);
-            if ( otp= this.registerdto.OTP) {
+            this.topheader = "none";
+
               this.userservice.InsertCustomer(this.registerdto).subscribe(res => {
                 this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
+                this.localStorage.set("Email", res["reEmail"]);               
+                this.router.navigateByUrl("customer/customeraccount");
               });
-            }
-            else
-            {
-              this.messageService.add({ severity: 'error', summary: 'Error Message', detail: "Invalid OTP" });
-            }
+            
+          
           }
-          else if(Number.parseInt(this.currentIndex)==5)
-          {
-               
+          else if (Number.parseInt(this.currentIndex) == 5) {
+
           }
 
           //this.btndisable = "disable";
         }
         if (Number.parseInt(this.currentIndex) >= 0) {
           this.prevbtn = "backBtn";
+          this.topheader = "_top";
         }
 
       }
