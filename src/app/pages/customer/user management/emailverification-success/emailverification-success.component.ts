@@ -30,7 +30,8 @@ export class EmailverificationSuccessComponent implements OnInit {
     EmailVerified:0,
     Status:0,
     EncId:null,
-    NPWD:null
+    NPWD:null,
+    OTP:0
   }
  
   constructor( private route: ActivatedRoute,private userservice:UsermanagementService,private router: Router) { }

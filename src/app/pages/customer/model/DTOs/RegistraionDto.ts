@@ -17,5 +17,6 @@ export class RegistrationDto
     Type:string;
     Status :number;
     NPWD:string;
+    OTP: number;
     EncId:string;
 }

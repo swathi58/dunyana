@@ -23,7 +23,7 @@
                         <a class="backBtn" (click)="prevclick()" [ngClass]="prevbtn" href="#demo" data-slide="prev">
                             <i class="icomoon icon-arrows"></i>
                         </a>
-                        <h4 class="_top">Get Started</h4>
+                        <h4 class="_top" [ngClass]="topheader">Get Started</h4>
 
 
                             <div id="demo" class="carousel" data-ride="carousel" data-interval="false">
@@ -33,6 +33,7 @@
                                     <li data-target="#demo" data-slide-to="2"></li>
                                     <li data-target="#demo" data-slide-to="3"></li>
                                     <li data-target="#demo" data-slide-to="4"></li>
+                                    <li data-target="#demo" data-slide-to="5"></li>
                                 </ul>
                                 <div class="carousel-inner">
                                  <form class="from_wrapper" [formGroup]="registrationForm" novalidate #f="ngForm">
@@ -104,8 +105,8 @@
                                         <div class="row inputset">
                                             <div class="col-sm-5"><label>Country</label><span class="text-danger">*</span></div>
                                             <div class="col-sm-7">
-                                                <p-dropdown [options]="countries" formControlName="country" [autoWidth]="false" placeholder="Select Country" [filter]="false">
-                                                    <option *ngFor="let c of countries" [ngValue]="c">{{c}}</option>
+                                                <p-dropdown [options]="countries" formControlName="country" [(ngModel)]="registerdto.Country" [autoWidth]="false" [filter]="false" optionLabel="description">
+                                                    <!-- <option *ngFor="let c of countries" [ngValue]="c">{{c}}</option> -->
                                                 </p-dropdown>
                                        
                                             </div>
@@ -158,8 +159,8 @@
                                     </div>
                                     <div class="carousel-item">
                                         <p class="para">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                        <div class="col-sm-10 m-auto">
-                                            <div class="otp">
+                                        <div class="col-sm-10 m-auto hid">
+                                          
 
                                                     <!-- <div id="divOuter">
                                                             <div id="divInner">
@@ -167,15 +168,24 @@
                                                             </div>
                                                         </div> -->
 
-                                               <input type="text" class="otptxt" placeholder="0" maxlength="1" formControlName="otp" [(ngModel)]="otp.text1" (keyup)="otpformvalidate()" >
-                                                <input type="text" class="otptxt" placeholder="0" maxlength="1" formControlName="otp" [(ngModel)]="otp.text2" (keyup)="otpformvalidate()">
-                                                <input type="text" class="otptxt" placeholder="0" maxlength="1" formControlName="otp" [(ngModel)]="otp.text3" (keyup)="otpformvalidate()">
-                                                <input type="text" class="otptxt" placeholder="0" maxlength="1" formControlName="otp" [(ngModel)]="otp.text4" (keyup)="otpformvalidate()">
-                                                <input type="text" class="otptxt" placeholder="0" maxlength="1" formControlName="otp" [(ngModel)]="otp.text5" (keyup)="otpformvalidate()">
-                                                <input type="text" class="otptxt" placeholder="0" maxlength="1" formControlName="otp" [(ngModel)]="otp.text6" (keyup)="otpformvalidate()">
-                                             
-                                               
+                                 
+                                              <div class="otp-num">
+                                                <input id="otp" type="number" oninput="if(value.length>6)value=value.slice(0,6)" formControlName="otp" [(ngModel)]="Otp" (keyup)="otpformvalidate()">
+                                                <span class="ml-g"></span> <span></span> <span></span> <span></span> <span></span> <span></span>
                                             </div>
+                                          
+                                        </div>
+                                    </div>
+
+                                    <div class="carousel-item">
+                                        <div class="center col-md-12 text-center">
+
+                                            <img class="text-center" [src]="checkinfo">
+                                            <h2>Success!</h2>
+                                            <p>
+                                                You have signed in successfully. You will be redirected in 5 seconds.
+                                            </p>
+                                            <p>Redirecting...</p>
                                         </div>
                                     </div>
                                 </form>
@@ -188,15 +198,13 @@
                             </div>
 
 
-                            <div class="row btns">
+                            <div class="row btns" [hidden]="hidenextbtn">
                                 <div class="col-sm-9 m-auto">
                                         <!-- <p-button class="timersty" [label]="timerbtntext" [hidden]="timerbtndisplay"></p-button> -->
                                         <p-button class="line_btn sblue" [label]="submitbtntext" href="#demo" data-slide="next" [ngClass]="btndisable" (click)="addcustomer()"></p-button>
 
                                 </div>
                             </div>
-
-
                         
                     </div>
                 </div>

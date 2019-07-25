@@ -13,6 +13,7 @@ import { ChangepasswordDto } from '../../model/DTOs/ChangepasswordDto';
 import { TranslateService } from '@ngx-translate/core';
 import { LocalStorageService } from 'angular-web-storage';
 import { OTP } from '../../model/OTP';
+import { IfStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-registration',
@@ -22,6 +23,7 @@ import { OTP } from '../../model/OTP';
 export class RegistrationComponent implements OnInit {
 
   headerlogo: string = "assets/layout/images/glogo.png";
+  checkinfo:string="assets/layout/images/svg/success.svg";
   ProgressSpinnerDlg: boolean = false;
   registrationForm: FormGroup;
   FirstregistrationForm: FormGroup;
@@ -30,13 +32,14 @@ export class RegistrationComponent implements OnInit {
   default: string = 'United States';
   btndisable: string = "disable";
   currentIndex: string;
-
+  hidenextbtn:boolean=false;
   activetab: string = "active";
   submitbtntext: string = "Next";
-  timerbtntext:string="Resend in";
-  prevbtn:string="none";
+  timerbtntext: string = "Resend in";
+  prevbtn: string = "none";
+  topheader:string="_top";
 
-  timerbtndisplay:boolean=true;
+  timerbtndisplay: boolean = true;
   imageChangedEvent: any = '';
   croppedImage: any = '';
   finalImage: any = '';
@@ -62,17 +65,11 @@ export class RegistrationComponent implements OnInit {
     EmailVerified: 0,
     Status: 0,
     EncId: null,
-    NPWD: null
+    NPWD: null,
+    OTP: 0
   }
 
-  otp: OTP = {
-    text1: null,
-    text2: null,
-    text3: null,
-    text4: null,
-    text5: null,
-    text6: null
-  }
+  Otp: string=null;
   cars: any[];
   constructor(private formBuilder: FormBuilder, private userservice: UsermanagementService,
     private messageService: MessageService, private ngxService: NgxUiLoaderService,
@@ -90,7 +87,7 @@ export class RegistrationComponent implements OnInit {
       emailid: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}')]],
       mobile: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
       address: ['', Validators.required],
-      country: ['Select Country', Validators.required],
+      country: ['', Validators.required],
       city: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmpassword: ['', [Validators.required, Validators.minLength(6)]],
@@ -101,14 +98,15 @@ export class RegistrationComponent implements OnInit {
       }
     );
 
-    this.countries = [
-      { label: 'KSA', value: 'KSA' },
-      { label: 'United States', value: 'United States' },
-      { label: 'United Kingdom', value: 'United Kingdom' }
-    ];
+    // this.countries = [
+    //   { label: 'KSA', value: 'KSA' },
+    //   { label: 'United States', value: 'United States' },
+    //   { label: 'United Kingdom', value: 'United Kingdom' }
+    // ];
 
-    this.registrationForm.controls['country'].setValue(this.countries[0]["label"], { onlySelf: true });
-    console.log(this.registrationForm.value);
+    // this.registrationForm.controls['country'].setValue(this.countries[0]["description"]);
+
+    this.GetCountriesList();
   }
 
 
@@ -163,10 +161,34 @@ export class RegistrationComponent implements OnInit {
     }
   }
   basicformvalidate() {
-    if ((this.registerdto.FirstName.length - 1 > -1)) {
-      if (this.registerdto.LastName != null) {
-        if (this.registerdto.LastName.length - 1 > -1) {
-          this.btndisable = "line_btn sblue";
+    if (this.registerdto.FirstName != null) {
+      if ((this.registerdto.FirstName.length - 1 > -1)) {
+        if (this.registerdto.LastName != null) {
+          if (this.registerdto.LastName.length - 1 > -1) {
+            this.btndisable = "line_btn sblue";
+          }
+        }
+      }
+      else {
+        this.btndisable = "disable";
+      }
+    }
+
+    else {
+      this.btndisable = "disable";
+    }
+  }
+
+  formauthdatavalidate() {
+
+    if (this.registerdto.Email != null) {
+      if (this.registerdto.Email.length - 1 > -1) {
+        if (this.registerdto.Email.match('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}')) {
+          if (this.registerdto.PWD != null) {
+            if (this.registerdto.PWD.length >= 6) {
+              this.btndisable = "line_btn sblue";
+            }
+          }
         }
       }
     }
@@ -175,28 +197,9 @@ export class RegistrationComponent implements OnInit {
     }
   }
 
-  formauthdatavalidate() {
-    if(this.registerdto.Email!=null)
-    {
-      if (this.registerdto.Email.length - 1 > -1) {
-        if (this.registerdto.Email.match('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}')) {
-          if (this.registerdto.PWD.length != null) {
-            if (this.registerdto.PWD.length >= 6) {
-              this.btndisable = "line_btn sblue";
-            }
-          }
-        }
-      }   
-    }
-    else {
-      this.btndisable = "disable";
-    }
-  }
-
   Addressformvalidate() {
-    
-    if(this.registerdto.City!=null)
-    {
+
+    if (this.registerdto.City != null) {
       if (this.registerdto.City.length - 1 > -1) {
         if (this.registerdto.Address != null) {
           if (this.registerdto.Address.length - 1 > -1) {
@@ -210,8 +213,7 @@ export class RegistrationComponent implements OnInit {
     }
   }
   contactformvalidate() {
-    if(this.registerdto.Mobile!=null)
-    {
+    if (this.registerdto.Mobile != null) {
       if (this.registerdto.Mobile.length == 10) {
         this.btndisable = "line_btn sblue";
       }
@@ -221,57 +223,60 @@ export class RegistrationComponent implements OnInit {
     }
   }
   otpformvalidate() {
-    if(this.otp.text1!=null)
-    {
-      if (this.otp.text1.length - 1 > -1) {
-        if (this.otp.text2 != null) {
-          if (this.otp.text2.length - 1 > -1) {
-            if (this.otp.text3 != null) {
-              if (this.otp.text3.length - 1 > -1) {
-                if (this.otp.text4 != null) {
-                  if (this.otp.text4.length - 1 > -1) {
-                    if (this.otp.text5 != null) {
-                      if (this.otp.text5.length - 1 > -1) {
-                        if (this.otp.text6 != null) {
-                          if (this.otp.text6.length - 1 > -1) {
-                            this.btndisable = "line_btn sblue";
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
+    console.log(this.Otp);
+    if (this.Otp != null) {
+      console.log(this.Otp.length);
+
+        this.btndisable = "line_btn sblue";
+      
     }
     else {
       this.btndisable = "disable";
     }
   }
 
-  prevclick()
-  {
-    
+  prevclick() {
+
     const slides = document.getElementsByTagName('li');
     let i = 0;
     for (i = 0; i < slides.length; i++) {
       if (slides[i].getAttribute('class') === 'active') {
         this.currentIndex = slides[i].getAttribute('data-slide-to');
-      console.log(this.currentIndex);
-       if(Number.parseInt(this.currentIndex)==1)
-       {
-            this.prevbtn="none";
-       }
-       else
-       {
-         this.prevbtn="backBtn";
-       }
+
+        if (Number.parseInt(this.currentIndex) == 1) {
+          this.prevbtn = "none";
+
+        }
+        else {
+          this.prevbtn = "backBtn";
+        }
+
+        if (Number.parseInt(this.currentIndex) == 4) {
+          this.submitbtntext = "Verify";
+        }
+        if (Number.parseInt(this.currentIndex) <= 3) {
+          this.submitbtntext = "Next";
+        }
       }
+
+    }
+    this.basicformvalidate();
   }
-}
+
+  GetCountriesList() {
+    this.userservice.GetCountriesList().subscribe(res => {
+      this.countries = res;
+
+      res.forEach(element => {
+        // this.countries.push({ "label": element["id"], value: element["description"] });
+        // this.countries = [
+        //   { label: 'KSA', value: 'KSA' },
+        //   { label: 'United States', value: 'United States' },
+        //   { label: 'United Kingdom', value: 'United Kingdom' }
+        // ];
+      });
+    })
+  }
   ConvertingFormToDto() {
 
     this.registerdto.FirstName = this.registrationForm.value["firstname"];
@@ -279,12 +284,11 @@ export class RegistrationComponent implements OnInit {
     this.registerdto.Mobile = this.registrationForm.value["mobile"];
     this.registerdto.Email = this.registrationForm.value["emailid"];
     this.registerdto.Address = this.registrationForm.value["address"];
-    this.registerdto.Country = this.registrationForm.value["country"];
     this.registerdto.City = this.registrationForm.value["city"];
     this.registerdto.PWD = this.registrationForm.value["password"];
     this.registerdto.Image = this.finalImage.replace(/^data:image\/[a-z]+;base64,/, "");
     this.registerdto.LoginType = "D";
-
+    console.log(this.registerdto);
   }
 
   CheckEmail() {
@@ -311,43 +315,75 @@ export class RegistrationComponent implements OnInit {
     for (i = 0; i < slides.length; i++) {
       if (slides[i].getAttribute('class') === 'active') {
         this.currentIndex = slides[i].getAttribute('data-slide-to');
-        if (Number.parseInt(this.currentIndex) != 4) {
-          console.log(this.currentIndex);
-          if(Number.parseInt(this.currentIndex)==0)
-          {
+        console.log(this.currentIndex);
+        if (Number.parseInt(this.currentIndex) != 5) {
+
+          if (Number.parseInt(this.currentIndex) == 0) {
             this.formauthdatavalidate();
-          //  this.basicformvalidate();
-           
+            //  this.basicformvalidate();
+
           }
-          else if(Number.parseInt(this.currentIndex)==1)
-          {
+          else if (Number.parseInt(this.currentIndex) == 1) {
 
             this.Addressformvalidate();
-           
+
           }
-          else if(Number.parseInt(this.currentIndex)==2)
-          {
+          else if (Number.parseInt(this.currentIndex) == 2) {
             this.submitbtntext = "Verify";
             this.contactformvalidate();
+            this.registerdto.Country = this.registrationForm.value["country"]["description"];
+
           }
-          else if(Number.parseInt(this.currentIndex)==3)
-          {
+          else if (Number.parseInt(this.currentIndex) == 3) {
+            this.ConvertingFormToDto();
+            console.log("3 th one");
+            this.userservice.SendOTP(this.registerdto).subscribe(res => {
+              // this.ProgressSpinnerDlg = false;             
+              this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
+              this.registerdto.OTP = res["otp"];
+              //this.router.navigateByUrl('/');
+              //this.ResetForm();
+            },
+              error => {
+                // this.ProgressSpinnerDlg = false;
+                console.log(error);
+                this.messageService.add({ severity: 'error', summary: 'Error Message', detail: error["result"] });
+              });
+
             this.submitbtntext = "Confirm";
-            this.timerbtndisplay=false;
+            this.timerbtndisplay = false;
             this.otpformvalidate();
-           
           }
-            
+
+          else if (Number.parseInt(this.currentIndex) == 4) {
+            this.hidenextbtn=true;
+            this.prevbtn = "none";
+            this.topheader="none";
+            let otp =Number.parseInt(this.Otp);
+            if ( otp= this.registerdto.OTP) {
+              this.userservice.InsertCustomer(this.registerdto).subscribe(res => {
+                this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
+              });
+            }
+            else
+            {
+              this.messageService.add({ severity: 'error', summary: 'Error Message', detail: "Invalid OTP" });
+            }
+          }
+          else if(Number.parseInt(this.currentIndex)==5)
+          {
+               
+          }
+
           //this.btndisable = "disable";
         }
-        if(Number.parseInt(this.currentIndex)>=0)
-        {
-          this.prevbtn="backBtn";
+        if (Number.parseInt(this.currentIndex) >= 0) {
+          this.prevbtn = "backBtn";
         }
-        
+
       }
     }
-    this.ConvertingFormToDto();
+
     // this.ProgressSpinnerDlg=true;
 
 
@@ -388,9 +424,4 @@ export class RegistrationComponent implements OnInit {
   ontemsDialogClose(event) {
     this.termesdialogdisplay = event;
   }
-
-
-
-
-
 }

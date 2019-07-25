@@ -20,29 +20,44 @@ export class UsermanagementService {
   }
 
   public CustomerRegistration(registration: RegistrationDto): Observable<RegistrationDto> {
-    return this.http.post<RegistrationDto>(environment.API_URL + 'CustomerRegistration/InsertRegistrationDetails', registration);
+    // return this.http.post<RegistrationDto>(environment.API_URL + 'Customer/InsertRegistrationDetails', registration);
+    return this.http.post<RegistrationDto>(environment.API_URL + 'Customer/InsertCustomer', registration);
+
+  }
+
+  public SendOTP(registration: RegistrationDto): Observable<RegistrationDto> {
+    return this.http.post<RegistrationDto>(environment.API_URL + 'Customer/OTPAuthentication', registration);
+  }
+
+  public InsertCustomer(registration: RegistrationDto): Observable<RegistrationDto> {
+    // return this.http.post<RegistrationDto>(environment.API_URL + 'Customer/InsertRegistrationDetails', registration);
+    return this.http.post<RegistrationDto>(environment.API_URL + 'Customer/InsertRegistrationOTP', registration);
+
   }
 
   public EmailVerificationUpdate(registration: RegistrationDto): Observable<RegistrationDto> {
-    return this.http.post<RegistrationDto>(environment.API_URL + 'CustomerRegistration/AccountActivation', registration);
+    return this.http.post<RegistrationDto>(environment.API_URL + 'Customer/AccountActivation', registration);
   }
 
   public EmailVerification(registration: RegistrationDto): Observable<RegistrationDto> {
-    return this.http.post<RegistrationDto>(environment.API_URL + 'CustomerRegistration/EmailCheckValidation', registration);
+    return this.http.post<RegistrationDto>(environment.API_URL + 'Customer/EmailCheckValidation', registration);
   }
 
   public ChangePassword(changepassword: ChangepasswordDto): Observable<ChangepasswordDto> {
-    return this.http.post<ChangepasswordDto>(environment.API_URL + 'CustomerRegistration/ChangePassword', changepassword);
+    return this.http.post<ChangepasswordDto>(environment.API_URL + 'Customer/ChangePassword', changepassword);
   }
 
   public GetProfileInformation(registration: RegistrationDto): Observable<RegistrationDto> {
-    return this.http.post<RegistrationDto>(environment.API_URL + 'CustomerRegistration/GetProfileDetails', registration);
+    return this.http.post<RegistrationDto>(environment.API_URL + 'Customer/GetProfileDetails', registration);
   }
 
   public UpdateCustomerProfileData(profiledata: RegistrationDto): Observable<RegistrationDto> {
-    return this.http.post<RegistrationDto>(environment.API_URL + 'CustomerRegistration/UpdateRegistrationDetails', profiledata);
+    return this.http.post<RegistrationDto>(environment.API_URL + 'Customer/UpdateRegistrationDetails', profiledata);
   }
 
+  public GetCountriesList(): Observable<any> {
+    return this.http.get<any>(environment.API_URL + 'LookupTypeValue/GetCountrylist');
+  }
 
   // public GetProfileInformation(Email): Observable<any[]> {
   //   return this.http.get<any[]>(environment.API_URL + 'CustomerRegistration/GetProfileDetails/'+Email);
