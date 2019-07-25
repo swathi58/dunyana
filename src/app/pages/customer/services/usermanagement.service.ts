@@ -40,6 +40,11 @@ export class UsermanagementService {
     return this.http.post<RegistrationDto>(environment.API_URL + 'CustomerRegistration/GetProfileDetails', registration);
   }
 
+  public UpdateCustomerProfileData(profiledata: RegistrationDto): Observable<RegistrationDto> {
+    return this.http.post<RegistrationDto>(environment.API_URL + 'CustomerRegistration/UpdateRegistrationDetails', profiledata);
+  }
+
+
   // public GetProfileInformation(Email): Observable<any[]> {
   //   return this.http.get<any[]>(environment.API_URL + 'CustomerRegistration/GetProfileDetails/'+Email);
   // }

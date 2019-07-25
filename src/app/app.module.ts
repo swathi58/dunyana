@@ -39,6 +39,7 @@ import{MerchantregistrationComponent}from './pages/merchant/merchant management/
 import{merchantModule}from './pages/merchant/merchant.module';
 import { ForgotpasswordComponent } from './pages/customer/user management/forgotpassword/forgotpassword.component';
 
+
 registerLocaleData(localeESUS);
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -99,6 +100,7 @@ export function getAuthServiceConfigs() {
    
     //NguCarouselModule
   ],
+  
   // providers: [AuthService,MessageService,
   //   {provide:AuthServiceConfig, useFactory:getAuthServiceConfigs},LangShareService,],
 

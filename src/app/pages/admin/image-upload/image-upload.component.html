@@ -1,0 +1,78 @@
+<!-- <div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">         
+        <div class="modal-header">
+          <h4 class="modal-title">Profile Photo</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+    
+        <div class="modal-body">
+                <div class="row inputset">
+
+                       <div class="col-sm-12">
+                            <image-cropper
+                            [imageChangedEvent]="imageChangedEvent"
+                            [maintainAspectRatio]="true"
+                            [aspectRatio]="4 / 3"
+                            [resizeToWidth]="150"
+                            [resizeToHeight]="150"
+                            format="png"
+                            (imageCropped)="imageCropped($event)"
+                            (imageLoaded)="imageLoaded()"
+                            (cropperReady)="cropperReady()"
+                            (loadImageFailed)="loadImageFailed()"
+                            [roundCropper]="true"
+                        ></image-cropper>
+                       </div>
+                        <div class="col-sm-12">
+                                <img [src]="croppedImage" class="uploadimgsty" />
+                        </div>
+                    </div>
+        </div>
+
+        <div class="modal-footer">
+                <button type="button" (click)="saveCropImage()" pButton icon="pi pi-info-circle" label="Save" class="btn btn-primary btn-sm" data-dismiss="modal" ></button>
+          <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
+        </div>
+
+      </div>
+    </div>
+  </div> -->
+  <div class="">
+      <p-dialog header="" [(visible)]="display" [modal]="true" [responsive]="true" [style]="{width: '475px'}"  [closeOnEscape]="true"  (onHide)="onClose()">
+       
+          <input type="file" #uploader (change)="fileChangeEvent($event)" accept="image/x-png,image/gif,image/jpeg" class="" [hidden]=true />
+     
+          <button type="button" (click)="uploadfile()" pButton label="Edit Image" class="btn btn-primary float-right mt-2"  data-toggle="modal" data-target="#myModal" class="btn-small text-right float-right" ></button>                                
+
+        <div>
+                <div class="row inputset">
+                       <div class="col-sm-12">
+                            <image-cropper
+                            [imageChangedEvent]="imageChangedEvent"
+                            [maintainAspectRatio]="true"
+                            [aspectRatio]="4 / 3"
+                            [resizeToWidth]="150"
+                            [resizeToHeight]="150"
+                            format="png"
+                            (imageCropped)="imageCropped($event)"
+                            (imageLoaded)="imageLoaded()"
+                            (cropperReady)="cropperReady()"
+                            (loadImageFailed)="loadImageFailed()"
+                            [roundCropper]="true"
+                        ></image-cropper>
+                       </div>
+                        <div class="col-sm-12">
+                                <img [src]="croppedImage" class="uploadimgsty" />
+                        </div>
+                    </div>
+        </div>
+
+        <div>
+                <button type="button" (click)="saveCropImage()" pButton icon="pi pi-info-circle" label="Save" class="btn btn-primary btn-sm" data-dismiss="modal" ></button>
+          <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
+        </div>
+
+
+   </p-dialog>
