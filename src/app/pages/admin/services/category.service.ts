@@ -12,13 +12,26 @@ export class CategoryService {
 
   constructor(private http: HttpClient,public router:Router) { }
 
-  // public CategoryList(): Observable<any[]> {
-  //   return this.http.get<any[]>(
-  //     environment.API_URL + 'Category/listSameAndOtherBank/${bankId}`
-  //   );
-  // }
+  public CategoryList(): Observable<any[]> {
+    return this.http.get<any[]>(
+      environment.API_URL + 'Category/GetCategories'
+    );
+  }
 
   public Insertcategorylist(categorylist:category[]): Observable<category[]> {
     return this.http.post<category[]>(environment.API_URL + 'Category/InsertCategoryDetails', categorylist);
+  }
+
+  public UpdateCategory(categorylist:category[]): Observable<category[]> {
+    return this.http.post<category[]>(environment.API_URL + 'Category/UpdateCategorys', categorylist);
+  }
+
+
+  //banners
+
+  public GetAllBanners(): Observable<any[]> {
+    return this.http.get<any[]>(
+      environment.API_URL + 'Banner/GetBanners'
+    );
   }
 }

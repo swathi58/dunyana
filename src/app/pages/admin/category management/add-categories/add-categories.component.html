@@ -1,7 +1,6 @@
 
-<p-dialog header="Add Categories" [(visible)]="display" [modal]="true" [responsive]="true" [style]="{width: '800px'}"  [closeOnEscape]="true"  (onHide)="onClose()">
 <!-- <form #formRef="ngForm">
-  <div *ngFor="let category of categorieslist; let addindex = index">
+  <div>
       <div>
         <div class="row">
            <div class="col-lg-2">
@@ -21,20 +20,15 @@
       <br />
   </div>
   <button [disabled]="!formRef.form.valid" (click)="add()">Add input</button>
-</form>
-<br />
-<br />
-{{words2 | json}} -->
+</form> -->
 
-<form [formGroup]="categoryForm">
+
+<!-- <form [formGroup]="categoryForm">
 
    <div formArrayName="category">
      <div *ngFor="let item of category.controls; let pointIndex=index" [formGroupName]="pointIndex">
      <label>
          <div class="row">
-               <!-- <div class="col-lg-2">
-                  <input type="text" pInputText class="form-control" formControlName="Id" />
-               </div> -->
                <div class="col-lg-2">
                   <input type="text" pInputText class="form-control" formControlName="Name" placeholder="Name" />
                   <div *ngIf="item.controls.Name.dirty">
@@ -48,25 +42,153 @@
                   <input type="text" pInputText class="form-control"  formControlName="Priority" placeholder="Priority"  />
                </div>
                <div class="col-lg-2">
-                     <!-- <input type="text" pInputText class="form-control"  formControlName="IsActive" placeholder="Category Name"  /> -->
-
                      <p-dropdown [options]="categorystatus" formControlName="IsActive" [autoWidth]="false" placeholder="Select Status" [filter]="false">
                            <option *ngFor="let c of categorystatus" [ngValue]="c">{{c}}</option>
                      </p-dropdown>  
                </div>          
             </div>
      </label>
-     <!-- <button type="button" (click)="deleteSellingPoint(pointIndex)">Delete Selling Point</button> -->
      </div>
      <button type="button" (click)="addSellingPoint()" [disabled]="!categoryForm.valid">Add Selling Point</button>
    </div>
  
  </form>
- 
+  -->
  
  <!-- {{ this.categoryForm.value | json }} -->
-<p-footer>
-    <button type="button" pButton icon="pi pi-check" (click)="display=false" label="Yes"></button>
-    <button type="button" pButton icon="pi pi-close" (click)="display=false" label="No" class="ui-button-secondary"></button>
-</p-footer>
-</p-dialog>
+
+
+
+ <div class="changepassword">
+   <p-dialog header="Add Categories" [(visible)]="display" [modal]="true" [responsive]="true" [style]="{width: '475px'}"  [closeOnEscape]="true"  (onHide)="onClose()">
+
+       <form class="from_wrapper" [formGroup]="categoryForm" novalidate>
+           <div class="row inputset">
+               <h2 class="col-md-12 text-center">Add Category</h2>
+               <div class="col-sm-6"><label>Name</label><span class="required">*</span></div>
+               <div class="col-sm-6"><input id="input" type="text" formControlName="Name" (keyup)="formvalidate()"> </div>
+               <div class="col-sm-12">
+                   <div *ngIf="categoryForm.controls['Name'].errors && !categoryForm.controls['Name'].pristine" class="text-danger float-right error">
+                       <div [hidden]="!categoryForm.controls['Name'].errors.required">Category Name Required</div>
+                      
+                   </div>
+               </div>
+
+               <div class="col-sm-12">
+                   <hr>
+               </div>
+           </div>
+           <div class="row inputset">
+               <div class="col-sm-6"><label>Select Priority</label><span class="required">*</span></div>
+               <div class="col-sm-6">
+                  <p-dropdown [options]="categorypriority" formControlName="Priority" [autoWidth]="false" [filter]="false">          
+                     <option *ngFor="let c of categorypriority" [ngValue]="c">{{c}}</option>
+                 </p-dropdown>  
+               </div>
+               <div class="col-sm-12">
+               </div>
+               <div class="col-sm-12">
+                   <hr>
+               </div>
+           </div>
+           <div class="row inputset">
+               <div class="col-sm-6"><label>Select Status</label><span class="required">*</span></div>
+               <div class="col-sm-6">
+                     <p-dropdown [options]="categorystatus" formControlName="IsActive" [autoWidth]="false"  [filter]="false">          
+                           <option *ngFor="let c of categorystatus" [ngValue]="c">{{c}}</option>
+                       </p-dropdown>   
+               </div>
+               <div class="col-sm-12">
+               </div>
+               <div class="col-sm-12">
+                   <hr>
+               </div>
+           </div>
+
+           <div class="row inputset">
+               <div class="col-sm-6"><label>Upload Image</label></div>
+               <div class="col-sm-6">
+                   <input type="file" #uploader (change)="fileChangeEvent($event)" accept="image/x-png,image/gif,image/jpeg" class="" [hidden]=true />
+
+                   <button type="button" (click)="uploader.click()" pButton label="Upload Image" class="btn btn-primary float-right mt-2"  data-toggle="modal" data-target="#myModal" class="btn-small" ></button>                                
+
+               </div>
+               <div class="col-sm-12"><hr></div>
+             </div>
+
+             <div class="row inputset">
+                   <div class="col-sm-12">
+                           <img [src]="finalImage" class="uploadimgsty" />
+                   </div>
+          </div>
+
+           <div class="row justify-content-center mt-4">
+
+               <button class="line_btn sblue mr-4" [ngClass]="btndisable" (click)="AddCategory()">Add</button>
+               <button class="line_btn sblue" (click)="redirectcustomerlist()">Cancel</button>
+
+           </div>
+       </form>
+       <!-- <section class="changepassword text-center">
+
+           <div class="center col-md-3">
+               <h2>change password</h2>
+       
+               
+           </div>
+       </section>
+    
+        -->
+
+
+   </p-dialog>
+
+</div>
+
+
+      <div class="modal" id="myModal">
+        <div class="modal-dialog">
+          <div class="modal-content">         
+            <div class="modal-header">
+              <h4 class="modal-title">Profile Photo</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+        
+            <div class="modal-body">
+                    <div class="row inputset">
+
+                           <div class="col-sm-12">
+                                <image-cropper
+                                [imageChangedEvent]="imageChangedEvent"
+                                [maintainAspectRatio]="true"
+                                [aspectRatio]="4 / 3"
+                                [resizeToWidth]="150"
+                                [resizeToHeight]="150"
+                                format="png"
+                                (imageCropped)="imageCropped($event)"
+                                (imageLoaded)="imageLoaded()"
+                                (cropperReady)="cropperReady()"
+                                (loadImageFailed)="loadImageFailed()"
+                                [roundCropper]="true"
+                            ></image-cropper>
+                           </div>
+                            <div class="col-sm-12">
+                                    <img [src]="croppedImage" class="uploadimgsty" />
+                            </div>
+                        </div>
+            </div>
+
+            <div class="modal-footer">
+                    <button type="button" (click)="saveCropImage()" pButton icon="pi pi-info-circle" label="Save" class="btn btn-primary btn-sm" data-dismiss="modal" ></button>
+              <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="loading-indicator" *ngIf="ProgressSpinnerDlg">
+            <p-progressSpinner></p-progressSpinner>
+    </div>
+
+    <p-toast></p-toast>

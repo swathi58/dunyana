@@ -10,7 +10,8 @@ const routes: Routes = [
     children:[
       {
         path:"categorylist",
-        component:CategoryListComponent
+        component:CategoryListComponent,
+        
       },
       
     ]

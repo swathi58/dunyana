@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ImageCroppedEvent } from 'ngx-image-cropper';
 
 @Component({
   selector: 'app-category-details',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CategoryDetailsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private route:ActivatedRoute) {
+
+    console.log(this.route.snapshot.params['id']);
+   }
 
   ngOnInit() {
   }
-
+  
 }

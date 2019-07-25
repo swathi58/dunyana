@@ -42,7 +42,28 @@ profiledata=this.registerdto;
 
   ngOnInit() {
     //this.ProgressSpinnerDlg=true;
-   this.registerdto.Email=this.localStorage.get("Email");
+   this.GetProfiledata();
+  }
+  showDialog() {
+    this.display = true;
+}
+onDialogClose(event) {
+   this.display = event;
+}
+
+
+showEditDialog()
+{
+  this.editdialogdisplay=true;
+}
+
+onEditDialogClose(event) {
+  this.editdialogdisplay = event;
+  this.GetProfiledata();
+}
+GetProfiledata()
+{
+  this.registerdto.Email=this.localStorage.get("Email");
     this.userservice.GetProfileInformation(this.registerdto).subscribe(res=>{
       this.profiledata.Image='data:image/png;base64,'+res["image"];
       this.profiledata.FirstName=res["firstName"];
@@ -56,21 +77,6 @@ profiledata=this.registerdto;
       this.ProgressSpinnerDlg=false;
      // console.log(this.profiledata["image"]);
     });
-  }
-  showDialog() {
-    this.display = true;
-}
-onDialogClose(event) {
-   this.display = event;
-}
-
-showEditDialog()
-{
-  this.editdialogdisplay=true;
-}
-
-onEditDialogClose(event) {
-  this.editdialogdisplay = event;
 }
 
 }

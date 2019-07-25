@@ -37,6 +37,7 @@ import { ChangepasswordComponent } from './pages/customer/user management/change
 import { AdminModule } from './pages/admin/admin.module';
 import { AdminComponent } from './pages/admin/admin.component';
 
+
 registerLocaleData(localeESUS);
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -67,6 +68,7 @@ export function getAuthServiceConfigs() {
     EmailverificationSuccessComponent,
     PageNotFoundComponent,
     AdminComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -93,6 +95,7 @@ export function getAuthServiceConfigs() {
    
     //NguCarouselModule
   ],
+  
   // providers: [AuthService,MessageService,
   //   {provide:AuthServiceConfig, useFactory:getAuthServiceConfigs},LangShareService,],
 

@@ -4,6 +4,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { LangShareService } from 'src/app/shared/services/lang-share.service';
 import { TranslateService } from '@ngx-translate/core';
 import { LocalStorageService } from 'angular-web-storage';
+import { CategoryService } from 'src/app/pages/admin/services/category.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -20,45 +21,32 @@ export class HomeComponent implements OnInit {
   lang: string;
 
   name:any;
-
+  headercarouselItems:any[]=[];
+  
   @ViewChild('headerCarousel') headerCarousel: NguCarousel<any>;
  // @ViewChild('categoryCarousel') categoryCarousel: NguCarousel<any>;
 
   
-  carouselConfig: NguCarouselConfig = {
-    grid: { xs: 1, sm: 1, md: 1, lg: 1, all: 0 },
-    load: 1,
-    interval: {timing: 4000, initialDelay: 1000},
-    loop: true,
-    touch: true,
-    velocity: 0.2
+ carouselConfig: NguCarouselConfig = {
+  grid: { xs: 1, sm: 1, md: 1, lg: 1, all: 0 },
+  load: 1,
+  interval: {timing: 4000, initialDelay: 1000},
+  loop: true,
+  touch: true,
+  velocity: 0.2,
+  point: {
+    visible: true,
+    hideOnSingleSlide: true
   }
+}
 
   
-  // categorycarouselConfig: NguCarouselConfig = {
-  //   grid: { xs: 2, sm: 3, md: 5, lg: 5, all: 0 },
-  //   load: 5,
-  //   interval: {timing: 4000, initialDelay: 1000},
-  //   loop: true,
-  //   touch: true,
-  //   velocity: 0.2
-  // }
-
-  headercarouselItems = [{name:1,img:"assets/layout/images/hero_banner.jpg"}, {name:2,img:"assets/layout/images/hero_banner.jpg"},
-  {name:3,img:"assets/layout/images/hero_banner.jpg"},{name:4,img:"assets/layout/images/hero_banner.jpg"},
-  {name:5,img:"assets/layout/images/hero_banner.jpg"},{name:6,img:"assets/layout/images/hero_banner.jpg"}];
-
-
-  // categorycarouselItems = [{name:1,img:"assets/layout/images/cat_img_fash.jpg"}, {name:2,img:"assets/layout/images/cat_img_shoes.jpg"},
-  // {name:3,img:"assets/layout/images/cat_img_sports.jpg"},{name:4,img:"assets/layout/images/cat_img_beauty.jpg"},
-  // {name:5,img:"assets/layout/images/cat_img_virtual.jpg"},{name:6,img:"assets/layout/images/cat_img_fash.jpg"},
-  // {name:7,img:"assets/layout/images/cat_img_shoes.jpg"},{name:8,img:"assets/layout/images/cat_img_sports.jpg"},
-  // {name:9,img:"assets/layout/images/cat_img_beauty.jpg"}];
 
 
   constructor(private cdr: ChangeDetectorRef,private sanitizer: DomSanitizer,
     public langShare: LangShareService,
-    public translate: TranslateService,private localStorage: LocalStorageService) { 
+    public translate: TranslateService,private localStorage: LocalStorageService,
+    private catgservice:CategoryService) { 
     //this.carouselTileItems = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
   }
 
@@ -74,7 +62,7 @@ export class HomeComponent implements OnInit {
     this.translation();
 
   this.name= this.localStorage.get('username');
-
+  this.BannersList();
   }
   translation() {
     this.langShare.translate$.subscribe(translate => {
@@ -100,6 +88,19 @@ export class HomeComponent implements OnInit {
   // {
   //   this.categoryCarousel.moveTo(slide, !this.withAnim);
   // }
+ BannersList()
+ {
+  this.catgservice.GetAllBanners().subscribe(res=>{
+    res.forEach(item=>{
+      item["image"]='data:image/png;base64,'+ item["image"];
+      this.headercarouselItems.push(item);
+    });
+    console.log(this.headercarouselItems);
+  });
 
+  //   this.headercarouselItems = [{name:1,image:"assets/layout/images/hero_banner.jpg"}, {name:2,image:"assets/layout/images/hero_banner.jpg"},
+  // {name:3,image:"assets/layout/images/hero_banner.jpg"},{name:4,image:"assets/layout/images/hero_banner.jpg"},
+  // {name:5,image:"assets/layout/images/hero_banner.jpg"},{name:6,image:"assets/layout/images/hero_banner.jpg"}];
+ }
 
 }
