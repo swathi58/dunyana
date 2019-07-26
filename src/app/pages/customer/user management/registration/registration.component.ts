@@ -22,7 +22,7 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
   styleUrls: ['./registration.component.scss']
 })
 export class RegistrationComponent implements OnInit {
-
+  lang = 'en';
   headerlogo: string = "assets/layout/images/glogo.png";
   checkinfo: string = "assets/layout/images/svg/success.svg";
   ProgressSpinnerDlg: boolean = false;
@@ -85,7 +85,13 @@ export class RegistrationComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    if(this.localStorage.get('lang') != null){
+      this.lang = this.localStorage.get('lang'); 
+      this.translate.use(this.lang); 
+    }
+    else {
+      this.translate.use(this.lang); 
+    }
     this.registrationForm = this.formBuilder.group({
       //  FirstregistrationForm:this.formBuilder.array([this.BasicDetails()]),
       firstname: ['', [Validators.required,Validators.pattern('^[^-\s][a-zA-Z0-9_\s-]+$')]],

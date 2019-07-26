@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
   @ViewChild('closeAddExpenseModal') closeAddExpenseModal: ElementRef;
   @ViewChild('Ferror') Ferror: ElementRef;
   public show = false;
-
+  lang = 'en';
 userdata:any;
 
 headerlogo:string="assets/layout/images/glogo.png";
@@ -89,6 +89,14 @@ FEmail:['', [Validators.required,Validators.pattern('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.
 });
 
 this.ProgressSpinnerDlg=false;
+
+if(this.localStorage.get('lang') != null){
+  this.lang = this.localStorage.get('lang'); 
+  this.translate.use(this.lang); 
+}
+else {
+  this.translate.use(this.lang); 
+}
 // ('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{1,}[.]{1}[a-zA-Z]{2,}')
 //[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-zA-Z]{2,}$'
 }

@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./shopping.component.scss']
 })
 export class ShoppingComponent implements OnInit {
-
+  carouselConfig: any;
+  headercarouselItems: any;
   constructor() { }
 
   ngOnInit() {

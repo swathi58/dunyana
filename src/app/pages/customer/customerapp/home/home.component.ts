@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
   slideNo = 0;
   withAnim = true;
   resetAnim = true;
-  parentMessage = "Shop By Category";
+  parentMessage = "Shopbycategory";
   translationMessages: any;
   lang: string;
 

@@ -165,7 +165,6 @@
           <div class="col-sm-12">
             <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="4 / 3"
               [resizeToWidth]="150" [resizeToHeight]="150" format="png" (imageCropped)="imageCropped($event)"
-              (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()"
               [roundCropper]="true"></image-cropper>
           </div>
           <div class="col-sm-12">

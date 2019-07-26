@@ -17,7 +17,10 @@ export class FooterComponent implements OnInit {
   ngOnInit() {
     if(this.localStorage.get('lang') != null){
       this.lang = this.localStorage.get('lang'); 
-      
+      this.translate.use(this.lang); 
+    }
+    else {
+      this.translate.use(this.lang); 
     }
   }
   showDialog() {
