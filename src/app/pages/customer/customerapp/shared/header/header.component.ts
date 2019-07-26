@@ -13,7 +13,7 @@ export class HeaderComponent implements OnInit {
 
   translationMessages: any;
   lang = 'en';
-  currentlang="English";
+  currentlang="";
   showDiv="";
   showlngDiv="";
   useremail:string;
@@ -34,32 +34,35 @@ export class HeaderComponent implements OnInit {
     ) { }
 
   ngOnInit() {
+    
     this.logoimg=this.headerimg;
     /* this.translate.setDefaultLang('en');
     this.translate.use('en'); */
 
     if(this.localStorage.get('lang') != null){
-      // this.lang = this.localStorage.get('lang');
-      // this.translate.use(this.lang); 
-      // console.log(this.lang);
-      // if(this.lang=="en")
-      // {
-      //   // this.logoimg=this.headerimg;
-      //    this.currentlang="English";
-      //    this.englicon=true;
+     
+      this.lang = this.localStorage.get('lang');
+      this.translate.use(this.lang); 
+     
+      if(this.lang=="en")
+      {
+        // this.logoimg=this.headerimg;
+         this.currentlang="English";
+         this.englicon=true;
   
-      // }
-      // else if(this.lang=="ar")
-      // {
-      //  // this.logoimg=this.header_ar_img;
-      //   this.currentlang="العربية";
-      // }
+      }
+      else if(this.lang=="ar")
+      {
+       // this.logoimg=this.header_ar_img;
+        this.currentlang="العربية";
+      }
     }
     else
     {
+     
       this.currentlang="English";
       this.englicon=true;
-      this.toggleLang("en");
+     // this.toggleLang("en");
     }
     this.langShare.setTranslate(this.translate);
     this.translation();
@@ -73,21 +76,23 @@ export class HeaderComponent implements OnInit {
 
   }
   toggleLang(lang) {
-    console.log(lang);
+   
     this.lang = lang;
     this.translate.use(lang);
     this.langShare.setTranslate(this.translate);
     if(lang=="en")
     {
+      
       this.logoimg=this.header_ar_img;
-      this.currentlang="العربية"; 
+      this.currentlang="English"; 
       this.englicon=true;    
     }
     else if(lang=="ar")
     {
+     
       this.logoimg=this.headerimg;
       this.englicon=false;
-       this.currentlang="English";
+       this.currentlang="العربية";
     }
 
     // this.showlngDiv="";

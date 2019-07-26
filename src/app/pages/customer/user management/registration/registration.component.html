@@ -1,5 +1,5 @@
 <section class="signin">
-    <p-toast [showTransitionOptions]="'0ms'" [hideTransitionOptions]="'3000ms'"></p-toast>
+    <p-toast [showTransitionOptions]="'0ms'" [hideTransitionOptions]="'3000ms'" position="bottom-right"></p-toast>
     <header class="trans">
         <div class="main-header">
             <div class="container">
@@ -45,6 +45,7 @@
                                                 <div class="col-sm-12">
                                                     <div *ngIf="registrationForm.controls['firstname'].errors && !registrationForm.controls['firstname'].pristine" class="text-danger error">
                                                         <p *ngIf="registrationForm.get('firstname').hasError('required')">FirstName Required</p>
+                                                        <div [hidden]="!registrationForm.controls['firstname'].errors?.pattern">FirstName</div>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-12">

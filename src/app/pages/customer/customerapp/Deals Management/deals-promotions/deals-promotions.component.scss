@@ -108,3 +108,66 @@ section.brands {
 a {
     cursor: pointer;
 }
+
+
+.pagination {
+    margin: 60px 0 100px;
+}
+
+.pagination>li>a {
+    color: #00c0f3;
+    background-color: #fff;
+    border: none;
+    font-size: 26pt;
+}
+
+.pagination>li.active>a {
+    color: #00c0f3;
+    font-family: 'teshrin_arltmedium', sans-serif;
+}
+
+.pagination>li:first-child>a,
+.pagination>li:last-child>a {
+    background-color: #fff;
+    border: none;
+    visibility: hidden;
+    display: none;
+}
+
+.pagination>li:nth-child(2)>a,
+.pagination>li:nth-last-child(2)>a {
+    background-color: #fff;
+    border: none;
+    visibility: hidden;
+}
+
+.pagination>li:nth-child(2)>a:after {
+    content: "\003e";
+    color: #00c0f3;
+    font-size: 55pt;
+    visibility: visible;
+    display: block;
+    position: absolute;
+    font-weight: bold;
+    top: -33pt;
+    right: 25pt;
+    transform: rotate(180deg);
+}
+
+.pagination>li:nth-last-child(2)>a:after {
+    content: "\003e";
+    color: #00c0f3;
+    font-size: 55pt;
+    visibility: visible;
+    display: block;
+    position: absolute;
+    font-weight: bold;
+    top: -10pt;
+    left: 20pt;
+}
+
+.pagination>li.disabled>a:after {
+    color: #cacdd2;
+}
+
+
