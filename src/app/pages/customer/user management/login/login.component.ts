@@ -35,6 +35,7 @@ export class LoginComponent implements OnInit {
 
   headerlogo: string = "assets/layout/images/glogo.png";
   //default Variable display='none'; 
+  lang = 'en';
   userPostData: User = {
     Email: "",
     FirstName: "",
@@ -78,7 +79,13 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    if (this.localStorage.get('lang') != null) {
+      this.lang = this.localStorage.get('lang');
+      this.translate.use(this.lang);
+    }
+    else {
+      this.translate.use(this.lang);
+    }
     this.loginForm = this.formBuilder.group({
       lEmail: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{1,}[.]{1}[a-zA-Z]{2,}')]],
       lPassword: ['', Validators.compose([Validators.required, Validators.minLength(6)])]
