@@ -36,38 +36,6 @@
                                     <li data-target="#demo" data-slide-to="5"></li>
                                 </ul>
                                 <div class="carousel-inner">
-
-                                 <form class="from_wrapper" [formGroup]="registrationForm" novalidate #f="ngForm">
-                                                    <div class="carousel-item" [ngClass]="activetab">               
-                                                        <p class="para">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent interdum seconds. adipiscing elit. Praesent interdum</p>
-                                                        <div class="row inputset">
-                                                            <div class="col-sm-5"><label>First Name</label><span class="text-danger">*</span></div>
-                                                            <div class="col-sm-7"><input type="text" placeholder="Ali" pInputText formControlName="firstname" [(ngModel)]="registerdto.FirstName" (keyup)="basicformvalidate()" class="w-100"> </div>
-                                                            <div class="col-sm-12">
-                                                                <div *ngIf="registrationForm.controls['firstname'].errors && !registrationForm.controls['firstname'].pristine" class="text-danger error">
-                                                                    <p *ngIf="registrationForm.get('firstname').hasError('required')">FirstName Required</p>
-                                                                    <div [hidden]="!registrationForm.controls['firstname'].errors?.pattern">FirstName</div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-sm-12">
-                                                                <hr>
-                                                            </div>
-                                                        </div>
-                
-                                                        <div class="row inputset">
-                                                            <div class="col-sm-5"><label>Last  Name</label><span class="text-danger">*</span></div>
-                                                            <div class="col-sm-7"><input type="text" placeholder="Raza" formControlName="lastname" [(ngModel)]="registerdto.LastName" (keyup)="basicformvalidate()" class="w-100" /></div>
-                                                            <div class="col-sm-12">
-                                                                <div *ngIf="registrationForm.controls['lastname'].errors && !registrationForm.controls['lastname'].pristine" class="text-danger error">
-                                                                    <div [hidden]="!registrationForm.controls['lastname'].errors.required">LastName Required</div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-sm-12">
-                                                                <hr>
-                                                            </div>
-                                                        </div>
-                
-=======
                                     <form class="from_wrapper" [formGroup]="registrationForm" novalidate #f="ngForm">
                                         <div class="carousel-item" [ngClass]="activetab">
                                             <p class="para btm" [ngClass]="para">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent interdum seconds. adipiscing elit. Praesent interdum</p>
@@ -77,7 +45,6 @@
                                                 <div class="col-sm-12">
                                                     <div *ngIf="registrationForm.controls['firstname'].errors && !registrationForm.controls['firstname'].pristine" class="text-danger error">
                                                         <p *ngIf="registrationForm.get('firstname').hasError('required')">FirstName Required</p>
->>>>>>> analysis_prahlad
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-12">
@@ -221,16 +188,7 @@
                                                 <p>Redirecting...</p>
                                             </div>
                                         </div>
-<<<<<<< HEAD
-                                        <div class="msg">
-                                               <span class="errormsg" [hidden]="iserror">{{errormsg}}</span>
-                                               <span class="succsmsg" [hidden]="issucss">{{succsmsg}}</span>
-                                        </div>
-                                    </div>
-                                </form>
-=======
                                     </form>
-
 
                                 </div>
                                 <!-- 

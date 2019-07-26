@@ -52,7 +52,7 @@ export class UsermanagementService {
   }
 
   public UpdateCustomerProfileData(profiledata: RegistrationDto): Observable<RegistrationDto> {
-    return this.http.post<RegistrationDto>(environment.API_URL + 'Customer/UpdateRegistrationDetails', profiledata);
+    return this.http.post<RegistrationDto>(environment.API_URL + 'Customer/UpdateCustomer', profiledata);
   }
 
   public GetCountriesList(): Observable<any> {
