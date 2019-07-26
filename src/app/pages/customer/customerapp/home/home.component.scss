@@ -68,6 +68,56 @@
     margin-right: -21px;
 }
 
+#container {
+    width: 100%;
+    margin: 5em auto;
+    padding: 0;
+    background: #fff;
+}
+
+.items {
+    max-width: 300px;
+    height: 300px;
+    background: #ECECEC;
+}
+
+#left,
+#right {
+    margin: 30px;
+}
+
+section.home_banner {
+    .item {
+        .text_container {
+            .line_btn {
+                background-image: url("../../../../../assets/layout/images/line_blue_sprite.png");
+                background-position: center 28px;
+            }
+            &:hover {
+                .line_btn {
+                    background-position: center -36px;
+                    &.blue {
+                        color: #00c0f3;
+                    }
+                }
+            }
+        }
+    }
+}
+
+section.fbConnect {
+    .fbtxt {
+        &:hover {
+            a {
+                color: #002e8a;
+                background-image: url("../../../../../assets/layout/images/btn_line_blue.png");
+                background-repeat: no-repeat;
+                background-position: 0px 23px;
+            }
+        }
+    }
+}
+
 @media screen and (max-width: 1024px) {
     section.offerbadge {
         .ob:after {
@@ -210,22 +260,4 @@
             bottom: 0px;
         }
     }
-}
-
-#container {
-    width: 100%;
-    margin: 5em auto;
-    padding: 0;
-    background: #fff;
-}
-
-.items {
-    max-width: 300px;
-    height: 300px;
-    background: #ECECEC;
-}
-
-#left,
-#right {
-    margin: 30px;
 }

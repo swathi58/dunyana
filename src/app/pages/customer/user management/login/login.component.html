@@ -1,75 +1,71 @@
 <section class="signin">
-    <h5> <p-toast [showTransitionOptions]="'0ms'" [hideTransitionOptions]="'2500ms'"></p-toast></h5>
+    <h5>
+        <p-toast [showTransitionOptions]="'0ms'" [hideTransitionOptions]="'2500ms'"></p-toast>
+    </h5>
     <header class="trans">
-  
-      <div class="main-header">
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-6">
-                <a [routerLink]="['/customer/home']" class="site-logo"><img [src]="translate.store.currentLang =='en' ? 'assets/layout/images/header_logo.png':'assets/layout/images/header_logo_ar.png'" alt="dunyana" /></a>
+
+        <div class="main-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <a [routerLink]="['/customer/home']" class="site-logo"><img [src]="translate.store.currentLang =='en' ? 'assets/layout/images/glogo.png':'assets/layout/images/glogo.png'" alt="dunyana" /></a>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </header>
     <main>
-      <section class="signin_wrap">
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-4 ">
-              <div class="si">
-                <h4>Sign In<span [hidden]="show" class="ertxt" #div></span></h4>
-  
-                <form class="from_wrapper" [formGroup]="loginForm" (ngSubmit)="OnLogin()">
-                  <div class="row inputset">
-                    <div class="col-sm-4"><label>Email</label><span class="required">*</span></div>
-                    <div class="col-sm-8"><input type="text" placeholder="email@domain.com" formControlName="lEmail"
-                        id="lEmail" (keyup)="onKeyPress($event);validateform()" />
-  
-                      <div class="login-error"
-                        *ngIf="loginForm.controls['lEmail'].hasError('required') && loginForm.controls['lEmail'].touched">
-                        Email is required</div>
-                      <div class="login-error" [hidden]="!loginForm.controls['lEmail'].errors?.pattern">Enter valid email
-                        address</div>
-  
-  
-                    </div>
-                    <div class="col-sm-12">
-                      <hr>
-                    </div>
-                  </div>
-                  <div class="row inputset">
-                    <div class="col-sm-4"><label>Password</label><span class="required">*</span></div>
-                    <div class="col-sm-8">
-                      <input type="password" class="form-control" formControlName="lPassword" id="lPassword"
-                        placeholder="********" (keyup)="onKeyPress($event);validateform()">
-                      <div class="login-error"
-                        *ngIf="loginForm.controls['lPassword'].hasError('required') && loginForm.controls['lPassword'].touched">
-                        Password is required</div>
-                      <div class="login-error" [hidden]="!loginForm.controls['lPassword'].errors?.minlength">Password Must
-                        be More Than 6</div>
-  
-                    </div>
-                    <div class="col-sm-12">
-                      <hr>
-                    </div>
-                  </div>
-  
-                  <div class="row acset">
-                    <div class="col-sm-4"></div>
-                    <div class="col-sm-8 right-align"><a href="#" data-toggle="modal" data-target="#bootstrapModel">Forgot
+        <section class="signin_wrap">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4 ">
+                        <div class="si">
+                            <h4>Sign In<span [hidden]="show" class="ertxt" #div></span></h4>
+
+                            <form class="from_wrapper" [formGroup]="loginForm" (ngSubmit)="OnLogin()">
+                                <div class="row inputset">
+                                    <div class="col-sm-4"><label>Email</label><span class="required">*</span></div>
+                                    <div class="col-sm-8"><input type="text" placeholder="email@domain.com" formControlName="lEmail" id="lEmail" (keyup)="onKeyPress($event);validateform()" />
+
+                                        <div class="login-error" *ngIf="loginForm.controls['lEmail'].hasError('required') && loginForm.controls['lEmail'].touched">
+                                            Email is required</div>
+                                        <div class="login-error" [hidden]="!loginForm.controls['lEmail'].errors?.pattern">Enter valid email address
+                                        </div>
+
+
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <hr>
+                                    </div>
+                                </div>
+                                <div class="row inputset">
+                                    <div class="col-sm-4"><label>Password</label><span class="required">*</span></div>
+                                    <div class="col-sm-8">
+                                        <input type="password" class="form-control" formControlName="lPassword" id="lPassword" placeholder="********" (keyup)="onKeyPress($event);validateform()">
+                                        <div class="login-error" *ngIf="loginForm.controls['lPassword'].hasError('required') && loginForm.controls['lPassword'].touched">
+                                            Password is required</div>
+                                        <div class="login-error" [hidden]="!loginForm.controls['lPassword'].errors?.minlength">Password Must be More Than 6</div>
+
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <hr>
+                                    </div>
+                                </div>
+
+                                <div class="row acset">
+                                    <div class="col-sm-4"></div>
+                                    <div class="col-sm-8 right-align"><a href="#" data-toggle="modal" data-target="#bootstrapModel">Forgot
                         your password?</a></div>
-                  </div>
-  
-                  <div class="row btset">
-                    <div class="col-sm-12 col-xl-6">
-  
-                      <!-- <button type="submit" [disabled]="loginForm.invalid" class="line_btn sblue" [ngClass]="btndisable"
+                                </div>
+
+                                <div class="row btset">
+                                    <div class="col-sm-12 col-xl-6">
+
+                                        <!-- <button type="submit" [disabled]="loginForm.invalid" class="line_btn sblue" [ngClass]="btndisable"
     >Sign in</button> -->
-                      <p-button class="line_btn sblue" [ngClass]="btndisable" label="Sign in"
-                        [disabled]="loginForm.invalid"></p-button>
-                    </div>
-                   <!--  <div class="col-sm-12 col-xl-6" style="visibility: hidden">
+                                        <p-button class="line_btn sblue" [ngClass]="btndisable" label="Sign in" [disabled]="loginForm.invalid"></p-button>
+                                    </div>
+                                    <!--  <div class="col-sm-12 col-xl-6" style="visibility: hidden">
                       Sign in with
   
   
@@ -77,133 +73,127 @@
                       <a (click)="socialSignIn('google')"><i class="fa fa-google"></i></a>
                     </div>
    -->
-                  </div>
-  
-                  <!-- <div *ngIf="invalidLogin" class="error">
+                                </div>
+
+                                <!-- <div *ngIf="invalidLogin" class="error">
     <div>Invalid credentials.</div>
     </div> -->
-  
-  
-                  <div class="row ">
-                    <div class="col-sm-12">
-                      <p class="terms">By continuing, you agree to our <a href="javascript:void(0)"
-                          (click)="showDialog()">Terms &
+
+
+                                <div class="row ">
+                                    <div class="col-sm-12">
+                                        <p class="terms">By continuing, you agree to our <a href="javascript:void(0)" (click)="showDialog()">Terms &
                           Conditions</a>.</p>
+                                    </div>
+                                </div>
+                                <div class="row ftset">
+                                    <div class="col-sm-12">
+                                        <p>New to Dunyana?</p>
+                                        <a [routerLink]="['/signup']" class="line_btn lblack">Create your account</a>
+                                    </div>
+                                </div>
+
+                            </form>
+
+
+
+
+
+                        </div>
                     </div>
-                  </div>
-                  <div class="row ftset">
-                    <div class="col-sm-12">
-                      <p>New to Dunyana?</p>
-                      <a [routerLink]="['/signup']" class="line_btn lblack">Create your account</a>
-                    </div>
-                  </div>
-  
-                </form>
-  
-  
-  
-  
-  
-              </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </section>
+        </section>
     </main>
     <footer class="trans">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <p>Photo by Jolly Chic.<strong> Shop this look</strong>.</p>
-          </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <p>Photo by Jolly Chic.<strong> Shop this look</strong>.</p>
+                </div>
+            </div>
         </div>
-      </div>
-  
+
     </footer>
-  
-  </section>
-  
-  
-  
-  
-                <!-- Modal section --> 
-  
-  
-                <div id="bootstrapModel" class="modal fade" role="dialog">
-                    <!-- <p>Password Details Sent To Registred Emailid</p> -->
-                  <div class="loading" [hidden]="forgotspinner"> </div>
-                  <!-- <div class="spinner-border" [hidden]="forgotspinner"></div> -->
-                  <div class="modal-dialog">
-  
-  
-                    <!-- Modal content-->
-  
-  
-                    <div class="modal-content">
-  
-  
-  
-                      <!-- model body section -->
-  
-  
-                      <div class="modal-body">
-  
-                        <button type="button" class="close" data-dismiss="modal" #closeAddExpenseModal>&times;</button>
-  
-                        <section class="forgotpassword text-center">
-  
-                          <div class="center">
-                            <h2>Forgot password</h2>
-  
-  
-                            <form class="from_wrapper text-left" [formGroup]="ForgetForm" (ngSubmit)="Forgot()">
-  
-                              <div class="row inputset">
+
+</section>
+
+
+
+
+<!-- Modal section -->
+
+
+<div id="bootstrapModel" class="modal fade" role="dialog">
+    <!-- <p>Password Details Sent To Registred Emailid</p> -->
+    <div class="loading" [hidden]="forgotspinner"> </div>
+    <!-- <div class="spinner-border" [hidden]="forgotspinner"></div> -->
+    <div class="modal-dialog">
+
+
+        <!-- Modal content-->
+
+
+        <div class="modal-content">
+
+
+
+            <!-- model body section -->
+
+
+            <div class="modal-body">
+
+                <button type="button" class="close" data-dismiss="modal" #closeAddExpenseModal>&times;</button>
+
+                <section class="forgotpassword text-center">
+
+                    <div class="center">
+                        <h2>Forgot password</h2>
+
+
+                        <form class="from_wrapper text-left" [formGroup]="ForgetForm" (ngSubmit)="Forgot()">
+
+                            <div class="row inputset">
                                 <div class="col-sm-4"><label>Email</label><span class="required">*</span></div>
-                                <div class="col-sm-8"><input type="text" formControlName="FEmail"
-                                    (keyup)="onKeyPress($event);validateForgetform()" placeholder="email@domain.com">
-  
-                                  <div class="login-error"
-                                    *ngIf="ForgetForm.controls['FEmail'].hasError('required') && ForgetForm.controls['FEmail'].touched">
-                                    Email is required</div>
-                                  <div class="login-error" [hidden]="!ForgetForm.controls['FEmail'].errors?.pattern">Enter
-                                    valid email address</div>
-                                  <!-- <div class="alert alert-danger" [hidden]="!loginForm.controls['lEmail'].errors?.pattern">Email must be a valid email address</div> -->
-  
+                                <div class="col-sm-8"><input type="text" formControlName="FEmail" (keyup)="onKeyPress($event);validateForgetform()" placeholder="email@domain.com">
+
+                                    <div class="login-error" *ngIf="ForgetForm.controls['FEmail'].hasError('required') && ForgetForm.controls['FEmail'].touched">
+                                        Email is required</div>
+                                    <div class="login-error" [hidden]="!ForgetForm.controls['FEmail'].errors?.pattern">Enter valid email address</div>
+                                    <!-- <div class="alert alert-danger" [hidden]="!loginForm.controls['lEmail'].errors?.pattern">Email must be a valid email address</div> -->
+
                                 </div>
-  
+
                                 <div class="col-sm-12 pl-5">
-                                  <hr>
-                                  <div [hidden]="show" class="mt-3  ertxt-left" #Ferror></div>
+                                    <hr>
+                                    <div [hidden]="show" class="mt-3  ertxt-left" #Ferror></div>
                                 </div>
-                              </div>
-  
-                              <div class="row justify-content-center mt-3">
+                            </div>
+
+                            <div class="row justify-content-center mt-3">
                                 <!-- 
     <a [routerLink]="['/account']" class="line_btn sblue mr-4">Cancel</a> -->
-  
+
                                 <!-- <a [routerLink]="['/account']" class="line_btn sblue">Submit</a> -->
-                                <button type="submit" class="line_btn sblue" [ngClass]="btnfdisable"
-                                  [disabled]="ForgetForm.invalid">Submit</button>
-  
+                                <button type="submit" class="line_btn sblue" [ngClass]="btnfdisable" [disabled]="ForgetForm.invalid">Submit</button>
+
                                 <!-- <p-button class="line_btn sblue" [ngClass]="btnfdisable"  [disabled]="ForgetForm.invalid">Submit</p-button>
     <p-button [routerLink]="['/customer/home']" class="line_btn sblue mr-4" (click)="cancel()">Cancel</p-button> -->
-                                <button type="button" [routerLink]="['/signin']" class="line_btn sblue mr-4"
-                                  (click)="cancel()">Cancel</button>
-  
-                              </div>
-  
-                            </form>
-  
-                          </div>
-  
-                        </section>
-                      </div>
-  
+                                <button type="button" [routerLink]="['/signin']" class="line_btn sblue mr-4" (click)="cancel()">Cancel</button>
+
+                            </div>
+
+                        </form>
+
                     </div>
-  
-                  </div>
-  
-                </div>
-  
-  <app-terms-conditions [display]="display" (displayChange)="onDialogClose($event)"></app-terms-conditions>
+
+                </section>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<app-terms-conditions [display]="display" (displayChange)="onDialogClose($event)"></app-terms-conditions>
