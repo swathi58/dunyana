@@ -22,8 +22,9 @@ import { SharedModule } from '../../../../shared/shared.module';
   styleUrls: ['./forgotpassword.component.scss']
 })
 export class ForgotpasswordComponent implements OnInit {
-  lang = 'en';
+
   headerlogo: string = "assets/layout/images/glogo.png";
+  checkinfo: string = "assets/layout/images/svg/success.svg";
   ProgressSpinnerDlg: boolean = false;
   @ViewChild('div') div: ElementRef;
   public show = false;
@@ -34,7 +35,7 @@ export class ForgotpasswordComponent implements OnInit {
   default: string = 'United States';
   btndisable: string = "disable";
   currentIndex: string;
-  otpnumb:string="";
+  hidenextbtn: boolean = false;
   flag:boolean=false;
 
   activetab: string = "active";
@@ -90,13 +91,7 @@ export class ForgotpasswordComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.localStorage.get('lang') != null) {
-      this.lang = this.localStorage.get('lang');
-      this.translate.use(this.lang);
-    }
-    else {
-      this.translate.use(this.lang);
-    }
+
     this.forgotform = this.formBuilder.group({
       // FirstregistrationForm:this.formBuilder.array([this.BasicDetails()]),    
       emailid: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}')]],    
@@ -174,32 +169,33 @@ export class ForgotpasswordComponent implements OnInit {
 
   
   otpformvalidate() {
+    debugger
     console.log(this.otp);
-  
+    this.show = true;
     if(this.forgotform.value["otp"]!=null){
       
      
       this.EmailOTP=this.forgotform.value["otp"];
       
       if(this.EmailOTP.toString().length==6){
-        this.otpnumb="numb";
+
       if(this.EmailOTP==this.registerdto.OTP.toString()){
         
       this.btndisable = "line_btn sblue";
       this.headertext= "Welcome Back";
+      this.submitbtntext="Submit";
     }
     else{
       this.btndisable = "disable";
       
-      // this.show = false;
-      // this.div.nativeElement.innerHTML = "OTP Mismatched";
-      this.messageService.add({severity:'error', summary:'Error Message', detail:"OTP Mismatched"});         
+       this.show = false;
+       this.div.nativeElement.innerHTML = "OTP Mismatched";
+     // this.messageService.add({severity:'error', summary:'Error Message', detail:"OTP Mismatched"});         
      
     }
   }
-  else
-  {
-    this.otpnumb=""
+  else{
+    this.btndisable="disable";
   }
 }
 
@@ -223,13 +219,14 @@ export class ForgotpasswordComponent implements OnInit {
     
     if (this.registerdto.Email.length > 0 ) {
       
-      if (this.registerdto.Email.match('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}')) {
+      if (this.registerdto.Email.match('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{1,}[.]{1}[a-zA-Z]{2,}')) {
         
         this.userservice.EmailVerification(this.registerdto).subscribe(res => {
           
-          
+          debugger
           if(res["result"]=="Email is valid")
           {
+            debugger
             this.btndisable="disable";
             //this.messageService.add({ severity:'error', summary:'Error Message', detail:"Invalid Email"});
             this.show = false;
@@ -238,6 +235,7 @@ export class ForgotpasswordComponent implements OnInit {
           }
           else{
           this.btndisable="line_btn sblue";
+          this.show = true;
           }
         },
         errormsg => {
@@ -251,7 +249,7 @@ export class ForgotpasswordComponent implements OnInit {
 
   }
 
-  addcustomer() {
+  submitforgotdata() {
   
     const slides = document.getElementsByTagName('li');
     let i = 0;
@@ -272,14 +270,17 @@ export class ForgotpasswordComponent implements OnInit {
 
             //this.otpformvalidate();
             this.btndisable="disable";
-            this.timerbtndisplay = true;
+            this.submitbtntext="Confirm";
           }
           else if (Number.parseInt(this.currentIndex) == 2) {
             
             //this.pwdauthdatavalidate();
-            this.submitbtntext = "Verify";
+            debugger
+            this.submitbtntext = "Submit";
            this.headertext="welcome back";
-           
+           this.btndisable="none";
+           this.show=true;
+           this.hidenextbtn = true;
             this.updatenewpwd();
           }
         
@@ -345,6 +346,7 @@ export class ForgotpasswordComponent implements OnInit {
     this.userservice.sendingotp(this.registerdto).subscribe(res => {
       this.ProgressSpinnerDlg=false;
       this.btndisable="disable";
+      this.submitbtntext="Confirm";
       debugger
       //this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
       this.show = false;
@@ -366,10 +368,11 @@ export class ForgotpasswordComponent implements OnInit {
   updatenewpwd(){
 
     this.userservice.ChangePassword(this.registerdto).subscribe(res => {  
-      this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
-      
-     
+     // this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
+     //this.showTermsDialog();
+     this.div.nativeElement.innerHTML = res["result"];
       setTimeout(() => {
+        //this.ontemsDialogClose(4);
         this.router.navigateByUrl('/signin');
       }, 1000);
    
@@ -382,6 +385,8 @@ export class ForgotpasswordComponent implements OnInit {
         this.div.nativeElement.innerHTML = errormsg["result"];
       });
   }
+
+  
   
 
 }
