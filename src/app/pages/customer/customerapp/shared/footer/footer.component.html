@@ -1,44 +1,45 @@
 <footer>
-  <div class="container">
-      <div class="row">
-          <div class="col-md-7 comp_info">
-              <a [routerLink]="['/customer/home']"><img [src]="translate.store.currentLang =='en' ? 'assets/layout/images/header_logo.png':'assets/layout/images/header_logo_ar.png'" alt="dunyana" /></a>
-              <p>+966 345 678 903<br> <a href="mailto:info@dunyana.com">info@dunyana.com</a></p>
-              <ul class="social">
-                  <li><a href="#"><i class="icomoon icon-fb_logo"></i></a></li>
-                  <li><a href="#"><i class="icomoon icon-twitter_logo"></i></a></li>
-                  <li><a href="#"><i class="icomoon icon-insta_logo"></i></a></li>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7 comp_info">
+                <a [routerLink]="['/customer/home']"><img [src]="translate.store.currentLang =='en' ? 'assets/layout/images/footer_logo.png':'assets/layout/images/footer_logo_ar.png'" alt="dunyana" /></a>
+                <p>+966 345 678 903<br> <a href="mailto:info@dunyana.com">info@dunyana.com</a></p>
+                <ul class="social">
+                    <li><a href="#"><i class="icomoon icon-fb_logo"></i></a></li>
+                    <li><a href="#"><i class="icomoon icon-twitter_logo"></i></a></li>
+                    <li><a href="#"><i class="icomoon icon-insta_logo"></i></a></li>
 
-              </ul>
-          </div>
-          <div class="col-md-5 ftlinks">
-              <ul>
-                  <li><a [routerLink]="['/customer/contact-us']">{{ 'ContactUs' | translate }}</a></li>
-                  <li><a [routerLink]="['/customer/orders-payment']">{{ 'Ordering&Payment' | translate }}</a></li>
-                  <li><a [routerLink]="['/customer/shipping']">{{ 'Shipping' | translate }}</a></li>
-                  <li><a [routerLink]="['/customer/Returns']">{{ 'Returns' | translate }}</a></li>
-                  <li><a [routerLink]="['/customer/faq']">{{ 'FAQ' | translate }}</a></li>
-                  <li><a [routerLink]="['/customer/about-dunyana']">{{ 'AboutDunyana' | translate }}</a></li>
-                  <li><a [routerLink]="['/customer/privacy-policy']">{{ 'PrivacyPolicy' | translate }}</a></li>
-                  <li><a href="javascript:void(0)" (click)="showDialog()">{{ 'Terms&Conditions' | translate }}</a></li>
-                  <li><a [routerLink]="['/customer/press-enquiries']">{{ 'PressEnquiries' | translate }}</a></li>
-              </ul>
-          </div>
-      </div>
-  </div>
-  <div class="container-fluid">
-      <div class="row">
-          <div class="col-sm-12 ftdivider">
+                </ul>
+            </div>
+            <div class="col-md-5 ftlinks">
+                <ul>
+                    <li><a [routerLink]="['/customer/contact-us']">{{ 'ContactUs' | translate }}</a></li>
+                    <li><a [routerLink]="['/customer/orders-payment']">{{ 'Ordering&Payment' | translate }}</a></li>
+                    <li><a [routerLink]="['/customer/shipping']">{{ 'Shipping' | translate }}</a></li>
+                    <li><a [routerLink]="['/customer/Returns']">{{ 'Returns' | translate }}</a></li>
+                    <li><a [routerLink]="['/customer/faq']">{{ 'FAQ' | translate }}</a></li>
+                    <li><a [routerLink]="['/customer/about-dunyana']">{{ 'AboutDunyana' | translate }}</a></li>
+                    <li><a [routerLink]="['/customer/privacy-policy']">{{ 'PrivacyPolicy' | translate }}</a></li>
+                    <li><a href="javascript:void(0)" (click)="showDialog()">{{ 'Terms&Conditions' | translate }}</a></li>
+                    <li><a [routerLink]="['/customer/press-enquiries']">{{ 'PressEnquiries' | translate }}</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12 ftdivider">
 
-          </div>
-      </div>
-  </div>
-  <div class="container">
-      <div class="row">
-          <div class="col-sm-12 fttxt">
-            <p>&copy; {{ 'AllRights' | translate }}</p>
-          </div>
-      </div>
-  </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <i class="icomoon icon-arrow_long" (click)="gotoTop()"></i>
+        <div class="row">
+            <div id="top" class="col-sm-12 fttxt">
+                <p>&copy; {{ 'AllRights' | translate }}</p>
+            </div>
+        </div>
+    </div>
 </footer>
 <app-terms-conditions [display]="display" (displayChange)="onDialogClose($event)"></app-terms-conditions>

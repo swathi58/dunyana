@@ -6,7 +6,8 @@ ol {
     padding: 0;
 }
 
-html, body{
+html,
+body {
     height: 100%;
 }
 
@@ -30,7 +31,7 @@ body {
 
 h1 {
     font-size: 46pt;
-    letter-spacing: -1px;
+    letter-spacing: 0px;
 }
 
 h2 {
@@ -69,7 +70,6 @@ strong {
         text-decoration: none;
     }
     &.sblue {
-
         background-position: 0 25px;
         color: $primary-blue;
         font-size: 18pt;
@@ -179,30 +179,24 @@ strong {
     }
 }
 
- 
 .line_btn {
     &.sblue {
-         background-position: 0 35px;
-        button{
-            span{
-  
-        color: $primary-blue;
-        font-size: 20pt;
-        padding:0 !important;
+        background-position: 0 35px;
+        button {
+            span {
+                color: $primary-blue;
+                font-size: 20pt;
+                padding: 0 !important;
             }
         }
-             &:hover {
+        &:hover {
             background-position: 0 -25px;
-  span {
-            color: $graylight;
+            span {
+                color: $graylight;
+            }
         }
-        }
-     
     }
-   
 }
-
-
 
 body .ui-dropdown-panel .ui-dropdown-items .ui-dropdown-item.ui-state-highlight,
 body .ui-dropdown-panel .ui-dropdown-items .ui-dropdown-item-group.ui-state-highlight {
@@ -247,8 +241,6 @@ body .ui-dropdown .ui-dropdown-trigger {
     content: "\e902";
     font-size: 22px;
 }
-
-
 
 .changepassword .ui-dialog .ui-dialog-titlebar {
     border: 0;
@@ -311,12 +303,12 @@ body .ui-widget-overlay {
     background-color: #00c0f3;
 }
 
-
 //slider
 .radius {
     border-radius: 100%;
     cursor: pointer;
 }
+
 .carouselSlider .ui-carousel .ui-carousel-viewport {
     border: none;
     padding: 0;
@@ -392,9 +384,8 @@ body .ui-widget-overlay {
     z-index: 1;
 }
 
-
-body .ui-paginator{
+body .ui-paginator {
     background-color: white;
-border: none;
- padding: 0; 
+    border: none;
+    padding: 0;
 }
