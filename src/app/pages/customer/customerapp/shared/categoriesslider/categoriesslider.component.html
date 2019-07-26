@@ -21,7 +21,7 @@
 
 
 <section class="container-fluid carouselSlider category">
-        <h2>{{ 'Shopbycategory' | translate }}</h2>
+        <h2>{{ childMessage }}</h2>
         <p-carousel headerText="items" [value]="items" numVisible="5" responsive="true" circular="true">
             <ng-template let-item pTemplate="item">
                 <div class="ui-grid ui-grid-responsive imgsty" (click)="navigatetocategory(item.name)">

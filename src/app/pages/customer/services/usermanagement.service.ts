@@ -105,7 +105,7 @@ Loginapi(login) {
     var body = login;
    
     var headerOptions = new Headers({ 'Content-Type': 'application/json' });
-    return this.http.post(environment.API_URL +'CustomerRegistration/'+'UsersLoginAuthenticate', login, { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) });
+    return this.http.post(environment.API_URL +'Customer/'+'UsersLoginAuthenticate', login, { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) });
   }
   registeruser(user:User):Observable<User>{
     const body : User = {
@@ -150,7 +150,7 @@ Loginapi(login) {
   //http://125.62.198.229:5000/api/CustomerRegistration/UsersLoginAuthenticate(Parameters:Email,PWD)
     login(user:User) {
       var reqHeader = new HttpHeaders({'No-Auth':'True'});
-    return this.http.post<User>(environment.API_URL+'CustomerRegistration/'+'UsersLoginAuthenticate',user,{headers : reqHeader});
+    return this.http.post<User>(environment.API_URL+'Customer/'+'UsersLoginAuthenticate',user,{headers : reqHeader});
       
      }
 

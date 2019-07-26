@@ -66,8 +66,8 @@
 
                       <p>Email ID<br> <span>{{profiledata.Email}}</span></p>
 
-                      <p class="text-blue float-left"><a (click)="showDialog()">change password </a></p>
-                      <p class="text-blue float-right edit"><a (click)="showEditDialog()"><i class="text-blue icon-edit f-big mr-2"></i>Edit</a></p>
+                      <p class="text-blue float-left"><a (click)="showDialog()">Change Password </a></p>
+                      <p class="text-blue float-right edit"><a (click)="showEditDialog()"><i class="text-blue icon-edit f-big mr-2"></i> Edit </a></p>
 
                   </div>
 
@@ -169,7 +169,7 @@
 
       </div>
 <div>
-        <app-categoriesslider></app-categoriesslider>
+        <app-categoriesslider [childMessage]="parentMessage"></app-categoriesslider>
 </div>
   </div>
 </div>

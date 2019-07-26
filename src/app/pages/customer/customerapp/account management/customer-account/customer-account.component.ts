@@ -13,6 +13,7 @@ export class CustomerAccountComponent implements OnInit {
   editdialogdisplay:boolean=false;
 
   test:string="test";
+  parentMessage = "Start Shopping";
 
   ProgressSpinnerDlg:boolean=false;
 

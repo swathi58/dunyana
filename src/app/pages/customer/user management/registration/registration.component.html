@@ -45,6 +45,7 @@
                                                             <div class="col-sm-12">
                                                                 <div *ngIf="registrationForm.controls['firstname'].errors && !registrationForm.controls['firstname'].pristine" class="text-danger error">
                                                                     <p *ngIf="registrationForm.get('firstname').hasError('required')">FirstName Required</p>
+                                                                    <div [hidden]="!registrationForm.controls['firstname'].errors?.pattern">FirstName</div>
                                                                 </div>
                                                             </div>
                                                             <div class="col-sm-12">
@@ -186,6 +187,10 @@
                                                 You have signed in successfully. You will be redirected in 5 seconds.
                                             </p>
                                             <p>Redirecting...</p>
+                                        </div>
+                                        <div class="msg">
+                                               <span class="errormsg" [hidden]="iserror">{{errormsg}}</span>
+                                               <span class="succsmsg" [hidden]="issucss">{{succsmsg}}</span>
                                         </div>
                                     </div>
                                 </form>

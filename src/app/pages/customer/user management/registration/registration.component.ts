@@ -40,6 +40,11 @@ export class RegistrationComponent implements OnInit {
   prevbtn: string = "none";
   topheader: string = "";
 
+  iserror:boolean=true;
+  issucss:boolean=true;
+  errormsg:string="";
+  succsmsg:string="";
+
   timerbtndisplay: boolean = true;
   imageChangedEvent: any = '';
   croppedImage: any = '';
@@ -83,7 +88,7 @@ export class RegistrationComponent implements OnInit {
 
     this.registrationForm = this.formBuilder.group({
       //  FirstregistrationForm:this.formBuilder.array([this.BasicDetails()]),
-      firstname: ['', Validators.required],
+      firstname: ['', [Validators.required,Validators.pattern('^[^-\s][a-zA-Z0-9_\s-]+$')]],
       lastname: ['', Validators.required],
       emailid: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}')]],
       mobile: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
@@ -259,7 +264,10 @@ export class RegistrationComponent implements OnInit {
         }
         else
         {
-          this.messageService.add({ severity: 'error', summary: 'Error Message', detail: "Invalid OTP" });
+          //this.messageService.add({ severity: 'error', summary: 'Error Message', detail: "Invalid OTP" });
+          this.errormsg="Invalid OTP";
+          this.iserror=false;
+          
           this.btndisable = "disable";
         }
        
@@ -340,17 +348,23 @@ export class RegistrationComponent implements OnInit {
           this.userservice.EmailVerification(this.registerdto).subscribe(res => {
             if(res["result"]==="Email is valid")
             {      
-            this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
+           // this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
+           this.issucss=false;
+           this.succsmsg=res["result"];
             //this.btndisable = "line_btn sblue";
             }
             else if(res["result"]==="EmailId is already registred")
             {
-              this.messageService.add({ severity: 'error', summary: 'Error Message', detail: res["result"] });
+              //this.messageService.add({ severity: 'error', summary: 'Error Message', detail: res["result"] });
+              this.errormsg=res["result"];
+              this.iserror=false;
               this.btndisable = "disable";
             }
           },
             errormsg => {
-              this.messageService.add({ severity: 'error', summary: 'Error Message', detail: errormsg["error"]["result"] });
+              //this.messageService.add({ severity: 'error', summary: 'Error Message', detail: errormsg["error"]["result"] });
+              this.errormsg=errormsg["error"]["result"];
+              this.iserror=false;
               this.btndisable = "disable";
   
             });
@@ -389,15 +403,19 @@ export class RegistrationComponent implements OnInit {
            
             this.userservice.SendOTP(this.registerdto).subscribe(res => {
               // this.ProgressSpinnerDlg = false;             
-              this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
+              //this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
+              this.issucss=false;
+              this.succsmsg=res["result"];
               this.registerdto.OTP = res["otp"];
               //this.router.navigateByUrl('/');
               //this.ResetForm();
             },
               error => {
                 // this.ProgressSpinnerDlg = false;
-                console.log(error);
-                this.messageService.add({ severity: 'error', summary: 'Error Message', detail: error["result"] });
+                
+               // this.messageService.add({ severity: 'error', summary: 'Error Message', detail: error["result"] });
+                this.errormsg=error["result"];
+                this.iserror=false;
               });
 
             this.submitbtntext = "Confirm";
@@ -411,7 +429,9 @@ export class RegistrationComponent implements OnInit {
             this.topheader = "none";
 
               this.userservice.InsertCustomer(this.registerdto).subscribe(res => {
-                this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
+                this.issucss=false;
+                this.succsmsg=res["result"];
+                //this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
                 this.localStorage.set("Email", res["reEmail"]);               
                 this.router.navigateByUrl("customer/customeraccount");
               });

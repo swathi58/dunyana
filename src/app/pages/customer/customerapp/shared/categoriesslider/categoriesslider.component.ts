@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef, Input } from '@angular/core';
 import { NguCarousel, NguCarouselConfig } from '@ngu/carousel';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -16,8 +16,8 @@ export class CategoriessliderComponent implements OnInit {
   withAnim = true;
   resetAnim = true;
   items: any[] = [];
-
-
+  Shopbycategory:string="Shop By Category";
+  @Input() childMessage: string;
 
   @ViewChild('categoryCarousel') categoryCarousel: NguCarousel<any>;
 
@@ -43,6 +43,7 @@ export class CategoriessliderComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.childMessage);
     this.LoadCategories();
   }
   catmoveTo(slide) {

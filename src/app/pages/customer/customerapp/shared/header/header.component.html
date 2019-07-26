@@ -81,7 +81,7 @@
                                
                             <li class="search"><a id="srhLink" (click)="displaysearch()">{{ 'Search' | translate }}</a></li>
                             <!-- <li><a href="javascript:void(0)" class="langSel" (click)="toggleLang(lang); displaylang()">{{translate.store.currentLang =='en' ? 'English':'العربية'}}</a></li> -->
-                            <li><a href="javascript:void(0)" class="langSel" (click)="toggleLang(lang); displaylang()">{{currentlang}}</a></li>
+                            <li><a href="javascript:void(0)" class="langSel" (click)="toggleLang(lang);">{{currentlang}}</a></li>
 
                         </ul>
                         <div class="search_container" [ngClass]="showDiv">
@@ -89,12 +89,12 @@
                             <a class="closebtn" (click)="closesearch()"></a>
                             <a class="filterbtn"></a>
                         </div>
-                        <div class="lang_container" [ngClass]="showlngDiv">                           
+                        <!-- <div class="lang_container" [ngClass]="showlngDiv">                           
                             <ul>
                                 <li><a (click)="toggleLang('ar')">العربية</a></li>
                                 <li><a (click)="toggleLang('en')">English</a></li>
                             </ul>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 </div>

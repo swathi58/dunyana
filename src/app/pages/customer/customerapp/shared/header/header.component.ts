@@ -63,24 +63,26 @@ export class HeaderComponent implements OnInit {
 
   }
   toggleLang(lang) {
+    console.log(lang);
     this.lang = lang;
     this.translate.use(lang);
     this.langShare.setTranslate(this.translate);
     if(lang=="en")
     {
-       this.logoimg=this.headerimg;
-       this.currentlang="English";
+      this.logoimg=this.header_ar_img;
+      this.currentlang="العربية";
+      
 
     }
     else if(lang=="ar")
     {
-      this.logoimg=this.header_ar_img;
-      this.currentlang="العربية";
+      this.logoimg=this.headerimg;
+       this.currentlang="English";
     }
 
-    this.showlngDiv="";
-    this.showlngDiv="lang_container"; 
-    this.localStorage.set('lang', lang);
+    // this.showlngDiv="";
+    // this.showlngDiv="lang_container"; 
+     this.localStorage.set('lang', lang);
 
   }
   translation() {
