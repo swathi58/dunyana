@@ -22,7 +22,7 @@ import { SharedModule } from '../../../../shared/shared.module';
   styleUrls: ['./forgotpassword.component.scss']
 })
 export class ForgotpasswordComponent implements OnInit {
-
+  lang = 'en';
   headerlogo: string = "assets/layout/images/glogo.png";
   ProgressSpinnerDlg: boolean = false;
   @ViewChild('div') div: ElementRef;
@@ -90,7 +90,13 @@ export class ForgotpasswordComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    if (this.localStorage.get('lang') != null) {
+      this.lang = this.localStorage.get('lang');
+      this.translate.use(this.lang);
+    }
+    else {
+      this.translate.use(this.lang);
+    }
     this.forgotform = this.formBuilder.group({
       // FirstregistrationForm:this.formBuilder.array([this.BasicDetails()]),    
       emailid: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}')]],    
