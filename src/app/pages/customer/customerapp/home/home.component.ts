@@ -5,6 +5,7 @@ import { LangShareService } from 'src/app/shared/services/lang-share.service';
 import { TranslateService } from '@ngx-translate/core';
 import { LocalStorageService } from 'angular-web-storage';
 import { CategoryService } from 'src/app/pages/admin/services/category.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -46,7 +47,7 @@ export class HomeComponent implements OnInit {
   constructor(private cdr: ChangeDetectorRef,private sanitizer: DomSanitizer,
     public langShare: LangShareService,
     public translate: TranslateService,private localStorage: LocalStorageService,
-    private catgservice:CategoryService) { 
+    private catgservice:CategoryService,private router:Router) { 
     //this.carouselTileItems = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
   }
 
@@ -63,6 +64,11 @@ export class HomeComponent implements OnInit {
 
   this.name= this.localStorage.get('username');
   this.BannersList();
+
+  // if(this.localStorage.get("Email"))
+  // {
+  //   this.router.navigateByUrl("customer/customeraccount");
+  // }
   }
   translation() {
     this.langShare.translate$.subscribe(translate => {

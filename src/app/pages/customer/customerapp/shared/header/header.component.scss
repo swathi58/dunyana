@@ -80,7 +80,7 @@ header .info-bar ul.lang li.search {
   
   header .info-bar ul.lang li.langSel {
     position: relative;
-  cursor: pointer;
+ // cursor: pointer;
   }
   header .info-bar ul.lang li.langSel:hover {
     color: white;
@@ -133,4 +133,7 @@ header .info-bar ul.lang li.search {
   .ac{
     cursor: pointer;
     outline: none;
+  }
+  .langiconsty{
+    cursor: pointer;
   }

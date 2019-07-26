@@ -39,11 +39,12 @@ export class RegistrationComponent implements OnInit {
   timerbtntext: string = "Resend in";
   prevbtn: string = "none";
   topheader: string = "";
+  userdata:any;
 
-  iserror:boolean=true;
-  issucss:boolean=true;
-  errormsg:string="";
-  succsmsg:string="";
+  iserror: boolean = true;
+  issucss: boolean = true;
+  errormsg: string = "";
+  succsmsg: string = "";
 
   timerbtndisplay: boolean = true;
   imageChangedEvent: any = '';
@@ -70,8 +71,8 @@ export class RegistrationComponent implements OnInit {
     Type: null,
     EmailVerified: 0,
     Status: 0,
-   // EncId: null,
-   // NPWD: null,
+    // EncId: null,
+    // NPWD: null,
     OTP: 0
   }
 
@@ -85,16 +86,16 @@ export class RegistrationComponent implements OnInit {
   }
 
   ngOnInit() {
-    if(this.localStorage.get('lang') != null){
-      this.lang = this.localStorage.get('lang'); 
-      this.translate.use(this.lang); 
+    if (this.localStorage.get('lang') != null) {
+      this.lang = this.localStorage.get('lang');
+      this.translate.use(this.lang);
     }
     else {
-      this.translate.use(this.lang); 
+      this.translate.use(this.lang);
     }
     this.registrationForm = this.formBuilder.group({
       //  FirstregistrationForm:this.formBuilder.array([this.BasicDetails()]),
-      firstname: ['', [Validators.required,Validators.pattern('^[^-\s][a-zA-Z0-9_\s-]+$')]],
+      firstname: ['', Validators.required],
       lastname: ['', Validators.required],
       emailid: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}')]],
       mobile: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
@@ -173,8 +174,16 @@ export class RegistrationComponent implements OnInit {
     }
   }
   basicformvalidate() {
+    if (this.registerdto.FirstName.match("^[^\s].+[^\s]$")) {
+      console.log("valid");
+    }
+    else {
+      console.log("invalid");
+    }
     if (this.registerdto.FirstName != null) {
       if ((this.registerdto.FirstName.length - 1 > -1)) {
+        // if(this.registerdto.FirstName.match("('[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*')"))
+        // {
         if (this.registerdto.LastName != null) {
           if (this.registerdto.LastName.length - 1 > -1) {
             this.btndisable = "line_btn sblue";
@@ -186,6 +195,7 @@ export class RegistrationComponent implements OnInit {
         else {
           this.btndisable = "disable";
         }
+
       }
       else {
         this.btndisable = "disable";
@@ -197,23 +207,22 @@ export class RegistrationComponent implements OnInit {
   }
 
   formauthdatavalidate() {
-
+    console.log(this.registerdto.Email.match('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}'));
     if (this.registerdto.Email != null) {
-        if (this.registerdto.Email.match('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}')) {
-          if (this.registerdto.PWD != null) {
-            if (this.registerdto.PWD.length >= 6) {
-             // this.CheckEmail();
-               this.btndisable = "line_btn sblue";
-            }
-            if(this.registerdto.PWD.length==0 || this.registerdto.PWD.length<6)
-            {
-              this.btndisable = "disable";
-            }
+      if (this.registerdto.Email.match('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}')) {
+        if (this.registerdto.PWD != null) {
+          if (this.registerdto.PWD.length >= 6) {
+            // this.CheckEmail();
+            this.btndisable = "line_btn sblue";
+          }
+          if (this.registerdto.PWD.length == 0 || this.registerdto.PWD.length < 6) {
+            this.btndisable = "disable";
           }
         }
-        else {
-          this.btndisable = "disable";
-        }
+      }
+      else {
+        this.btndisable = "disable";
+      }
 
     }
     else {
@@ -229,17 +238,15 @@ export class RegistrationComponent implements OnInit {
           if (this.registerdto.Address.length - 1 > -1) {
             this.btndisable = "line_btn sblue";
           }
-          else if(this.registerdto.Address.length==0)
-          {
+          else if (this.registerdto.Address.length == 0) {
             this.btndisable = "disable";
           }
         }
       }
-      else if(this.registerdto.City.length===0)
-      {
+      else if (this.registerdto.City.length === 0) {
         this.btndisable = "disable";
       }
-    } 
+    }
     else {
       this.btndisable = "disable";
     }
@@ -249,8 +256,7 @@ export class RegistrationComponent implements OnInit {
       if (this.registerdto.Mobile.length == 10) {
         this.btndisable = "line_btn sblue";
       }
-      else if(this.registerdto.Mobile.length<=9)
-      {
+      else if (this.registerdto.Mobile.length <= 9) {
         this.btndisable = "disable";
       }
     }
@@ -259,30 +265,26 @@ export class RegistrationComponent implements OnInit {
     }
   }
   otpformvalidate() {
-   
+
     if (this.Otp != null) {
       console.log(this.Otp.toString().length);
-      if(this.Otp.toString().length==6)
-      {
-        if(this.Otp==this.registerdto.OTP.toString())
-        {
+      if (this.Otp.toString().length == 6) {
+        if (this.Otp == this.registerdto.OTP.toString()) {
           this.btndisable = "line_btn sblue";
         }
-        else
-        {
+        else {
           this.messageService.add({ severity: 'error', summary: 'Error Message', detail: "Invalid OTP" });
           // this.errormsg="Invalid OTP";
           // this.iserror=false;
-          
+
           this.btndisable = "disable";
         }
-       
+
       }
-      else
-      {
+      else {
         this.btndisable = "disable";
       }
-      
+
     }
     else {
       this.btndisable = "disable";
@@ -348,34 +350,31 @@ export class RegistrationComponent implements OnInit {
   CheckEmail() {
     //this.registerdto.Email="swathi.chinnala@gmail.com";
     this.ConvertingFormToDto();
-      if(this.registerdto.Email!=null)
-      {
-        if (this.registerdto.Email.match('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}')) {
-          this.userservice.EmailVerification(this.registerdto).subscribe(res => {
-            if(res["result"]==="Email is valid")
-            {      
-           this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
-          //  this.issucss=false;
-          //  this.succsmsg=res["result"];
+    if (this.registerdto.Email != null) {
+      if (this.registerdto.Email.match('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}')) {
+        this.userservice.EmailVerification(this.registerdto).subscribe(res => {
+          if (res["result"] === "Email is valid") {
+            this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
+            //  this.issucss=false;
+            //  this.succsmsg=res["result"];
             //this.btndisable = "line_btn sblue";
-            }
-            else if(res["result"]==="EmailId is already registred")
-            {
-              this.messageService.add({ severity: 'error', summary: 'Error Message', detail: res["result"] });
-              // this.errormsg=res["result"];
-              // this.iserror=false;
-              this.btndisable = "disable";
-            }
-          },
-            errormsg => {
-              this.messageService.add({ severity: 'error', summary: 'Error Message', detail: errormsg["error"]["result"] });
-              // this.errormsg=errormsg["error"]["result"];
-              // this.iserror=false;
-              this.btndisable = "disable";
-  
-            });
-        }
+          }
+          else if (res["result"] === "EmailId is already registred") {
+            this.messageService.add({ severity: 'error', summary: 'Error Message', detail: res["result"] });
+            // this.errormsg=res["result"];
+            // this.iserror=false;
+            this.btndisable = "disable";
+          }
+        },
+          errormsg => {
+            this.messageService.add({ severity: 'error', summary: 'Error Message', detail: errormsg["error"]["result"] });
+            // this.errormsg=errormsg["error"]["result"];
+            // this.iserror=false;
+            this.btndisable = "disable";
+
+          });
       }
+    }
   }
 
   addcustomer() {
@@ -406,7 +405,7 @@ export class RegistrationComponent implements OnInit {
           }
           else if (Number.parseInt(this.currentIndex) == 3) {
             this.ConvertingFormToDto();
-           
+
             this.userservice.SendOTP(this.registerdto).subscribe(res => {
               // this.ProgressSpinnerDlg = false;             
               this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
@@ -418,7 +417,7 @@ export class RegistrationComponent implements OnInit {
             },
               error => {
                 // this.ProgressSpinnerDlg = false;
-                
+
                 this.messageService.add({ severity: 'error', summary: 'Error Message', detail: error["result"] });
                 // this.errormsg=error["result"];
                 // this.iserror=false;
@@ -434,15 +433,18 @@ export class RegistrationComponent implements OnInit {
             this.prevbtn = "none";
             this.topheader = "none";
 
-              this.userservice.InsertCustomer(this.registerdto).subscribe(res => {
-                // this.issucss=false;
-                // this.succsmsg=res["result"];
-                this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
-                this.localStorage.set("Email", res["reEmail"]);               
-                this.router.navigateByUrl("customer/customeraccount");
-              });
-            
-          
+            this.userservice.InsertCustomer(this.registerdto).subscribe(res => {
+              // this.issucss=false;
+              // this.succsmsg=res["result"];
+              this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
+              //this.localStorage.set("Email", res["reEmail"]);
+              this.userdata = res['reFirstName'];
+              this.localStorage.set('username', this.userdata);
+              this.localStorage.set('Email', res['reEmail']);
+              this.router.navigateByUrl("customer/customeraccount");
+            });
+
+
           }
           else if (Number.parseInt(this.currentIndex) == 5) {
 

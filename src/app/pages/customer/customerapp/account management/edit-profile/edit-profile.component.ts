@@ -61,6 +61,7 @@ export class EditProfileComponent implements OnInit {
   ngOnInit() {
     
     this.FormInit();
+    this.GetCountriesList();
   }
 
   FormInit()
@@ -137,6 +138,12 @@ _keyPress(event: any) {
   }
 }
 
+GetCountriesList() {
+  this.userservice.GetCountriesList().subscribe(res => {
+    this.countries = res;
+  })
+}
+
 Updateprofiledata()
 {
   this.ProgressSpinnerDlg=true;
@@ -146,7 +153,7 @@ Updateprofiledata()
   this.profiledata.LastName=this.EditprofileForm.value["lastname"];
   this.profiledata.City=this.EditprofileForm.value["city"];
   this.profiledata.Address=this.EditprofileForm.value["address"];
-  this.profiledata.Country=this.EditprofileForm.value["country"];
+  this.profiledata.Country=this.EditprofileForm.value["country"]["description"];
   this.profiledata.Mobile=this.EditprofileForm.value["mobile"];
 
   this.userservice.UpdateCustomerProfileData(this.profiledata).subscribe(res=>{

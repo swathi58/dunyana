@@ -47,14 +47,15 @@ export class HeaderComponent implements OnInit {
       if(this.lang=="en")
       {
         // this.logoimg=this.headerimg;
-         this.currentlang="English";
+        this.currentlang="العربية";
          this.englicon=true;
   
       }
       else if(this.lang=="ar")
       {
+        this.currentlang="English";
        // this.logoimg=this.header_ar_img;
-        this.currentlang="العربية";
+       
       }
     }
     else
@@ -84,7 +85,8 @@ export class HeaderComponent implements OnInit {
     {
       
       this.logoimg=this.header_ar_img;
-      this.currentlang="English"; 
+      this.currentlang="العربية";
+
       this.englicon=true;    
     }
     else if(lang=="ar")
@@ -92,7 +94,7 @@ export class HeaderComponent implements OnInit {
      
       this.logoimg=this.headerimg;
       this.englicon=false;
-       this.currentlang="العربية";
+      this.currentlang="English"; 
     }
 
     // this.showlngDiv="";

@@ -159,5 +159,12 @@ Loginapi(login) {
     return this.http.post<User>(environment.API_URL+'CustomerRegistration/'+'ForgotPassword',user,{headers : reqHeader});
       
      }
+     public sendingotp(registration: RegistrationDto): Observable<RegistrationDto> {
+      return this.http.post<RegistrationDto>(environment.API_URL + 'Customer/OTPAuthentication', registration);
+    }
+
+    public newpwd(registration: RegistrationDto): Observable<RegistrationDto> {
+      return this.http.post<RegistrationDto>(environment.API_URL + 'Customer/ChangePassword', registration);
+    }
 
 }

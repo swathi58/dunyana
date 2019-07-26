@@ -36,6 +36,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { ChangepasswordComponent } from './pages/customer/user management/changepassword/changepassword.component';
 import { AdminModule } from './pages/admin/admin.module';
 import { AdminComponent } from './pages/admin/admin.component';
+import { ForgotpasswordComponent } from './pages/customer/user management/forgotpassword/forgotpassword.component';
 
 
 registerLocaleData(localeESUS);
@@ -68,6 +69,7 @@ export function getAuthServiceConfigs() {
     EmailverificationSuccessComponent,
     PageNotFoundComponent,
     AdminComponent,
+    ForgotpasswordComponent,
 
   ],
   imports: [

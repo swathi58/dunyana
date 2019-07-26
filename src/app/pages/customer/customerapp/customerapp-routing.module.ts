@@ -25,6 +25,7 @@ import { PaymentMethodsComponent } from './Payment/payment-methods/payment-metho
 import { CustomerServiceComponent } from './About/customer-service/customer-service.component';
 import { CategoryComponent } from './customer category management/category/category.component';
 import { ShoppingComponent } from './shopping/shopping.component';
+import { ForgotpasswordComponent } from '../user management/forgotpassword/forgotpassword.component';
 
 
 const routes: Routes = [
@@ -136,6 +137,10 @@ const routes: Routes = [
     path:"shopping",
     component:ShoppingComponent
   },
+  {
+    path:"forgotpassword",
+    component:ForgotpasswordComponent
+  }
 ];
 
 @NgModule({

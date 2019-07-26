@@ -92,13 +92,9 @@ section.home_banner {
             .line_btn {
                 background-image: url("../../../../../assets/layout/images/line_blue_sprite.png");
                 background-position: center 28px;
-            }
-            &:hover {
-                .line_btn {
+                &:hover {
+                    color: #00c0f3;
                     background-position: center -36px;
-                    &.blue {
-                        color: #00c0f3;
-                    }
                 }
             }
         }
@@ -107,9 +103,9 @@ section.home_banner {
 
 section.fbConnect {
     .fbtxt {
-        &:hover {
-            a {
-                color: #002e8a;
+        a {
+            &:hover {
+                color: #00b4e6;
                 background-image: url("../../../../../assets/layout/images/btn_line_blue.png");
                 background-repeat: no-repeat;
                 background-position: 0px 23px;
