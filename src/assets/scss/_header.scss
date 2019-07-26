@@ -22,6 +22,10 @@ header {
                     padding: 0;
                 }
             }
+            img.lang-item
+            {
+                cursor: pointer;
+            }
             &.lang {
                 justify-content: flex-end;
                 li {
@@ -37,10 +41,17 @@ header {
                         font-size: 12pt;
                         /* font-size:8pt;    */
                     }
-                    &:nth-child(2) a {
-                        font-family: $medfont;
-                        font-weight: 900;
+                    &:nth-child(2) 
+                    {
+                       
+                        a {
+                            font-family: $medfont;
+                            font-weight: 900;
+                            cursor:default;
+                            
+                        }
                     }
+                    
                     &.search {
                         position: relative;
                         >a {

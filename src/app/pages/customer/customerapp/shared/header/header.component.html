@@ -68,9 +68,9 @@
                     </ul>
                 </div>
                 <div class="col-sm-6">
-                    <ul class="float-right text-right ml-4">
+                    <ul class="float-right text-right ml-2">
                             <li>
-                                <img [src]="englnfimg" class="langiconsty" width="20" height="20" [hidden]="englicon" [ngClass]="{ blur: lang == 'es' }" (click)="toggleLang('en')" alt="EN" class="lang-item mr-2" />
+                                <img [src]="englnfimg" class="langiconsty" width="20" height="20" [hidden]="englicon" [ngClass]="{ blur: lang == 'es' }" (click)="toggleLang('en')" alt="EN" class="lang-item " />
                                 <img [src]="spanlanimg" class="langiconsty" width="20" height="20" [hidden]="!englicon" [ngClass]="{ blur: lang == 'en' }" class="lang-item lang-item--es marg-right-20" (click)="toggleLang('ar')" alt="arbic" />
                             </li>
                         </ul>

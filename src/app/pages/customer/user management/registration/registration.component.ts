@@ -40,6 +40,7 @@ export class RegistrationComponent implements OnInit {
   prevbtn: string = "none";
   topheader: string = "";
   userdata:any;
+  otpnumb:string="";
 
   iserror: boolean = true;
   issucss: boolean = true;
@@ -174,12 +175,12 @@ export class RegistrationComponent implements OnInit {
     }
   }
   basicformvalidate() {
-    if (this.registerdto.FirstName.match("^[^\s].+[^\s]$")) {
-      console.log("valid");
-    }
-    else {
-      console.log("invalid");
-    }
+    // if (this.registerdto.FirstName.match("^[^\s].+[^\s]$")) {
+    //   console.log("valid");
+    // }
+    // else {
+    //   console.log("invalid");
+    // }
     if (this.registerdto.FirstName != null) {
       if ((this.registerdto.FirstName.length - 1 > -1)) {
         // if(this.registerdto.FirstName.match("('[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*')"))
@@ -207,7 +208,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   formauthdatavalidate() {
-    console.log(this.registerdto.Email.match('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}'));
+   
     if (this.registerdto.Email != null) {
       if (this.registerdto.Email.match('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}')) {
         if (this.registerdto.PWD != null) {
@@ -269,8 +270,10 @@ export class RegistrationComponent implements OnInit {
     if (this.Otp != null) {
       console.log(this.Otp.toString().length);
       if (this.Otp.toString().length == 6) {
+        this.otpnumb="numb";
         if (this.Otp == this.registerdto.OTP.toString()) {
           this.btndisable = "line_btn sblue";
+         
         }
         else {
           this.messageService.add({ severity: 'error', summary: 'Error Message', detail: "Invalid OTP" });
@@ -280,6 +283,10 @@ export class RegistrationComponent implements OnInit {
           this.btndisable = "disable";
         }
 
+      }
+      else if(this.Otp.toString().length<=5)
+      {
+        this.otpnumb="";
       }
       else {
         this.btndisable = "disable";
@@ -385,11 +392,17 @@ export class RegistrationComponent implements OnInit {
       if (slides[i].getAttribute('class') === 'active') {
         this.currentIndex = slides[i].getAttribute('data-slide-to');
         console.log(this.currentIndex);
+        if (Number.parseInt(this.currentIndex) >= 0) {
+          
+          this.prevbtn = "backBtn";
+          this.topheader = "_top";
+        }
         if (Number.parseInt(this.currentIndex) != 5) {
 
           if (Number.parseInt(this.currentIndex) == 0) {
             this.formauthdatavalidate();
             //  this.basicformvalidate();
+           // this.prevbtn = "backBtn";
 
           }
           else if (Number.parseInt(this.currentIndex) == 1) {
@@ -405,7 +418,7 @@ export class RegistrationComponent implements OnInit {
           }
           else if (Number.parseInt(this.currentIndex) == 3) {
             this.ConvertingFormToDto();
-
+            this.ProgressSpinnerDlg=true;
             this.userservice.SendOTP(this.registerdto).subscribe(res => {
               // this.ProgressSpinnerDlg = false;             
               this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
@@ -414,6 +427,7 @@ export class RegistrationComponent implements OnInit {
               this.registerdto.OTP = res["otp"];
               //this.router.navigateByUrl('/');
               //this.ResetForm();
+              this.ProgressSpinnerDlg=false;
             },
               error => {
                 // this.ProgressSpinnerDlg = false;
@@ -452,10 +466,7 @@ export class RegistrationComponent implements OnInit {
 
           //this.btndisable = "disable";
         }
-        if (Number.parseInt(this.currentIndex) >= 0) {
-          this.prevbtn = "backBtn";
-          this.topheader = "_top";
-        }
+
 
       }
     }

@@ -307,6 +307,9 @@ body .ui-widget-overlay {
 .radius {
     border-radius: 100%;
     cursor: pointer;
+    height: 210px;
+    width: 210px;
+    border: 1px solid #979793;
 }
 
 .carouselSlider .ui-carousel .ui-carousel-viewport {
@@ -337,6 +340,8 @@ body .ui-widget-overlay {
     position: relative;
 }
 
+
+
 .carouselSlider .ui-carousel .ui-carousel-viewport .ui-carousel-items .ui-carousel-item .ui-grid .desc {
     position: absolute;
     z-index: 2;
@@ -345,6 +350,10 @@ body .ui-widget-overlay {
     font-size: 21pt;
     font-family: 'teshrin_arltmedium', sans-serif;
     text-align: center;
+}
+
+.carouselSlider .ui-carousel .ui-carousel-viewport .ui-carousel-items .ui-carousel-item:hover .desc{
+    color: #00c0f3;
 }
 
 .carouselSlider .ui-carousel .ui-carousel-page-links .ui-carousel-page-link,
@@ -388,4 +397,8 @@ body .ui-paginator {
     background-color: white;
     border: none;
     padding: 0;
+}
+
+body .ui-button:enabled:focus{
+    box-shadow: none;
 }

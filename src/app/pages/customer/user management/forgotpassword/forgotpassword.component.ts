@@ -191,6 +191,10 @@ export class ForgotpasswordComponent implements OnInit {
      
     }
   }
+  else
+  {
+    this.otpnumb=""
+  }
 }
 
     
