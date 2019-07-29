@@ -39,7 +39,7 @@ import { AdminComponent } from './pages/admin/admin.component';
 import { ForgotpasswordComponent } from './pages/customer/user management/forgotpassword/forgotpassword.component';
 import { MerchantregistrationComponent } from './pages/merchant/merchant management/merchantregistration/merchantregistration.component';
 
-
+import{merchantModule}from './pages/merchant/merchant.module';
 registerLocaleData(localeESUS);
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -88,7 +88,7 @@ export function getAuthServiceConfigs() {
     ImageCropperModule,
     DialogModule,
     ButtonModule,
-    
+    merchantModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
