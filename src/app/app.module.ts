@@ -37,6 +37,7 @@ import { ChangepasswordComponent } from './pages/customer/user management/change
 import { AdminModule } from './pages/admin/admin.module';
 import { AdminComponent } from './pages/admin/admin.component';
 import { ForgotpasswordComponent } from './pages/customer/user management/forgotpassword/forgotpassword.component';
+import { MerchantregistrationComponent } from './pages/merchant/merchant management/merchantregistration/merchantregistration.component';
 
 
 registerLocaleData(localeESUS);
@@ -70,6 +71,7 @@ export function getAuthServiceConfigs() {
     PageNotFoundComponent,
     AdminComponent,
     ForgotpasswordComponent,
+    MerchantregistrationComponent,
 
   ],
   imports: [
