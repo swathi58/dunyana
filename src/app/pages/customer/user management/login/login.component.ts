@@ -307,16 +307,16 @@ export class LoginComponent implements OnInit {
       }
       else if(res["loginStatus"]==0){
         this.show = false;
-        this.div.nativeElement.innerHTML = res["result"];
+        this.div.nativeElement.innerHTML = 'Account is Inactive'; // res["result"];
       }
 
       else if(res["loginStatus"]==2){
         this.show = false;
-        this.div.nativeElement.innerHTML = res["result"];
+        this.div.nativeElement.innerHTML = 'Account is Locked'; //res["result"];
       }
       else if(res["loginStatus"]==3){
         this.show = false;
-        this.div.nativeElement.innerHTML = res["result"];
+        this.div.nativeElement.innerHTML =  'Account is Barred';//res["result"];
       }
 
     },
