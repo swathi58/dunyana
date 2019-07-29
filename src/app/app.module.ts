@@ -40,6 +40,7 @@ import { ForgotpasswordComponent } from './pages/customer/user management/forgot
 import { MerchantregistrationComponent } from './pages/merchant/merchant management/merchantregistration/merchantregistration.component';
 
 import{merchantModule}from './pages/merchant/merchant.module';
+import{MerchantComponent}from './pages/merchant/merchant.component';
 registerLocaleData(localeESUS);
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -71,8 +72,8 @@ export function getAuthServiceConfigs() {
     PageNotFoundComponent,
     AdminComponent,
     ForgotpasswordComponent,
-    MerchantregistrationComponent,
-
+    MerchantComponent,
+    MerchantregistrationComponent
   ],
   imports: [
     BrowserModule,

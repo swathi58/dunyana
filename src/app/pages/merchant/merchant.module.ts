@@ -13,7 +13,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {CalendarModule} from 'primeng/calendar';
 import {ButtonModule} from 'primeng/button';
 import { SharedModule } from 'src/app/shared/shared.module';
-//import{MerchantRoutingModule}from '../merchant/merchant-routing.module';
+import{MerchantRoutingModule}from '../merchant/merchant-routing.module';
 
 @NgModule({
   declarations: [],
@@ -29,7 +29,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     RadioButtonModule,
     FileUploadModule,
     CalendarModule,
-   // MerchantRoutingModule,
+    MerchantRoutingModule,
   ],
 })
 export class merchantModule { }
