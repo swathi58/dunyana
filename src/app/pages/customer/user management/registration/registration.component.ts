@@ -41,7 +41,8 @@ export class RegistrationComponent implements OnInit {
   topheader: string = "";
   userdata:any;
   otpnumb:string="";
-
+  response:string="";
+  responsesty:string="";
   iserror: boolean = true;
   issucss: boolean = true;
   errormsg: string = "";
@@ -276,7 +277,10 @@ export class RegistrationComponent implements OnInit {
          
         }
         else {
-          this.messageService.add({ severity: 'error', summary: 'Error Message', detail: "Invalid OTP" });
+          this.response="Invalid OTP";
+          this.responsesty="errormsg";
+          this.HideResponse();
+          //this.messageService.add({ severity: 'error', summary: 'Error Message', detail: "Invalid OTP" });
           // this.errormsg="Invalid OTP";
           // this.iserror=false;
 
@@ -361,20 +365,30 @@ export class RegistrationComponent implements OnInit {
       if (this.registerdto.Email.match('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}')) {
         this.userservice.EmailVerification(this.registerdto).subscribe(res => {
           if (res["result"] === "Email is valid") {
-            this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
+            this.response=res["result"];
+            this.HideResponse();
+            this.responsesty="succsmsg";
+            //this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
             //  this.issucss=false;
             //  this.succsmsg=res["result"];
             //this.btndisable = "line_btn sblue";
           }
           else if (res["result"] === "EmailId is already registred") {
-            this.messageService.add({ severity: 'error', summary: 'Error Message', detail: res["result"] });
+
+            this.response=res["result"];
+            this.responsesty="errormsg";
+            this.HideResponse();
+            //this.messageService.add({ severity: 'error', summary: 'Error Message', detail: res["result"] });
             // this.errormsg=res["result"];
             // this.iserror=false;
             this.btndisable = "disable";
           }
         },
           errormsg => {
-            this.messageService.add({ severity: 'error', summary: 'Error Message', detail: errormsg["error"]["result"] });
+            this.response=errormsg["error"]["result"];
+            this.responsesty="errormsg";
+            this.HideResponse();
+            //this.messageService.add({ severity: 'error', summary: 'Error Message', detail: errormsg["error"]["result"] });
             // this.errormsg=errormsg["error"]["result"];
             // this.iserror=false;
             this.btndisable = "disable";
@@ -420,8 +434,11 @@ export class RegistrationComponent implements OnInit {
             this.ConvertingFormToDto();
             this.ProgressSpinnerDlg=true;
             this.userservice.SendOTP(this.registerdto).subscribe(res => {
-              // this.ProgressSpinnerDlg = false;             
-              this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
+              // this.ProgressSpinnerDlg = false;     
+              this.response=res["result"];   
+              this.responsesty="succsmsg";     
+              this.HideResponse();
+              //this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
               // this.issucss=false;
               // this.succsmsg=res["result"];
               this.registerdto.OTP = res["otp"];
@@ -431,8 +448,11 @@ export class RegistrationComponent implements OnInit {
             },
               error => {
                 // this.ProgressSpinnerDlg = false;
-
-                this.messageService.add({ severity: 'error', summary: 'Error Message', detail: error["result"] });
+                
+                this.response=error["result"];
+                this.responsesty="errormsg";
+                this.HideResponse();
+                //this.messageService.add({ severity: 'error', summary: 'Error Message', detail: error["result"] });
                 // this.errormsg=error["result"];
                 // this.iserror=false;
               });
@@ -450,7 +470,10 @@ export class RegistrationComponent implements OnInit {
             this.userservice.InsertCustomer(this.registerdto).subscribe(res => {
               // this.issucss=false;
               // this.succsmsg=res["result"];
-              this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
+              this.response=res["result"];
+              this.responsesty="succsmsg";
+              this.HideResponse();
+              //this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
               //this.localStorage.set("Email", res["reEmail"]);
               this.userdata = res['reFirstName'];
               this.localStorage.set('username', this.userdata);
@@ -510,5 +533,12 @@ export class RegistrationComponent implements OnInit {
   }
   ontemsDialogClose(event) {
     this.termesdialogdisplay = event;
+  }
+
+  HideResponse()
+  {
+    setTimeout(() => {          
+      this.response="";
+  }, 3000); 
   }
 }

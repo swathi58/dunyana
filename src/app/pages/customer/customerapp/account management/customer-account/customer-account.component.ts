@@ -2,6 +2,7 @@ import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { UsermanagementService } from '../../../services/usermanagement.service';
 import { RegistrationDto } from '../../../model/DTOs/RegistraionDto';
 import { LocalStorageService } from 'angular-web-storage';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-customer-account',
   templateUrl: './customer-account.component.html',
@@ -16,6 +17,7 @@ export class CustomerAccountComponent implements OnInit {
   parentMessage = "Start Shopping";
 
   ProgressSpinnerDlg:boolean=false;
+  orderhistorylist:any[]=[];
 
   registerdto:RegistrationDto={
     Id:0,
@@ -40,11 +42,12 @@ export class CustomerAccountComponent implements OnInit {
   }
 
 profiledata=this.registerdto;
-  constructor(private userservice:UsermanagementService,private localStorage: LocalStorageService) { }
+  constructor(private userservice:UsermanagementService,private localStorage: LocalStorageService,private router:Router ) { }
 
   ngOnInit() {
     //this.ProgressSpinnerDlg=true;
    this.GetProfiledata();
+   this.GetOrderHistory();
   }
   showDialog() {
     this.display = true;
@@ -81,6 +84,38 @@ GetProfiledata()
       this.ProgressSpinnerDlg=false;
      // console.log(this.profiledata["image"]);
     });
+}
+
+GetOrderHistory()
+{
+  this.orderhistorylist=[
+    {
+      "productname":"SAR 123",
+      "OrderID":"A1B2 – C3D4 – E5F6",
+      "soldby":"Retailer Name",
+      "MasterCard":"MasterCard **** 5100",
+      "OrderPlaced":"July 12, 2019"
+    },
+    {
+      "productname":"SAR 123",
+      "OrderID":"A1B2 – C3D4 – E5F6",
+      "soldby":"Retailer Name",
+      "MasterCard":"MasterCard **** 5100",
+      "OrderPlaced":"July 12, 2019"
+    },
+    {
+      "productname":"SAR 123",
+      "OrderID":"A1B2 – C3D4 – E5F6",
+      "soldby":"Retailer Name",
+      "MasterCard":"MasterCard **** 5100",
+      "OrderPlaced":"July 12, 2019"
+    }
+  ]
+}
+
+GetOrderDetails(orderdetails)
+{
+  this.router.navigateByUrl('customer/orderdetails/' + orderdetails["OrderID"]);
 }
 
 }

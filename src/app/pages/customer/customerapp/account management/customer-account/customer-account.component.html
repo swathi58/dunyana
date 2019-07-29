@@ -79,7 +79,35 @@
 
               <h4 class="">Your Order History</h4>
 
-              <div class="col-md-12 category">
+              <div class="col-md-12 category" *ngFor="let order of orderhistorylist" (click)="GetOrderDetails(order)">
+
+
+                  <div class="img col-lg-2 col-sm-2">
+                      <img src="assets/layout/images/cat_img_virtual.jpg" width="110">
+                  </div>
+
+                  <div class="float-left pl-4 col-lg-5 col-sm-5 pr-0">
+                      <h3>Product Name</h3>
+                      <p>Order ID:{{order.OrderID}}<br> Sold by <strong>{{order.soldby}}</strong></p>
+                  </div>
+                  <div class="float-right text-right col-md-4 col-sm-4">
+                      <h3>{{order.productname}}</h3>
+                      <p>{{order.MasterCard}}</p>
+                  </div>
+
+
+
+                  <div class="float-left pl-4 opl col-lg-6 col-xl-6 col-sm-6">
+
+                      Order Placed <span>{{order.OrderPlaced}}</span>
+                  </div>
+                  <div class="float-right text-right  col-md-4 col-sm-3">
+                      <h3>on route</h3>
+                      <p>Track Package</p>
+                  </div>
+
+              </div>
+              <!-- <div class="col-md-12 category">
 
 
                   <div class="img col-lg-2 col-sm-2">
@@ -106,8 +134,8 @@
                       <p>Track Package</p>
                   </div>
 
-              </div>
-              <div class="col-md-12 category">
+              </div> -->
+              <!-- <div class="col-md-12 category">
 
 
                   <div class="img col-lg-2 col-sm-2">
@@ -134,35 +162,7 @@
                       <p>Track Package</p>
                   </div>
 
-              </div>
-              <div class="col-md-12 category">
-
-
-                  <div class="img col-lg-2 col-sm-2">
-                      <img src="assets/layout/images/cat_img_virtual.jpg" width="110">
-                  </div>
-
-                  <div class="float-left pl-4 col-lg-5 col-sm-5 pr-0">
-                      <h3>Product Name</h3>
-                      <p>Order ID: A1B2 – C3D4 – E5F6<br> Sold by <strong>Retailer Name</strong></p>
-                  </div>
-                  <div class="float-right text-right col-md-4 col-sm-4">
-                      <h3>SAR 123</h3>
-                      <p>MasterCard **** 5100</p>
-                  </div>
-
-
-
-                  <div class="float-left pl-4 opl col-lg-6 col-xl-6 col-sm-6">
-
-                      Order Placed <span>July 12, 2019</span>
-                  </div>
-                  <div class="float-right text-right  col-md-4 col-sm-3">
-                      <h3>on route</h3>
-                      <p>Track Package</p>
-                  </div>
-
-              </div>
+              </div> -->
               <p class="col-12 text-right text-blue pr-0"><a href="#">load more</a></p>
 
           </div>

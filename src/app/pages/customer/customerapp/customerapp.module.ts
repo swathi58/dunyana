@@ -54,6 +54,7 @@ import { EditProfileComponent } from './account management/edit-profile/edit-pro
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ShoppingComponent } from './shopping/shopping.component';
 import { PagerService } from '../services/pager.service';
+import { OrderDetailsComponent } from './order management/order-details/order-details.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -61,7 +62,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 }
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent, HomeComponent,CustomerappComponent, CategoriessliderComponent, CustomerAccountComponent,ChangepasswordComponent, ShopByCategoryComponent, OurStoryComponent, HowDunyanaWorksComponent, BecomeSellerComponent, TermsConditionsComponent, ContactUsComponent, FAQComponent, AboutDunyanaComponent, PrivacyPolicyComponent, OrderingPaymentComponent, ShippingComponent, ReturnsComponent, PressEnquiriesComponent, PaymentMethodsComponent, CustomerServiceComponent, TrackYourPackageComponent, DealsPromotionsComponent, CategoryComponent, EditProfileComponent, ShoppingComponent],
+  declarations: [HeaderComponent, FooterComponent, HomeComponent,CustomerappComponent, CategoriessliderComponent, CustomerAccountComponent,ChangepasswordComponent, ShopByCategoryComponent, OurStoryComponent, HowDunyanaWorksComponent, BecomeSellerComponent, TermsConditionsComponent, ContactUsComponent, FAQComponent, AboutDunyanaComponent, PrivacyPolicyComponent, OrderingPaymentComponent, ShippingComponent, ReturnsComponent, PressEnquiriesComponent, PaymentMethodsComponent, CustomerServiceComponent, TrackYourPackageComponent, DealsPromotionsComponent, CategoryComponent, EditProfileComponent, ShoppingComponent, OrderDetailsComponent],
   exports: [CustomerappComponent,HeaderComponent,FooterComponent,TermsConditionsComponent],
   imports: [
     CommonModule,

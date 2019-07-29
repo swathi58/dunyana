@@ -14,6 +14,10 @@ export class CustomerappComponent implements OnInit {
     if (this.localStorage.get('Email') === null ) {
       this.router.navigateByUrl('customer/home');
     }
+    else{
+      this.router.navigateByUrl('customer/customeraccount');
+    }
+   // this.router.navigateByUrl('customer/home');
   }
 
 }

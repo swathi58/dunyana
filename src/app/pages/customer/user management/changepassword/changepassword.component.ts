@@ -21,6 +21,8 @@ export class ChangepasswordComponent implements OnInit {
 
   changepwdForm:FormGroup;
   btndisable:string="disable";
+  response:string="";
+  responsesty:string="";
   // changepassword:ChangepasswordDto={
   //   Email:null,
   //   PWD:null,
@@ -54,7 +56,7 @@ export class ChangepasswordComponent implements OnInit {
   ngOnInit() {
     this.changepwdForm=this.formBuilder.group({
  
-      PWD:['',[Validators.required,Validators.minLength(6)]],
+      PWD:['',[Validators.required,Validators.minLength(6),Validators.pattern('^\S')]],
       NPWD:['',[Validators.required,Validators.minLength(6)]],
       confirmpassword:['',Validators.required]
  },
@@ -79,7 +81,10 @@ SaveChangePassword()
       this.registerdto.PWD=this.changepwdForm.value["PWD"];
       this.userservice.ChangePassword(this.registerdto).subscribe(res=>{
         this.FormReset();
-        this.messageService.add({severity:'success', summary:'Success Message', detail:res["result"]});
+        this.response=res["result"];
+        this.responsesty="succsmsg";
+        this.HideResponse();
+        //this.messageService.add({severity:'success', summary:'Success Message', detail:res["result"]});
         setTimeout(() => {
           this.onClose();
           this.router.navigateByUrl("signin");
@@ -87,12 +92,18 @@ SaveChangePassword()
    
       },
       errormsg=>{
-        this.messageService.add({severity:'error', summary:'Error Message', detail:errormsg["error"]["result"]});
+        this.response=errormsg["error"]["result"];
+        this.responsesty="errormsg";
+        this.HideResponse();
+       // this.messageService.add({severity:'error', summary:'Error Message', detail:errormsg["error"]["result"]});
       });
     }
     else
     {
-      this.messageService.add({severity:'error', summary:'Error Message', detail:"Invalid Old Password"});
+      this.response="Invalid Old Password";
+      this.responsesty="errormsg";
+      this.HideResponse();
+      //this.messageService.add({severity:'error', summary:'Error Message', detail:"Invalid Old Password"});
     }
     
    
@@ -123,5 +134,11 @@ SaveChangePassword()
       'NPWD':'',
       'confirmpassword':''
     })
+  }
+  HideResponse()
+  {
+  //   setTimeout(() => {          
+  //     this.response="";
+  // }, 3000); 
   }
 }
