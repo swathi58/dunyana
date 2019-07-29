@@ -28,7 +28,7 @@ export class CategoryService {
 
   public getbanners(): Observable<any[]> {
     return this.http.get<any[]>(environment.API_URL +'api/Banner');
-
+  }
   public UpdateCategory(categorylist:category[]): Observable<category[]> {
     return this.http.post<category[]>(environment.API_URL + 'Category/UpdateCategorys', categorylist);
   }
