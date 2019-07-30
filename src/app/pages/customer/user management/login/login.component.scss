@@ -104,17 +104,22 @@
     }
 }
 
-.line_btn {
-    &.sblue {
-        background-position: 0px 32px;
-        background-color: transparent;
-        border: none;
-        outline: none;
-        &:hover {
-            background-position: 0px -28px;
-        }
+:host {
+    ::ng-deep {
+    .ui-button{
+   
+            span{
+                font-weight: 600;
+            }
+      
+    }
     }
 }
+
+
+
+
+
 
 .justify-content-center {
     button {

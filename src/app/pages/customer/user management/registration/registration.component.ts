@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validator, Validators } from '@angular/forms';
 
 import { MustMatch } from 'src/app/shared/validators/PasswordMustMatchvalidator';
@@ -15,6 +15,7 @@ import { LocalStorageService } from 'angular-web-storage';
 import { OTP } from '../../model/OTP';
 import { IfStmt } from '@angular/compiler';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import{Observable}from 'rxjs/Rx';
 
 @Component({
   selector: 'app-registration',
@@ -47,14 +48,22 @@ export class RegistrationComponent implements OnInit {
   errormsg: string = "";
   succsmsg: string = "";
 
-  timerbtndisplay: boolean = true;
+
   imageChangedEvent: any = '';
   croppedImage: any = '';
   finalImage: any = '';
   display: boolean = false;
   termesdialogdisplay: boolean = false;
 
-
+  timerbtndisplay: boolean = true;
+  verifybtndisplay:boolean=false;
+  callDuration:string='';
+  resendtext:string='Resend in 00:00';
+  timetaken:any='';
+  timerdata:any='';
+  btnotpdis:string= "disable";
+  otpdisable:string='';
+  
   registerdto: RegistrationDto = {
     Id: 0,
     FirstName: null,
@@ -82,7 +91,7 @@ export class RegistrationComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private userservice: UsermanagementService,
     private messageService: MessageService, private ngxService: NgxUiLoaderService,
     public translate: TranslateService, private localStorage: LocalStorageService,
-    private router: Router) {
+    private router: Router,private elementRef: ElementRef) {
 
   }
 
@@ -265,28 +274,50 @@ export class RegistrationComponent implements OnInit {
       this.btndisable = "disable";
     }
   }
-  otpformvalidate() {
 
+  
+  otpformvalidate() {
+    this.timerdata = this.localStorage.get('timerdata');
     if (this.Otp != null) {
       console.log(this.Otp.toString().length);
+
       if (this.Otp.toString().length == 6) {
-        this.otpnumb="numb";
-        if (this.Otp == this.registerdto.OTP.toString()) {
-          this.btndisable = "line_btn sblue";
-         
+        this.otpnumb = "numb";
+        debugger
+        if (this.timerdata <= "01:00" || this.timerdata != "00:00") {
+          debugger
+          if (this.Otp == this.registerdto.OTP.toString()) {
+          
+            this.btndisable = "line_btn sblue";         
+            this.btnotpdis="disabled";
+            
+  
+            this.timerbtndisplay = true;
+            this.verifybtndisplay = false;
+            //this.resendtext = 'Resend in 00:00';
+            this.callDuration = "";
+
+          }
+          else {
+            this.messageService.add({ severity: 'error', summary: 'Error Message', detail: "Invalid OTP" });
+            // this.errormsg="Invalid OTP";
+            // this.iserror=false;
+
+            this.btndisable = "disable";
+          }
         }
         else {
-          this.messageService.add({ severity: 'error', summary: 'Error Message', detail: "Invalid OTP" });
-          // this.errormsg="Invalid OTP";
-          // this.iserror=false;
-
           this.btndisable = "disable";
+          this.btnotpdis = "line_btn sblue";          
+          this.messageService.add({ severity: 'error', summary: 'Error Message', detail: "Please Enter OTP With in 10 Minutes" });
+          this.timerbtndisplay = true;
+          this.verifybtndisplay = false;
+          this.resendtext = 'Resend in 00:00';
+          this.callDuration = "";
         }
-
       }
-      else if(this.Otp.toString().length<=5)
-      {
-        this.otpnumb="";
+      else if (this.Otp.toString().length <= 5) {
+        this.otpnumb = "";
       }
       else {
         this.btndisable = "disable";
@@ -297,6 +328,7 @@ export class RegistrationComponent implements OnInit {
       this.btndisable = "disable";
     }
   }
+
 
   prevclick() {
 
@@ -425,6 +457,11 @@ export class RegistrationComponent implements OnInit {
               // this.issucss=false;
               // this.succsmsg=res["result"];
               this.registerdto.OTP = res["otp"];
+              this.callDuration = this.elementRef.nativeElement.querySelector('#time');
+              this.startTimer(this.callDuration);
+              debugger
+              this.timerbtndisplay = false;
+              this.verifybtndisplay = true;
               //this.router.navigateByUrl('/');
               //this.ResetForm();
               this.ProgressSpinnerDlg=false;
@@ -488,6 +525,81 @@ export class RegistrationComponent implements OnInit {
       this.messageService.add({severity:'error', summary:'Error Message', detail:error["result"]});
     }); */
   }
+
+  resendotp(){
+    this.ProgressSpinnerDlg=true;
+    this.btndisable="disable";
+    this.userservice.sendingotp(this.registerdto).subscribe(res => {
+      this.ProgressSpinnerDlg=false;
+      this.btndisable="disable";
+      this.submitbtntext="Verify";
+     this.verifybtndisplay=false;
+     this.timerbtndisplay=true;
+      debugger
+      this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
+      // this.show = false;
+      // this.div.nativeElement.innerHTML = res["result"];
+      
+      
+     
+      this.registerdto.OTP=res["otp"];
+      //sessionStorage.setItem('otp',res["otp"]);      
+      this.localStorage.set('otp',res["otp"]);
+      this.callDuration = this.elementRef.nativeElement.querySelector('#time');
+      this.startTimer(this.callDuration);
+      debugger
+      this.timerbtndisplay=false;
+      this.verifybtndisplay=true;
+      this.btnotpdis = "disable";  
+      this.resendtext="Resend in 00:00";
+      this.otpdisable="";
+     // this.show=true;
+
+      
+    },
+      errormsg => {
+        //this.show = false;
+        this.verifybtndisplay=true;
+        this.timerbtndisplay=false;
+      //this.div.nativeElement.innerHTML = errormsg["error"]["result"];
+       this.messageService.add({ severity: 'error', summary: 'Error Message', detail: errormsg["error"]["result"] });
+      });
+  }
+
+  
+  startTimer(display) {
+    var timer = 60;
+    var minutes;
+    var seconds;
+    console.log(display.textContent);
+    var subscription= Observable.interval(1000).subscribe(x => {
+        minutes = Math.floor(timer / 60);
+        seconds = Math.floor(timer % 60);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent ="Resend in "+ minutes + ":" + seconds;
+       
+        --timer;
+        this.localStorage.set('timerdata', minutes + ":" + seconds);
+       
+        if (minutes + ":" + seconds == "00:00") {  
+                               
+          subscription.unsubscribe();
+          this.btnotpdis = "line_btn sblue";         
+          this.timerbtndisplay=false;
+          this.verifybtndisplay=true;
+          this.resendtext='Resend in 00:00';    
+          this.callDuration="";
+          this.otpdisable="disable";
+          
+        }
+        console.log(this.timetaken);
+    });
+    
+}
+
 
   ResetForm() {
 

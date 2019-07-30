@@ -402,7 +402,7 @@
 
                              
                                           <div class="otp-num">
-                                            <input id="otp" type="number" oninput="if(value.length>6)value=value.slice(0,6)" formControlName="otp" [(ngModel)]="Otp" (keyup)="otpformvalidate()">
+                                            <input id="otp" type="number" oninput="if(value.length>6)value=value.slice(0,6)" formControlName="otp" [ngClass]="otpdisable" [(ngModel)]="Otp" (keyup)="otpformvalidate()">
                                             <span class="ml-g"></span> <span></span> <span></span> <span></span> <span></span> <span></span>
                                         </div>
                                       
@@ -432,8 +432,8 @@
 
                         <div class="row btns" [hidden]="hidenextbtn">
                             <div class="col-sm-11 m-auto">
-                                    <!-- <p-button class="timersty" [label]="timerbtntext" [hidden]="timerbtndisplay"></p-button> -->
-                                    <p-button class="line_btn sblue" [label]="submitbtntext" href="#demo" data-slide="next" [ngClass]="btndisable" (click)="addcustomer()"></p-button>
+                                <p-button class="timersty" [ngClass]="btnotpdis" [hidden]="timerbtndisplay" (click)="resendotp()"><span id="time" class="text-primary timer" >{{resendtext}}</span></p-button>
+                                    <p-button class="line_btn sblue" [label]="submitbtntext" href="#demo" data-slide="next" [ngClass]="btndisable" [hidden]="verifybtndisplay" (click)="addcustomer()"></p-button>
 
                             </div>
                         </div>

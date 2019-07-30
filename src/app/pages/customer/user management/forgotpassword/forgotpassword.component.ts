@@ -15,6 +15,7 @@ import { LocalStorageService } from 'angular-web-storage';
 import { OTP } from '../../model/OTP';
 import { SharedModule } from '../../../../shared/shared.module';
 import{Observable}from 'rxjs/Rx';
+import { observable } from 'rxjs';
 
 @Component({
   selector: 'app-forgotpassword',
@@ -34,21 +35,23 @@ export class ForgotpasswordComponent implements OnInit {
   countries: any[] = [];
   default: string = 'United States';
   btndisable: string = "disable";
+  btnotpdis:string= "disable";
   currentIndex: string;
   hidenextbtn: boolean = false;
   flag:boolean=false;
 
   activetab: string = "active";
-  submitbtntext: string = "Confirm";
+  submitbtntext: string = "Submit";
   headertext:string="Forgot Your Password";
   timerbtntext: string = "Resend in";
   prevbtn: string = "none";
 
   timerbtndisplay: boolean = true;
   verifybtndisplay:boolean=false;
-  minutes:string="";
   callDuration:string='';
-
+  resendtext:string='Resend in 00:00';
+  timetaken:any='';
+  timerdata:any='';
   
   imageChangedEvent: any = '';
   croppedImage: any = '';
@@ -58,7 +61,7 @@ export class ForgotpasswordComponent implements OnInit {
   apiotp:any='';
   EmailOTP:string='';
   errmsg:string='';
-  
+  otpdisable:string='';
   timeLeft: number = 10;
 
   subscribeTimer: any;
@@ -150,7 +153,7 @@ export class ForgotpasswordComponent implements OnInit {
         if (this.registerdto.Email.match('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}')) {
          
           //this.btndisable = "line_btn sblue";
-            
+        
              this.CheckEmail();                             
         }
         else
@@ -168,6 +171,7 @@ export class ForgotpasswordComponent implements OnInit {
       if (this.registerdto.PWD.length != null) {
             if (this.registerdto.PWD.length >= 6) {
             this.btndisable = "line_btn sblue";
+           
              }
              else{
               this.btndisable = "disable";
@@ -181,49 +185,63 @@ export class ForgotpasswordComponent implements OnInit {
 
   
   otpformvalidate() {
-    debugger   
+    debugger
     this.show = true;
-    if (this.forgotform.value["otp"] != null) {
+    this.timerdata = this.localStorage.get('timerdata');
+    this.EmailOTP = this.forgotform.value["otp"];
+    console.log(this.timerdata);
+    
+    if (this.EmailOTP.toString().length == 6) {
 
 
-      this.EmailOTP = this.forgotform.value["otp"];
+    
+      //this.timerbtndisplay = true;
+      //this.verifybtndisplay = false;
+     // this.resendtext = 'Resend in 00:00';
+     // this.callDuration = "";
 
-      if (this.EmailOTP.toString().length == 6) {
 
+     debugger
+      if (this.timerdata <= "01:00" ) {
+        debugger
         if (this.EmailOTP == this.registerdto.OTP.toString()) {
           console.log(this.callDuration);
 
-          if(this.callDuration<="10:00"){
-            this.btndisable = "line_btn sblue";
-            this.headertext = "Welcome Back";
-            this.submitbtntext = "Submit";
-            this.timerbtndisplay=true;
-            this.verifybtndisplay=false;
-            this.callDuration="";
-          }
-          else{
-            this.show = false;
-            this.div.nativeElement.innerHTML = "Please Enter OTP With in 10 Minutes";
-            this.callDuration="";
-          }
-         
-         
+          this.btndisable = "line_btn sblue";
+          // this.headertext = "Welcome Back";
+          // this.submitbtntext = "Submit";
+          this.btnotpdis="disabled";
+          
+
+          this.timerbtndisplay = true;
+          this.verifybtndisplay = false;
+          //this.resendtext = 'Resend in 00:00';
+          this.callDuration = "";
         }
         else {
           this.btndisable = "disable";
-
+          this.btnotpdis = "disable";
           this.show = false;
           this.div.nativeElement.innerHTML = "OTP Mismatched";
           // this.messageService.add({severity:'error', summary:'Error Message', detail:"OTP Mismatched"});         
 
         }
+
+
       }
       else {
         this.btndisable = "disable";
+        this.btnotpdis = "line_btn sblue";
+        this.show = false;
+        this.div.nativeElement.innerHTML = "Please Enter OTP With in 10 Minutes";
+        this.timerbtndisplay = true;
+        this.verifybtndisplay = false;
+        this.resendtext = 'Resend in 00:00';
+        this.callDuration = "";
       }
-}
+    }
 
-    
+
   }
 
   
@@ -274,7 +292,7 @@ export class ForgotpasswordComponent implements OnInit {
   }
 
   submitforgotdata() {
-  
+  debugger
     const slides = document.getElementsByTagName('li');
     let i = 0;
     for (i = 0; i < slides.length; i++) {
@@ -286,16 +304,19 @@ export class ForgotpasswordComponent implements OnInit {
 
           if (Number.parseInt(this.currentIndex) == 0) {
            
+            
             this.sendotp();
           
             // this.basicformvalidate();
-
+            this.submitbtntext="Verify";
           }
           else if (Number.parseInt(this.currentIndex) == 1) {
 
             //this.otpformvalidate();
             this.btndisable="disable";
-            this.submitbtntext="Confirm";
+            //this.submitbtntext="Verify";
+            this.submitbtntext = "Submit";
+            this.headertext="welcome back";
           }
           else if (Number.parseInt(this.currentIndex) == 2) {
             
@@ -306,15 +327,15 @@ export class ForgotpasswordComponent implements OnInit {
            this.btndisable="none";
            this.show=true;
            this.hidenextbtn = true;
+           this.timerbtndisplay=true;
+           this.verifybtndisplay=false;
             this.updatenewpwd();
           }
         
 
           //this.btndisable = "disable";
         }
-        if (Number.parseInt(this.currentIndex) >= 0) {
-          this.prevbtn = "backBtn";
-        }
+        
 
       }
     }
@@ -371,7 +392,8 @@ export class ForgotpasswordComponent implements OnInit {
     this.userservice.sendingotp(this.registerdto).subscribe(res => {
       this.ProgressSpinnerDlg=false;
       this.btndisable="disable";
-      this.submitbtntext="Confirm";
+      this.btnotpdis = "disable";
+      this.submitbtntext="Verify";
      
       debugger
       //this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
@@ -397,27 +419,79 @@ export class ForgotpasswordComponent implements OnInit {
       });
   }
 
+  resendotp(){
+    this.ProgressSpinnerDlg=true;
+    this.btndisable="disable";
+    this.userservice.sendingotp(this.registerdto).subscribe(res => {
+      this.ProgressSpinnerDlg=false;
+      this.btndisable="disable";
+      this.submitbtntext="Verify";
+     this.verifybtndisplay=false;
+     this.timerbtndisplay=true;
+      debugger
+      //this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
+      this.show = false;
+      this.div.nativeElement.innerHTML = res["result"];
+      this.headertext="Verify Email";
+      
+     
+      this.registerdto.OTP=res["otp"];
+      //sessionStorage.setItem('otp',res["otp"]);      
+      this.localStorage.set('otp',res["otp"]);
+      this.callDuration = this.elementRef.nativeElement.querySelector('#time');
+      this.startTimer(this.callDuration);
+      debugger
+      this.timerbtndisplay=false;
+      this.verifybtndisplay=true;
+      this.btnotpdis = "disable";  
+      this.otpdisable="";
+      this.resendtext="Resend in 00:00";
+     // this.show=true;
+
+      
+    },
+      errormsg => {
+        this.show = false;
+        this.verifybtndisplay=true;
+        this.timerbtndisplay=false;
+      this.div.nativeElement.innerHTML = errormsg["error"]["result"];
+      // this.messageService.add({ severity: 'error', summary: 'Error Message', detail: errormsg["error"]["result"] });
+      });
+  }
+
   
   startTimer(display) {
-    var timer = 600;
+    var timer = 60;
     var minutes;
     var seconds;
     console.log(display.textContent);
-    Observable.interval(1000).subscribe(x => {
+    var subscription= Observable.interval(1000).subscribe(x => {
         minutes = Math.floor(timer / 60);
         seconds = Math.floor(timer % 60);
 
         minutes = minutes < 10 ? "0" + minutes : minutes;
         seconds = seconds < 10 ? "0" + seconds : seconds;
 
-        display.textContent = minutes + ":" + seconds;
-        
+        display.textContent ="Resend in "+ minutes + ":" + seconds;
+       
         --timer;
-        
-        if (--timer < 0) {                       
+        this.localStorage.set('timerdata', minutes + ":" + seconds);
+       
+        if (minutes + ":" + seconds == "00:00") {  
+                               
+          subscription.unsubscribe();
+          this.btnotpdis = "line_btn sblue";         
+          this.timerbtndisplay=false;
+          this.verifybtndisplay=true;
+          this.resendtext='Resend in 00:00';    
+          this.callDuration="";
+          this.otpdisable="disable";
+          
           
         }
-    })
+        console.log(this.timetaken);
+    });
+    
 }
 
 
