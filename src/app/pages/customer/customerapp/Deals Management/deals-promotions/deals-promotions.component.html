@@ -12,20 +12,21 @@
                 </div>
             </div>
 
-
             <section class="category brands">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-10 offset-md-1">
-                            <span class="text-center let-space" *ngFor="let char of alphabetpaging" (click)="Filterbyalphabet(char)">{{char}}</span>
-                            <!-- <p class="text-center let-space"># <strong>A</strong> B C D E F G H I J K L M N O P Q R S T U V W X Y Z</p> -->
+                            <h2>Deals</h2>
+                        
+                            <p class="text-center let-space">
+                                <span *ngFor="let char of alphabetpaging" (click)="Filterbyalphabet(char)">{{char}}</span>
+                            </p>
                         </div>
                     </div>
                     <hr/>
-                </div>
-            
-            
+                </div>          
             </section>
+
             <!-- <div class="row">
                <div>
                    <span *ngFor="let char of alphabetpaging" (click)="Filterbyalphabet(char)">{{char}}</span>

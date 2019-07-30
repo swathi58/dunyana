@@ -117,6 +117,10 @@ const routes: Routes = [
     {
       path:"orderdetails/:ordid",
       component:OrderDetailsComponent
+    },
+    {
+      path:"shopping",
+      component:ShoppingComponent
     }
 
   ]

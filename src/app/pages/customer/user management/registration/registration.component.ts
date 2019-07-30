@@ -88,6 +88,9 @@ export class RegistrationComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.GetCountriesList();
+
     if (this.localStorage.get('lang') != null) {
       this.lang = this.localStorage.get('lang');
       this.translate.use(this.lang);
@@ -97,14 +100,15 @@ export class RegistrationComponent implements OnInit {
     }
     this.registrationForm = this.formBuilder.group({
       //  FirstregistrationForm:this.formBuilder.array([this.BasicDetails()]),
-      firstname: ['', Validators.required],
-      lastname: ['', Validators.required],
+      //firstname: ['', [Validators.required,Validators.pattern('[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*')]],
+      firstname: ['', [Validators.required,Validators.pattern('^([A-Za-z]+ )+[A-Za-z]+$|^[A-Za-z]+$')]],
+      lastname: ['', [Validators.required,Validators.pattern('^([A-Za-z]+ )+[A-Za-z]+$|^[A-Za-z]+$')]],
       emailid: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}')]],
       mobile: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
-      address: ['', Validators.required],
+      address: ['', [Validators.required,Validators.pattern('^([A-Za-z]+ )+[A-Za-z]+$|^[A-Za-z]+$')]],
       country: ['', Validators.required],
-      city: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      city: ['', [Validators.required,Validators.pattern('^([A-Za-z]+ )+[A-Za-z]+$|^[A-Za-z]+$')]],
+      password: ['', [Validators.required,Validators.pattern('^([A-Za-z]+ )+[A-Za-z]+$|^[A-Za-z]+$'),Validators.minLength(6)]],
       confirmpassword: ['', [Validators.required, Validators.minLength(6)]],
       otp: ['', Validators.required]
     },
@@ -113,20 +117,21 @@ export class RegistrationComponent implements OnInit {
       }
     );
 
+   
     // this.countries = [
     //   { label: 'KSA', value: 'KSA' },
     //   { label: 'United States', value: 'United States' },
     //   { label: 'United Kingdom', value: 'United Kingdom' }
     // ];
 
-    // this.registrationForm.controls['country'].setValue(this.countries[0]["description"]);
 
-    this.GetCountriesList();
+
   }
 
 
   _keyPress(event: any) {
-    const pattern = /[0-9\+\-\ ]/;
+    //const pattern = /[0-9\+\-\ ]/;
+    const pattern=/^([0-9]+ )+[0-9]+$|^[0-9]+$/;
     let inputChar = String.fromCharCode(event.charCode);
 
     if (!pattern.test(inputChar)) {
@@ -329,21 +334,14 @@ export class RegistrationComponent implements OnInit {
     }
     this.basicformvalidate();
   }
-
   GetCountriesList() {
     this.userservice.GetCountriesList().subscribe(res => {
-      this.countries = res;
-
-      res.forEach(element => {
-        // this.countries.push({ "label": element["id"], value: element["description"] });
-        // this.countries = [
-        //   { label: 'KSA', value: 'KSA' },
-        //   { label: 'United States', value: 'United States' },
-        //   { label: 'United Kingdom', value: 'United Kingdom' }
-        // ];
-      });
-    })
+      Object.keys(res).map(key => (
+       this.countries.push({label:res[key]["description"], value:res[key]["description"]})    
+        ));
+    });
   }
+
   ConvertingFormToDto() {
 
     this.registerdto.FirstName = this.registrationForm.value["firstname"];
@@ -417,6 +415,7 @@ export class RegistrationComponent implements OnInit {
             this.formauthdatavalidate();
             //  this.basicformvalidate();
            // this.prevbtn = "backBtn";
+           this.registrationForm.controls['country'].setValue(this.countries[0].value,{onlySelf: true});
 
           }
           else if (Number.parseInt(this.currentIndex) == 1) {
@@ -427,8 +426,7 @@ export class RegistrationComponent implements OnInit {
           else if (Number.parseInt(this.currentIndex) == 2) {
             this.submitbtntext = "Verify";
             this.contactformvalidate();
-            this.registerdto.Country = this.registrationForm.value["country"]["description"];
-
+            this.registerdto.Country = this.registrationForm.value["country"];
           }
           else if (Number.parseInt(this.currentIndex) == 3) {
             this.ConvertingFormToDto();
@@ -539,6 +537,6 @@ export class RegistrationComponent implements OnInit {
   {
     setTimeout(() => {          
       this.response="";
-  }, 3000); 
+  }, 5000); 
   }
 }

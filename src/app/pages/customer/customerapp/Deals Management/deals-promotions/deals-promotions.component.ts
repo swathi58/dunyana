@@ -68,7 +68,7 @@ setPage(page: number) {
   if (page < 1 || page > this.pager.totalPages) {
       return;
   }
-  this.pager = this.pagerService.getPager(this.filtereditems.length, page);
+  this.pager = this.pagerService.getPager(this.filtereditems.length, page,4);
   this.pagedItems = this.filtereditems.slice(this.pager.startIndex, this.pager.endIndex + 1);
 }
 

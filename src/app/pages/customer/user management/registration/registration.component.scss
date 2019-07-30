@@ -337,6 +337,9 @@ button:hover {
 .carousel-item {
     min-height: 231px;
     background: white;
+    &.c-btm{
+        margin-bottom: 2.8rem;
+    }
 }
 
 .carousel-indicators li {

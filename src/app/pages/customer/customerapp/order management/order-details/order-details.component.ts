@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { OrdermanagementService } from '../../../services/ordermanagemet.service';
+import { LocalStorageService } from 'angular-web-storage';
 
 @Component({
   selector: 'app-order-details',
@@ -8,11 +10,19 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class OrderDetailsComponent implements OnInit {
 
-  constructor(private router:ActivatedRoute) { }
+  customerid:number;
+  productid:number;
+
+  constructor(private router:ActivatedRoute,private orderservice:OrdermanagementService,private localStorage: LocalStorageService) { }
 
   ngOnInit() {
+    this.customerid=this.localStorage.get("customerid");
+   this.productid=this.router.snapshot.params['ordid'];
+   this.GetOrderHistoryDetails();
 
-   console.log(this.router.snapshot.params['ordid']);
   }
-
+  GetOrderHistoryDetails()
+  {
+    //this.orderservice.orderhistorydetailsdata
+  }
 }

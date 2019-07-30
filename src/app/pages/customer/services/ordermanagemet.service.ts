@@ -9,11 +9,13 @@ import { LocalStorageService } from 'angular-web-storage';
 @Injectable({
   providedIn: 'root'
 })
-export class DealsmanagementService {
+export class OrdermanagementService {
+
+  orderhistorydetailsdata:any[]=[];
 
   constructor(private http: HttpClient,public router:Router,private localStorage: LocalStorageService) {}
 
-  public GetDealsList(): Observable<any> {
-    return this.http.get<any>(environment.API_URL + 'Deals/GetDeals');
+  public GetOrderHistory(customerid): Observable<any> {
+    return this.http.get<any>(environment.API_URL + 'Orders/GetOrders/'+customerid);
   }
 }

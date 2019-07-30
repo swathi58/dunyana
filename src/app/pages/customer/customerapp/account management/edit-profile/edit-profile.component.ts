@@ -71,14 +71,14 @@ export class EditProfileComponent implements OnInit {
     this.GetCountriesList();
     this.EditprofileForm=this.formBuilder.group({
 
-      firstname:['',Validators.required],
-      lastname:['',Validators.required],
+      firstname:['',[Validators.required,Validators.pattern('^([A-Za-z]+ )+[A-Za-z]+$|^[A-Za-z]+$')]],
+      lastname:['',[Validators.required,Validators.pattern('^([A-Za-z]+ )+[A-Za-z]+$|^[A-Za-z]+$')]],
       // emailid:['',[Validators.required,Validators.email]],
       //emailid:['', [Validators.required,Validators.pattern('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}')]],
       mobile:['',[Validators.required,Validators.minLength(10),Validators.maxLength(10)]],
-      address:['',Validators.required],
+      address:['',[Validators.required,Validators.pattern('^([A-Za-z]+ )+[A-Za-z]+$|^[A-Za-z]+$')]],
       country:['Select Country',Validators.required],
-      city:['',Validators.required],
+      city:['',[Validators.required,Validators.pattern('^([A-Za-z]+ )+[A-Za-z]+$|^[A-Za-z]+$')]],
     });
 
 
@@ -135,7 +135,7 @@ console.log(this.EditprofileForm.value);
   }
   
 _keyPress(event: any) {
-  const pattern = /[0-9\+\-\ ]/;
+  const pattern=/^([0-9]+ )+[0-9]+$|^[0-9]+$/;
   let inputChar = String.fromCharCode(event.charCode);
 
   if (!pattern.test(inputChar)) {
