@@ -10,6 +10,7 @@ import {InputTextModule} from 'primeng/inputtext';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import {CarouselModule} from 'primeng/carousel';
 import {PaginatorModule} from 'primeng/paginator';
+import {MultiSelectModule} from 'primeng/multiselect';
 
 const COMMON_MODULES = [
 
@@ -22,7 +23,8 @@ const COMMON_MODULES = [
   InputTextModule,
   ImageCropperModule,
   CarouselModule,
-  PaginatorModule
+  PaginatorModule,
+  MultiSelectModule
 ]
 
 

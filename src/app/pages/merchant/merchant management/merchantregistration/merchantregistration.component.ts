@@ -72,21 +72,17 @@ export class MerchantregistrationComponent implements OnInit {
    }
  );
   
- this.countries=[
-  {label:'India',value:'India'},
-  {label:'United Kingdom',value:'United Kingdom'},
-  {label:'Afghanistan',value:'Afghanistan'}
-];
 
-this.categories=[
-  {label:'Accessories&Beauty',value:'Accessories&Beauty'},
-  {label:'Fashion',value:'Fashion'},
-  {label:'Shoes',value:'Shoes'},
-  {label:'SportsFitness',value:'SportsFitness'},
-  {label:'VirtualMall',value:'VirtualMall'}
-]
+this.bindcountries();
+//this.categories();
+// this.categories=[
+//   {label:'Accessories&Beauty',value:'Accessories&Beauty'},
+//   {label:'Fashion',value:'Fashion'},
+//   {label:'Shoes',value:'Shoes'},
+//   {label:'SportsFitness',value:'SportsFitness'},
+//   {label:'VirtualMall',value:'VirtualMall'}
+// ]
 
-this.merchantForm.controls['country'].setValue(this.countries[0]["label"], {onlySelf: true});
 }
 
 
@@ -209,6 +205,18 @@ error=>{
 });
  }
 
+ bindcategories(){
+  this.merchantservice.Getcategories().subscribe(res=>{
+    this.categories=res;
+  })
+ }
+ bindcountries(){
+  this.merchantservice.GetCountries().subscribe(res => {
+    this.countries = res;       
+  })
+ }
+
+ 
 
  ResetForm()
  {

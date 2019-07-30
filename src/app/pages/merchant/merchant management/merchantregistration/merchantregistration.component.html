@@ -197,7 +197,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="row inputset">
+                                    <!-- <div class="row inputset">
                                        
                                         <div class="col-sm-12">
                                              <p-dropdown [options]="countries"  formControlName="country" placeholder="Which country are you from" [autoWidth]="false"  [filter]="false">
@@ -208,14 +208,18 @@
                                         <div class="col-sm-12">
                                             <hr>
                                         </div>
-                                    </div>
+                                    </div> -->
                                           
                                     <div class="row inputset">
                                         
                                         <div class="col-sm-12">
-                                                <p-dropdown [options]="countries" placeholder="Where do you want to Sell" formControlName="Sell" [autoWidth]="false"  [filter]="false">
+                                                <!-- <p-dropdown [options]="countries" placeholder="Where do you want to Sell" formControlName="Sell" [autoWidth]="false"  [filter]="false">
                                                       
-                                                    </p-dropdown>
+                                                    </p-dropdown> -->
+                                                 
+                                                    <p-multiSelect [options]="countries" placeholder="Where do you want to Sell" formControlName="Sell" [(ngModel)]="selectedCars1" [panelStyle]="{minWidth:'12em'}">
+
+                                                    </p-multiSelect>    
                                         </div>
                                         
                                         <div class="col-sm-12">
@@ -223,7 +227,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="row inputset">
+                                    <!-- <div class="row inputset">
                                       
                                        
                                         <div class="col-sm-12">
@@ -234,7 +238,7 @@
                                         <div class="col-sm-12">
                                             <hr>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                                
                             </div>
@@ -357,8 +361,10 @@
             </div>
           </div>
  
-<div class="loading-indicator" *ngIf="ProgressSpinnerDlg">
-      <p-progressSpinner></p-progressSpinner>
-</div>
+          <div class="loading-indicator mid" *ngIf="ProgressSpinnerDlg">
+            <p-progressSpinner></p-progressSpinner>
+          </div> 
+          
+          <div class="overlay" *ngIf="ProgressSpinnerDlg"></div>
 
 

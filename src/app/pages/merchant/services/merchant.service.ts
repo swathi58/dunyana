@@ -20,4 +20,12 @@ export class MerchantService {
   public EmailVerification(merchantregistor: MerchantDto): Observable<MerchantDto> { 
     return this.http.post<MerchantDto>(environment.API_URL + 'Customer/AccountActivation', merchantregistor);
   }
+
+  public GetCountries(): Observable<any> {
+    return this.http.get<any>(environment.API_URL + 'LookupTypeValue/GetCountrylist');
+  }
+
+  public Getcategories(): Observable<any> {
+    return this.http.get<any>(environment.API_URL + 'Category/GetCategories');
+  }
 }
