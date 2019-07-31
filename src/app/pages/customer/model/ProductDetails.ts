@@ -5,4 +5,7 @@ export class Productdetails{
     cardnumber:string;
     address:string;
     status:string;
+    zip:string;
+    country:string;
+    productname:string;
 }

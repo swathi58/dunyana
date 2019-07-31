@@ -48,7 +48,7 @@
                         Password is </div> -->
                         <div class="login-error" [hidden]="!loginForm.controls['lPassword'].errors?.pattern">Your password can't start or end with a blank sapce</div>
 
-                      <div class="login-error" [hidden]="!loginForm.controls['lPassword'].errors?.minlength"></div>
+                      <div class="login-error" [hidden]="!loginForm.controls['lPassword'].errors?.minlength">Password Must be Grater Than 6 Characters</div>
                     </div>
                     <div class="col-sm-12">
                       <hr>
