@@ -113,7 +113,7 @@
     
                             </div>
     
-                            <p class="col-12 text-right text-blue pr-0"><a href="#">load more</a></p>
+                            <!-- <p class="col-12 text-right text-blue pr-0"><a href="#">load more</a></p> -->
                             <!-- pager -->
                             <div class="col-md-12 text-center">
                                 <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
@@ -135,7 +135,7 @@
                                 </ul>
     
                             </div>
-                      
+                      <div [hidden]="noorders"><span>No Orders</span></div>
 
                     </div>
 

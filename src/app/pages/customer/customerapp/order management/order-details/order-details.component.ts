@@ -12,7 +12,7 @@ import { Productdetails } from '../../../model/ProductDetails';
 export class OrderDetailsComponent implements OnInit {
 
   customerid:number;
-  productid:number;
+  productid:number=0;
   orderhistorylist: any[] = [];
   productdetails:Productdetails={
     productimage:null,
@@ -41,8 +41,7 @@ export class OrderDetailsComponent implements OnInit {
     this.orderhistorylist.forEach(items => {
       
       var prod:any[]=items["orderDetails"];
-      console.log(prod);
-     console.log(prod.filter(x=>x.id===13));
+     console.log(prod.filter(x=>x.id==this.productid));
     });
   }
 }

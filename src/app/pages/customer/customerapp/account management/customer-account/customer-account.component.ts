@@ -28,7 +28,7 @@ export class CustomerAccountComponent implements OnInit {
   pagedItems: any[] = [];
   filtereditems: any[] = [];
   totalproducts: Array<orderhistory> = [];
-
+  noorders:boolean=true;
   registerdto: RegistrationDto = {
     Id: 0,
     FirstName: null,
@@ -112,9 +112,17 @@ export class CustomerAccountComponent implements OnInit {
      else
      {
       this.orderservice.GetOrderHistory(this.customerid).subscribe(res => {
+       
         this.orderhistorylist =res;
-        this.orderservice.orderhistorydetailsdata=res;
-        this.Fillproductdetails();
+        if(this.orderhistorylist.length>0)
+        {
+          this.orderservice.orderhistorydetailsdata=res;
+          this.Fillproductdetails();
+        }
+       else
+       {
+          this.noorders=false;
+       }
       });
      }
   }
