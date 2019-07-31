@@ -116,7 +116,7 @@
                                         <div class="col-sm-12"><input placeholder="Website link" type="text" formControlName="Website" (keyup)="formvalidate()" /></div>
                                         <div class="col-sm-12">
                                             <div *ngIf="merchantForm.controls['Website'].errors && !merchantForm.controls['Website'].pristine" class="text-danger error">
-                                                <div [hidden]="!merchantForm.controls['Website'].errors.required">Email Required</div>
+                                                <div [hidden]="!merchantForm.controls['Website'].errors.required">Please Enter Website Link</div>
                                                 
                                             </div>
                                         </div>

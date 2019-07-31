@@ -478,14 +478,14 @@ export class ForgotpasswordComponent implements OnInit {
         this.localStorage.set('timerdata', minutes + ":" + seconds);
        
         if (minutes + ":" + seconds == "00:00") {  
-                               
-          subscription.unsubscribe();
           this.btnotpdis = "line_btn sblue";         
           this.timerbtndisplay=false;
           this.verifybtndisplay=true;
           this.resendtext='Resend in 00:00';    
           this.callDuration="";
-          this.otpdisable="disable";
+          this.otpdisable="disable";             
+          subscription.unsubscribe();
+         
           
           
         }

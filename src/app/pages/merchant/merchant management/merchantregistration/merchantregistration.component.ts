@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { MustMatch } from 'src/app/shared/validators/PasswordMustMatchvalidator';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 import{MerchantService}from '../../services/merchant.service';
+import { Key } from 'protractor';
 @Component({
   selector: 'app-merchantregistration',
   templateUrl: './merchantregistration.component.html',
@@ -79,6 +80,7 @@ export class MerchantregistrationComponent implements OnInit {
   
 
 this.bindcountries();
+this.bindcategories();
 //this.categories();
 // this.categories=[
 //   {label:'Accessories&Beauty',value:'Accessories&Beauty'},
@@ -88,7 +90,11 @@ this.bindcountries();
 //   {label:'VirtualMall',value:'VirtualMall'}
 // ]
 
+
+
 }
+
+
 
 
 _keyPress(event: any) {
@@ -216,14 +222,23 @@ error=>{
 
  bindcategories(){
   this.merchantservice.Getcategories().subscribe(res=>{
-    this.categories=res;
+    //this.categories=res;
+    debugger
+    Object.keys(res).map(Key=>(
+    this.categories.push({label:res[Key]["name"],value:res[Key]["name"]})
+    ));
   })
  }
  bindcountries(){
   this.merchantservice.GetCountries().subscribe(res => {
-    this.countries = res;       
+    debugger
+    Object.keys(res).map(key => (
+      this.countries.push({label:res[key]["description"], value:res[key]["description"]}) 
+      ));       
   })
  }
+
+
 
  
 
