@@ -22,6 +22,7 @@ import { SharedModule } from '../../../../shared/shared.module';
   styleUrls: ['./forgotpassword.component.scss']
 })
 export class ForgotpasswordComponent implements OnInit {
+  lang = 'en';
 
   headerlogo: string = "assets/layout/images/glogo.png";
   checkinfo: string = "assets/layout/images/svg/success.svg";
@@ -91,6 +92,13 @@ export class ForgotpasswordComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (this.localStorage.get('lang') != null) {
+      this.lang = this.localStorage.get('lang');
+      this.translate.use(this.lang);
+    }
+    else {
+      this.translate.use(this.lang);
+    }
 
     this.forgotform = this.formBuilder.group({
       // FirstregistrationForm:this.formBuilder.array([this.BasicDetails()]),    
@@ -168,8 +176,7 @@ export class ForgotpasswordComponent implements OnInit {
   }
 
   
-  otpformvalidate() {
-    debugger
+  otpformvalidate() { 
     console.log(this.otp);
     this.show = true;
     if(this.forgotform.value["otp"]!=null){
@@ -221,12 +228,10 @@ export class ForgotpasswordComponent implements OnInit {
       
       if (this.registerdto.Email.match('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{1,}[.]{1}[a-zA-Z]{2,}')) {
         
-        this.userservice.EmailVerification(this.registerdto).subscribe(res => {
-          
-          debugger
+        this.userservice.EmailVerification(this.registerdto).subscribe(res => {  
           if(res["result"]=="Email is valid")
           {
-            debugger
+           
             this.btndisable="disable";
             //this.messageService.add({ severity:'error', summary:'Error Message', detail:"Invalid Email"});
             this.show = false;
@@ -275,7 +280,7 @@ export class ForgotpasswordComponent implements OnInit {
           else if (Number.parseInt(this.currentIndex) == 2) {
             
             //this.pwdauthdatavalidate();
-            debugger
+             
             this.submitbtntext = "Submit";
            this.headertext="welcome back";
            this.btndisable="none";
@@ -347,7 +352,7 @@ export class ForgotpasswordComponent implements OnInit {
       this.ProgressSpinnerDlg=false;
       this.btndisable="disable";
       this.submitbtntext="Confirm";
-      debugger
+     
       //this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
       this.show = false;
       this.div.nativeElement.innerHTML = res["result"];
