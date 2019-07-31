@@ -283,9 +283,9 @@ export class RegistrationComponent implements OnInit {
 
       if (this.Otp.toString().length == 6) {
         this.otpnumb = "numb";
-        debugger
+      
         if (this.timerdata <= "01:00" || this.timerdata != "00:00") {
-          debugger
+        
           if (this.Otp == this.registerdto.OTP.toString()) {
           
             this.btndisable = "line_btn sblue";         
@@ -459,7 +459,7 @@ export class RegistrationComponent implements OnInit {
               this.registerdto.OTP = res["otp"];
               this.callDuration = this.elementRef.nativeElement.querySelector('#time');
               this.startTimer(this.callDuration);
-              debugger
+              
               this.timerbtndisplay = false;
               this.verifybtndisplay = true;
               //this.router.navigateByUrl('/');
@@ -535,7 +535,7 @@ export class RegistrationComponent implements OnInit {
       this.submitbtntext="Verify";
      this.verifybtndisplay=false;
      this.timerbtndisplay=true;
-      debugger
+      
       this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
       // this.show = false;
       // this.div.nativeElement.innerHTML = res["result"];
@@ -547,7 +547,7 @@ export class RegistrationComponent implements OnInit {
       this.localStorage.set('otp',res["otp"]);
       this.callDuration = this.elementRef.nativeElement.querySelector('#time');
       this.startTimer(this.callDuration);
-      debugger
+      
       this.timerbtndisplay=false;
       this.verifybtndisplay=true;
       this.btnotpdis = "disable";  

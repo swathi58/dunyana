@@ -37,6 +37,9 @@ export class MerchantregistrationComponent implements OnInit {
   merchantDto:MerchantDto={
     Id:0,
     Name :null,
+    ProfileImage:null,
+    Company:null,
+    CompanyImage:null,
     RegNo:null,
     Address:null,
     Website :null,
@@ -44,8 +47,10 @@ export class MerchantregistrationComponent implements OnInit {
     SPOCName :null,
     Mobile:null,
     Email:null,
-    IsLegalApproved:0,
-    Image :null
+    Categories:null,
+    SellCountries:null,
+    IsLegalApproved:0
+  
    }
 
   constructor(private formBuilder:FormBuilder, private merchantservice:MerchantService,
@@ -170,6 +175,8 @@ ConvertingFormToDto()
 {
 
   this.merchantDto.Name=this.merchantForm.value["Name"];
+  this.merchantDto.ProfileImage=this.merchantForm.value["ProfileImage"];
+  this.merchantDto.Company=this.merchantForm.value["Company"];
   this.merchantDto.RegNo=this.merchantForm.value["RegNo"];
   this.merchantDto.Address=this.merchantForm.value["address"];
   this.merchantDto.Website=this.merchantForm.value["Website"];
@@ -177,8 +184,10 @@ ConvertingFormToDto()
   this.merchantDto.SPOCName=this.merchantForm.value["SPOCName"];
   this.merchantDto.Mobile=this.merchantForm.value["mobile"];
   this.merchantDto.Email=this.merchantForm.value["emailid"];
+  this.merchantDto.Categories=this.merchantForm.value["Categories"];
+  this.merchantDto.SellCountries=this.merchantForm.value["SellCountries"];
   this.merchantDto.IsLegalApproved=this.merchantForm.value["IsLegalApproved"];
-  this.merchantDto.Image=this.finalImage.replace(/^data:image\/[a-z]+;base64,/, "");
+  this.merchantDto.CompanyImage=this.finalImage.replace(/^data:image\/[a-z]+;base64,/, "");
   
 
 }

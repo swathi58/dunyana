@@ -185,7 +185,7 @@ export class ForgotpasswordComponent implements OnInit {
 
   
   otpformvalidate() {
-    debugger
+    
     this.show = true;
     this.timerdata = this.localStorage.get('timerdata');
     this.EmailOTP = this.forgotform.value["otp"];
@@ -201,9 +201,9 @@ export class ForgotpasswordComponent implements OnInit {
      // this.callDuration = "";
 
 
-     debugger
+    
       if (this.timerdata <= "01:00" ) {
-        debugger
+        
         if (this.EmailOTP == this.registerdto.OTP.toString()) {
           console.log(this.callDuration);
 
@@ -265,10 +265,10 @@ export class ForgotpasswordComponent implements OnInit {
         
         this.userservice.EmailVerification(this.registerdto).subscribe(res => {
           
-          debugger
+          
           if(res["result"]=="Email is valid")
           {
-            debugger
+            
             this.btndisable="disable";
             //this.messageService.add({ severity:'error', summary:'Error Message', detail:"Invalid Email"});
             this.show = false;
@@ -292,7 +292,7 @@ export class ForgotpasswordComponent implements OnInit {
   }
 
   submitforgotdata() {
-  debugger
+ 
     const slides = document.getElementsByTagName('li');
     let i = 0;
     for (i = 0; i < slides.length; i++) {
@@ -321,7 +321,7 @@ export class ForgotpasswordComponent implements OnInit {
           else if (Number.parseInt(this.currentIndex) == 2) {
             
             //this.pwdauthdatavalidate();
-            debugger
+            
             this.submitbtntext = "Submit";
            this.headertext="welcome back";
            this.btndisable="none";
@@ -395,7 +395,7 @@ export class ForgotpasswordComponent implements OnInit {
       this.btnotpdis = "disable";
       this.submitbtntext="Verify";
      
-      debugger
+      
       //this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
       this.show = false;
       this.div.nativeElement.innerHTML = res["result"];
@@ -407,7 +407,7 @@ export class ForgotpasswordComponent implements OnInit {
       this.localStorage.set('otp',res["otp"]);
       this.callDuration = this.elementRef.nativeElement.querySelector('#time');
       this.startTimer(this.callDuration);
-      debugger
+      
       this.timerbtndisplay=false;
       this.verifybtndisplay=true;
       
@@ -428,7 +428,7 @@ export class ForgotpasswordComponent implements OnInit {
       this.submitbtntext="Verify";
      this.verifybtndisplay=false;
      this.timerbtndisplay=true;
-      debugger
+      
       //this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
       this.show = false;
       this.div.nativeElement.innerHTML = res["result"];
@@ -440,7 +440,7 @@ export class ForgotpasswordComponent implements OnInit {
       this.localStorage.set('otp',res["otp"]);
       this.callDuration = this.elementRef.nativeElement.querySelector('#time');
       this.startTimer(this.callDuration);
-      debugger
+    
       this.timerbtndisplay=false;
       this.verifybtndisplay=true;
       this.btnotpdis = "disable";  
