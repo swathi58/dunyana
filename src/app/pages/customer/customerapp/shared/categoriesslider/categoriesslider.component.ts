@@ -43,7 +43,6 @@ export class CategoriessliderComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.childMessage);
     this.LoadCategories();
   }
   catmoveTo(slide) {
@@ -55,7 +54,6 @@ export class CategoriessliderComponent implements OnInit {
   }
   LoadCategories() {
     this.catgservice.CategoryList().subscribe(res => {
-      console.log(res.length);
       res.forEach(img => {
         img["image"] = 'data:image/png;base64,' + img["image"]
         this.items.push(img);

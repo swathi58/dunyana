@@ -84,7 +84,6 @@ export class EditProfileComponent implements OnInit {
 
     this.registerdto.Email=this.localStorage.get("Email");
     this.userservice.GetProfileInformation(this.registerdto).subscribe(res=>{
-      console.log(res);
       this.profiledata.Id=res["id"];
       this.EditprofileForm.controls['firstname'].setValue(res["firstName"]);
       this.EditprofileForm.controls['lastname'].setValue(res["lastName"]);
@@ -98,7 +97,6 @@ export class EditProfileComponent implements OnInit {
 
       this.btndisable = "line_btn sblue mr-4";
       //this.profiledata.Id=res["id"];
-console.log(this.EditprofileForm.value);
      
      // console.log(this.profiledata["image"]);
     });
@@ -159,7 +157,6 @@ GetCountriesList() {
 Updateprofiledata()
 {
   this.ProgressSpinnerDlg=true;
-  console.log(this.EditprofileForm.value);
   this.profiledata.Image=this.finalImage.replace(/^data:image\/[a-z]+;base64,/, "");
   this.profiledata.FirstName=this.EditprofileForm.value["firstname"];
   this.profiledata.LastName=this.EditprofileForm.value["lastname"];

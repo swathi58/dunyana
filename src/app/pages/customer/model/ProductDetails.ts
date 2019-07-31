@@ -1,4 +1,4 @@
-export class Orderdetails{
+export class Productdetails{
     productimage:string;
     productcost:number;
     ordereddate:string;

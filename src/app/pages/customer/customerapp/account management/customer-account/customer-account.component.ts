@@ -107,46 +107,44 @@ export class CustomerAccountComponent implements OnInit {
      if(this.orderservice.orderhistorydetailsdata.length>0)
      {
       this.orderhistorylist = this.orderservice.orderhistorydetailsdata;
+      this.Fillproductdetails();
      }
      else
      {
       this.orderservice.GetOrderHistory(this.customerid).subscribe(res => {
         this.orderhistorylist =res;
         this.orderservice.orderhistorydetailsdata=res;
-        this.orderhistorylist.forEach(items => {
-  
-          this.totalorderproductsRecords = this.totalorderproductsRecords + items["orderDetails"].length;
-  
-        
-          items["orderDetails"].forEach(prod => {
-            let Orderproducthistory = new orderhistory();
-  
-            Orderproducthistory.orderid = items["orderNo"];
-            //Orderproducthistory.soldby = items["merchant"]["name"];
-            Orderproducthistory.orderplaced = items["orderDate"];
-            Orderproducthistory.productname = prod["productName"];
-            Orderproducthistory.productid = prod["id"];
-            if(prod["productImage"]!="")
-            {
-              Orderproducthistory.productimage='data:image/png;base64,'+prod["productImage"];
-            }     
-            else
-            {
-              Orderproducthistory.productimage="assets/layout/images/cat_img_virtual.jpg";
-            }
-            this.totalproducts.push(Orderproducthistory);
-            console.log(Orderproducthistory);
-          });
-          console.log(this.totalproducts);
-  
-        });
-  
-  
-        this.setPage(1);
-  
-      })
+        this.Fillproductdetails();
+      });
      }
+  }
 
+  Fillproductdetails()
+  {
+    this.orderhistorylist.forEach(items => {
+  
+      this.totalorderproductsRecords = this.totalorderproductsRecords + items["orderDetails"].length;
+    
+      items["orderDetails"].forEach(prod => {
+        let Orderproducthistory = new orderhistory();
+
+        Orderproducthistory.orderid = items["orderNo"];
+        //Orderproducthistory.soldby = items["merchant"]["name"];
+        Orderproducthistory.orderplaced = items["orderDate"];
+        Orderproducthistory.productname = prod["productName"];
+        Orderproducthistory.productid = prod["id"];
+        if(prod["productImage"]!="")
+        {
+          Orderproducthistory.productimage='data:image/png;base64,'+prod["productImage"];
+        }     
+        else
+        {
+          Orderproducthistory.productimage="assets/layout/images/cat_img_virtual.jpg";
+        }
+        this.totalproducts.push(Orderproducthistory);        
+      });    
+      this.setPage(1);
+    });
   }
 
   setPage(page: number) {
@@ -155,8 +153,8 @@ export class CustomerAccountComponent implements OnInit {
     }
     this.pager = this.pagerService.getPager(this.totalorderproductsRecords, page, 3);
     this.pagedItems = this.totalproducts.slice(this.pager.startIndex, this.pager.endIndex + 1);
-
   }
+  
 
 
 }

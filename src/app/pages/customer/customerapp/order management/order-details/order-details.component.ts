@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { OrdermanagementService } from '../../../services/ordermanagemet.service';
 import { LocalStorageService } from 'angular-web-storage';
+import { Productdetails } from '../../../model/ProductDetails';
 
 @Component({
   selector: 'app-order-details',
@@ -12,7 +13,15 @@ export class OrderDetailsComponent implements OnInit {
 
   customerid:number;
   productid:number;
-
+  orderhistorylist: any[] = [];
+  productdetails:Productdetails={
+    productimage:null,
+    ordereddate:null,
+    productcost:null,
+    cardnumber:null,
+    address:null,
+    status:null
+  }
   constructor(private router:ActivatedRoute,private orderservice:OrdermanagementService,private localStorage: LocalStorageService) { }
 
   ngOnInit() {
@@ -23,6 +32,17 @@ export class OrderDetailsComponent implements OnInit {
   }
   GetOrderHistoryDetails()
   {
-    //this.orderservice.orderhistorydetailsdata
+    this.orderhistorylist=this.orderservice.orderhistorydetailsdata;
+    this.Fillproductdetails();
+  }
+
+  Fillproductdetails()
+  {
+    this.orderhistorylist.forEach(items => {
+      
+      var prod:any[]=items["orderDetails"];
+      console.log(prod);
+     console.log(prod.filter(x=>x.id===13));
+    });
   }
 }
