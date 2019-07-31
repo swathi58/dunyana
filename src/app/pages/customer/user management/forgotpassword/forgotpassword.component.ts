@@ -106,7 +106,7 @@ export class ForgotpasswordComponent implements OnInit {
 
     this.forgotform = this.formBuilder.group({
       // FirstregistrationForm:this.formBuilder.array([this.BasicDetails()]),    
-      emailid: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}')]],    
+      emailid: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{1,}[.]{1}[a-zA-Z]{2,}')]],    
       password: ['', [Validators.required, Validators.minLength(6)]],  
       otp: ['', [Validators.required]]
     });
