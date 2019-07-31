@@ -13,7 +13,8 @@ export class MerchantDto{
     Email:string;
     Categories:string;
     SellCountries:string;
-    IsLegalApproved:number;    
+    IsLegalApproved:number;  
+    PWD:string;  
     
    
     

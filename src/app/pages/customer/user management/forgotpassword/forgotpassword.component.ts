@@ -114,8 +114,10 @@ export class ForgotpasswordComponent implements OnInit {
 
     this.forgotform = this.formBuilder.group({
       // FirstregistrationForm:this.formBuilder.array([this.BasicDetails()]),    
-      emailid: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}')]],    
+
+      emailid: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{1,}[.]{1}[a-zA-Z]{2,}')]],    
       password: ['', [Validators.required,Validators.pattern('^([A-Za-z0-9]+ )+[A-Za-z0-9]+$|^[A-Za-z0-9]+$'), Validators.minLength(6)]],  
+
       otp: ['', [Validators.required]]
     });
      this.apiotp= this.localStorage.get('otp');//sessionStorage.getItem('otp');
@@ -489,14 +491,14 @@ export class ForgotpasswordComponent implements OnInit {
         this.localStorage.set('timerdata', minutes + ":" + seconds);
        
         if (minutes + ":" + seconds == "00:00") {  
-                               
-          subscription.unsubscribe();
           this.btnotpdis = "line_btn sblue";         
           this.timerbtndisplay=false;
           this.verifybtndisplay=true;
           this.resendtext='Resend in 00:00';    
           this.callDuration="";
-          this.otpdisable="disable";      
+          this.otpdisable="disable";             
+          subscription.unsubscribe();
+
         }
     });
     
