@@ -37,8 +37,10 @@ import { ChangepasswordComponent } from './pages/customer/user management/change
 import { AdminModule } from './pages/admin/admin.module';
 import { AdminComponent } from './pages/admin/admin.component';
 import { ForgotpasswordComponent } from './pages/customer/user management/forgotpassword/forgotpassword.component';
+import { MerchantregistrationComponent } from './pages/merchant/merchant management/merchantregistration/merchantregistration.component';
 
-
+import{merchantModule}from './pages/merchant/merchant.module';
+import{MerchantComponent}from './pages/merchant/merchant.component';
 registerLocaleData(localeESUS);
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -70,7 +72,8 @@ export function getAuthServiceConfigs() {
     PageNotFoundComponent,
     AdminComponent,
     ForgotpasswordComponent,
-
+    MerchantComponent,
+    MerchantregistrationComponent
   ],
   imports: [
     BrowserModule,
@@ -86,7 +89,7 @@ export function getAuthServiceConfigs() {
     ImageCropperModule,
     DialogModule,
     ButtonModule,
-    
+    merchantModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

@@ -29,7 +29,7 @@
                       <!-- <div class="login-error"
                         *ngIf="loginForm.controls['lEmail'].hasError('') && loginForm.controls['lEmail'].touched">
                         Email is </div> -->
-                      <div class="login-error" [hidden]="!loginForm.controls['lEmail'].errors?.pattern">Enter valid email
+                      <div class="login-error" [hidden]="!loginForm.controls['lEmail'].errors?.pattern">Please Enter valid email
                         address</div>
   
   
@@ -47,7 +47,7 @@
                         *ngIf="loginForm.controls['lPassword'].hasError('') && loginForm.controls['lPassword'].touched">
                         Password is </div> -->
                       <div class="login-error" [hidden]="!loginForm.controls['lPassword'].errors?.minlength">Password Must
-                        be More Than 6</div>
+                        be More Than 6 Characters</div>
   
                     </div>
                     <div class="col-sm-12">

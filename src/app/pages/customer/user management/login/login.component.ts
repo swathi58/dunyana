@@ -122,7 +122,7 @@ export class LoginComponent implements OnInit {
   // // this is the image as dataUrl
   // this.base64Image = 'data:image/jpg;base64,' + base64data;
   // userData.photoUrl=base64data;
-  // debugger
+  // 
   // this.apiConnection(userData);
   // });
   // // this.apiConnection(userData);
@@ -160,7 +160,7 @@ export class LoginComponent implements OnInit {
   // else if (data.provider == "GOOGLE") {
   // data.provider = "G";
   // //data.photoUrl="download (1).jpg"
-  // debugger
+  // 
   // this.userPostData.FirstName = data.firstName;
   // this.userPostData.LastName = data.lastName;
   // this.userPostData.Email = data.email;
@@ -168,7 +168,7 @@ export class LoginComponent implements OnInit {
   // this.userPostData.FBID = "";
   // this.userPostData.LoginType = data.provider;
   // this.userPostData.Image=data.photoUrl;
-  // debugger
+  // 
   // //this.getBase64ImageFromURL(data.photoUrl);
 
   // //this.userPostData.Image=data.photoUrl.replace(/^data:image\/[a-z]+;base64,/,"");
@@ -200,16 +200,16 @@ export class LoginComponent implements OnInit {
   // this.userPostData.EmailVerified = null;
   // this.userPostData.PWD = "";
   // this.userPostData.Type = "";
-  // debugger
+  // 
   // }
 
-  // debugger
+  // 
 
 
   // }
   // else{
 
-  // debugger
+  // 
 
   // this.messageService.add({severity:'success', summary:'Success Message', detail:'Your Email id is not registerd in Facebook'});
 
@@ -221,21 +221,21 @@ export class LoginComponent implements OnInit {
   // getBase64ImageFromURL(url: string) {
 
   // return Observable.create((observer: Observer<string>) => {
-  // debugger
+  // 
   // let img = new Image();
   // img.crossOrigin = 'Anonymous';
   // img.src = url;
-  // debugger
+  // 
   // if (!img.complete) {
   // img.onload = () => {
   // observer.next(this.getBase64Image(img));
   // observer.complete();
-  // debugger
+  // 
   // };
   // img.onerror = (err) => {
   // observer.error(err);
   // };
-  // debugger
+  //
   // } else {
   // observer.next(this.getBase64Image(img));
   // observer.complete();
@@ -307,16 +307,20 @@ export class LoginComponent implements OnInit {
       }
       else if(res["loginStatus"]==0){
         this.show = false;
-        this.div.nativeElement.innerHTML = 'Account is Inactive'; // res["result"];
+
+        this.div.nativeElement.innerHTML = "Please Activate Your Account";
+
       }
 
       else if(res["loginStatus"]==2){
         this.show = false;
+
         this.div.nativeElement.innerHTML = 'Account is Locked'; //res["result"];
       }
+
       else if(res["loginStatus"]==3){
         this.show = false;
-        this.div.nativeElement.innerHTML =  'Account is Barred';//res["result"];
+        this.div.nativeElement.innerHTML = "Your Account is Barred";
       }
 
     },

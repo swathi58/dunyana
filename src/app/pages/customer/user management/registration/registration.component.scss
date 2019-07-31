@@ -331,6 +331,29 @@ button:hover {
                 }
             }
         }
+        .timersty {
+            width: 100%;
+            .ui-button{
+                    border: 2px solid #bdbdbd;
+                    border-radius: 20px;
+                    height: 60px;
+                    margin-bottom: 20px;
+                    line-height: 55px;
+                    color: #bdbdbd;
+         
+        
+             span.timer{
+               color: #bdbdbd !important;
+              }
+              &:hover, &:focus{
+                border: 2px solid #00c0f3;
+                span.timer{
+                  color: #00c0f3 !important;
+                 }
+               
+              }
+            }
+          }
     }
 }
 
@@ -388,12 +411,12 @@ button:hover {
 }
 
 .disable {
+    opacity: 1;
     pointer-events: none;
 }
 
-.timersty {
-    color: black;
-}
+
+
 
 //otp
 input[type="number"]::-webkit-outer-spin-button,
