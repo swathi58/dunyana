@@ -324,7 +324,7 @@
                                         <div class="col-sm-12">
                                             <div *ngIf="registrationForm.controls['password'].errors && !registrationForm.controls['password'].pristine" class="text-danger error">
                                                 <div [hidden]="!registrationForm.controls['password'].errors.required">Please Enter Password</div>
-                                                <div [hidden]="!registrationForm.controls['password'].errors?.pattern">Your password can't start or end with a blank sapce</div>
+                                                <div [hidden]="!registrationForm.controls['password'].errors?.pattern">Your Password can't start or end with a blank sapce</div>
                                                 <div [hidden]="!registrationForm.controls['password'].errors?.minlength">Password Length Must be Grater Than 6</div>
                                             </div>
                                         </div>
@@ -442,7 +442,7 @@
 
                             </div>
                         </div>
-                        <div class="">
+                        <div class="pt-2">
                             <div [ngClass]="responsesty">
                                 <span >{{response}}</span>
                             </div>

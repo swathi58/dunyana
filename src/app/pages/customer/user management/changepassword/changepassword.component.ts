@@ -56,9 +56,9 @@ export class ChangepasswordComponent implements OnInit {
   ngOnInit() {
     this.changepwdForm=this.formBuilder.group({
  
-      PWD:['',[Validators.required,Validators.pattern('^([A-Za-z]+ )+[A-Za-z]+$|^[A-Za-z]+$'),Validators.minLength(6)]],
-      NPWD:['',[Validators.required,Validators.pattern('^([A-Za-z]+ )+[A-Za-z]+$|^[A-Za-z]+$'),Validators.minLength(6)]],
-      confirmpassword:['',[Validators.required,Validators.pattern('^([A-Za-z]+ )+[A-Za-z]+$|^[A-Za-z]+$')]]
+      PWD:['',[Validators.required,Validators.pattern('^([A-Za-z0-9]+ )+[A-Za-z0-9]+$|^[A-Za-z0-9]+$'),Validators.minLength(6)]],
+      NPWD:['',[Validators.required,Validators.pattern('^([A-Za-z0-9]+ )+[A-Za-z0-9]+$|^[A-Za-z0-9]+$'),Validators.minLength(6)]],
+      confirmpassword:['',[Validators.required,Validators.pattern('^([A-Za-z0-9]+ )+[A-Za-z0-9]+$|^[A-Za-z0-9]+$')]]
  },
  {
   validator: MustMatch('NPWD', 'confirmpassword')

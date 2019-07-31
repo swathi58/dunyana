@@ -117,8 +117,8 @@ export class RegistrationComponent implements OnInit {
       address: ['', [Validators.required,Validators.pattern('^([A-Za-z]+ )+[A-Za-z]+$|^[A-Za-z]+$')]],
       country: ['', Validators.required],
       city: ['', [Validators.required,Validators.pattern('^([A-Za-z]+ )+[A-Za-z]+$|^[A-Za-z]+$')]],
-      password: ['', [Validators.required,Validators.pattern('^([A-Za-z]+ )+[A-Za-z]+$|^[A-Za-z]+$'),Validators.minLength(6)]],
-      confirmpassword: ['', [Validators.required, Validators.minLength(6)]],
+      password: ['', [Validators.required,Validators.pattern('^([A-Za-z0-9]+ )+[A-Za-z0-9]+$|^[A-Za-z0-9]+$'),Validators.minLength(6)]],
+      confirmpassword: ['', [Validators.required, Validators.pattern('^([A-Za-z0-9]+ )+[A-Za-z0-9]+$|^[A-Za-z0-9]+$'),Validators.minLength(6)]],
       otp: ['', Validators.required]
     },
       {
@@ -197,25 +197,43 @@ export class RegistrationComponent implements OnInit {
     //   console.log("invalid");
     // }
     if (this.registerdto.FirstName != null) {
-      if ((this.registerdto.FirstName.length - 1 > -1)) {
-        // if(this.registerdto.FirstName.match("('[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*')"))
-        // {
-        if (this.registerdto.LastName != null) {
-          if (this.registerdto.LastName.length - 1 > -1) {
-            this.btndisable = "line_btn sblue";
+
+      if(this.registerdto.FirstName.match("^([A-Za-z]+ )+[A-Za-z]+$|^[A-Za-z]+$"))
+      {
+        if ((this.registerdto.FirstName.length - 1 > -1)) {
+          // if(this.registerdto.FirstName.match("('[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*')"))
+          // {
+          if (this.registerdto.LastName != null) {
+            
+            if(this.registerdto.LastName.match("^([A-Za-z]+ )+[A-Za-z]+$|^[A-Za-z]+$"))
+            {
+              if (this.registerdto.LastName.length - 1 > -1) {
+                this.btndisable = "line_btn sblue";
+              }
+              if (this.registerdto.LastName.length == 0) {
+                this.btndisable = "disable";
+              }
+            }
+            else
+            {
+              this.btndisable = "disable";
+            }
+       
           }
-          if (this.registerdto.LastName.length == 0) {
+          else {
             this.btndisable = "disable";
           }
+  
         }
         else {
           this.btndisable = "disable";
         }
-
       }
-      else {
+      else
+      {
         this.btndisable = "disable";
       }
+
     }
     else {
       this.btndisable = "disable";
@@ -227,13 +245,16 @@ export class RegistrationComponent implements OnInit {
     if (this.registerdto.Email != null) {
       if (this.registerdto.Email.match('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}')) {
         if (this.registerdto.PWD != null) {
-          if (this.registerdto.PWD.length >= 6) {
-            // this.CheckEmail();
-            this.btndisable = "line_btn sblue";
-          }
-          if (this.registerdto.PWD.length == 0 || this.registerdto.PWD.length < 6) {
-            this.btndisable = "disable";
-          }
+          if(this.registerdto.PWD.match('^([A-Za-z0-9]+ )+[A-Za-z0-9]+$|^[A-Za-z0-9]+$'))
+          {
+            if (this.registerdto.PWD.length >= 6) {
+              // this.CheckEmail();
+              this.btndisable = "line_btn sblue";
+            }
+            if (this.registerdto.PWD.length == 0 || this.registerdto.PWD.length < 6) {
+              this.btndisable = "disable";
+            }
+          } 
         }
       }
       else {
@@ -249,19 +270,31 @@ export class RegistrationComponent implements OnInit {
   Addressformvalidate() {
 
     if (this.registerdto.City != null) {
-      if (this.registerdto.City.length - 1 > -1) {
-        if (this.registerdto.Address != null) {
-          if (this.registerdto.Address.length - 1 > -1) {
-            this.btndisable = "line_btn sblue";
-          }
-          else if (this.registerdto.Address.length == 0) {
-            this.btndisable = "disable";
+      if(this.registerdto.City.match('^([A-Za-z]+ )+[A-Za-z]+$|^[A-Za-z]+$'))
+      {
+        if (this.registerdto.City.length - 1 > -1) {
+          if (this.registerdto.Address != null) {
+            if(this.registerdto.Address.match('^([A-Za-z]+ )+[A-Za-z]+$|^[A-Za-z]+$'))
+            {
+              if (this.registerdto.Address.length - 1 > -1) {
+                this.btndisable = "line_btn sblue";
+              }
+              else if (this.registerdto.Address.length == 0) {
+                this.btndisable = "disable";
+              }
+              else
+              {
+                this.btndisable = "disable";
+              }
+            }
+
           }
         }
+        else if (this.registerdto.City.length === 0) {
+          this.btndisable = "disable";
+        }
       }
-      else if (this.registerdto.City.length === 0) {
-        this.btndisable = "disable";
-      }
+
     }
     else {
       this.btndisable = "disable";
@@ -285,12 +318,11 @@ export class RegistrationComponent implements OnInit {
   otpformvalidate() {
     this.timerdata = this.localStorage.get('timerdata');
     if (this.Otp != null) {
-      console.log(this.Otp.toString().length);
 
       if (this.Otp.toString().length == 6) {
         this.otpnumb = "numb";
       
-        if (this.timerdata <= "01:00" || this.timerdata != "00:00") {
+        if (this.timerdata < "10:00") {
         
           if (this.Otp == this.registerdto.OTP.toString()) {
           
@@ -391,7 +423,6 @@ export class RegistrationComponent implements OnInit {
     this.registerdto.PWD = this.registrationForm.value["password"];
     this.registerdto.Image = this.finalImage.replace(/^data:image\/[a-z]+;base64,/, "");
     this.registerdto.LoginType = "D";
-    console.log(this.registerdto);
   }
 
   CheckEmail() {
@@ -441,7 +472,7 @@ export class RegistrationComponent implements OnInit {
     for (i = 0; i < slides.length; i++) {
       if (slides[i].getAttribute('class') === 'active') {
         this.currentIndex = slides[i].getAttribute('data-slide-to');
-        console.log(this.currentIndex);
+
         if (Number.parseInt(this.currentIndex) >= 0) {
           
           this.prevbtn = "backBtn";
@@ -599,10 +630,9 @@ export class RegistrationComponent implements OnInit {
 
   
   startTimer(display) {
-    var timer = 60;
+    var timer = 600;
     var minutes;
     var seconds;
-    console.log(display.textContent);
     var subscription= Observable.interval(1000).subscribe(x => {
         minutes = Math.floor(timer / 60);
         seconds = Math.floor(timer % 60);
@@ -626,7 +656,6 @@ export class RegistrationComponent implements OnInit {
           this.otpdisable="disable";
           
         }
-        console.log(this.timetaken);
     });
     
 }
