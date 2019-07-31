@@ -164,13 +164,13 @@ export class MerchantregistrationComponent implements OnInit {
     //this.merchantDto.Email="swathi.chinnala@gmail.com";
     this.ConvertingFormToDto();
     this.merchantservice.EmailVerification(this.merchantDto).subscribe(res => {
-      debugger
+
       this.show=false;
       this.div.nativeElement.innerHTML=res["result"];
       //this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
     },
       errormsg => {
-        debugger
+
         this.div.nativeElement.innerHTML=errormsg["error"]["result"];
         //this.messageService.add({ severity: 'error', summary: 'Error Message', detail: errormsg["error"]["result"] });
       });
@@ -198,7 +198,7 @@ export class MerchantregistrationComponent implements OnInit {
   }
 
   formauthdatavalidate() {
-    debugger
+
    this.show = true;
     if (this.merchantDto.Email != null) {
       if (this.merchantDto.Email.match('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}')) {
@@ -231,9 +231,8 @@ export class MerchantregistrationComponent implements OnInit {
         
         if (Number.parseInt(this.currentIndex) != 3) {
           console.log(this.currentIndex);
-            debugger
+
           if (Number.parseInt(this.currentIndex) == 2) {
-           debugger
             
             this.ConvertingFormToDto()
             this.ProgressSpinnerDlg = true;

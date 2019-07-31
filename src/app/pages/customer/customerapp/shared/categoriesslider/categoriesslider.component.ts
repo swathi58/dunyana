@@ -50,7 +50,7 @@ export class CategoriessliderComponent implements OnInit {
   }
 
   navigatetocategory(catname) {
-    this.route.navigateByUrl('customer/category/' + catname);
+    this.route.navigateByUrl('customer/shopping/' + catname);
   }
   LoadCategories() {
     this.catgservice.CategoryList().subscribe(res => {
