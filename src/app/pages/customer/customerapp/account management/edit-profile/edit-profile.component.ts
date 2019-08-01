@@ -24,6 +24,8 @@ export class EditProfileComponent implements OnInit {
   finalImage:any='';
   btndisable:string="disable";
   ProgressSpinnerDlg:boolean=false;
+  response:string="";
+  responsesty:string="";
 
   registerdto:RegistrationDto={
     Id:0,
@@ -50,32 +52,33 @@ export class EditProfileComponent implements OnInit {
 
   constructor(private formBuilder:FormBuilder,private userservice:UsermanagementService,
     private localStorage: LocalStorageService,private messageService: MessageService) {
-    this.countries=[  
-      {label:'KSA',value:'KSA'},
-      {label:'United States',value:'United States'},
-      {label:'United Kingdom',value:'United Kingdom'}
-    ];
+    // this.countries=[  
+    //   {label:'KSA',value:'KSA'},
+    //   {label:'United States',value:'United States'},
+    //   {label:'United Kingdom',value:'United Kingdom'}
+    // ];
     
    }
 
   ngOnInit() {
-    
+  
+
     this.FormInit();
-    this.GetCountriesList();
   }
 
   FormInit()
   {
+    this.GetCountriesList();
     this.EditprofileForm=this.formBuilder.group({
 
-      firstname:['',Validators.required],
-      lastname:['',Validators.required],
+      firstname:['',[Validators.required,Validators.pattern('^([A-Za-z]+ )+[A-Za-z]+$|^[A-Za-z]+$')]],
+      lastname:['',[Validators.required,Validators.pattern('^([A-Za-z]+ )+[A-Za-z]+$|^[A-Za-z]+$')]],
       // emailid:['',[Validators.required,Validators.email]],
       //emailid:['', [Validators.required,Validators.pattern('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}')]],
       mobile:['',[Validators.required,Validators.minLength(10),Validators.maxLength(10)]],
-      address:['',Validators.required],
+      address:['',[Validators.required,Validators.pattern('^([A-Za-z]+ )+[A-Za-z]+$|^[A-Za-z]+$')]],
       country:['Select Country',Validators.required],
-      city:['',Validators.required],
+      city:['',[Validators.required,Validators.pattern('^([A-Za-z]+ )+[A-Za-z]+$|^[A-Za-z]+$')]],
     });
 
 
@@ -86,13 +89,14 @@ export class EditProfileComponent implements OnInit {
       this.EditprofileForm.controls['lastname'].setValue(res["lastName"]);
       this.EditprofileForm.controls['mobile'].setValue(res["mobile"]);
       this.EditprofileForm.controls['address'].setValue(res["address"]);
+      //this.EditprofileForm.controls['country'].setValue(res["country"]);
+          // this.registrationForm.controls['country'].setValue(this.countries[0]["description"]);
       this.EditprofileForm.controls['country'].setValue(res["country"]);
       this.EditprofileForm.controls['city'].setValue(res["city"]);
       this.finalImage='data:image/png;base64,'+res["image"];
 
       this.btndisable = "line_btn sblue mr-4";
       //this.profiledata.Id=res["id"];
-
      
      // console.log(this.profiledata["image"]);
     });
@@ -129,7 +133,7 @@ export class EditProfileComponent implements OnInit {
   }
   
 _keyPress(event: any) {
-  const pattern = /[0-9\+\-\ ]/;
+  const pattern=/^([0-9]+ )+[0-9]+$|^[0-9]+$/;
   let inputChar = String.fromCharCode(event.charCode);
 
   if (!pattern.test(inputChar)) {
@@ -140,30 +144,51 @@ _keyPress(event: any) {
 
 GetCountriesList() {
   this.userservice.GetCountriesList().subscribe(res => {
-    this.countries = res;
-  })
+  
+    // res.foreach(item=>{        
+    //   this.countries.push({label:item["id"],value:item["description"]});
+    // });
+    Object.keys(res).map(key => (
+     this.countries.push({label:res[key]["description"], value:res[key]["description"]})    
+      ));
+  });
 }
 
 Updateprofiledata()
 {
   this.ProgressSpinnerDlg=true;
-  
   this.profiledata.Image=this.finalImage.replace(/^data:image\/[a-z]+;base64,/, "");
   this.profiledata.FirstName=this.EditprofileForm.value["firstname"];
   this.profiledata.LastName=this.EditprofileForm.value["lastname"];
   this.profiledata.City=this.EditprofileForm.value["city"];
   this.profiledata.Address=this.EditprofileForm.value["address"];
-  this.profiledata.Country=this.EditprofileForm.value["country"]["description"];
+  this.profiledata.Country=this.EditprofileForm.value["country"];
   this.profiledata.Mobile=this.EditprofileForm.value["mobile"];
 
   this.userservice.UpdateCustomerProfileData(this.profiledata).subscribe(res=>{
-    this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
-    this.redirectCustomer();
+    //this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
+    this.response=res["result"];
+    this.responsesty="succsmsg";
+    this.HideResponse();
+    setTimeout(() => {          
+      this.redirectCustomer();
+  }, 3000); 
+
     this.ProgressSpinnerDlg=false;
   },
   error=>{
-    this.messageService.add({ severity: 'error', summary: 'Error Message', detail: "Something Went Wrong Please Try Again"});
+    this.response="Something Went Wrong Please Try Again";
+    this.responsesty="errormsg";
+    this.HideResponse();
+    //this.messageService.add({ severity: 'error', summary: 'Error Message', detail: "Something Went Wrong Please Try Again"});
     this.redirectCustomer();
   });
+}
+
+HideResponse()
+{
+  setTimeout(() => {          
+    this.response="";
+}, 3000); 
 }
 }

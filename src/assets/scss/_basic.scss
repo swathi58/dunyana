@@ -458,3 +458,24 @@ body .ui-paginator {
 body .ui-button:enabled:focus{
     box-shadow: none;
 }
+
+
+//styles for inline message
+.errormsg{
+    text-align: center;
+    color: red;
+    padding: 0px;
+    margin-top: 0px;
+    float: right;
+    position: absolute;
+    right: 5%;
+}
+.succsmsg{
+    text-align: center;
+    color: #4CAF50;
+    padding: 0px;
+    margin-top: 0px;
+    float: right;
+    position: absolute;
+    right: 5%;
+}

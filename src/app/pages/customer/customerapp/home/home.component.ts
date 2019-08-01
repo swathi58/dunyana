@@ -101,7 +101,6 @@ export class HomeComponent implements OnInit {
       item["image"]='data:image/png;base64,'+ item["image"];
       this.headercarouselItems.push(item);
     });
-    console.log(this.headercarouselItems);
   });
 
   //   this.headercarouselItems = [{name:1,image:"assets/layout/images/hero_banner.jpg"}, {name:2,image:"assets/layout/images/hero_banner.jpg"},

@@ -1,188 +1,160 @@
-
 <main>
-<section class="accounts">
-<div class="text_container">
-  <div class="container">
+    <section class="accounts">
+        <div class="text_container">
+            <div class="container">
 
 
-      <div class="row">
-          <div class="col-xl-4 col-lg-4 leftPanel">
+                <div class="row">
+                    <div class="col-xl-4 col-lg-4 leftPanel">
 
 
-              <h2>Welcome back, <br><span class="font-weight-bold">{{profiledata.FirstName}}.</span></h2>
-              <p>Lorem ipsum dolor sit amet, consectetur eset adipiscing elit gart.</p>
+                        <h2>Welcome back, <br><span class="font-weight-bold">{{profiledata.FirstName}}.</span></h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur eset adipiscing elit gart.</p>
 
-          </div>
-
-
-          <div class="col-xl-7 col-lg-8 offset-xl-1 offset-lg-0 wallet">
-
-              <div class="row">
-                  <h4 class="col-12">Your Wallet</h4>
-                  <div class="col-xl-4 col-lg-6 ">
-                      <div class="col-xl-12 col-lg-12 g-box">
-                          <p class="first">Points</p>
-                          <p class="b-font">6,320</p>
-
-                          <p><a href="#"><span class="icon-add mr-2"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span> add balance</a></p>
-                      </div>
-                  </div>
-                  <div class="col-xl-4 col-lg-6">
-                      <div class="col-xl-12 col-lg-12 g-box">
-                            <img src="assets/layout/images/svg/mc_logo.svg" height="72px">
-                          <p class="light">Mohammed Ali K<br> <strong> 1051 0510 5100</strong><br> 01/23 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; CVC 123</p>
-                          <p><a href="#"><i class="icon-edit mr-2"></i>edit/remove card</a></p>
-                      </div>
-                  </div>
-                  <div class="col-xl-4 col-lg-12">
-                      <div class="col-xl-12 col-lg-12 g-box-line">
-                          <img src="assets/layout/images/svg/plus.svg" width="55px" height="55px">
-                      </div>
-
-                  </div>
-              </div>
+                    </div>
 
 
-          </div>
+                    <div class="col-xl-7 col-lg-8 offset-xl-1 offset-lg-0 wallet">
 
-          <div class="col-xl-4 col-lg-4">
+                        <div class="row">
+                            <h4 class="col-12">Your Wallet</h4>
+                            <div class="col-xl-4 col-lg-6 ">
+                                <div class="col-xl-12 col-lg-12 g-box">
+                                    <p class="first">Points</p>
+                                    <p class="b-font">6,320</p>
 
+                                    <p><a href="#"><span class="icon-add mr-2"><span class="path1"></span><span
+                                                    class="path2"></span><span class="path3"></span></span> add
+                                            balance</a></p>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-6">
+                                <div class="col-xl-12 col-lg-12 g-box">
+                                    <img src="assets/layout/images/svg/mc_logo.svg" height="72px">
+                                    <p class="light">Mohammed Ali K<br> <strong> 1051 0510 5100</strong><br> 01/23
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; CVC 123</p>
+                                    <p><a href="#"><i class="icon-edit mr-2"></i>edit/remove card</a></p>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-12">
+                                <div class="col-xl-12 col-lg-12 g-box-line">
+                                    <img src="assets/layout/images/svg/plus.svg" width="55px" height="55px">
+                                </div>
 
-              <h4>Your Profile</h4>
-
-
-              <div class="profile">
-
-                  <div class="thumb">
-                      <img [src]="profiledata.Image">
-                      <p>{{profiledata.FirstName}}<br><span> {{profiledata.City}}, {{profiledata.Country}}</span></p>
-                  </div>
-                  <div class="address">
-                      <p> Office No.<br> <span>{{profiledata.Mobile}}</span></p>
-
-                      <p>Mobile No.<br><span>{{profiledata.Mobile}}</span></p>
-
-                      <p>Address (*)<br> <span>{{profiledata.Address}},<br>{{profiledata.City}}, {{profiledata.Country}} </span></p>
-
-                      <p>Email ID<br> <span>{{profiledata.Email}}</span></p>
-
-                      <p class="text-blue float-left"><a (click)="showDialog()">Change password </a></p>
-                      <p class="text-blue float-right edit"><a (click)="showEditDialog()"><i class="text-blue icon-edit f-big mr-2"></i> Edit </a></p>
-
-                  </div>
-
-
-              </div>
-          </div>
-
-          <div class="col-xl-7 col-lg-8 offset-xl-1 offset-lg-0 order-history">
-
-              <h4 class="">Your Order History</h4>
-
-              <div class="col-md-12 category">
+                            </div>
+                        </div>
 
 
-                  <div class="img col-lg-2 col-sm-2">
-                      <img src="assets/layout/images/cat_img_virtual.jpg" width="110">
-                  </div>
+                    </div>
 
-                  <div class="float-left pl-4 col-lg-5 col-sm-5 pr-0">
-                      <h3>Product Name</h3>
-                      <p>Order ID: A1B2 – C3D4 – E5F6<br> Sold by <strong>Retailer Name</strong></p>
-                  </div>
-                  <div class="float-right text-right col-md-4 col-sm-4">
-                      <h3>SAR 123</h3>
-                      <p>MasterCard **** 5100</p>
-                  </div>
+                    <div class="col-xl-4 col-lg-4">
 
 
-
-                  <div class="float-left pl-4 opl col-lg-6 col-xl-6 col-sm-6">
-
-                      Order Placed <span>July 12, 2019</span>
-                  </div>
-                  <div class="float-right text-right  col-md-4 col-sm-3">
-                      <h3>on route</h3>
-                      <p>Track Package</p>
-                  </div>
-
-              </div>
-              <div class="col-md-12 category">
+                        <h4>Your Profile</h4>
 
 
-                  <div class="img col-lg-2 col-sm-2">
-                      <img src="assets/layout/images/cat_img_virtual.jpg" width="110">
-                  </div>
+                        <div class="profile">
 
-                  <div class="float-left pl-4 col-lg-5 col-sm-5 pr-0">
-                      <h3>Product Name</h3>
-                      <p>Order ID: A1B2 – C3D4 – E5F6<br> Sold by <strong>Retailer Name</strong></p>
-                  </div>
-                  <div class="float-right text-right col-md-4 col-sm-4">
-                      <h3>SAR 123</h3>
-                      <p>MasterCard **** 5100</p>
-                  </div>
+                            <div class="thumb">
+                                <img [src]="profiledata.Image">
+                                <p>{{profiledata.FirstName}}<br><span> {{profiledata.City}},
+                                        {{profiledata.Country}}</span></p>
+                            </div>
+                            <div class="address">
+                                <p> Office No.<br> <span>{{profiledata.Mobile}}</span></p>
 
+                                <p>Mobile No.<br><span>{{profiledata.Mobile}}</span></p>
 
+                                <p>Address (*)<br> <span>{{profiledata.Address}},<br>{{profiledata.City}},
+                                        {{profiledata.Country}} </span></p>
 
-                  <div class="float-left pl-4 opl col-lg-6 col-xl-6 col-sm-6">
+                                <p>Email ID<br> <span>{{profiledata.Email}}</span></p>
 
-                      Order Placed <span>July 12, 2019</span>
-                  </div>
-                  <div class="float-right text-right  col-md-4 col-sm-3">
-                      <h3>on route</h3>
-                      <p>Track Package</p>
-                  </div>
+                                <p class="text-blue float-left"><a (click)="showDialog()">Change password </a></p>
+                                <p class="text-blue float-right edit"><a (click)="showEditDialog()"><i
+                                            class="text-blue icon-edit f-big mr-2"></i> Edit </a></p>
 
-              </div>
-              <div class="col-md-12 category">
+                            </div>
 
 
-                  <div class="img col-lg-2 col-sm-2">
-                      <img src="assets/layout/images/cat_img_virtual.jpg" width="110">
-                  </div>
+                        </div>
+                    </div>
 
-                  <div class="float-left pl-4 col-lg-5 col-sm-5 pr-0">
-                      <h3>Product Name</h3>
-                      <p>Order ID: A1B2 – C3D4 – E5F6<br> Sold by <strong>Retailer Name</strong></p>
-                  </div>
-                  <div class="float-right text-right col-md-4 col-sm-4">
-                      <h3>SAR 123</h3>
-                      <p>MasterCard **** 5100</p>
-                  </div>
+                    <div class="col-xl-7 col-lg-8 offset-xl-1 offset-lg-0 order-history">
+
+                        <h4 class="">Your Order History</h4>
+                         <div class="col-md-12 category" *ngFor="let order of pagedItems"
+                                (click)="GetOrderDetails(order.productid)">
+    
+    
+                                <div class="img col-lg-2 col-sm-2">
+                                    <img src="{{order.productimage}}" width="110">
+                                </div>
+    
+                                <div class="float-left pl-4 col-lg-5 col-sm-5 pr-0">
+                                    <h3>Product Name</h3>
+                                    <p>Order ID:{{order.orderid}}<br> Sold by <strong>{{order.soldby}}</strong></p>
+                                </div>
+                                <div class="float-right text-right col-md-4 col-sm-4">
+                                    <h3>{{order.productname}}</h3>
+                                    <p>{{order.MasterCard}}</p>
+                                </div>
+    
+
+    
+                                <div class="float-left pl-4 opl col-lg-6 col-xl-6 col-sm-6">
+    
+                                    Order Placed <span>{{order.orderplaced | date:'yyyy-MM-dd'}}</span>
+                                </div>
+                                <div class="float-right text-right  col-md-4 col-sm-3">
+                                    <h3>on route</h3>
+                                    <p>Track Package</p>
+                                </div>
+    
+                            </div>
+    
+                            <!-- <p class="col-12 text-right text-blue pr-0"><a href="#">load more</a></p> -->
+                            <!-- pager -->
+                            <div class="col-md-12 text-center">
+                                <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+                                    <li [ngClass]="{disabled:pager.currentPage === 1}">
+                                        <a (click)="setPage(1)">First</a>
+                                    </li>
+                                    <li [ngClass]="{disabled:pager.currentPage === 1}">
+                                        <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+                                    </li>
+                                    <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                                        <a (click)="setPage(page)">{{page}}</a>
+                                    </li>
+                                    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                                        <a (click)="setPage(pager.currentPage + 1)">Next</a>
+                                    </li>
+                                    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                                        <a (click)="setPage(pager.totalPages)">Last</a>
+                                    </li>
+                                </ul>
+    
+                            </div>
+                      <div [hidden]="noorders"><span>No Orders</span></div>
+
+                    </div>
+
+                </div>
+                <div>
+
+                </div>
+            </div>
+        </div>
 
 
-
-                  <div class="float-left pl-4 opl col-lg-6 col-xl-6 col-sm-6">
-
-                      Order Placed <span>July 12, 2019</span>
-                  </div>
-                  <div class="float-right text-right  col-md-4 col-sm-3">
-                      <h3>on route</h3>
-                      <p>Track Package</p>
-                  </div>
-
-              </div>
-              <p class="col-12 text-right text-blue pr-0"><a href="#">load more</a></p>
-
-          </div>
-
-      </div>
-<div>
-     
-</div>
-  </div>
-</div>
+        <app-categoriesslider [childMessage]="parentMessage"></app-categoriesslider>
 
 
-    <app-categoriesslider [childMessage]="parentMessage"></app-categoriesslider>
-
-
-<div class="loading-indicator" *ngIf="ProgressSpinnerDlg">
-        <p-progressSpinner></p-progressSpinner>
-</div>
-</section>
+        <div class="loading-indicator" *ngIf="ProgressSpinnerDlg">
+            <p-progressSpinner></p-progressSpinner>
+        </div>
+    </section>
 
 </main>
 <app-changepassword [display]="display" (displayChange)="onDialogClose($event)"></app-changepassword>
-<app-edit-profile [display]="editdialogdisplay" (displayChange)="onEditDialogClose($event)" ></app-edit-profile>
+<app-edit-profile [display]="editdialogdisplay" (displayChange)="onEditDialogClose($event)"></app-edit-profile>

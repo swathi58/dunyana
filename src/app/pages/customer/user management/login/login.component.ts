@@ -88,7 +88,7 @@ export class LoginComponent implements OnInit {
     }
     this.loginForm = this.formBuilder.group({
       lEmail: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{1,}[.]{1}[a-zA-Z]{2,}')]],
-      lPassword: ['', Validators.compose([Validators.required, Validators.minLength(6)])]
+      lPassword: ['', [Validators.compose([Validators.required,Validators.pattern('^([A-Za-z0-9]+ )+[A-Za-z0-9]+$|^[A-Za-z0-9]+$'), Validators.minLength(6)])]]
     });
 
     this.ForgetForm = this.formBuilder.group({
@@ -307,13 +307,17 @@ export class LoginComponent implements OnInit {
       }
       else if(res["loginStatus"]==0){
         this.show = false;
+
         this.div.nativeElement.innerHTML = "Please Activate Your Account";
+
       }
 
       else if(res["loginStatus"]==2){
         this.show = false;
-        this.div.nativeElement.innerHTML ="Your Account is Locked";
+
+        this.div.nativeElement.innerHTML = 'Account is Locked'; //res["result"];
       }
+
       else if(res["loginStatus"]==3){
         this.show = false;
         this.div.nativeElement.innerHTML = "Your Account is Barred";

@@ -11,53 +11,29 @@
 
                 </div>
             </div>
-            <section class="row">
-                <!-- <div class="container-fluid">
+
+            <section class="category brands">
+                <div class="container-fluid">
                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="card mb-4 box-shadow"><img alt="Thumbnail [100%x225]" class="card-img-top" src="../../../../../assets/layout/images/brand-img1.jpg">
-                                <div class="card-body">
-                                    <p class="card-text">Apple</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="card mb-4 box-shadow"><img alt="Thumbnail [100%x225]" class="card-img-top" src="../../../../../assets/layout/images/brand-img2.jpg">
-                                <div class="card-body">
-                                    <p class="card-text">Adidas</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="card mb-4 box-shadow"><img alt="Thumbnail [100%x225]" class="card-img-top" src="../../../../../assets/layout/images/brand-img3.jpg">
-                                <div class="card-body">
-                                    <p class="card-text">Anne Klein</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="card mb-4 box-shadow"><img alt="Thumbnail [100%x225]" class="card-img-top" src="../../../../../assets/layout/images/brand-img4.jpg">
-                                <div class="card-body">
-                                    <p class="card-text">Anthropologie</p>
-                                </div>
-                            </div>
-                        </div>
-            
-                    </div>
-                </div> -->
-
-
-                <!-- <p-table [columns]="cols" [value]="cars" [paginator]="true" [rows]="10">
-                                    <ng-template pTemplate="body" let-rowData let-columns="columns">
-                                        <tr>
-                                            <td></td>
+                        <div class="col-md-10 offset-md-1">
+                            <h2>Deals</h2>
                         
-                                        </tr>
-                                    </ng-template>
-                                </p-table> -->
+                            <p class="text-center let-space">
+                                <span *ngFor="let char of alphabetpaging" (click)="Filterbyalphabet(char)">{{char}}</span>
+                            </p>
+                        </div>
+                    </div>
+                    <hr/>
+                </div>          
+            </section>
 
-                <!-- <p-paginator [rows]="4" [totalRecords]="totaldealsRecords"></p-paginator> -->
+            <!-- <div class="row">
+               <div>
+                   <span *ngFor="let char of alphabetpaging" (click)="Filterbyalphabet(char)">{{char}}</span>
+               </div>
+            </div> -->
 
+            <section class="row">
 
                 <div class="col-md-6" *ngFor="let deal of pagedItems">
                     <div class="card mb-4 box-shadow"><img alt="Thumbnail [100%x225]" class="card-img-top" [src]="deal.image">

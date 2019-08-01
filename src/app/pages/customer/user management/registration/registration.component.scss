@@ -360,6 +360,9 @@ button:hover {
 .carousel-item {
     min-height: 231px;
     background: white;
+    &.c-btm{
+        margin-bottom: 2.8rem;
+    }
 }
 
 .carousel-indicators li {
@@ -518,12 +521,7 @@ input[type="number"] {
 }
 
 
-.errormsg{
-  color: red;
-}
-.succsmsg{
-  color: #4CAF50;
-}
+
 
 @media screen and (max-width: 475px) {
     .center {
@@ -553,3 +551,16 @@ input[type="number"] {
     left: 0;
     top: 0;
   }
+
+.errormsg
+{
+    right: 10%;
+}
+
+.succsmsg{
+    right: 10%;
+}
+.text-danger{
+    font-size: 13px;
+    float: right;
+}

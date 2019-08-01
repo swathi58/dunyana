@@ -51,20 +51,6 @@ section.qkLinks {
     }
 }
 
-section.brands {
-    padding-bottom: 45px;
-    p {
-        color: #4f5b69;
-        font-size: 18pt;
-    }
-    hr {
-        opacity: 0.5;
-    }
-    .let-space {
-        letter-spacing: 1pt;
-    }
-}
-
 .card-body {
     padding: 2rem;
     background: #4f5b69;
@@ -171,3 +157,23 @@ a {
 }
 
 
+section.brands {
+    padding-bottom: 45px;
+    p {
+        color: #4f5b69;
+        font-size: 18pt;
+        span{
+           letter-spacing: 6pt;
+        }
+    }
+    hr {
+        opacity: 0.5;
+    }
+    .let-space {
+        letter-spacing: 1pt;
+    }
+}
+
+section.category {
+    padding: 10px 0;
+}

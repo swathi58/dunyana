@@ -26,6 +26,7 @@ import { CustomerServiceComponent } from './About/customer-service/customer-serv
 import { CategoryComponent } from './customer category management/category/category.component';
 import { ShoppingComponent } from './shopping/shopping.component';
 import { ForgotpasswordComponent } from '../user management/forgotpassword/forgotpassword.component';
+import { OrderDetailsComponent } from './order management/order-details/order-details.component';
 
 
 const routes: Routes = [
@@ -113,6 +114,14 @@ const routes: Routes = [
       path:"category/:catname",
       component:CategoryComponent
     },
+    {
+      path:"orderdetails/:ordid",
+      component:OrderDetailsComponent
+    },
+    {
+      path:"shopping/:catname",
+      component:ShoppingComponent
+    }
 
   ]
 },

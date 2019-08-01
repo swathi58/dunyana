@@ -23,6 +23,7 @@ import { observable } from 'rxjs';
   styleUrls: ['./forgotpassword.component.scss']
 })
 export class ForgotpasswordComponent implements OnInit {
+  lang = 'en';
 
   headerlogo: string = "assets/layout/images/glogo.png";
   checkinfo: string = "assets/layout/images/svg/success.svg";
@@ -103,11 +104,20 @@ export class ForgotpasswordComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (this.localStorage.get('lang') != null) {
+      this.lang = this.localStorage.get('lang');
+      this.translate.use(this.lang);
+    }
+    else {
+      this.translate.use(this.lang);
+    }
 
     this.forgotform = this.formBuilder.group({
       // FirstregistrationForm:this.formBuilder.array([this.BasicDetails()]),    
+
       emailid: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{1,}[.]{1}[a-zA-Z]{2,}')]],    
-      password: ['', [Validators.required, Validators.minLength(6)]],  
+      password: ['', [Validators.required,Validators.pattern('^([A-Za-z0-9]+ )+[A-Za-z0-9]+$|^[A-Za-z0-9]+$'), Validators.minLength(6)]],  
+
       otp: ['', [Validators.required]]
     });
      this.apiotp= this.localStorage.get('otp');//sessionStorage.getItem('otp');
@@ -149,7 +159,6 @@ export class ForgotpasswordComponent implements OnInit {
 
   formauthdatavalidate() {
     if (this.registerdto.Email != null) {
-      if (this.registerdto.Email.length - 1 > -1) {
         if (this.registerdto.Email.match('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}')) {
          
           //this.btndisable = "line_btn sblue";
@@ -160,7 +169,7 @@ export class ForgotpasswordComponent implements OnInit {
         {
           this.btndisable = "disable";
         }
-      }
+
     }
     else {
       this.btndisable = "disable";
@@ -169,13 +178,21 @@ export class ForgotpasswordComponent implements OnInit {
 
   pwdauthdatavalidate(){
       if (this.registerdto.PWD.length != null) {
-            if (this.registerdto.PWD.length >= 6) {
+         if(this.registerdto.PWD.match('^([A-Za-z0-9]+ )+[A-Za-z0-9]+$|^[A-Za-z0-9]+$'))
+         {
+          if (this.registerdto.PWD.length >= 6) {
             this.btndisable = "line_btn sblue";
            
              }
              else{
               this.btndisable = "disable";
              }
+         }
+         else
+         {
+          this.btndisable = "disable";
+         }
+     
           }
           else {
             this.btndisable = "disable";
@@ -184,12 +201,12 @@ export class ForgotpasswordComponent implements OnInit {
   }
 
   
+
   otpformvalidate() {
-    
+
     this.show = true;
     this.timerdata = this.localStorage.get('timerdata');
     this.EmailOTP = this.forgotform.value["otp"];
-    console.log(this.timerdata);
     
     if (this.EmailOTP.toString().length == 6) {
 
@@ -202,11 +219,9 @@ export class ForgotpasswordComponent implements OnInit {
 
 
     
-      if (this.timerdata <= "01:00" ) {
+      if (this.timerdata < "10:00" ) {
         
         if (this.EmailOTP == this.registerdto.OTP.toString()) {
-          console.log(this.callDuration);
-
           this.btndisable = "line_btn sblue";
           // this.headertext = "Welcome Back";
           // this.submitbtntext = "Submit";
@@ -258,11 +273,11 @@ export class ForgotpasswordComponent implements OnInit {
   CheckEmail() {
     //this.registerdto.email="swathi.chinnala@gmail.com";
     this.ConvertingFormToDto();
-    
-    if (this.registerdto.Email.length > 0 ) {
+
       
       if (this.registerdto.Email.match('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{1,}[.]{1}[a-zA-Z]{2,}')) {
         
+
         this.userservice.EmailVerification(this.registerdto).subscribe(res => {
           
           
@@ -287,7 +302,7 @@ export class ForgotpasswordComponent implements OnInit {
           
         });
       }
-    }
+    
 
   }
 
@@ -300,7 +315,6 @@ export class ForgotpasswordComponent implements OnInit {
         this.currentIndex = slides[i].getAttribute('data-slide-to');
         
         if (Number.parseInt(this.currentIndex) != 3) {
-          console.log(this.currentIndex);
 
           if (Number.parseInt(this.currentIndex) == 0) {
            
@@ -321,7 +335,7 @@ export class ForgotpasswordComponent implements OnInit {
           else if (Number.parseInt(this.currentIndex) == 2) {
             
             //this.pwdauthdatavalidate();
-            
+
             this.submitbtntext = "Submit";
            this.headertext="welcome back";
            this.btndisable="none";
@@ -391,11 +405,11 @@ export class ForgotpasswordComponent implements OnInit {
     this.btndisable="disable";
     this.userservice.sendingotp(this.registerdto).subscribe(res => {
       this.ProgressSpinnerDlg=false;
-      this.btndisable="disable";
+
+
       this.btnotpdis = "disable";
       this.submitbtntext="Verify";
      
-      
       //this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
       this.show = false;
       this.div.nativeElement.innerHTML = res["result"];
@@ -461,10 +475,9 @@ export class ForgotpasswordComponent implements OnInit {
 
   
   startTimer(display) {
-    var timer = 60;
+    var timer = 600;
     var minutes;
     var seconds;
-    console.log(display.textContent);
     var subscription= Observable.interval(1000).subscribe(x => {
         minutes = Math.floor(timer / 60);
         seconds = Math.floor(timer % 60);
@@ -485,11 +498,8 @@ export class ForgotpasswordComponent implements OnInit {
           this.callDuration="";
           this.otpdisable="disable";             
           subscription.unsubscribe();
-         
-          
-          
+
         }
-        console.log(this.timetaken);
     });
     
 }

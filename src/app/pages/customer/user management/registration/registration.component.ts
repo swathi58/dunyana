@@ -42,7 +42,8 @@ export class RegistrationComponent implements OnInit {
   topheader: string = "";
   userdata:any;
   otpnumb:string="";
-
+  response:string="";
+  responsesty:string="";
   iserror: boolean = true;
   issucss: boolean = true;
   errormsg: string = "";
@@ -96,6 +97,9 @@ export class RegistrationComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.GetCountriesList();
+
     if (this.localStorage.get('lang') != null) {
       this.lang = this.localStorage.get('lang');
       this.translate.use(this.lang);
@@ -105,15 +109,16 @@ export class RegistrationComponent implements OnInit {
     }
     this.registrationForm = this.formBuilder.group({
       //  FirstregistrationForm:this.formBuilder.array([this.BasicDetails()]),
-      firstname: ['', Validators.required],
-      lastname: ['', Validators.required],
+      //firstname: ['', [Validators.required,Validators.pattern('[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*')]],
+      firstname: ['', [Validators.required,Validators.pattern('^([A-Za-z]+ )+[A-Za-z]+$|^[A-Za-z]+$')]],
+      lastname: ['', [Validators.required,Validators.pattern('^([A-Za-z]+ )+[A-Za-z]+$|^[A-Za-z]+$')]],
       emailid: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}')]],
       mobile: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
-      address: ['', Validators.required],
+      address: ['', [Validators.required,Validators.pattern('^([A-Za-z]+ )+[A-Za-z]+$|^[A-Za-z]+$')]],
       country: ['', Validators.required],
-      city: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmpassword: ['', [Validators.required, Validators.minLength(6)]],
+      city: ['', [Validators.required,Validators.pattern('^([A-Za-z]+ )+[A-Za-z]+$|^[A-Za-z]+$')]],
+      password: ['', [Validators.required,Validators.pattern('^([A-Za-z0-9]+ )+[A-Za-z0-9]+$|^[A-Za-z0-9]+$'),Validators.minLength(6)]],
+      confirmpassword: ['', [Validators.required, Validators.pattern('^([A-Za-z0-9]+ )+[A-Za-z0-9]+$|^[A-Za-z0-9]+$'),Validators.minLength(6)]],
       otp: ['', Validators.required]
     },
       {
@@ -121,20 +126,21 @@ export class RegistrationComponent implements OnInit {
       }
     );
 
+   
     // this.countries = [
     //   { label: 'KSA', value: 'KSA' },
     //   { label: 'United States', value: 'United States' },
     //   { label: 'United Kingdom', value: 'United Kingdom' }
     // ];
 
-    // this.registrationForm.controls['country'].setValue(this.countries[0]["description"]);
 
-    this.GetCountriesList();
+
   }
 
 
   _keyPress(event: any) {
-    const pattern = /[0-9\+\-\ ]/;
+    //const pattern = /[0-9\+\-\ ]/;
+    const pattern=/^([0-9]+ )+[0-9]+$|^[0-9]+$/;
     let inputChar = String.fromCharCode(event.charCode);
 
     if (!pattern.test(inputChar)) {
@@ -191,25 +197,43 @@ export class RegistrationComponent implements OnInit {
     //   console.log("invalid");
     // }
     if (this.registerdto.FirstName != null) {
-      if ((this.registerdto.FirstName.length - 1 > -1)) {
-        // if(this.registerdto.FirstName.match("('[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*')"))
-        // {
-        if (this.registerdto.LastName != null) {
-          if (this.registerdto.LastName.length - 1 > -1) {
-            this.btndisable = "line_btn sblue";
+
+      if(this.registerdto.FirstName.match("^([A-Za-z]+ )+[A-Za-z]+$|^[A-Za-z]+$"))
+      {
+        if ((this.registerdto.FirstName.length - 1 > -1)) {
+          // if(this.registerdto.FirstName.match("('[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*')"))
+          // {
+          if (this.registerdto.LastName != null) {
+            
+            if(this.registerdto.LastName.match("^([A-Za-z]+ )+[A-Za-z]+$|^[A-Za-z]+$"))
+            {
+              if (this.registerdto.LastName.length - 1 > -1) {
+                this.btndisable = "line_btn sblue";
+              }
+              if (this.registerdto.LastName.length == 0) {
+                this.btndisable = "disable";
+              }
+            }
+            else
+            {
+              this.btndisable = "disable";
+            }
+       
           }
-          if (this.registerdto.LastName.length == 0) {
+          else {
             this.btndisable = "disable";
           }
+  
         }
         else {
           this.btndisable = "disable";
         }
-
       }
-      else {
+      else
+      {
         this.btndisable = "disable";
       }
+
     }
     else {
       this.btndisable = "disable";
@@ -221,13 +245,16 @@ export class RegistrationComponent implements OnInit {
     if (this.registerdto.Email != null) {
       if (this.registerdto.Email.match('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}')) {
         if (this.registerdto.PWD != null) {
-          if (this.registerdto.PWD.length >= 6) {
-            // this.CheckEmail();
-            this.btndisable = "line_btn sblue";
-          }
-          if (this.registerdto.PWD.length == 0 || this.registerdto.PWD.length < 6) {
-            this.btndisable = "disable";
-          }
+          if(this.registerdto.PWD.match('^([A-Za-z0-9]+ )+[A-Za-z0-9]+$|^[A-Za-z0-9]+$'))
+          {
+            if (this.registerdto.PWD.length >= 6) {
+              // this.CheckEmail();
+              this.btndisable = "line_btn sblue";
+            }
+            if (this.registerdto.PWD.length == 0 || this.registerdto.PWD.length < 6) {
+              this.btndisable = "disable";
+            }
+          } 
         }
       }
       else {
@@ -243,19 +270,31 @@ export class RegistrationComponent implements OnInit {
   Addressformvalidate() {
 
     if (this.registerdto.City != null) {
-      if (this.registerdto.City.length - 1 > -1) {
-        if (this.registerdto.Address != null) {
-          if (this.registerdto.Address.length - 1 > -1) {
-            this.btndisable = "line_btn sblue";
-          }
-          else if (this.registerdto.Address.length == 0) {
-            this.btndisable = "disable";
+      if(this.registerdto.City.match('^([A-Za-z]+ )+[A-Za-z]+$|^[A-Za-z]+$'))
+      {
+        if (this.registerdto.City.length - 1 > -1) {
+          if (this.registerdto.Address != null) {
+            if(this.registerdto.Address.match('^([A-Za-z]+ )+[A-Za-z]+$|^[A-Za-z]+$'))
+            {
+              if (this.registerdto.Address.length - 1 > -1) {
+                this.btndisable = "line_btn sblue";
+              }
+              else if (this.registerdto.Address.length == 0) {
+                this.btndisable = "disable";
+              }
+              else
+              {
+                this.btndisable = "disable";
+              }
+            }
+
           }
         }
+        else if (this.registerdto.City.length === 0) {
+          this.btndisable = "disable";
+        }
       }
-      else if (this.registerdto.City.length === 0) {
-        this.btndisable = "disable";
-      }
+
     }
     else {
       this.btndisable = "disable";
@@ -279,12 +318,11 @@ export class RegistrationComponent implements OnInit {
   otpformvalidate() {
     this.timerdata = this.localStorage.get('timerdata');
     if (this.Otp != null) {
-      console.log(this.Otp.toString().length);
 
       if (this.Otp.toString().length == 6) {
         this.otpnumb = "numb";
       
-        if (this.timerdata <= "01:00" || this.timerdata != "00:00") {
+        if (this.timerdata < "10:00") {
         
           if (this.Otp == this.registerdto.OTP.toString()) {
           
@@ -299,7 +337,9 @@ export class RegistrationComponent implements OnInit {
 
           }
           else {
-            this.messageService.add({ severity: 'error', summary: 'Error Message', detail: "Invalid OTP" });
+			   this.response="Invalid OTP";
+            this.responsesty="errormsg";
+            //this.messageService.add({ severity: 'error', summary: 'Error Message', detail: "Invalid OTP" });
             // this.errormsg="Invalid OTP";
             // this.iserror=false;
 
@@ -307,9 +347,16 @@ export class RegistrationComponent implements OnInit {
           }
         }
         else {
+          this.response="Please Enter OTP With in 10 Minutes";
+          this.responsesty="errormsg";
+          this.HideResponse();
+          //this.messageService.add({ severity: 'error', summary: 'Error Message', detail: "Invalid OTP" });
+          // this.errormsg="Invalid OTP";
+          // this.iserror=false;
+
           this.btndisable = "disable";
           this.btnotpdis = "line_btn sblue";          
-          this.messageService.add({ severity: 'error', summary: 'Error Message', detail: "Please Enter OTP With in 10 Minutes" });
+          //this.messageService.add({ severity: 'error', summary: 'Error Message', detail: "Please Enter OTP With in 10 Minutes" });
           this.timerbtndisplay = true;
           this.verifybtndisplay = false;
           this.resendtext = 'Resend in 00:00';
@@ -357,21 +404,14 @@ export class RegistrationComponent implements OnInit {
     }
     this.basicformvalidate();
   }
-
   GetCountriesList() {
     this.userservice.GetCountriesList().subscribe(res => {
-      this.countries = res;
-
-      res.forEach(element => {
-        // this.countries.push({ "label": element["id"], value: element["description"] });
-        // this.countries = [
-        //   { label: 'KSA', value: 'KSA' },
-        //   { label: 'United States', value: 'United States' },
-        //   { label: 'United Kingdom', value: 'United Kingdom' }
-        // ];
-      });
-    })
+      Object.keys(res).map(key => (
+       this.countries.push({label:res[key]["description"], value:res[key]["description"]})    
+        ));
+    });
   }
+
   ConvertingFormToDto() {
 
     this.registerdto.FirstName = this.registrationForm.value["firstname"];
@@ -383,7 +423,6 @@ export class RegistrationComponent implements OnInit {
     this.registerdto.PWD = this.registrationForm.value["password"];
     this.registerdto.Image = this.finalImage.replace(/^data:image\/[a-z]+;base64,/, "");
     this.registerdto.LoginType = "D";
-    console.log(this.registerdto);
   }
 
   CheckEmail() {
@@ -393,20 +432,30 @@ export class RegistrationComponent implements OnInit {
       if (this.registerdto.Email.match('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}')) {
         this.userservice.EmailVerification(this.registerdto).subscribe(res => {
           if (res["result"] === "Email is valid") {
-            this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
+            this.response=res["result"];
+            this.HideResponse();
+            this.responsesty="succsmsg";
+            //this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
             //  this.issucss=false;
             //  this.succsmsg=res["result"];
             //this.btndisable = "line_btn sblue";
           }
           else if (res["result"] === "EmailId is already registred") {
-            this.messageService.add({ severity: 'error', summary: 'Error Message', detail: res["result"] });
+
+            this.response=res["result"];
+            this.responsesty="errormsg";
+            this.HideResponse();
+            //this.messageService.add({ severity: 'error', summary: 'Error Message', detail: res["result"] });
             // this.errormsg=res["result"];
             // this.iserror=false;
             this.btndisable = "disable";
           }
         },
           errormsg => {
-            this.messageService.add({ severity: 'error', summary: 'Error Message', detail: errormsg["error"]["result"] });
+            this.response=errormsg["error"]["result"];
+            this.responsesty="errormsg";
+            this.HideResponse();
+            //this.messageService.add({ severity: 'error', summary: 'Error Message', detail: errormsg["error"]["result"] });
             // this.errormsg=errormsg["error"]["result"];
             // this.iserror=false;
             this.btndisable = "disable";
@@ -423,7 +472,7 @@ export class RegistrationComponent implements OnInit {
     for (i = 0; i < slides.length; i++) {
       if (slides[i].getAttribute('class') === 'active') {
         this.currentIndex = slides[i].getAttribute('data-slide-to');
-        console.log(this.currentIndex);
+
         if (Number.parseInt(this.currentIndex) >= 0) {
           
           this.prevbtn = "backBtn";
@@ -435,6 +484,7 @@ export class RegistrationComponent implements OnInit {
             this.formauthdatavalidate();
             //  this.basicformvalidate();
            // this.prevbtn = "backBtn";
+           this.registrationForm.controls['country'].setValue(this.countries[0].value,{onlySelf: true});
 
           }
           else if (Number.parseInt(this.currentIndex) == 1) {
@@ -445,15 +495,17 @@ export class RegistrationComponent implements OnInit {
           else if (Number.parseInt(this.currentIndex) == 2) {
             this.submitbtntext = "Verify";
             this.contactformvalidate();
-            this.registerdto.Country = this.registrationForm.value["country"]["description"];
-
+            this.registerdto.Country = this.registrationForm.value["country"];
           }
           else if (Number.parseInt(this.currentIndex) == 3) {
             this.ConvertingFormToDto();
             this.ProgressSpinnerDlg=true;
             this.userservice.SendOTP(this.registerdto).subscribe(res => {
-              // this.ProgressSpinnerDlg = false;             
-              this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
+              // this.ProgressSpinnerDlg = false;     
+              this.response=res["result"];   
+              this.responsesty="succsmsg";     
+              this.HideResponse();
+              //this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
               // this.issucss=false;
               // this.succsmsg=res["result"];
               this.registerdto.OTP = res["otp"];
@@ -468,8 +520,11 @@ export class RegistrationComponent implements OnInit {
             },
               error => {
                 // this.ProgressSpinnerDlg = false;
-
-                this.messageService.add({ severity: 'error', summary: 'Error Message', detail: error["result"] });
+                
+                this.response=error["result"];
+                this.responsesty="errormsg";
+                this.HideResponse();
+                //this.messageService.add({ severity: 'error', summary: 'Error Message', detail: error["result"] });
                 // this.errormsg=error["result"];
                 // this.iserror=false;
               });
@@ -487,7 +542,10 @@ export class RegistrationComponent implements OnInit {
             this.userservice.InsertCustomer(this.registerdto).subscribe(res => {
               // this.issucss=false;
               // this.succsmsg=res["result"];
-              this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
+              this.response=res["result"];
+              this.responsesty="succsmsg";
+              this.HideResponse();
+              //this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
               //this.localStorage.set("Email", res["reEmail"]);
               this.userdata = res['reFirstName'];
               this.localStorage.set('username', this.userdata);
@@ -535,8 +593,10 @@ export class RegistrationComponent implements OnInit {
       this.submitbtntext="Verify";
      this.verifybtndisplay=false;
      this.timerbtndisplay=true;
-      
-      this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
+       this.response=res["result"];   
+       this.responsesty="succsmsg";     
+       this.HideResponse();
+      //this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
       // this.show = false;
       // this.div.nativeElement.innerHTML = res["result"];
       
@@ -562,16 +622,17 @@ export class RegistrationComponent implements OnInit {
         this.verifybtndisplay=true;
         this.timerbtndisplay=false;
       //this.div.nativeElement.innerHTML = errormsg["error"]["result"];
-       this.messageService.add({ severity: 'error', summary: 'Error Message', detail: errormsg["error"]["result"] });
+	   this.response=errormsg["error"]["result"];   
+       this.responsesty="errormsg";   
+      // this.messageService.add({ severity: 'error', summary: 'Error Message', detail: errormsg["error"]["result"] });
       });
   }
 
   
   startTimer(display) {
-    var timer = 60;
+    var timer = 600;
     var minutes;
     var seconds;
-    console.log(display.textContent);
     var subscription= Observable.interval(1000).subscribe(x => {
         minutes = Math.floor(timer / 60);
         seconds = Math.floor(timer % 60);
@@ -595,7 +656,6 @@ export class RegistrationComponent implements OnInit {
           this.otpdisable="disable";
           
         }
-        console.log(this.timetaken);
     });
     
 }
@@ -622,5 +682,12 @@ export class RegistrationComponent implements OnInit {
   }
   ontemsDialogClose(event) {
     this.termesdialogdisplay = event;
+  }
+
+  HideResponse()
+  {
+    setTimeout(() => {          
+      this.response="";
+  }, 5000); 
   }
 }
