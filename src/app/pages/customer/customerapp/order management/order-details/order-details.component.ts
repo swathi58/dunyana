@@ -15,6 +15,7 @@ export class OrderDetailsComponent implements OnInit {
   productid:number=0;
   orderhistorylist: any[] = [];
   productitem:any[]=[];
+  ProgressSpinnerDlg:boolean=false;
   productdetails:Productdetails={
     productimage:null,
     ordereddate:null,
@@ -36,6 +37,7 @@ export class OrderDetailsComponent implements OnInit {
   }
   GetOrderHistoryDetails()
   {
+    this.ProgressSpinnerDlg=true;
     this.orderhistorylist=this.orderservice.orderhistorydetailsdata;
     this.Fillproductdetails();
   }
@@ -71,5 +73,6 @@ export class OrderDetailsComponent implements OnInit {
       this.productdetails.productname=item["productName"];
     
     });
+    this.ProgressSpinnerDlg=false;
   }
 }

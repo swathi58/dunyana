@@ -322,7 +322,7 @@ export class RegistrationComponent implements OnInit {
       if (this.Otp.toString().length == 6) {
         this.otpnumb = "numb";
       
-        if (this.timerdata < "10:00") {
+        if (this.timerdata < "01:00") {
         
           if (this.Otp == this.registerdto.OTP.toString()) {
           
@@ -630,7 +630,7 @@ export class RegistrationComponent implements OnInit {
 
   
   startTimer(display) {
-    var timer = 600;
+    var timer = 60;
     var minutes;
     var seconds;
     var subscription= Observable.interval(1000).subscribe(x => {

@@ -49,8 +49,8 @@ export class CategoriessliderComponent implements OnInit {
     this.categoryCarousel.moveTo(slide, !this.withAnim);
   }
 
-  navigatetocategory(catname) {
-    this.route.navigateByUrl('customer/shopping/' + catname);
+  navigatetocategory(catid) {
+    this.route.navigateByUrl('customer/shopping/' + catid);
   }
   LoadCategories() {
     this.catgservice.CategoryList().subscribe(res => {

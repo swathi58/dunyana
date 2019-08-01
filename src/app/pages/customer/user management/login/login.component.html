@@ -207,3 +207,10 @@
                 </div>
   
   <!-- <app-terms-conditions [display]="display" (displayChange)="onDialogClose($event)"></app-terms-conditions> -->
+
+
+  <div class="loading-indicator mid" *ngIf="ProgressSpinnerDlg">
+    <p-progressSpinner></p-progressSpinner>
+  </div> 
+  
+  <div class="overlay" *ngIf="ProgressSpinnerDlg"></div>

@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
   isBrowser: boolean;
   base64Image: any;
   submitted: boolean = false;
-  ProgressSpinnerDlg: boolean;
+  ProgressSpinnerDlg: boolean=false;
   display: boolean = false;
   btndisable: string = "disable";
   btnfdisable: string = "disable";

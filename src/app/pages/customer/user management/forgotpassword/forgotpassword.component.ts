@@ -219,7 +219,7 @@ export class ForgotpasswordComponent implements OnInit {
 
 
     
-      if (this.timerdata < "10:00" ) {
+      if (this.timerdata < "01:00" ) {
         
         if (this.EmailOTP == this.registerdto.OTP.toString()) {
           this.btndisable = "line_btn sblue";
@@ -475,7 +475,7 @@ export class ForgotpasswordComponent implements OnInit {
 
   
   startTimer(display) {
-    var timer = 600;
+    var timer = 60;
     var minutes;
     var seconds;
     var subscription= Observable.interval(1000).subscribe(x => {

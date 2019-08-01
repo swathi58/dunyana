@@ -26,7 +26,7 @@ export class EditProfileComponent implements OnInit {
   ProgressSpinnerDlg:boolean=false;
   response:string="";
   responsesty:string="";
-
+  country:string="";
   registerdto:RegistrationDto={
     Id:0,
     FirstName:null,
@@ -68,7 +68,7 @@ export class EditProfileComponent implements OnInit {
 
   FormInit()
   {
-    this.GetCountriesList();
+   
     this.EditprofileForm=this.formBuilder.group({
 
       firstname:['',[Validators.required,Validators.pattern('^([A-Za-z]+ )+[A-Za-z]+$|^[A-Za-z]+$')]],
@@ -84,6 +84,7 @@ export class EditProfileComponent implements OnInit {
 
     this.registerdto.Email=this.localStorage.get("Email");
     this.userservice.GetProfileInformation(this.registerdto).subscribe(res=>{
+
       this.profiledata.Id=res["id"];
       this.EditprofileForm.controls['firstname'].setValue(res["firstName"]);
       this.EditprofileForm.controls['lastname'].setValue(res["lastName"]);
@@ -91,7 +92,9 @@ export class EditProfileComponent implements OnInit {
       this.EditprofileForm.controls['address'].setValue(res["address"]);
       //this.EditprofileForm.controls['country'].setValue(res["country"]);
           // this.registrationForm.controls['country'].setValue(this.countries[0]["description"]);
-      this.EditprofileForm.controls['country'].setValue(res["country"]);
+          
+          this.country=res["country"];
+        //  this.EditprofileForm.controls['country'].setValue("Jordan",{onlySelf: true});
       this.EditprofileForm.controls['city'].setValue(res["city"]);
       this.finalImage='data:image/png;base64,'+res["image"];
 
@@ -99,6 +102,7 @@ export class EditProfileComponent implements OnInit {
       //this.profiledata.Id=res["id"];
      
      // console.log(this.profiledata["image"]);
+     this.GetCountriesList();
     });
    
     
@@ -151,7 +155,9 @@ GetCountriesList() {
     Object.keys(res).map(key => (
      this.countries.push({label:res[key]["description"], value:res[key]["description"]})    
       ));
+      this.EditprofileForm.controls['country'].setValue(this.country);
   });
+
 }
 
 Updateprofiledata()

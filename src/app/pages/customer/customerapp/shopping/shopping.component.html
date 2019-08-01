@@ -1,8 +1,8 @@
-<section class="shopping_banner">
+<section class="home_banner shopping_banner">
     
     <ngu-carousel #headerCarousel [inputs]="carouselConfig" [dataSource]="headercarouselItems">
         <div *nguCarouselDef="let item;" class="item">
-            <div class="item" [ngStyle]="{'background-image':'url('+item.img+')'}">
+            <div class="item" [ngStyle]="{'background-image':'url('+item.image+')'}">
                 <div class="text_container">
                     <div class="container">
 
@@ -70,11 +70,10 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-10 offset-md-1">
-                <h2>Brands</h2>
-                <p class="text-center">
-                    All | Accesories & Beauty Books & Magazines Fashion Sports & Fitness <br>Appliances & Electronics Gifts, Gadgets & Toys Phones & Accessories Shoes Virtual Mall
+                <h2>Merchants</h2>
+                <p class="text-center let-space">
+                    <span *ngFor="let char of alphabetpaging" (click)="Filterbyalphabet(char)">{{char}}</span>
                 </p>
-                <p class="text-center let-space"># <strong>A</strong> B C D E F G H I J K L M N O P Q R S T U V W X Y Z</p>
             </div>
         </div>
         <hr/>
@@ -86,36 +85,48 @@
 
 <section class="">
     <div class="container-fluid">
+            <div class="loading-indicator mid" *ngIf="ProgressSpinnerDlg">
+                    <p-progressSpinner></p-progressSpinner>
+                </div>
         <div class="row">
-            <div class="col-md-6">
-                <div class="card mb-4 box-shadow"><img alt="Thumbnail [100%x225]" class="card-img-top" src="../../../../../assets/layout/images/brand-img1.jpg">
+            <div class="col-md-6" *ngFor="let merchant of pagedItems">
+                <div class="card mb-4 box-shadow"><img alt="Thumbnail [100%x225]" class="card-img-top" src="{{merchant.merchantimage}}">
                     <div class="card-body">
-                        <p class="card-text">Apple</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="card mb-4 box-shadow"><img alt="Thumbnail [100%x225]" class="card-img-top" src="../../../../../assets/layout/images/brand-img2.jpg">
-                    <div class="card-body">
-                        <p class="card-text">Adidas</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="card mb-4 box-shadow"><img alt="Thumbnail [100%x225]" class="card-img-top" src="../../../../../assets/layout/images/brand-img3.jpg">
-                    <div class="card-body">
-                        <p class="card-text">Anne Klein</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="card mb-4 box-shadow"><img alt="Thumbnail [100%x225]" class="card-img-top" src="../../../../../assets/layout/images/brand-img4.jpg">
-                    <div class="card-body">
-                        <p class="card-text">Anthropologie</p>
+                        <p class="card-text">{{merchant.merchantname}}</p>
                     </div>
                 </div>
             </div>
 
         </div>
+         <!-- pager -->
+         <div class="col-md-12 text-center">
+            <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+                <li [ngClass]="{disabled:pager.currentPage === 1}">
+                    <a (click)="setPage(1)">First</a>
+                </li>
+                <li [ngClass]="{disabled:pager.currentPage === 1}">
+                    <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+                </li>
+                <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                    <a (click)="setPage(page)">{{page}}</a>
+                </li>
+                <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                    <a (click)="setPage(pager.currentPage + 1)">Next</a>
+                </li>
+                <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                    <a (click)="setPage(pager.totalPages)">Last</a>
+                </li>
+            </ul>
+
+        </div>
+        
+        <div class="no-orders" [hidden]="isempty">
+            <span>NO Records Found</span>
+        </div>
     </div>
+             
 </section>
+
+
+
+<!-- <div class="overlay" *ngIf="ProgressSpinnerDlg" ></div> -->

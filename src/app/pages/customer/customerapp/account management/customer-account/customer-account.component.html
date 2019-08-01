@@ -83,6 +83,9 @@
                     <div class="col-xl-7 col-lg-8 offset-xl-1 offset-lg-0 order-history">
 
                         <h4 class="">Your Order History</h4>
+                        <div class="loading-indicator" *ngIf="ProgressSpinnerDlg">
+                            <p-progressSpinner></p-progressSpinner>
+                        </div>
                          <div class="col-md-12 category" *ngFor="let order of pagedItems"
                                 (click)="GetOrderDetails(order.productid)">
     
@@ -115,7 +118,7 @@
     
                             <!-- <p class="col-12 text-right text-blue pr-0"><a href="#">load more</a></p> -->
                             <!-- pager -->
-                            <div class="col-md-12 text-center">
+                            <div class="col-md-12 text-center float-right pr-0">
                                 <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
                                     <li [ngClass]="{disabled:pager.currentPage === 1}">
                                         <a (click)="setPage(1)">First</a>
@@ -135,7 +138,7 @@
                                 </ul>
     
                             </div>
-                      <div [hidden]="noorders"><span>No Orders</span></div>
+                      <div [hidden]="noorders" class="no-orders"><span>No Orders</span></div>
 
                     </div>
 
@@ -148,11 +151,6 @@
 
 
         <app-categoriesslider [childMessage]="parentMessage"></app-categoriesslider>
-
-
-        <div class="loading-indicator" *ngIf="ProgressSpinnerDlg">
-            <p-progressSpinner></p-progressSpinner>
-        </div>
     </section>
 
 </main>

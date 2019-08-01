@@ -83,6 +83,9 @@
           </div>
       </div>
   </div>
-
-
 </section>
+<div class="loading-indicator mid" *ngIf="ProgressSpinnerDlg">
+    <p-progressSpinner></p-progressSpinner>
+  </div> 
+  
+  <div class="overlay" *ngIf="ProgressSpinnerDlg"></div>

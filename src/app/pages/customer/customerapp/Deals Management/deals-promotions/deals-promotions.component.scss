@@ -171,9 +171,18 @@ section.brands {
     }
     .let-space {
         letter-spacing: 1pt;
+        span {
+            cursor: pointer;
+        }
     }
 }
 
 section.category {
     padding: 10px 0;
+}
+.no-orders{
+    color: #02a7d4;
+    font-weight: bold;
+    font-size: 22pt; 
+    text-align: center;
 }

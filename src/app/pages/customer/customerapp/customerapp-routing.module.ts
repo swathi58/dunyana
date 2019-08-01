@@ -119,7 +119,7 @@ const routes: Routes = [
       component:OrderDetailsComponent
     },
     {
-      path:"shopping/:catname",
+      path:"shopping/:catid",
       component:ShoppingComponent
     }
 

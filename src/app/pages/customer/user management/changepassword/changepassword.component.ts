@@ -16,7 +16,7 @@ export class ChangepasswordComponent implements OnInit {
   
   @Input() display: boolean;
   @Output() displayChange = new EventEmitter();
-
+  ProgressSpinnerDlg:boolean=false;
 
 
   changepwdForm:FormGroup;
@@ -78,8 +78,10 @@ SaveChangePassword()
     let oldpwd=this.localStorage.get("PWD");
     if(oldpwd===this.changepwdForm.value["PWD"])
     {
+      this.ProgressSpinnerDlg=true;
       this.registerdto.PWD=this.changepwdForm.value["PWD"];
       this.userservice.ChangePassword(this.registerdto).subscribe(res=>{
+        this.ProgressSpinnerDlg=false;
         this.FormReset();
         this.response=res["result"];
         this.responsesty="succsmsg";
