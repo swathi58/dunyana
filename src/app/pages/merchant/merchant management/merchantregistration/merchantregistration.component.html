@@ -40,7 +40,7 @@
                                     <p class="para">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                                     <div class="row inputset">
                                         
-                                        <div class="col-sm-12"><input type="text"  pInputText formControlName="Name" [(ngModel)]="merchantDto.FirstName"  placeholder="Name" (keyup)="formvalidate()" class="w-100"> </div>
+                                        <div class="col-sm-12"><input type="text"  pInputText formControlName="Name" [(ngModel)]="merchantDto.FirstName"  placeholder="Name" (keyup)="formvalidate();onKeyPress($event)" class="w-100"> </div>
                                         <div class="col-sm-12">
 
                                             <!-- <p *ngIf="merchantForm.get('Name').hasError('required') && merchantForm.submitted">Name is required</p> -->
@@ -113,7 +113,7 @@
                                     <p class="para">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                                     <div class="row inputset">
                                         
-                                        <div class="col-sm-12"><input placeholder="Website link" type="text" formControlName="Website" [(ngModel)]="merchantDto.Website"  (keyup)="formvalidate()" /></div>
+                                        <div class="col-sm-12"><input placeholder="Website link" type="text" formControlName="Website" [(ngModel)]="merchantDto.Website"  (keyup)="formvalidate();onKeyPress($event)" /></div>
                                         <div class="col-sm-12">
                                             <div *ngIf="merchantForm.controls['Website'].errors && !merchantForm.controls['Website'].pristine" class="text-danger error">
                                                 <div [hidden]="!merchantForm.controls['Website'].errors.required">Please Enter Website Link</div>
@@ -127,13 +127,17 @@
 
                                     <div class="row inputset">
              
-                                        <div class="col-sm-12"><input placeholder="Email" type="text" formControlName="Email" [(ngModel)]="merchantDto.Email"  (focusout)="CheckEmail()" (keyup)="formauthdatavalidate()" /></div>
+                                        <div class="col-sm-12"><input placeholder="Email" type="text" formControlName="Email" [(ngModel)]="merchantDto.Email" (keyup)="formauthdatavalidate();onKeyPress($event)"   /></div>
                                         <div class="col-sm-12">
                                             <div *ngIf="merchantForm.controls['Email'].errors && !merchantForm.controls['Email'].pristine" class="text-danger error">
-                                                <div [hidden]="!merchantForm.controls['Email'].errors.required">Please Enter Email</div>
-                                                <!-- <div  [hidden]="!merchantForm.controls['Email'].errors?.email">Email must be a valid email address</div> -->
+                                                <div [hidden]="!merchantForm.controls['Email'].errors.required">Please Enter Email  </div>
+                                                <!-- <div  [hidden]="!merchantForm.controls['Email'].errors?.email">Email must be a valid email address</div> -->    
                                                 <div [hidden]="!merchantForm.controls['Email'].errors?.pattern">Please Enter valid email address</div>
                                             </div>
+
+                                            
+
+                                            
                                         </div>
                                         <div class="col-sm-12">
                                             <hr>
@@ -156,7 +160,7 @@
 
                                     <div class="row inputset">
                               
-                                        <div class="col-sm-12"><input placeholder="Confirm Password" type="password"  formControlName="confirmpassword"  (keyup)="formauthdatavalidate()"/></div>
+                                        <div class="col-sm-12"><input placeholder="Confirm Password" type="password"  formControlName="confirmpassword"  (keyup)="formauthdatavalidate();onKeyPress($event)"/></div>
                                        <div class="col-sm-12">
                                               <div *ngIf="merchantForm.controls['confirmpassword'].errors && !merchantForm.controls['confirmpassword'].pristine" class="text-danger error-msg float-right">
                                                       <div [hidden]="!merchantForm.controls['confirmpassword'].errors.required">Please Enter ConfirmPassword</div>

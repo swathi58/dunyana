@@ -18,7 +18,7 @@ export class MerchantService {
   }
 
   public EmailVerification(merchantregistor: MerchantDto): Observable<MerchantDto> { 
-    return this.http.post<MerchantDto>(environment.API_URL + 'Customer/AccountActivation', merchantregistor);
+    return this.http.post<MerchantDto>(environment.API_URL + 'Customer/EmailCheckValidation', merchantregistor);
   }
 
   public GetCountries(): Observable<any> {

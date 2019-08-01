@@ -151,7 +151,7 @@ export class MerchantregistrationComponent implements OnInit {
   }
 
   formvalidate() {
-    this.show = true;
+   
     if (this.merchantForm.valid) {
       this.btndisable = "line_btn sblue";
     }
@@ -161,19 +161,37 @@ export class MerchantregistrationComponent implements OnInit {
   }
 
   CheckEmail() {
-    //this.merchantDto.Email="swathi.chinnala@gmail.com";
-    this.ConvertingFormToDto();
-    this.merchantservice.EmailVerification(this.merchantDto).subscribe(res => {
-      debugger
-      this.show=false;
-      this.div.nativeElement.innerHTML=res["result"];
-      //this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
-    },
-      errormsg => {
-        debugger
-        this.div.nativeElement.innerHTML=errormsg["error"]["result"];
-        //this.messageService.add({ severity: 'error', summary: 'Error Message', detail: errormsg["error"]["result"] });
-      });
+    //this.registerdto.email="swathi.chinnala@gmail.com";
+    //this.ConvertingFormToDto();
+    
+    if (this.merchantDto.Email.length > 0 ) {
+      
+      if (this.merchantDto.Email.match('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{1,}[.]{1}[a-zA-Z]{2,}')) {
+        
+        this.merchantservice.EmailVerification(this.merchantDto).subscribe(res => {
+          debugger
+          
+          if(res["result"]!="Email is valid")
+          {                    
+            this.show = false;
+            this.div.nativeElement.innerHTML = res["result"];
+            
+          }
+          else{
+          this.btndisable="disable";
+          this.show = false;
+          this.div.nativeElement.innerHTML = res["result"];
+          }
+        },
+        errormsg => {
+          this.show = false;
+          this.div.nativeElement.innerHTML = errormsg["result"];
+          //this.messageService.add({severity:'error', summary:'Error Message', detail:errormsg["result"]});         
+          
+        });
+      }
+    }
+
   }
 
   ConvertingFormToDto() {
@@ -194,14 +212,16 @@ export class MerchantregistrationComponent implements OnInit {
     this.merchantDto.CompanyImage = this.finalImage.replace(/^data:image\/[a-z]+;base64,/, "");
     this.merchantDto.ProfileImage=this.iconimage.replace(/^data:image\/[a-z]+;base64,/, "");
     this.merchantDto.PWD=this.merchantForm.value["PWD"];
+    debugger
 
   }
 
   formauthdatavalidate() {
     debugger
-   this.show = true;
+      
     if (this.merchantDto.Email != null) {
-      if (this.merchantDto.Email.match('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}')) {
+      if (this.merchantDto.Email.match('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{1,}[.]{1}[a-zA-Z]{2,}')) {
+        this.CheckEmail();
         if (this.merchantDto.PWD != null) {
           if (this.merchantDto.PWD.length >= 6) {
             // this.CheckEmail();
