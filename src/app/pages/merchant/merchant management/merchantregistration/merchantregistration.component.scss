@@ -347,8 +347,21 @@ display: block;
     top: 0;
   }
 
+  .errormsg
+{
+    right: 10%;
+    position: initial;
+}
+  .succsmsg{
+    right: 10%;
+    position: initial;
+}
+.text-danger{
+    font-size: 13px;
+    float: right;
+}
 
-  .signin_wrap {
+.signin_wrap {
     min-height: 648px;
     }
     

@@ -157,7 +157,9 @@
                                         <div class="col-sm-12">
                                             <div *ngIf="merchantForm.controls['PWD'].errors && !merchantForm.controls['PWD'].pristine" class="text-danger error">
                                                 <div [hidden]="!merchantForm.controls['PWD'].errors.required">Please Enter Password</div>
+                                                <div [hidden]="!merchantForm.controls['PWD'].errors?.pattern">Your Password can't start or end with a blank sapce</div>
                                                 <div [hidden]="!merchantForm.controls['PWD'].errors?.minlength">Password Length Must be Grater Than 6 Characters</div>
+                                                
                                             </div>
                                         </div>
                                         <div class="col-sm-12">
@@ -199,9 +201,13 @@
                                     <div class="row inputset">
                                       
                                         <div class="col-sm-12">
-                                            <p-dropdown [options]="countries" formControlName="country" Placeholder="Country" [(ngModel)]="_merchentFormData.Country" [autoWidth]="false" defaultLabel="Country" [filter]="false">
+                                            <p-dropdown [options]="countries" formControlName="country" Placeholder="Country" [(ngModel)]="_merchentFormData.Country"  [autoWidth]="false"  [filter]="false" required>
                                                
                                             </p-dropdown>
+
+                                            <div [hidden]="merchantForm.control?.status !== 'INVALID' ">
+                                                Value is required
+                                              </div>
                                          
                                         </div>
                                         <div class="col-sm-12" >
@@ -268,7 +274,13 @@
                                       data-slide="next" [ngClass]="btndisable"  (click)="addmerchent()"></p-button>
                                 
                             </div>
-                            <span [hidden]="show"  class="col-md-12 ertxt text-center pt-3" #div></span>
+                            
+                        </div>
+
+                        <div class="pt-2">
+                            <div [ngClass]="responsesty">
+                                <span [hidden]="show" [ngClass]="responsesty"  #div></span>
+                            </div>
                         </div>
 
                     </form>
