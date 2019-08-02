@@ -11,6 +11,7 @@ import { MerchantService } from '../../services/merchant.service';
 import { Key } from 'protractor';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { category } from 'src/app/pages/admin/model/category';
+import { LocalStorageService } from 'angular-web-storage';
 
 
 
@@ -76,8 +77,10 @@ export class MerchantregistrationComponent implements OnInit {
 
   
    reg:any= '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
+  responsesty: string='';
+  smsmsg:string='';
   constructor(private formBuilder: FormBuilder, private merchantservice: MerchantService,
-    private messageService: MessageService, private ngxService: NgxUiLoaderService,
+    private messageService: MessageService, private ngxService: NgxUiLoaderService,private localStorage: LocalStorageService,
     private router: Router) { }
 
   ngOnInit() {
@@ -168,7 +171,7 @@ export class MerchantregistrationComponent implements OnInit {
 
   formvalidate() {
    
-    debugger
+    
     if (this._merchentFormData.Name != null) {
 
       if(this._merchentFormData.Name.match("^([A-Za-z]+ )+[A-Za-z]+$|^[A-Za-z]+$"))
@@ -180,12 +183,12 @@ export class MerchantregistrationComponent implements OnInit {
             
             if(this._merchentFormData.Company.match("^([A-Za-z]+ )+[A-Za-z]+$|^[A-Za-z]+$"))
             {
-              debugger
+              
               if (this._merchentFormData.Company.length - 1 > -1) {
                 this.btndisable = "line_btn sblue";
               }
               if (this._merchentFormData.Company.length == 0) {
-                debugger
+                
                 this.btndisable = "disable";
               }
             }
@@ -219,33 +222,45 @@ export class MerchantregistrationComponent implements OnInit {
 
     //this.registerdto.email="swathi.chinnala@gmail.com";
     //this.ConvertingFormToDto();
-    debugger
+    
     this.btndisable = "disable";
     if (this._merchentFormData.Email.length > 0 ) {
       
       if (this._merchentFormData.Email.match('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{1,}[.]{1}[a-zA-Z]{2,}')) {
         
         this.merchantservice.EmailVerification(this._merchentFormData).subscribe(res => {
-          debugger
-          
-          if(res["result"]!="Email is valid")
-          {                    
-            this.show = false;
-            this.div.nativeElement.innerHTML = res["result"];
-            
+          if (res["result"] === "Email is valid") {
+            this.show=false;
+            this.div.nativeElement.innerHTML=res["result"];
+            this.responsesty="succsmsg";
+            //this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
+            //  this.issucss=false;
+            //  this.succsmsg=res["result"];
+            this.btndisable = "line_btn sblue";
           }
-          else{
-          //this.btndisable= "line_btn sblue";
-          this.show = false;
-          this.div.nativeElement.innerHTML = res["result"];
+          else if (res["result"] === "EmailId is already registred") {
+
+            this.localStorage.set('sms',res["result"]);
+            this.responsesty="errormsg";
+            this.show=false;
+            this.div.nativeElement.innerHTML=res["result"];
+            //this.messageService.add({ severity: 'error', summary: 'Error Message', detail: res["result"] });
+            // this.errormsg=res["result"];
+            // this.iserror=false;
+            this.btndisable = "disable";
           }
         },
-        errormsg => {
-          this.show = false;
-          this.div.nativeElement.innerHTML = errormsg["result"];
-          //this.messageService.add({severity:'error', summary:'Error Message', detail:errormsg["result"]});         
-          
-        });
+          errormsg => {
+           
+            this.responsesty="errormsg";
+            this.show=false;
+            this.div.nativeElement.innerHTML=errormsg["error"]["result"];
+            //this.messageService.add({ severity: 'error', summary: 'Error Message', detail: errormsg["error"]["result"] });
+            // this.errormsg=errormsg["error"]["result"];
+            // this.iserror=false;
+            this.btndisable = "disable";
+
+          });
       }
     }
 
@@ -300,7 +315,7 @@ export class MerchantregistrationComponent implements OnInit {
   
     
    
-    debugger
+    
     
   
    
@@ -310,11 +325,24 @@ export class MerchantregistrationComponent implements OnInit {
 
   }
 
-  
+  dropdownvalidation(){
+    
+    this.btndisable = "disable";
+    if(this._merchentFormData.Country!=null){
+      if(this._merchentFormData.Categories!=null){
+      this.btndisable="line_btn sblue";
+      }
+    }
+    else{
+      this.btndisable = "disable";
+    }
+  }
  
 
   formauthdatavalidate() {
-    debugger
+    
+    this.smsmsg=this.localStorage.get('sms');
+    
     this.btndisable = "disable";
     if (this._merchentFormData.Website != null) {
       if (this._merchentFormData.Website.match("(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?")) {
@@ -325,14 +353,24 @@ export class MerchantregistrationComponent implements OnInit {
                 if (this._merchentFormData.PWD.length >= 6) {
                   if (this._merchentFormData.CPWD != null) {
                     if (this._merchentFormData.PWD == this._merchentFormData.CPWD) {
-
+                     //if(this.show==true){
+                       if(this.smsmsg!="EmailId is already registred"){
                       this.btndisable = "line_btn sblue";
-
+                       }
+                       else{
+                        this.show=false;
+                        this.div.nativeElement.innerHTML=this.smsmsg;
+                      }
+                      
                     }
+                   
                   }
+                 
                 }
+               
               }
             }
+           
 
           }
         }
@@ -349,8 +387,8 @@ export class MerchantregistrationComponent implements OnInit {
 
   addmerchent() {
     
-  debugger
 
+   this.show=true;
     const slides = document.getElementsByTagName('li');
     let i = 0;
     for (i = 0; i < slides.length; i++) {
@@ -361,12 +399,12 @@ export class MerchantregistrationComponent implements OnInit {
 
           if (Number.parseInt(this.currentIndex) == 0) {
            
-            this.btndisable="disable";
+           // this.btndisable="disable";
             this.merchantForm.controls['country'].setValue(this.countries[0].value,{onlySelf: true});
             //this.merchantForm.controls['categorie'].setValue(this.categories[0].value,{onlySelf: true});
           }
           else if (Number.parseInt(this.currentIndex) == 1) {
-
+            //this.dropdownvalidation();
             //this.otpformvalidate();            
             this.submitbtntext="Submit";
             //this.btndisable="disable";
@@ -374,6 +412,7 @@ export class MerchantregistrationComponent implements OnInit {
             //this._merchentFormData.Categories=this.merchantForm.value["categories"];
           }
           else if (Number.parseInt(this.currentIndex) == 2) {
+             
             
             this.btndisable="none";
             
@@ -405,13 +444,35 @@ export class MerchantregistrationComponent implements OnInit {
             
         
           }
+         
+          // if(MerchantDto.Country==null){
+          //   if(MerchantDto.Categories==""){  
+          //     if(MerchantDto.SellCountries==""){
+          //       this.btndisable="disable";
+          //       this.show=false;
+          //       this.responsesty="errormsg";
+          //       this.div.nativeElement.innerHTML="Please select at least one value";
+          //     }
+          //     else{
+          //       this.btndisable="line_btn sblue";
+          //     }
+            
+          //   }
+          //   else{
+          //     this.btndisable="line_btn sblue";
+          //   }
+          
+          // }
+        
+          
 
             this.ProgressSpinnerDlg = true;
-           
-            debugger
+            
+            
             this.merchantservice.merchentRegistration(MerchantDto).subscribe(res => {
               this.ProgressSpinnerDlg = false;
               this.show=false;
+              this.responsesty="succsmsg";
               this.div.nativeElement.innerHTML=res["result"];
               //this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
         
@@ -429,6 +490,7 @@ export class MerchantregistrationComponent implements OnInit {
         
                 this.ProgressSpinnerDlg = false;       
                 this.show=false;
+                this.responsesty="errormsg";
                 this.div.nativeElement.innerHTML=error["result"];
                 //this.messageService.add({ severity: 'error', summary: 'Error Message', detail: error["result"] });
               });
@@ -448,12 +510,12 @@ export class MerchantregistrationComponent implements OnInit {
 
   bindcategories() {
     this.merchantservice.Getcategories().subscribe(res => {
-     debugger
+     
       Object.keys(res).map(Key => (
         this.categories.push({ label: res[Key]["name"], value: res[Key]["id"] })
       
       ));
-      debugger
+      
     })
 
     
@@ -465,7 +527,7 @@ export class MerchantregistrationComponent implements OnInit {
         this.countries.push({ label: res[key]["description"], value: res[key]["id"] })
       ));
     })
-    debugger
+    
   }
 
 
@@ -475,7 +537,7 @@ export class MerchantregistrationComponent implements OnInit {
   }
 
   catFilter(selectedCat:string){
-    debugger
+    
     this._merchentFormData.SellCountries = selectedCat;
  }
 
