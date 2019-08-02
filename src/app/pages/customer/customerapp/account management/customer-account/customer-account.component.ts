@@ -130,6 +130,7 @@ export class CustomerAccountComponent implements OnInit {
         }
         else {
           this.noorders = false;
+          this.ProgressSpinnerDlg = false;
         }
       });
     

@@ -59,6 +59,22 @@ export class CategoriessliderComponent implements OnInit {
         this.items.push(img);
       });
     });
-
   }
+  
+  gotomerchants(){
+  let scrollToTop = window.setInterval(() => {
+    let pos = document.querySelector(".brands").scrollTop;
+    let carouselSlider = document.querySelector(".carouselSlider").scrollTop;
+    
+    console.log(pos);
+    console.log(carouselSlider);
+    
+    if (pos > carouselSlider) {
+     
+        window.scrollTo(pos, carouselSlider); // how far to scroll on each step
+    } else {
+        window.clearInterval(scrollToTop);
+    }
+}, 5);
+}
 }
