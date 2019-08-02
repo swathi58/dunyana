@@ -63,7 +63,7 @@ export class OrderDetailsComponent implements OnInit {
     this.productitem.forEach(item=>{
       if(item["productImage"]==="")
       {
-        this.productdetails.productimage="assets/layout/images/cat_img_virtual.jpg";
+        this.productdetails.productimage="assets/layout/images/no-image.png";
       }
       else
       {

@@ -62,6 +62,8 @@ export class ShoppingComponent implements OnInit {
         let merchant = new CategoryWiseMerchants();
         merchant.categoryid = item["categoryID"];
         merchant.merchantid = item["merchant"]["id"];
+        // console.log(item["merchant"]["company"]);
+        // merchant.merchantname=item["merchant"]["name"];
         if (item["merchant"]["profileImage"] == "") {
           merchant.merchantimage = "assets/layout/images/brand-img1.jpg";
         }

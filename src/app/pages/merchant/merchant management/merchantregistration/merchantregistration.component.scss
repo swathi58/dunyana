@@ -330,8 +330,8 @@ display: block;
 
 .mid{
     position: absolute;
-    left: 50%;
-    top: 50%;
+    //left: 50%;
+   // top: 50%;
     transform: translate(-50% -50%);
     z-index: 1;
   }
@@ -346,3 +346,13 @@ display: block;
     left: 0;
     top: 0;
   }
+
+
+  .signin_wrap {
+    min-height: 648px;
+    }
+    
+    footer.trans {
+    margin-top: 43px;
+    }
+    

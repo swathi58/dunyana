@@ -248,8 +248,8 @@ export class RegistrationComponent implements OnInit {
           if(this.registerdto.PWD.match('^([A-Za-z0-9]+ )+[A-Za-z0-9]+$|^[A-Za-z0-9]+$'))
           {
             if (this.registerdto.PWD.length >= 6) {
-              // this.CheckEmail();
-              this.btndisable = "line_btn sblue";
+               this.CheckEmail();
+             // this.btndisable = "line_btn sblue";
             }
             if (this.registerdto.PWD.length == 0 || this.registerdto.PWD.length < 6) {
               this.btndisable = "disable";
@@ -438,11 +438,12 @@ export class RegistrationComponent implements OnInit {
             //this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
             //  this.issucss=false;
             //  this.succsmsg=res["result"];
-            //this.btndisable = "line_btn sblue";
+            this.btndisable = "line_btn sblue";
           }
           else if (res["result"] === "EmailId is already registred") {
 
             this.response=res["result"];
+          
             this.responsesty="errormsg";
             this.HideResponse();
             //this.messageService.add({ severity: 'error', summary: 'Error Message', detail: res["result"] });

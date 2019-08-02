@@ -307,7 +307,6 @@ export class ForgotpasswordComponent implements OnInit {
   }
 
   submitforgotdata() {
-     debugger
     const slides = document.getElementsByTagName('li');
     let i = 0;
     for (i = 0; i < slides.length; i++) {

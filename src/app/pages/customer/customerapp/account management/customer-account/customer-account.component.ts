@@ -143,7 +143,7 @@ export class CustomerAccountComponent implements OnInit {
     this.orderhistorylist.forEach(items => {
 
       this.totalorderproductsRecords = this.totalorderproductsRecords + items["orderDetails"].length;
-
+      
       items["orderDetails"].forEach(prod => {
         let Orderproducthistory = new orderhistory();
 
@@ -152,11 +152,14 @@ export class CustomerAccountComponent implements OnInit {
         Orderproducthistory.orderplaced = items["orderDate"];
         Orderproducthistory.productname = prod["productName"];
         Orderproducthistory.productid = prod["id"];
+        Orderproducthistory.soldby=items["merchant"]["name"];
+        Orderproducthistory.productcost=prod["unitCost"];
+        Orderproducthistory.MasterCard="MasterCard ****5100";
         if (prod["productImage"] != "") {
           Orderproducthistory.productimage = 'data:image/png;base64,' + prod["productImage"];
         }
         else {
-          Orderproducthistory.productimage = "assets/layout/images/cat_img_virtual.jpg";
+          Orderproducthistory.productimage = "assets/layout/images/no-image.png";
         }
         this.totalproducts.push(Orderproducthistory);
       });

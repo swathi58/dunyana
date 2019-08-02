@@ -95,11 +95,11 @@
                                 </div>
     
                                 <div class="float-left pl-4 col-lg-5 col-sm-5 pr-0">
-                                    <h3>Product Name</h3>
+                                    <h3>{{order.productname}}</h3>
                                     <p>Order ID:{{order.orderid}}<br> Sold by <strong>{{order.soldby}}</strong></p>
                                 </div>
                                 <div class="float-right text-right col-md-4 col-sm-4">
-                                    <h3>{{order.productname}}</h3>
+                                    <h3>{{order.productcost}}</h3>
                                     <p>{{order.MasterCard}}</p>
                                 </div>
     
@@ -107,7 +107,7 @@
     
                                 <div class="float-left pl-4 opl col-lg-6 col-xl-6 col-sm-6">
     
-                                    Order Placed <span>{{order.orderplaced | date:'yyyy-MM-dd'}}</span>
+                                    Order Placed <span>{{order.orderplaced | date:'MMM d, y'}}</span>
                                 </div>
                                 <div class="float-right text-right  col-md-4 col-sm-3">
                                     <h3>on route</h3>
@@ -138,7 +138,7 @@
                                 </ul>
     
                             </div>
-                      <div [hidden]="noorders" class="no-orders"><span>No Orders</span></div>
+                      <div [hidden]="noorders" class="no-orders"><span>No Orders Found</span></div>
 
                     </div>
 
