@@ -43,12 +43,14 @@ export class MerchantregistrationComponent implements OnInit {
   imageChangedEvent: any = '';
   croppedImage: any = '';
   finalImage: any = '';
-  
+  prevbtn: string = "none";
+  previosusbtn:boolean=true;
   iconimage: any = '';
   croppediconImage: any = '';
 
   display: boolean = false;
   termesdialogdisplay: boolean = false;
+  flage:boolean=true;
 
   @ViewChild('div') div: ElementRef;
 
@@ -79,6 +81,8 @@ export class MerchantregistrationComponent implements OnInit {
    reg:any= '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
   responsesty: string='';
   smsmsg:string='';
+  hidenextbtn: boolean;
+  topheader: string;
   constructor(private formBuilder: FormBuilder, private merchantservice: MerchantService,
     private messageService: MessageService, private ngxService: NgxUiLoaderService,private localStorage: LocalStorageService,
     private router: Router) { }
@@ -222,24 +226,28 @@ export class MerchantregistrationComponent implements OnInit {
 
     //this.registerdto.email="swathi.chinnala@gmail.com";
     //this.ConvertingFormToDto();
-    
+    debugger
+    this.show=false;
     this.btndisable = "disable";
     if (this._merchentFormData.Email.length > 0 ) {
       
       if (this._merchentFormData.Email.match('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{1,}[.]{1}[a-zA-Z]{2,}')) {
         
         this.merchantservice.EmailVerification(this._merchentFormData).subscribe(res => {
+          debugger
           if (res["result"] === "Email is valid") {
             this.show=false;
+            this.localStorage.clear();
+            this.localStorage.set('sms',res["result"]);
             this.div.nativeElement.innerHTML=res["result"];
             this.responsesty="succsmsg";
             //this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
             //  this.issucss=false;
             //  this.succsmsg=res["result"];
-            this.btndisable = "line_btn sblue";
+            //this.btndisable = "line_btn sblue";
           }
           else if (res["result"] === "EmailId is already registred") {
-
+            this.localStorage.clear();
             this.localStorage.set('sms',res["result"]);
             this.responsesty="errormsg";
             this.show=false;
@@ -251,7 +259,8 @@ export class MerchantregistrationComponent implements OnInit {
           }
         },
           errormsg => {
-           
+            this.localStorage.clear();
+            this.localStorage.set('sms',errormsg["error"]["result"]);
             this.responsesty="errormsg";
             this.show=false;
             this.div.nativeElement.innerHTML=errormsg["error"]["result"];
@@ -341,13 +350,16 @@ export class MerchantregistrationComponent implements OnInit {
 
   formauthdatavalidate() {
     
-    this.smsmsg=this.localStorage.get('sms');
     
+    debugger
     this.btndisable = "disable";
     if (this._merchentFormData.Website != null) {
       if (this._merchentFormData.Website.match("(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?")) {
         if (this._merchentFormData.Email != null) {
           if (this._merchentFormData.Email.match('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{1,}[.]{1}[a-zA-Z]{2,}')) {
+            this.CheckEmail();
+            debugger
+            this.smsmsg=this.localStorage.get('sms');
             if (this._merchentFormData.PWD != null) {
               if (this._merchentFormData.PWD.match('^([A-Za-z0-9]+ )+[A-Za-z0-9]+$|^[A-Za-z0-9]+$')) {
                 if (this._merchentFormData.PWD.length >= 6) {
@@ -355,7 +367,8 @@ export class MerchantregistrationComponent implements OnInit {
                     if (this._merchentFormData.PWD == this._merchentFormData.CPWD) {
                      //if(this.show==true){
                        if(this.smsmsg!="EmailId is already registred"){
-                      this.btndisable = "line_btn sblue";
+                       this.btndisable = "line_btn sblue";
+                       this.show=true;
                        }
                        else{
                         this.show=false;
@@ -363,11 +376,27 @@ export class MerchantregistrationComponent implements OnInit {
                       }
                       
                     }
+                    else{
+                      this.show=false;
+                      this.div.nativeElement.innerHTML=this.smsmsg;
+                    }
                    
+                  }
+                  else{
+                    this.show=false;
+                    this.div.nativeElement.innerHTML=this.smsmsg;
                   }
                  
                 }
+                else{
+                  this.show=false;
+                  this.div.nativeElement.innerHTML=this.smsmsg;
+                }
                
+              }
+              else{
+                this.show=false;
+                this.div.nativeElement.innerHTML=this.smsmsg;
               }
             }
            
@@ -380,30 +409,63 @@ export class MerchantregistrationComponent implements OnInit {
 
   }
         
-      
-      
-     
-  
+  prevclick() {
 
-  addmerchent() {
-    
-
-   this.show=true;
     const slides = document.getElementsByTagName('li');
     let i = 0;
     for (i = 0; i < slides.length; i++) {
       if (slides[i].getAttribute('class') === 'active') {
         this.currentIndex = slides[i].getAttribute('data-slide-to');
+
+        if (Number.parseInt(this.currentIndex) == 1) {
+          //this.prevbtn = "none";
+          this.previosusbtn=true;
+         
+        }
+        else {
+          this.prevbtn = "backBtn";
+          this.previosusbtn=false;
+        }
+
+        if (Number.parseInt(this.currentIndex) == 2) {
+          this.submitbtntext = "Submit";
+        }
+        if (Number.parseInt(this.currentIndex) <= 2) {
+          this.submitbtntext = "Next";
+        }
+      }
+
+    }
+    
+  }
+  
+  addmerchent() {
+    
+   this.show=true;
+    const slides = document.getElementsByTagName('li');
+    let i = 0;
+    for (i = 0; i < slides.length; i++) {
+      if (slides[i].getAttribute('class') === 'active') {
+        
+        this.currentIndex = slides[i].getAttribute('data-slide-to');
+        debugger
+        if (Number.parseInt(this.currentIndex) >= 0) {
+          
+          this.previosusbtn = false;
+          
+          this.topheader = "_top";
+        }
         
         if (Number.parseInt(this.currentIndex) != 3) {
 
           if (Number.parseInt(this.currentIndex) == 0) {
-           
+           // this.prevbtn = "none";
            // this.btndisable="disable";
             this.merchantForm.controls['country'].setValue(this.countries[0].value,{onlySelf: true});
+            this.previosusbtn=false;
             //this.merchantForm.controls['categorie'].setValue(this.categories[0].value,{onlySelf: true});
           }
-          else if (Number.parseInt(this.currentIndex) == 1) {
+           if (Number.parseInt(this.currentIndex) == 1) {
             //this.dropdownvalidation();
             //this.otpformvalidate();            
             this.submitbtntext="Submit";
@@ -411,9 +473,10 @@ export class MerchantregistrationComponent implements OnInit {
             //this._merchentFormData.Country = this.merchantForm.value["country"];
             //this._merchentFormData.Categories=this.merchantForm.value["categories"];
           }
+          
           else if (Number.parseInt(this.currentIndex) == 2) {
              
-            
+            this.hidenextbtn = true;                       
             this.btndisable="none";
             
             this.ConvertingFormToDto();
@@ -444,28 +507,10 @@ export class MerchantregistrationComponent implements OnInit {
             
         
           }
-         
-          // if(MerchantDto.Country==null){
-          //   if(MerchantDto.Categories==""){  
-          //     if(MerchantDto.SellCountries==""){
-          //       this.btndisable="disable";
-          //       this.show=false;
-          //       this.responsesty="errormsg";
-          //       this.div.nativeElement.innerHTML="Please select at least one value";
-          //     }
-          //     else{
-          //       this.btndisable="line_btn sblue";
-          //     }
-            
-          //   }
-          //   else{
-          //     this.btndisable="line_btn sblue";
-          //   }
-          
-          // }
+       
         
-          
-
+          debugger
+         if(this.flage==true){
             this.ProgressSpinnerDlg = true;
             
             
@@ -482,23 +527,22 @@ export class MerchantregistrationComponent implements OnInit {
               this.iconimage="";
               this.submitbtntext="Next";
               this.btndisable = "disable";
+              this.previosusbtn=true;
 
             },
               error => {
-        
-        
         
                 this.ProgressSpinnerDlg = false;       
                 this.show=false;
                 this.responsesty="errormsg";
                 this.div.nativeElement.innerHTML=error["result"];
+                
                 //this.messageService.add({ severity: 'error', summary: 'Error Message', detail: error["result"] });
               });
            
-           
+            }
           }
-        
-
+         
           //this.btndisable = "disable";
         }
         
@@ -561,11 +605,6 @@ export class MerchantregistrationComponent implements OnInit {
     });
   }
 
-  showTermsDialog() {
-    this.termesdialogdisplay = true;
-  }
-  ontemsDialogClose(event) {
-    this.termesdialogdisplay = event;
-  }
+  
 
 }

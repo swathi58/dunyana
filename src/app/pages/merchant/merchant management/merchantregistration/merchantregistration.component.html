@@ -19,16 +19,16 @@
             <div class="col-sm-4 p-0">
                 <div class="si">
                 
-                    <!-- <a class="backBtn" href="#demo" data-slide="prev">
+                    <a class="backBtn" (click)="prevclick()" [hidden]="previosusbtn" href="#demo" data-slide="prev">
                         <i class="icomoon icon-arrows"></i>
-                    </a> -->
-                    <h4 class="">Become a Seller</h4>
+                    </a>
+                    <h4 class="_top">Become a Seller</h4>
 
 
                     <form class="from_wrapper" [formGroup]="merchantForm" (ngSubmit)="addmerchent()" novalidate #myform="ngForm">
 
                         <div id="demo" class="carousel" data-ride="carousel" data-interval="false">
-                            <ul class="carousel-indicators" style="display: none">
+                            <ul class="carousel-indicators" >
                                 <li data-target="#demo" data-slide-to="0" class="active"></li>
                                 <li data-target="#demo" data-slide-to="1"></li>
                                 <li data-target="#demo" data-slide-to="2"></li>
@@ -42,8 +42,7 @@
                                     <p class="para">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                                     <div class="row inputset">
                                         
-
-                                        <div class="col-sm-12"><input type="text"  pInputText formControlName="Name" [(ngModel)]="_merchentFormData.Name"  placeholder="Name" (keyup)="formvalidate();onKeyPress($event)" class="w-100"> </div>
+                                     <div class="col-sm-12"><input type="text"  pInputText formControlName="Name" [(ngModel)]="_merchentFormData.Name"  placeholder="Name" (keyup)="formvalidate();onKeyPress($event)" class="w-100"> </div>
 
                                         <div class="col-sm-12">
 
@@ -78,7 +77,7 @@
                                 
                                     <div class="row inputset">
                                      
-                                        <div class="col-sm-12"><input placeholder="Company" type="text"  formControlName="Company" [(ngModel)]="_merchentFormData.Company" (keyup)="formvalidate();onKeyPress($event)" class="w-100" /></div>
+                                        <div class="col-sm-12"><input placeholder="Company*" type="text"  formControlName="Company" [(ngModel)]="_merchentFormData.Company" (keyup)="formvalidate();onKeyPress($event)" class="w-100" /></div>
                                         <div class="col-sm-12">
                                             <div *ngIf="merchantForm.controls['Company'].errors && !merchantForm.controls['Company'].pristine" class="text-danger error">
                                                 <div [hidden]="!merchantForm.controls['Company'].errors.required">Please Enter Company Name</div>
@@ -120,11 +119,11 @@
                                     <p class="para">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                                     <div class="row inputset">
                                         
-                                        <div class="col-sm-12"><input placeholder="Website link" type="text" formControlName="Website" [(ngModel)]="_merchentFormData.Website"  (keyup)="formauthdatavalidate();onKeyPress($event)" /></div>
+                                        <div class="col-sm-12"><input placeholder="Website link*" type="text" formControlName="Website" [(ngModel)]="_merchentFormData.Website"  (keyup)="formauthdatavalidate()" class="w-100"/></div>
                                         <div class="col-sm-12">
                                             <div *ngIf="merchantForm.controls['Website'].errors && !merchantForm.controls['Website'].pristine" class="text-danger error">
                                                 <div [hidden]="!merchantForm.controls['Website'].errors.required">Please Enter Website Link</div>
-                                                <div [hidden]="!merchantForm.controls['Website'].errors.pattern">Please Enter  Website Link</div>
+                                                <div [hidden]="!merchantForm.controls['Website'].errors.pattern">Enter Valid Website Link</div>
                                             </div>
                                         </div>
                                         <div class="col-sm-12">
@@ -134,12 +133,12 @@
 
                                     <div class="row inputset">
              
-                                        <div class="col-sm-12"><input placeholder="Email" type="text" formControlName="Email" [(ngModel)]="_merchentFormData.Email" (focusout)="CheckEmail()" (keyup)="formauthdatavalidate();onKeyPress($event)"   /></div>
+                                        <div class="col-sm-12"><input placeholder="Email*" type="text" formControlName="Email" [(ngModel)]="_merchentFormData.Email"  (keyup)="formauthdatavalidate()"  class="w-100" /></div>
                                         <div class="col-sm-12">
                                             <div *ngIf="merchantForm.controls['Email'].errors && !merchantForm.controls['Email'].pristine" class="text-danger error">
                                                 <div [hidden]="!merchantForm.controls['Email'].errors.required">Please Enter Email  </div>
                                                 <!-- <div  [hidden]="!merchantForm.controls['Email'].errors?.email">Email must be a valid email address</div> -->    
-                                                <div [hidden]="!merchantForm.controls['Email'].errors?.pattern">Please Enter valid email address</div>
+                                                <div [hidden]="!merchantForm.controls['Email'].errors?.pattern">Please Enter Valid Email Address</div>
                                             </div>
 
                                             
@@ -153,12 +152,12 @@
 
                                     <div class="row inputset">
                                       
-                                        <div class="col-sm-12"><input type="password" placeholder="Password" formControlName="PWD" [(ngModel)]="_merchentFormData.PWD"  (keyup)="formauthdatavalidate();onKeyPress($event)" /></div>
+                                        <div class="col-sm-12"><input type="password" placeholder="Password*" formControlName="PWD" [(ngModel)]="_merchentFormData.PWD"  (keyup)="formauthdatavalidate()" class="w-100"/></div>
                                         <div class="col-sm-12">
                                             <div *ngIf="merchantForm.controls['PWD'].errors && !merchantForm.controls['PWD'].pristine" class="text-danger error">
                                                 <div [hidden]="!merchantForm.controls['PWD'].errors.required">Please Enter Password</div>
-                                                <div [hidden]="!merchantForm.controls['PWD'].errors?.pattern">Your Password can't start or end with a blank sapce</div>
-                                                <div [hidden]="!merchantForm.controls['PWD'].errors?.minlength">Password Length Must be Grater Than 6 Characters</div>
+                                                <div [hidden]="!merchantForm.controls['PWD'].errors?.pattern">Your Password Can't Start Or End Eith a Blank sapce</div>
+                                                <div [hidden]="!merchantForm.controls['PWD'].errors?.minlength">Password Length Must be Greater Than 6 Characters</div>
                                                 
                                             </div>
                                         </div>
@@ -169,12 +168,12 @@
 
                                     <div class="row inputset">
                               
-                                        <div class="col-sm-12"><input placeholder="Confirm Password" type="password"  formControlName="confirmpassword" [(ngModel)]="_merchentFormData.CPWD"  (keyup)="formauthdatavalidate();onKeyPress($event)"/></div>
+                                        <div class="col-sm-12"><input placeholder="Confirm Password*" type="password"  formControlName="confirmpassword" [(ngModel)]="_merchentFormData.CPWD"  (keyup)="formauthdatavalidate();" class="w-100"/></div>
                                        <div class="col-sm-12">
                                               <div *ngIf="merchantForm.controls['confirmpassword'].errors && !merchantForm.controls['confirmpassword'].pristine" class="text-danger error-msg float-right">
-                                                      <div [hidden]="!merchantForm.controls['confirmpassword'].errors.required">Please Enter ConfirmPassword</div>
+                                                      <div [hidden]="!merchantForm.controls['confirmpassword'].errors.required">Please Enter Confirm Password</div>
                                                       <!-- <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</div> -->
-                                                      <div [hidden]="!merchantForm.controls['confirmpassword'].errors?.mustMatch">ConfirmPassword MusT Match Password</div>
+                                                      <div [hidden]="!merchantForm.controls['confirmpassword'].errors?.mustMatch">Confirm Password Must Match Password</div>
                                               </div>
                                        </div>
                                         <div class="col-sm-12"><hr></div>
@@ -188,7 +187,7 @@
                                       
                                         <div class="col-sm-12">
                                             
-                                            <p-multiSelect [options]="categories" placeholder="categories" formControlName="categorie"  [(ngModel)]="_merchentFormData.categories" defaultLabel="Categories" [panelStyle]="{minWidth:'12em'}">
+                                            <p-multiSelect [options]="categories" placeholder="categories*" formControlName="categorie"  [(ngModel)]="_merchentFormData.categories" defaultLabel="Categories" [panelStyle]="{minWidth:'12em'}">
                                                
                                             </p-multiSelect>
                                          
@@ -201,13 +200,13 @@
                                     <div class="row inputset">
                                       
                                         <div class="col-sm-12">
-                                            <p-dropdown [options]="countries" formControlName="country" Placeholder="Country" [(ngModel)]="_merchentFormData.Country"  [autoWidth]="false"  [filter]="false" required>
+                                            <p-dropdown [options]="countries" formControlName="country" Placeholder="Country" [(ngModel)]="_merchentFormData.Country"  [autoWidth]="false"  [filter]="false" >
                                                
                                             </p-dropdown>
 
-                                            <div [hidden]="merchantForm.control?.status !== 'INVALID' ">
+                                            <!-- <div [hidden]="merchantForm.control?.status !== 'INVALID' ">
                                                 Value is required
-                                              </div>
+                                              </div> -->
                                          
                                         </div>
                                         <div class="col-sm-12" >
@@ -267,7 +266,7 @@
                         </div>
 
                         
-                        <div class="row btns">
+                        <div class="row btns" [hidden]="hidenextbtn">
                             <div class="col-sm-9 m-auto">
                                 <!-- <p-button class="line_btn sblue" [ngClass]="btndisable" label="Next"></p-button> -->
                                 <p-button class="line_btn sblue" [label]="submitbtntext" href="#demo" 
