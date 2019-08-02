@@ -287,7 +287,7 @@ export class ForgotpasswordComponent implements OnInit {
             this.btndisable="disable";
             //this.messageService.add({ severity:'error', summary:'Error Message', detail:"Invalid Email"});
             this.show = false;
-            this.div.nativeElement.innerHTML = "Invalid Email";
+            this.div.nativeElement.innerHTML = "Email does not exist";
             
           }
           else{

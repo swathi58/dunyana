@@ -11,6 +11,8 @@ import { Productdetails } from '../../../model/ProductDetails';
 })
 export class OrderDetailsComponent implements OnInit {
 
+  display: boolean = false;
+
   customerid:number;
   productid:number=0;
   orderhistorylist: any[] = [];
@@ -74,5 +76,12 @@ export class OrderDetailsComponent implements OnInit {
     
     });
     this.ProgressSpinnerDlg=false;
+  }
+  onDialogClose(event) {
+    this.display = event;
+  }
+  editaddressinmap()
+  {
+    this.display = true;
   }
 }

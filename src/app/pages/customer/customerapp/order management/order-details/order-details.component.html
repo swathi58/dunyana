@@ -1,92 +1,92 @@
 <section class="accounts">
-  <div class="text_container">
-      <div class="container">
+    <div class="text_container">
+        <div class="container">
 
 
-          <div class="row">
-
-
-
-
-              <div class="col-xl-5 col-lg-5">
-
-
-                  <div class="profile mb-5">
-
-                      <div class="thumb text-center w-100">
-                          <img src="{{productdetails.productimage}}" class="float-none">
-                          <h2>${{productdetails.productcost}}</h2>
-                          <div>{{productdetails.ordereddate | date:'yyyy-MM-dd'}}</div>
-                          <input class="text-center" type="text" value="*********45862"></div>
-
-                      <div class="order-details">
-                         <div class="fade-o">
-                          <p class="hd"><span></span>Delievered </p>
-                          <p class="addr"> 497 Evergreen Rd.Roseville,<br> CA 95673</p>
-                         </div>
-                        
-                         <div>
-                          <p class="hd"><span></span>Delievered </p>
-                          <p class="addr"> 497 Evergreen Rd.Roseville,<br> CA 95673</p>
-                         </div>
-
-                          <p class="hd"><span></span>Delievered </p>
-                          <p class="addr stop">
-                              <button class="float-right line_btn blue edit">Edit</button>{{productdetails.address}} ,<br> {{productdetails.country}},{{productdetails.zip}}
-
-                          </p>
-
-                      </div>
-
-
-                  </div>
-              </div>
-
-              <div class="col-xl-6 col-lg-8 offset-xl-1 offset-lg-0 order-history">
+            <div class="row">
 
 
 
 
-
-                  <div class="col-md-12 category view">
-                      <div class="col-12">
-                          <h5 class="float-left col-6">{{productdetails.productname}} </h5>
-                          <h5 class="float-right text-right col-6">${{productdetails.productcost}}</h5>
-                      </div>
-                      <div class="col-12">
-                          <hr>
-                      </div>
-                      <div class="col-12">
-                          <p class="float-left col-6">Sub Total</p>
-                          <p class="float-right text-right col-6">$000</p>
-                      </div>
-                      <div class="col-12">
-                          <p class="float-left col-6">Sales Tax (7.5%) </p>
-                          <p class="float-right text-right col-6">$00</p>
-                      </div>
-                      <div class="col-12">
-                          <p class="float-left col-6">Delivery </p>
-                          <p class="float-right text-right col-6">$0</p>
-                      </div>
-                      <div class="col-12 text-center">
-                          <button class="line_btn blue cancel">Cancel Order</button>
-                      </div>
-
-                  </div>
+                <div class="col-xl-5 col-lg-5">
 
 
-              </div>
+                    <div class="profile mb-5">
 
-          </div>
-          <div>
+                        <div class="thumb text-center w-100">
+                            <img src="{{productdetails.productimage}}" class="float-none">
+                            <h2>${{productdetails.productcost}}</h2>
+                            <div>{{productdetails.ordereddate | date:'MMM d, y'}}</div>
+                            <input class="text-center" type="text" value="*********45862">
+                        </div>
 
-          </div>
-      </div>
-  </div>
+                        <div class="order-details">
+                            <div class="fade-o">
+                                <p class="hd"><span></span>Delievered </p>
+                                <p class="addr"> 497 Evergreen Rd.Roseville,<br> CA 95673</p>
+                            </div>
+
+                            <div>
+                                <p class="hd"><span></span>Dely'ievered </p>
+                                <p class="addr"> 497 Evergreen Rd.Roseville,<br> CA 95673</p>
+                            </div>
+
+                            <p class="hd"><span></span>Delievered </p>
+                            <p class="addr stop">
+                                <button class="float-right line_btn blue edit"
+                                    (click)="editaddressinmap()">Edit</button>{{productdetails.address}} ,<br>
+                                {{productdetails.country}},{{productdetails.zip}}
+
+                            </p>
+
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <div class="col-xl-6 col-lg-8 offset-xl-1 offset-lg-0 order-history">
+
+                    <div class="col-md-12 category view">
+                        <div class="col-12">
+                            <h5 class="float-left col-6">{{productdetails.productname}} </h5>
+                            <h5 class="float-right text-right col-6">${{productdetails.productcost}}</h5>
+                        </div>
+                        <div class="col-12">
+                            <hr>
+                        </div>
+                        <div class="col-12">
+                            <p class="float-left col-6">Sub Total</p>
+                            <p class="float-right text-right col-6">$000</p>
+                        </div>
+                        <div class="col-12">
+                            <p class="float-left col-6">Sales Tax (7.5%) </p>
+                            <p class="float-right text-right col-6">$00</p>
+                        </div>
+                        <div class="col-12">
+                            <p class="float-left col-6">Delivery </p>
+                            <p class="float-right text-right col-6">$0</p>
+                        </div>
+                        <div class="col-12 text-center">
+                            <button class="line_btn blue cancel">Cancel Order</button>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+            <div>
+
+            </div>
+        </div>
+    </div>
 </section>
+<app-order-editaddress-map [display]="display" (displayChange)="onDialogClose($event)"></app-order-editaddress-map>
+
 <div class="loading-indicator mid" *ngIf="ProgressSpinnerDlg">
     <p-progressSpinner></p-progressSpinner>
-  </div> 
-  
-  <div class="overlay" *ngIf="ProgressSpinnerDlg"></div>
-  
+</div>
+
+<div class="overlay" *ngIf="ProgressSpinnerDlg"></div>

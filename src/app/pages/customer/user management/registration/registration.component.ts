@@ -442,7 +442,7 @@ export class RegistrationComponent implements OnInit {
           }
           else if (res["result"] === "EmailId is already registred") {
 
-            this.response=res["result"];
+            this.response="EmailId is already registered";
           
             this.responsesty="errormsg";
             this.HideResponse();

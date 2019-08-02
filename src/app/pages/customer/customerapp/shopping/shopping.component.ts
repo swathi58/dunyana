@@ -64,11 +64,11 @@ export class ShoppingComponent implements OnInit {
         merchant.merchantid = item["merchant"]["id"];
         // console.log(item["merchant"]["company"]);
         // merchant.merchantname=item["merchant"]["name"];
-        if (item["merchant"]["profileImage"] == "") {
+        if (item["merchant"]["companyImage"] == "") {
           merchant.merchantimage = "assets/layout/images/brand-img1.jpg";
         }
         else {
-          merchant.merchantimage = 'data:image/png;base64,' + item["merchant"]["profileImage"];
+          merchant.merchantimage = 'data:image/png;base64,' + item["merchant"]["companyImage"];
         }
 
         merchant.merchantname = item["merchant"]["name"];
