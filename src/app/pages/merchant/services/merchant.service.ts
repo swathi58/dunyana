@@ -14,7 +14,7 @@ export class MerchantService {
   constructor(private http: HttpClient,public router:Router,private localStorage: LocalStorageService) { }
 
   public merchentRegistration(merchantregistor: MerchantDto): Observable<MerchantDto> {
-    return this.http.post<MerchantDto>(environment.API_URL + 'CustomerRegistration/InsertRegistrationDetails', merchantregistor);
+    return this.http.post<MerchantDto>(environment.API_URL + 'Merchant/InsertMerchant', merchantregistor);
   }
 
   public EmailVerification(merchantregistor: MerchantDto): Observable<MerchantDto> { 
