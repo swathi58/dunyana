@@ -25,6 +25,7 @@ import localeESUS from '@angular/common/locales/es-US';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import {MessageService} from 'primeng/api';
+import { AgmCoreModule } from '@agm/core';
 
 import {
   HttpClientModule,
@@ -97,7 +98,9 @@ export function getAuthServiceConfigs() {
         deps: [HttpClient],
       },
     }),
-   
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyD-DxhwCnziY69grwJGlMlJ3IYURiPws8U'
+    })
     //NguCarouselModule
   ],
   
