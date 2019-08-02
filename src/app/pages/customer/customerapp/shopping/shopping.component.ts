@@ -71,7 +71,7 @@ export class ShoppingComponent implements OnInit {
           merchant.merchantimage = 'data:image/png;base64,' + item["merchant"]["companyImage"];
         }
 
-        merchant.merchantname = item["merchant"]["name"];
+        merchant.merchantname = item["merchant"]["company"];
         this.categorywisemerchants.push(merchant);
         
       });
