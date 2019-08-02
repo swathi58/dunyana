@@ -29,7 +29,7 @@
                       <!-- <div class="login-error"
                         *ngIf="loginForm.controls['lEmail'].hasError('') && loginForm.controls['lEmail'].touched">
                         Email is </div> -->
-                      <div class="login-error" [hidden]="!loginForm.controls['lEmail'].errors?.pattern">Please Enter valid emailid
+                      <div class="login-error" [hidden]="!loginForm.controls['lEmail'].errors?.pattern">Please enter valid email
                         </div>
   
   
@@ -46,7 +46,7 @@
                       <!-- <div class="login-error"
                         *ngIf="loginForm.controls['lPassword'].hasError('') && loginForm.controls['lPassword'].touched">
                         Password is </div> -->
-                        <div class="login-error" [hidden]="!loginForm.controls['lPassword'].errors?.pattern">Your password can't start or end with a blank sapce</div>
+                        <div class="login-error" [hidden]="!loginForm.controls['lPassword'].errors?.pattern">Your password can't start or end with a blank spaces</div>
 
                       <div class="login-error" [hidden]="!loginForm.controls['lPassword'].errors?.minlength"></div>
                     </div>

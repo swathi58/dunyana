@@ -116,7 +116,7 @@ export class ForgotpasswordComponent implements OnInit {
       // FirstregistrationForm:this.formBuilder.array([this.BasicDetails()]),    
 
       emailid: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{1,}[.]{1}[a-zA-Z]{2,}')]],    
-      password: ['', [Validators.required,Validators.pattern('^([A-Za-z0-9]+ )+[A-Za-z0-9]+$|^[A-Za-z0-9]+$'), Validators.minLength(6)]],  
+      password: ['', [Validators.required,Validators.pattern('^([A-Za-z0-9!@#$%^&*(),.?":{}]+ )+[A-Za-z0-9!@#$%^&*(),.?":{}]+$|^[A-Za-z0-9!@#$%^&*(),.?":{}]+$'), Validators.minLength(6)]],  
 
       otp: ['', [Validators.required]]
     });
@@ -178,7 +178,7 @@ export class ForgotpasswordComponent implements OnInit {
 
   pwdauthdatavalidate(){
       if (this.registerdto.PWD.length != null) {
-         if(this.registerdto.PWD.match('^([A-Za-z0-9]+ )+[A-Za-z0-9]+$|^[A-Za-z0-9]+$'))
+         if(this.registerdto.PWD.match('^([A-Za-z0-9!@#$%^&*(),.?":{}]+ )+[A-Za-z0-9!@#$%^&*(),.?":{}]+$|^[A-Za-z0-9!@#$%^&*(),.?":{}]+$'))
          {
           if (this.registerdto.PWD.length >= 6) {
             this.btndisable = "line_btn sblue";
@@ -237,7 +237,7 @@ export class ForgotpasswordComponent implements OnInit {
           this.btndisable = "disable";
           this.btnotpdis = "disable";
           this.show = false;
-          this.div.nativeElement.innerHTML = "OTP Mismatched";
+          this.div.nativeElement.innerHTML = "OTP mismatched";
           // this.messageService.add({severity:'error', summary:'Error Message', detail:"OTP Mismatched"});         
 
         }
@@ -248,7 +248,7 @@ export class ForgotpasswordComponent implements OnInit {
         this.btndisable = "disable";
         this.btnotpdis = "line_btn sblue";
         this.show = false;
-        this.div.nativeElement.innerHTML = "Please Enter OTP With in 10 Minutes";
+        this.div.nativeElement.innerHTML = "Please enter OTP with in 10 minutes";
         this.timerbtndisplay = true;
         this.verifybtndisplay = false;
         this.resendtext = 'Resend in 00:00';

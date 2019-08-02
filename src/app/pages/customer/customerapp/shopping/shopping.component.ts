@@ -22,7 +22,7 @@ export class ShoppingComponent implements OnInit {
   pagedItems: Array<CategoryWiseMerchants> = [];
   alphabetpaging = [ '#','A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' ];
   filtereditems:any[]=[];
-  isempty:boolean=false;
+  isempty:boolean=true;
   // merchants:CategoryWiseMerchants={
   //   categoryid:0,
   //   categoryname:null,

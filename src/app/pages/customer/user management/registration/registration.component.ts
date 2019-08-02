@@ -117,8 +117,8 @@ export class RegistrationComponent implements OnInit {
       address: ['', [Validators.required,Validators.pattern('^([A-Za-z]+ )+[A-Za-z]+$|^[A-Za-z]+$')]],
       country: ['', Validators.required],
       city: ['', [Validators.required,Validators.pattern('^([A-Za-z]+ )+[A-Za-z]+$|^[A-Za-z]+$')]],
-      password: ['', [Validators.required,Validators.pattern('^([A-Za-z0-9]+ )+[A-Za-z0-9]+$|^[A-Za-z0-9]+$'),Validators.minLength(6)]],
-      confirmpassword: ['', [Validators.required, Validators.pattern('^([A-Za-z0-9]+ )+[A-Za-z0-9]+$|^[A-Za-z0-9]+$'),Validators.minLength(6)]],
+      password: ['', [Validators.required,Validators.pattern('^([A-Za-z0-9!@#$%^&*(),.?":{}]+ )+[A-Za-z0-9!@#$%^&*(),.?":{}]+$|^[A-Za-z0-9!@#$%^&*(),.?":{}]+$'),Validators.minLength(6)]],
+      confirmpassword: ['', [Validators.required, Validators.pattern('^([A-Za-z0-9!@#$%^&*(),.?":{}]+ )+[A-Za-z0-9!@#$%^&*(),.?":{}]+$|^[A-Za-z0-9!@#$%^&*(),.?":{}]+$'),Validators.minLength(6)]],
       otp: ['', Validators.required]
     },
       {
@@ -245,7 +245,7 @@ export class RegistrationComponent implements OnInit {
     if (this.registerdto.Email != null) {
       if (this.registerdto.Email.match('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}')) {
         if (this.registerdto.PWD != null) {
-          if(this.registerdto.PWD.match('^([A-Za-z0-9]+ )+[A-Za-z0-9]+$|^[A-Za-z0-9]+$'))
+          if(this.registerdto.PWD.match('^([A-Za-z0-9!@#$%^&*(),.?":{}]+ )+[A-Za-z0-9!@#$%^&*(),.?":{}]+$|^[A-Za-z0-9!@#$%^&*(),.?":{}]+$'))
           {
             if (this.registerdto.PWD.length >= 6) {
                this.CheckEmail();
@@ -347,7 +347,7 @@ export class RegistrationComponent implements OnInit {
           }
         }
         else {
-          this.response="Please Enter OTP With in 10 Minutes";
+          this.response="Please enter OTP with in 10 minutes";
           this.responsesty="errormsg";
           this.HideResponse();
           //this.messageService.add({ severity: 'error', summary: 'Error Message', detail: "Invalid OTP" });
@@ -432,7 +432,7 @@ export class RegistrationComponent implements OnInit {
       if (this.registerdto.Email.match('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}')) {
         this.userservice.EmailVerification(this.registerdto).subscribe(res => {
           if (res["result"] === "Email is valid") {
-            this.response=res["result"];
+            //this.response=res["result"];
             this.HideResponse();
             this.responsesty="succsmsg";
             //this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
