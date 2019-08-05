@@ -128,6 +128,7 @@ SaveChangePassword()
   }
   redirectCustomer(){ 
     this.displayChange.emit(false);
+    this.FormReset();
   }
   FormReset()
   {

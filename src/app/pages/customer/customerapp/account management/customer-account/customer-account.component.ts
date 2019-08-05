@@ -58,7 +58,16 @@ export class CustomerAccountComponent implements OnInit {
 
   ngOnInit() {
     //this.ProgressSpinnerDlg=true;
-    this.GetProfiledata();
+
+    if((this.localStorage.get("Email")) && (this.localStorage.get("loginType")==="C"))
+    {
+      this.GetProfiledata();
+    }
+    else
+    {
+      this.router.navigateByUrl("customer/home");
+    }
+
     //this.GetOrderHistory();
   }
   showDialog() {

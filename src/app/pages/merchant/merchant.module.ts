@@ -14,10 +14,10 @@ import {CalendarModule} from 'primeng/calendar';
 import {ButtonModule} from 'primeng/button';
 import { SharedModule } from 'src/app/shared/shared.module';
 import{MerchantRoutingModule}from '../merchant/merchant-routing.module';
-
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [HomeComponent],
   imports: [
     CommonModule,
     TableModule,

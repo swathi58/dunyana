@@ -277,8 +277,11 @@
                                                         <div class="col-sm-12">
                                                             <div *ngIf="registrationForm.controls['firstname'].errors && !registrationForm.controls['firstname'].pristine" class="text-danger error">
                                                                 <div [hidden]="!registrationForm.controls['firstname'].errors.required">Please enter first name</div>
-                                                                <div [hidden]="!registrationForm.controls['firstname'].errors.pattern">Please enter first name</div>
+                                                                <div [hidden]="!registrationForm.controls['firstname'].errors.pattern">Please enter first name</div>          
                                                             </div>
+                                                            <!-- <div class="text-danger error">
+                                                                <span [hidden]="txterrormsg">{{registererrormsg.firstname}}</span>                                                           
+                                                            </div> -->
                                                         </div>
                                                         <div class="col-sm-12">
                                                             <hr>
@@ -292,7 +295,11 @@
                                                             <div *ngIf="registrationForm.controls['lastname'].errors && !registrationForm.controls['lastname'].pristine" class="text-danger error">
                                                                 <div [hidden]="!registrationForm.controls['lastname'].errors.required">Please enter last name</div>
                                                                 <div [hidden]="!registrationForm.controls['lastname'].errors.pattern">Please enter last name</div>
+                                                              
                                                             </div>
+                                                            <!-- <div class="text-danger error">
+                                                                <span [hidden]="txterrormsg">{{registererrormsg.lastname}}</span>                                                           
+                                                            </div> -->
                                                         </div>
                                                         <div class="col-sm-12">
                                                             <hr>
@@ -306,11 +313,14 @@
                                     <p class="para">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent interdum seconds. adipiscing elit. Praesent interdum</p>
                                     <div class="row inputset">
                                         <div class="col-sm-5"><label>Email</label><span class="">*</span></div>
-                                        <div class="col-sm-7"><input type="text" placeholder="email@domain.com" formControlName="emailid" [(ngModel)]="registerdto.Email" (focusout)="CheckEmail()" (keyup)="formauthdatavalidate()" /></div>
+                                        <div class="col-sm-7"><input type="text" placeholder="email@domain.com" formControlName="emailid" [(ngModel)]="registerdto.Email" (focusout)="CheckEmail()" (focusout)="formauthdatavalidate()" /></div>
                                         <div class="col-sm-12">
                                             <div *ngIf="registrationForm.controls['emailid'].errors && !registrationForm.controls['emailid'].pristine" class="text-danger error">
                                                 <div [hidden]="!registrationForm.controls['emailid'].errors.required">Please enter email</div>
-                                                <div [hidden]="!registrationForm.controls['emailid'].errors?.pattern">Please enter valid email</div>
+                                                <div [hidden]="!registrationForm.controls['emailid'].errors?.pattern"></div>
+                                            </div>
+                                            <div class="text-danger error">
+                                                <span [hidden]="txterrormsg">{{emailvaliderrormsg}}</span>
                                             </div>
                                         </div>
                                         <div class="col-sm-12">
@@ -320,12 +330,15 @@
 
                                     <div class="row inputset">
                                         <div class="col-sm-5"><label>Password</label><span class="">*</span></div>
-                                        <div class="col-sm-7"><input type="password" placeholder="********" formControlName="password" [(ngModel)]="registerdto.PWD" (keyup)="formauthdatavalidate()" /></div>
+                                        <div class="col-sm-7"><input type="password" placeholder="********" formControlName="password" [(ngModel)]="registerdto.PWD" (blur)="formauthdatavalidate()" /></div>
                                         <div class="col-sm-12">
                                             <div *ngIf="registrationForm.controls['password'].errors && !registrationForm.controls['password'].pristine" class="text-danger error">
-                                                <div [hidden]="!registrationForm.controls['password'].errors.required">Please enter password</div>
-                                                <div [hidden]="!registrationForm.controls['password'].errors?.pattern">Your password can't start or end with a blank space</div>
-                                                <div [hidden]="!registrationForm.controls['password'].errors?.minlength">Password length must be grater then 6</div>
+                                                <div [hidden]="!registrationForm.controls['password'].errors.required"></div>
+                                                <div [hidden]="!registrationForm.controls['password'].errors?.pattern"></div>
+                                                <div [hidden]="!registrationForm.controls['password'].errors?.minlength"></div>
+                                            </div>
+                                            <div class="text-danger error">
+                                                <span [hidden]="false">{{pwdvaliderrormsg}}</span>
                                             </div>
                                         </div>
                                         <div class="col-sm-12">

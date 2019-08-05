@@ -16,6 +16,7 @@ import { OTP } from '../../model/OTP';
 import { IfStmt } from '@angular/compiler';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import{Observable}from 'rxjs/Rx';
+import { registererrormsg } from '../../model/registererrormsg';
 
 @Component({
   selector: 'app-registration',
@@ -48,13 +49,20 @@ export class RegistrationComponent implements OnInit {
   issucss: boolean = true;
   errormsg: string = "";
   succsmsg: string = "";
-
+  txterrormsg:boolean=true;
+  txterrorresponse:string="";
+  nextslide:string="next";
+  namepattern:string='^([A-Za-z0-9]+ )+[A-Za-z0-9]+$|^[A-Za-z0-9]+$';
+  addresspattern:string='^([A-Za-z0-9,]+ )+[A-Za-z0-9,]+$|^[A-Za-z0-9,]+$';
+  passwordpattern:string='^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$';
 
   imageChangedEvent: any = '';
   croppedImage: any = '';
   finalImage: any = '';
   display: boolean = false;
   termesdialogdisplay: boolean = false;
+  emailvaliderrormsg:string="";
+  pwdvaliderrormsg:string="";
 
   timerbtndisplay: boolean = true;
   verifybtndisplay:boolean=false;
@@ -86,6 +94,16 @@ export class RegistrationComponent implements OnInit {
     // NPWD: null,
     OTP: 0
   }
+  registererrormsg:registererrormsg=
+  {
+    firstname:null,
+    lastname:null,
+    email:null,
+    mobile:null,
+    address:null,
+    country:null,
+    password:null
+  }
 
   Otp: string = null;
   cars: any[];
@@ -110,15 +128,15 @@ export class RegistrationComponent implements OnInit {
     this.registrationForm = this.formBuilder.group({
       //  FirstregistrationForm:this.formBuilder.array([this.BasicDetails()]),
       //firstname: ['', [Validators.required,Validators.pattern('[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*')]],
-      firstname: ['', [Validators.required,Validators.pattern('^([A-Za-z]+ )+[A-Za-z]+$|^[A-Za-z]+$')]],
-      lastname: ['', [Validators.required,Validators.pattern('^([A-Za-z]+ )+[A-Za-z]+$|^[A-Za-z]+$')]],
+      firstname: ['', [Validators.required,Validators.pattern(this.namepattern)]],
+      lastname: ['', [Validators.required,Validators.pattern(this.namepattern)]],
       emailid: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}')]],
       mobile: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
-      address: ['', [Validators.required,Validators.pattern('^([A-Za-z]+ )+[A-Za-z]+$|^[A-Za-z]+$')]],
+      address: ['', [Validators.required,Validators.pattern(this.addresspattern)]],
       country: ['', Validators.required],
-      city: ['', [Validators.required,Validators.pattern('^([A-Za-z]+ )+[A-Za-z]+$|^[A-Za-z]+$')]],
-      password: ['', [Validators.required,Validators.pattern('^([A-Za-z0-9!@#$%^&*(),.?":{}]+ )+[A-Za-z0-9!@#$%^&*(),.?":{}]+$|^[A-Za-z0-9!@#$%^&*(),.?":{}]+$'),Validators.minLength(6)]],
-      confirmpassword: ['', [Validators.required, Validators.pattern('^([A-Za-z0-9!@#$%^&*(),.?":{}]+ )+[A-Za-z0-9!@#$%^&*(),.?":{}]+$|^[A-Za-z0-9!@#$%^&*(),.?":{}]+$'),Validators.minLength(6)]],
+      city: ['', [Validators.required,Validators.pattern(this.namepattern)]],
+      password: ['', [Validators.required,Validators.pattern(this.passwordpattern),Validators.minLength(6)]],
+      confirmpassword: ['', [Validators.required, Validators.pattern(this.passwordpattern),Validators.minLength(6)]],
       otp: ['', Validators.required]
     },
       {
@@ -198,14 +216,15 @@ export class RegistrationComponent implements OnInit {
     // }
     if (this.registerdto.FirstName != null) {
 
-      if(this.registerdto.FirstName.match("^([A-Za-z]+ )+[A-Za-z]+$|^[A-Za-z]+$"))
+      if(this.registerdto.FirstName.match(this.namepattern))
       {
+
         if ((this.registerdto.FirstName.length - 1 > -1)) {
           // if(this.registerdto.FirstName.match("('[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*')"))
           // {
           if (this.registerdto.LastName != null) {
             
-            if(this.registerdto.LastName.match("^([A-Za-z]+ )+[A-Za-z]+$|^[A-Za-z]+$"))
+            if(this.registerdto.LastName.match(this.namepattern))
             {
               if (this.registerdto.LastName.length - 1 > -1) {
                 this.btndisable = "line_btn sblue";
@@ -236,28 +255,50 @@ export class RegistrationComponent implements OnInit {
 
     }
     else {
+
       this.btndisable = "disable";
     }
   }
 
   formauthdatavalidate() {
-   
+
     if (this.registerdto.Email != null) {
       if (this.registerdto.Email.match('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}')) {
+        this.txterrormsg=true;
+        this.emailvaliderrormsg="";
         if (this.registerdto.PWD != null) {
-          if(this.registerdto.PWD.match('^([A-Za-z0-9!@#$%^&*(),.?":{}]+ )+[A-Za-z0-9!@#$%^&*(),.?":{}]+$|^[A-Za-z0-9!@#$%^&*(),.?":{}]+$'))
-          {
-            if (this.registerdto.PWD.length >= 6) {
-               this.CheckEmail();
-             // this.btndisable = "line_btn sblue";
+          if (this.registerdto.PWD.length >= 6) {
+            if(this.registerdto.PWD.match(this.passwordpattern))
+            {
+              this.txterrormsg=true;
+              this.pwdvaliderrormsg="";
+              this.CheckEmail();
             }
-            if (this.registerdto.PWD.length == 0 || this.registerdto.PWD.length < 6) {
-              this.btndisable = "disable";
+            else
+            {
+              this.txterrormsg=false;
+              this.pwdvaliderrormsg="Password must be at least special characters";
             }
-          } 
+           
+          // this.btndisable = "line_btn sblue";  
+        }
+        else if(this.registerdto.PWD.length==0) 
+        {
+          this.txterrormsg=false;
+          this.pwdvaliderrormsg="";
+          this.btndisable = "disable";
+        } 
+        else  if ((this.registerdto.PWD.length < 6 )&& (this.registerdto.PWD.length>0)) {
+          this.btndisable = "disable";
+          this.txterrormsg=false;
+          this.pwdvaliderrormsg="Password must be at least 6 characters";
+        }
+        
         }
       }
       else {
+        this.txterrormsg=false;
+        this.emailvaliderrormsg="Please enter valid email";
         this.btndisable = "disable";
       }
 
@@ -270,11 +311,11 @@ export class RegistrationComponent implements OnInit {
   Addressformvalidate() {
 
     if (this.registerdto.City != null) {
-      if(this.registerdto.City.match('^([A-Za-z]+ )+[A-Za-z]+$|^[A-Za-z]+$'))
+      if(this.registerdto.City.match(this.namepattern))
       {
         if (this.registerdto.City.length - 1 > -1) {
           if (this.registerdto.Address != null) {
-            if(this.registerdto.Address.match('^([A-Za-z]+ )+[A-Za-z]+$|^[A-Za-z]+$'))
+            if(this.registerdto.Address.match(this.addresspattern))
             {
               if (this.registerdto.Address.length - 1 > -1) {
                 this.btndisable = "line_btn sblue";
@@ -339,6 +380,7 @@ export class RegistrationComponent implements OnInit {
           else {
 			   this.response="Invalid OTP";
             this.responsesty="errormsg";
+            this.HideResponse();
             //this.messageService.add({ severity: 'error', summary: 'Error Message', detail: "Invalid OTP" });
             // this.errormsg="Invalid OTP";
             // this.iserror=false;
@@ -365,6 +407,7 @@ export class RegistrationComponent implements OnInit {
       }
       else if (this.Otp.toString().length <= 5) {
         this.otpnumb = "";
+        this.btndisable = "disable";
       }
       else {
         this.btndisable = "disable";
@@ -432,8 +475,8 @@ export class RegistrationComponent implements OnInit {
       if (this.registerdto.Email.match('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}')) {
         this.userservice.EmailVerification(this.registerdto).subscribe(res => {
           if (res["result"] === "Email is valid") {
-            //this.response=res["result"];
-            this.HideResponse();
+            this.response="";
+            //this.HideResponse();
             this.responsesty="succsmsg";
             //this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
             //  this.issucss=false;
@@ -445,7 +488,7 @@ export class RegistrationComponent implements OnInit {
             this.response="EmailId is already registered";
           
             this.responsesty="errormsg";
-            this.HideResponse();
+            //this.HideResponse();
             //this.messageService.add({ severity: 'error', summary: 'Error Message', detail: res["result"] });
             // this.errormsg=res["result"];
             // this.iserror=false;
@@ -455,7 +498,7 @@ export class RegistrationComponent implements OnInit {
           errormsg => {
             this.response=errormsg["error"]["result"];
             this.responsesty="errormsg";
-            this.HideResponse();
+           // this.HideResponse();
             //this.messageService.add({ severity: 'error', summary: 'Error Message', detail: errormsg["error"]["result"] });
             // this.errormsg=errormsg["error"]["result"];
             // this.iserror=false;

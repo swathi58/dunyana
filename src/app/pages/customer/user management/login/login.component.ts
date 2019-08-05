@@ -298,11 +298,21 @@ export class LoginComponent implements OnInit {
       this.userdata = res['reFirstName'];
       this.localStorage.set('username', this.userdata);
       this.localStorage.set('Email', res['reEmail']);
+      this.localStorage.set('loginType',res["loginType"]);
       //this.messageService.add({severity:'success', summary:'Success Message', detail:res["result"]});
       if(res["loginStatus"]==1){
       this.show = false;
       this.div.nativeElement.innerHTML = res["result"];
-      this.router.navigateByUrl("customer/customeraccount");
+      if(res["loginType"]=="C")
+      {
+        this.router.navigateByUrl("customer/home");
+      }
+      else if(res["loginType"]=="M")
+      {
+        this.router.navigateByUrl("merchant/home");
+      }
+
+      //this.router.navigateByUrl("customer/customeraccount");
       this.Resetlog();
       }
       else if(res["loginStatus"]==0){

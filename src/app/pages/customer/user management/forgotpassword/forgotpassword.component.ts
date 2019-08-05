@@ -255,6 +255,12 @@ export class ForgotpasswordComponent implements OnInit {
         this.callDuration = "";
       }
     }
+    else
+
+    {
+      this.btndisable = "disable";
+    }
+  
 
 
   }

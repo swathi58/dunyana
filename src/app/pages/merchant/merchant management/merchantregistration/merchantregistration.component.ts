@@ -88,7 +88,7 @@ export class MerchantregistrationComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-
+   //this.router.navigateByUrl('signin');
     this.merchantForm = this.formBuilder.group({
       Name: ['',[Validators.required,Validators.pattern('^([A-Za-z]+ )+[A-Za-z]+$|^[A-Za-z]+$')]],
       Website: ['', [Validators.required,Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')]],
@@ -521,7 +521,7 @@ export class MerchantregistrationComponent implements OnInit {
               this.div.nativeElement.innerHTML=res["result"];
               //this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
         
-              // this.router.navigateByUrl('/');
+               this.router.navigateByUrl('signin');
               this.ResetForm();
               this.finalImage="";
               this.iconimage="";
