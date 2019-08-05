@@ -48,8 +48,8 @@
                                             <!-- <p *ngIf="merchantForm.get('Name').hasError('required') && merchantForm.submitted">Name is required</p> -->
 
                                             <div *ngIf="merchantForm.controls['Name'].errors && !merchantForm.controls['Name'].pristine" class="text-danger error">
-                                                    <div [hidden]="!merchantForm.controls['Name'].errors.required">Please Enter Merchant Name </div>
-                                                    <div [hidden]="!merchantForm.controls['Name'].errors.pattern">Please Enter Merchant Name</div>
+                                                    <div [hidden]="!merchantForm.controls['Name'].errors.required">please enter merchant name </div>
+                                                    <div [hidden]="!merchantForm.controls['Name'].errors.pattern">please enter merchant name</div>
                                                 </div>
                                         </div>
                                         <div class="col-sm-12">
@@ -79,8 +79,8 @@
                                         <div class="col-sm-12"><input placeholder="Company*" type="text"  formControlName="Company" [(ngModel)]="_merchentFormData.Company" (keyup)="formvalidate();onKeyPress($event)" class="w-100" /></div>
                                         <div class="col-sm-12">
                                             <div *ngIf="merchantForm.controls['Company'].errors && !merchantForm.controls['Company'].pristine" class="text-danger error">
-                                                <div [hidden]="!merchantForm.controls['Company'].errors.required">Please Enter Company Name</div>
-                                                <div [hidden]="!merchantForm.controls['Company'].errors.pattern">Please Enter Company Name</div>
+                                                <div [hidden]="!merchantForm.controls['Company'].errors.required">please enter company name</div>
+                                                <div [hidden]="!merchantForm.controls['Company'].errors.pattern">please enter company name</div>
                                             </div>
 
                                            
@@ -121,8 +121,8 @@
                                         <div class="col-sm-12"><input placeholder="Website link*" type="text" formControlName="Website" [(ngModel)]="_merchentFormData.Website"  (keyup)="formauthdatavalidate()" class="w-100"/></div>
                                         <div class="col-sm-12">
                                             <div *ngIf="merchantForm.controls['Website'].errors && !merchantForm.controls['Website'].pristine" class="text-danger error">
-                                                <div [hidden]="!merchantForm.controls['Website'].errors.required">Please Enter Website Link</div>
-                                                <div [hidden]="!merchantForm.controls['Website'].errors.pattern">Enter Valid Website Link</div>
+                                                <div [hidden]="!merchantForm.controls['Website'].errors.required">please enter website link</div>
+                                                <div [hidden]="!merchantForm.controls['Website'].errors.pattern">enter valid website link</div>
                                             </div>
                                         </div>
                                         <div class="col-sm-12">
@@ -135,9 +135,9 @@
                                         <div class="col-sm-12"><input placeholder="Email*" type="text" formControlName="Email" [(ngModel)]="_merchentFormData.Email"  (keyup)="formauthdatavalidate()"  class="w-100" /></div>
                                         <div class="col-sm-12">
                                             <div *ngIf="merchantForm.controls['Email'].errors && !merchantForm.controls['Email'].pristine" class="text-danger error">
-                                                <div [hidden]="!merchantForm.controls['Email'].errors.required">Please Enter Email  </div>
+                                                <div [hidden]="!merchantForm.controls['Email'].errors.required">please enter email  </div>
                                                 <!-- <div  [hidden]="!merchantForm.controls['Email'].errors?.email">Email must be a valid email address</div> -->    
-                                                <div [hidden]="!merchantForm.controls['Email'].errors?.pattern">Please Enter Valid Email Address</div>
+                                                <div [hidden]="!merchantForm.controls['Email'].errors?.pattern">please enter valid email address</div>
                                             </div>
 
                                             
@@ -154,9 +154,9 @@
                                         <div class="col-sm-12"><input type="password" placeholder="Password*" formControlName="PWD" [(ngModel)]="_merchentFormData.PWD"  (keyup)="formauthdatavalidate()" class="w-100"/></div>
                                         <div class="col-sm-12">
                                             <div *ngIf="merchantForm.controls['PWD'].errors && !merchantForm.controls['PWD'].pristine" class="text-danger error">
-                                                <div [hidden]="!merchantForm.controls['PWD'].errors.required">Please Enter Password</div>
-                                                <div [hidden]="!merchantForm.controls['PWD'].errors?.pattern">Your Password Can't Start Or End Eith a Blank sapce</div>
-                                                <div [hidden]="!merchantForm.controls['PWD'].errors?.minlength">Password Length Must be Greater Than 6 Characters</div>
+                                                <div [hidden]="!merchantForm.controls['PWD'].errors.required">please enter password</div>
+                                                <div [hidden]="!merchantForm.controls['PWD'].errors?.pattern">your password can't start or end with a blank space</div>
+                                                <div [hidden]="!merchantForm.controls['PWD'].errors?.minlength">password length must be greater than 6 characters</div>
                                                 
                                             </div>
                                         </div>
@@ -170,9 +170,9 @@
                                         <div class="col-sm-12"><input placeholder="Confirm Password*" type="password"  formControlName="confirmpassword" [(ngModel)]="_merchentFormData.CPWD"  (keyup)="formauthdatavalidate();" class="w-100"/></div>
                                        <div class="col-sm-12">
                                               <div *ngIf="merchantForm.controls['confirmpassword'].errors && !merchantForm.controls['confirmpassword'].pristine" class="text-danger error-msg float-right">
-                                                      <div [hidden]="!merchantForm.controls['confirmpassword'].errors.required">Please Enter Confirm Password</div>
+                                                      <div [hidden]="!merchantForm.controls['confirmpassword'].errors.required">please enter confirm password</div>
                                                       <!-- <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</div> -->
-                                                      <div [hidden]="!merchantForm.controls['confirmpassword'].errors?.mustMatch">Confirm Password Must Match Password</div>
+                                                      <div [hidden]="!merchantForm.controls['confirmpassword'].errors?.mustMatch">confirm password must match password</div>
                                               </div>
                                        </div>
                                         <div class="col-sm-12"><hr></div>
@@ -199,13 +199,16 @@
                                     <div class="row inputset">
                                       
                                         <div class="col-sm-12">
-                                            <p-dropdown [options]="countries" formControlName="country" Placeholder="Country" [(ngModel)]="_merchentFormData.Country"  [autoWidth]="false"  [filter]="false" >
+                                            <p-dropdown [options]="countries" formControlName="country" Placeholder="Country" [(ngModel)]="_merchentFormData.Country"  [autoWidth]="false"  [filter]="false" (onChange)="dropdownvalidation()" >
                                                
                                             </p-dropdown>
-
-                                            <!-- <div [hidden]="merchantForm.control?.status !== 'INVALID' ">
-                                                Value is required
-                                              </div> -->
+                                            
+                                            <div class="col-sm-12">
+                                                <div *ngIf="!merchantForm.controls['country'].valid && merchantForm.controls['country'].dirty" class="text-danger error">
+                                                    Country is required  
+                                                   </div> 
+                                            </div>
+                                            
                                          
                                         </div>
                                         <div class="col-sm-12" >
