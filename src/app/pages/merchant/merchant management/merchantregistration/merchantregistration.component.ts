@@ -238,9 +238,7 @@ export class MerchantregistrationComponent implements OnInit {
           if (res["result"] === "Email is valid") {
            
             this.localStorage.clear();
-            this.localStorage.set('sms',res["result"]);
-            this.show=false;
-            this.div.nativeElement.innerHTML=res["result"];
+            this.localStorage.set('sms',res["result"]);            
             this.responsesty="succsmsg";
             this.HideResponse();
             //this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
@@ -265,8 +263,7 @@ export class MerchantregistrationComponent implements OnInit {
             this.localStorage.clear();
             this.localStorage.set('sms',errormsg["error"]["result"]);
             this.responsesty="errormsg";
-            this.show=false;
-            this.div.nativeElement.innerHTML=errormsg["error"]["result"];
+            
             //this.messageService.add({ severity: 'error', summary: 'Error Message', detail: errormsg["error"]["result"] });
             // this.errormsg=errormsg["error"]["result"];
             // this.iserror=false;
