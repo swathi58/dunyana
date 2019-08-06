@@ -12,8 +12,7 @@ import { Key } from 'protractor';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { category } from 'src/app/pages/admin/model/category';
 import { LocalStorageService } from 'angular-web-storage';
-
-
+import {RegistrationDto } from '../../../customer/model/DTOs/RegistraionDto';
 
 @Component({
   selector: 'app-merchantregistration',
@@ -25,7 +24,7 @@ import { LocalStorageService } from 'angular-web-storage';
 
 export class MerchantregistrationComponent implements OnInit {
 
-
+  checkinfo: string = "assets/layout/images/svg/success.svg";
   btndisable: string = "disable";
   btnupload:string= "uploadimgsty uploadimgsty2";
   btnupload1:string= "uploadimgsty uploadimgsty1";
@@ -55,9 +54,18 @@ export class MerchantregistrationComponent implements OnInit {
   termesdialogdisplay: boolean = false;
   flage: boolean = true;
   filelength: string = '';
+  checkimage:boolean=true;
+  //couraselHref: string;
+
   @ViewChild('div') div: ElementRef;
 
   public show = false;
+
+  merwebsite:boolean=true;
+  meremail:boolean=true;
+  merpwdleter:boolean=true;
+  merpwdlength:boolean=true;
+  mercpwd:boolean=true;
 
   _merchentFormData: merchentFormData = {
     Id: 0,
@@ -80,6 +88,29 @@ export class MerchantregistrationComponent implements OnInit {
 
   }
 
+  registerdto: RegistrationDto = {
+    Id: 0,
+    FirstName: null,
+    LastName: null,
+    Email: null,
+    Mobile: null,
+    Address: null,
+    Country: null,
+    City: null,
+    Image: null,
+    LoginType: null,
+    FBID: null,
+    GoogleID: null,
+    PWD: null,
+    Type: null,
+    EmailVerified: 0,
+    Status: 0,
+    // EncId: null,
+    // NPWD: null,
+    OTP: 0
+  }
+  
+
 
   reg: any = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
   responsesty: string = '';
@@ -94,7 +125,7 @@ export class MerchantregistrationComponent implements OnInit {
   ngOnInit() {
    //this.router.navigateByUrl('signin');
     this.merchantForm = this.formBuilder.group({
-      Name: ['', [Validators.required, Validators.pattern('^([A-Za-z]+ )+[A-Za-z]+$|^[A-Za-z]+$')]],
+      Name: ['', [Validators.required, Validators.pattern('^([A-Za-z0-9]+ )+[A-Za-z0-9]+$|^[A-Za-z0-9]+$')]],
       Website: ['', [Validators.required, Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')]],
       Company: ['', [Validators.required, Validators.pattern('^([A-Za-z]+ )+[A-Za-z]+$|^[A-Za-z]+$')]],
       Email: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{1,}[.]{1}[a-zA-Z]{2,}')]],
@@ -103,8 +134,8 @@ export class MerchantregistrationComponent implements OnInit {
       categorie: ['select categories', Validators.required],
       CompanyImage: ['', Validators.required],
       SellCountrie: ['', Validators.required],
-      PWD: ['', [Validators.required, Validators.pattern('^([A-Za-z0-9]+ )+[A-Za-z0-9]+$|^[A-Za-z0-9]+$'), Validators.minLength(6)]],
-      confirmpassword: ['', [Validators.required, Validators.pattern('^([A-Za-z0-9]+ )+[A-Za-z0-9]+$|^[A-Za-z0-9]+$'), Validators.minLength(6)]],
+      PWD: ['', [Validators.required, Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$'), Validators.minLength(6)]],
+      confirmpassword: ['', [Validators.required, Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$'), Validators.minLength(6)]],
     },
       {
         validator: MustMatch('PWD', 'confirmpassword')
@@ -114,23 +145,9 @@ export class MerchantregistrationComponent implements OnInit {
     this.countries.push({ label: 'Select Country', value: '' });
     this.bindcountries();
     this.bindcategories();
-    this.bindsellcountries();
-
-
+   
   }
 
-
-
-
-  // _keyPress(event: any) {
-  //   const pattern = /[0-9\+\-\ ]/;
-  //   let inputChar = String.fromCharCode(event.charCode);
-
-  //   if (!pattern.test(inputChar)) {
-  //     // invalid character, prevent input
-  //     event.preventDefault();
-  //   }
-  // }
 
   checkPasswords(group: FormGroup) { // here we have the 'passwords' group
     let pass = group.controls.password.value;
@@ -142,12 +159,7 @@ export class MerchantregistrationComponent implements OnInit {
   iconChangeEvent(event: any): void {
     this.imageChangedEvent = event;
     
-    // this.fileSelected=true;
-    // var files = event.srcElement.files;
-    // console.log(files);
-    // this.localStorage.set('filelength',files);
-    // this.fileSelected = files.length>0;
-
+  
   }
 
   fileChangeEvent(event: any): void {
@@ -210,7 +222,7 @@ export class MerchantregistrationComponent implements OnInit {
     
     if (this._merchentFormData.Name != null) {
 
-      if (this._merchentFormData.Name.match("^([A-Za-z]+ )+[A-Za-z]+$|^[A-Za-z]+$")) {
+      if (this._merchentFormData.Name.match('^([A-Za-z0-9]+ )+[A-Za-z0-9]+$|^[A-Za-z0-9]+$')) {
         if ((this._merchentFormData.Name.length - 1 > -1)) {
           // if(this.registerdto.FirstName.match("('[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*')"))
           // {
@@ -258,35 +270,34 @@ export class MerchantregistrationComponent implements OnInit {
   }
 
   CheckEmail() {
+   
 
-    //this.registerdto.email="swathi.chinnala@gmail.com";
-    //this.ConvertingFormToDto();
-
-    //this.show=false;
+  
     this.btndisable = "disable";
     if (this._merchentFormData.Email.length > 0) {
-
       if (this._merchentFormData.Email.match('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{1,}[.]{1}[a-zA-Z]{2,}')) {
-
-        this.merchantservice.EmailVerification(this._merchentFormData).subscribe(res => {
-
+       this.convertMailDto();
+        this.merchantservice.EmailVerification(this.registerdto).subscribe(res => {
+          
           if (res["result"] === "Email is valid") {
-
             this.localStorage.clear();
             this.localStorage.set('sms', res["result"]);
-            this.responsesty = "succsmsg";
-            this.HideResponse();
+            this.show=true;
+            
+            // this.responsesty = "succsmsg";
+            // this.HideResponse();
             //this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
             //  this.issucss=false;
             //  this.succsmsg=res["result"];
-            this.btndisable = "line_btn sblue";
+            //this.btndisable = "line_btn sblue";
           }
-          else if (res["result"] === "EmailId is already registred") {
+          else if (res["result"] === "Email Id already registered") {
             this.localStorage.clear();
             this.localStorage.set('sms', res["result"]);
             this.responsesty = "errormsg";
             this.show = false;
             this.div.nativeElement.innerHTML = res["result"];
+            
             // this.HideResponse();
             //this.messageService.add({ severity: 'error', summary: 'Error Message', detail: res["result"] });
             // this.errormsg=res["result"];
@@ -308,6 +319,7 @@ export class MerchantregistrationComponent implements OnInit {
       }
     }
 
+<<<<<<< HEAD
     //this._merchentformdata.email="swathi.chinnala@gmail.com";
     //this.ConvertingFormToDto();
     this.merchantservice.EmailVerification(this._merchentFormData).subscribe(res => {
@@ -321,14 +333,30 @@ export class MerchantregistrationComponent implements OnInit {
         this.div.nativeElement.innerHTML = errormsg["error"]["result"];
         //this.messageService.add({ severity: 'error', summary: 'Error Message', detail: errormsg["error"]["result"] });
       });
+=======
+   
+  }
+>>>>>>> 9cab9b6580b3a8ea16441ab5f967f2d5b47622bb
 
+  convertMailDto(){
+    this.registerdto.Email=this.merchantForm.value["Email"];
+    this.registerdto.EmailVerified=0;
+    this.registerdto.FirstName ="";
+    this.registerdto.LastName = "";
+    this.registerdto.Mobile = ""    
+    this.registerdto.Address = "";
+    this.registerdto.City ="";
+    this.registerdto.PWD = "";
+    this.registerdto.Image ="";
+    this.registerdto.LoginType = "D";
   }
 
   ConvertingFormToDto() {
 
     this._merchentFormData.Categories = this.merchantForm.value["categorie"];
     this._merchentFormData.SellCountries = this.merchantForm.value["SellCountrie"];
-
+    this.selectList.length=0;
+    this.checkedlist.length=0;
     this.selectList.push(this._merchentFormData.SellCountries);
     this.checkedlist.push(this._merchentFormData.Categories);
     // for (var i = 0; i < this.selectList.length; i++) {
@@ -336,9 +364,14 @@ export class MerchantregistrationComponent implements OnInit {
     //     this.selectList.splice(i, 1);
     //   }
     // }
-    this._merchentFormData.SellCountries = this.selectList.toString();
-    this._merchentFormData.Categories = this.checkedlist.toString();
-
+    const tab = this.selectList.reduce((acc, value) => !acc.includes(value) ? acc.concat(value) : acc, []).join(',');
+    const tab2= this.checkedlist.reduce((acc, value) => !acc.includes(value) ? acc.concat(value) : acc, []).join(',');
+    console.log(tab) //"2,5,3"
+    console.log(tab2)
+  
+    this._merchentFormData.SellCountries =tab;
+    this._merchentFormData.Categories = tab2;
+    
     this._merchentFormData.Name = this.merchantForm.value["Name"];
     this._merchentFormData.ProfileImage = this.finalImage.replace(/^data:image\/[a-z]+;base64,/, "");
     this._merchentFormData.Company = this.merchantForm.value["Company"];
@@ -357,85 +390,132 @@ export class MerchantregistrationComponent implements OnInit {
    
    
    // this.btndisable = "disable";
-   if(this._merchentFormData.Country!==null){
-    if (this._merchentFormData.SellCountries != ",") {
-      if (this._merchentFormData.Categories != null) {       
-          this.btndisable = "line_btn sblue";      
-      }
-      else{
-        this.div.nativeElement.innerHTML = "please select merchant categories";
-        this.show=false;  
-        this.flage=false;    
-        this.HideResponse();
+    if (this._merchentFormData.Categories !== "") {
+      if (this._merchentFormData.Categories !== ",") {
+        if (this._merchentFormData.Country !== null) {
+          if (this._merchentFormData.SellCountries !== "") {
+            if (this._merchentFormData.SellCountries !== ",") {
+              this.btndisable = "line_btn sblue";
+              this.show=true;
+              this.flage=true;
+            } else {
+              this.responsesty = "errormsg";
+              this.div.nativeElement.innerHTML = "please select merchant sell countries";
+              this.show = false;
+              this.flage = false;
+            }
+          } else {
+            this.responsesty = "errormsg";
+            this.div.nativeElement.innerHTML = "please select merchant sell countries";
+            this.show = false;
+            this.flage = false;
+
+            //this.btndisable = "disable";
+          }
+        }else {
+          this.responsesty = "errormsg";
+          this.show = false;
+          this.flage = false;
+          this.div.nativeElement.innerHTML = "please select merchant countrie name";
+
+          // this.btndisable = "disable";
+        }
+      }else {
+        this.responsesty = "errormsg";
+        this.show = false;
+        this.flage = false;
+        this.div.nativeElement.innerHTML = "please select categories";
         //this.btndisable = "disable";
       }
-    }
-    else {
-      this.show=false;
-      this.flage=false;
-      this.div.nativeElement.innerHTML = "please select merchant sell countries"; 
-      this.HideResponse();   
-     // this.btndisable = "disable";
+    }else {
+      this.responsesty = "errormsg";
+      this.show = false;
+      this.flage = false;
+      this.div.nativeElement.innerHTML = "please select categories";
+      //this.btndisable = "disable";
     }
   }
-  else {
-    this.show=false;
-    this.flage=false;
-    this.div.nativeElement.innerHTML = "please select countrie name";    
-    this.HideResponse(); //this.btndisable = "disable";
-  }
-}
 
 
 
 
   formauthdatavalidate() {
+    
     this.btndisable = "disable";
     if (this._merchentFormData.Website != null) {
+     
       if (this._merchentFormData.Website.match("(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?")) {
+        this.merwebsite=true;
         if (this._merchentFormData.Email != null) {
+          if(this._merchentFormData.Email.length>3){
           if (this._merchentFormData.Email.match('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{1,}[.]{1}[a-zA-Z]{2,}')) {
+
+          this.meremail=true;
             this.CheckEmail();
-
             this.smsmsg = this.localStorage.get('sms');
-
             if (this._merchentFormData.PWD != null) {
-              if (this._merchentFormData.PWD.match('^([A-Za-z0-9]+ )+[A-Za-z0-9]+$|^[A-Za-z0-9]+$')) {
+              if (this._merchentFormData.PWD.match('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$')) {
+                this.merpwdleter=true;
                 if (this._merchentFormData.PWD.length >= 6) {
+                  this.merpwdlength=true;
                   if (this._merchentFormData.CPWD != null) {
                     if (this._merchentFormData.PWD == this._merchentFormData.CPWD) {
-                      //if(this.show==true){
-
-                      if (this.smsmsg != "EmailId is already registred") {
+                     this.mercpwd=true;
+                         
+                      if (this.smsmsg !== "EmailId is already registred") {
                         this.btndisable = "line_btn sblue";
-                        this.HideResponse();
+                        //this.HideResponse();
                         //this.show=true;
                       }
-                      else {
-                        this.show = false;
-                        this.div.nativeElement.innerHTML = this.smsmsg;
-                        this.HideResponse();
-                      }
+                      
 
+                    }else{
+                      this.mercpwd=false;
                     }
 
 
+
+                  }else{
+                    this.mercpwd=true;
                   }
 
 
+                }else{
+                  this.merpwdlength=false;
                 }
 
 
               }
+              else{
+                this.merpwdleter=false;
+              }
 
+            } else{
+              this.merpwdlength=true;
+              this.merpwdleter=true;
             }
 
 
+
+          }else{
+            this.meremail=false;
           }
+        }
+          else{
+            this.meremail=true;
+          }
+        } else{
+          this.meremail=true;
         }
 
       }
-    }
+      else{
+        this.merwebsite=false;
+      }
+    
+  }else{
+    this.merwebsite=true;
+  }
 
   }
 
@@ -453,7 +533,7 @@ export class MerchantregistrationComponent implements OnInit {
     for (i = 0; i < slides.length; i++) {
       if (slides[i].getAttribute('class') === 'active') {
         this.currentIndex = slides[i].getAttribute('data-slide-to');
-
+          
         if (Number.parseInt(this.currentIndex) == 1) {
           //this.prevbtn = "none";
           this.previosusbtn = true;
@@ -477,6 +557,7 @@ export class MerchantregistrationComponent implements OnInit {
   }
 
   addMerchent() {
+    
     this.btndisable = "disable";
     this.show = true;
     const slides = document.getElementsByTagName('li');
@@ -488,7 +569,8 @@ export class MerchantregistrationComponent implements OnInit {
        
           
         this.currentIndex = slides[i].getAttribute('data-slide-to');
-        if(this.flage === true){
+        
+       
         
           if (Number.parseInt(this.currentIndex) >= 0) {
 
@@ -523,6 +605,7 @@ export class MerchantregistrationComponent implements OnInit {
               // this.btndisable="disable";
               //this.merchantForm.controls['country'].setValue(this.countries[0].value,{onlySelf: true});
               this.previosusbtn = false;
+              // this.couraselHref = "#demo-1";
               //this.merchantForm.controls['categorie'].setValue(this.categories[0].value,{onlySelf: true});
             }
             if (Number.parseInt(this.currentIndex) == 1) {
@@ -530,6 +613,7 @@ export class MerchantregistrationComponent implements OnInit {
               //this.otpformvalidate();            
               this.submitbtntext = "Submit";
               this.btndisable = "line_btn sblue";
+              // this.couraselHref = "#demo-2";
               //this.btndisable="disable";
               //this._merchentFormData.Country = this.merchantForm.value["country"];
               //this._merchentFormData.Categories=this.merchantForm.value["categories"];
@@ -537,9 +621,13 @@ export class MerchantregistrationComponent implements OnInit {
 
               this.hidenextbtn = true;
               
-
+              this.show = false;
               this.ConvertingFormToDto();
               this.dropdownvalidation();
+              /*if (!this.show || !this.flage)  {
+                this.btndisable = "line_btn sblue";
+                this.couraselHref = "#demo-3";
+              }*/
               // this._merchentFormData.Categories = this.merchantForm.value["categories"];
               // this._merchentFormData.SellCountries = this.merchantForm.value["SellCountries"];
 
@@ -570,7 +658,7 @@ export class MerchantregistrationComponent implements OnInit {
 
 
               
-              if (this.flage == true) {
+              if (this.flage) {
                 this.ProgressSpinnerDlg = true;
 
 
@@ -578,14 +666,17 @@ export class MerchantregistrationComponent implements OnInit {
                   this.ProgressSpinnerDlg = false;
                   this.show = false;
                   this.responsesty = "succsmsg";
+                  this.checkimage=false;
                   this.div.nativeElement.innerHTML = res["result"];
-                  //this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
-
-                  // this.router.navigateByUrl('/');
+                  setTimeout(() => {
+                
+                    this.router.navigateByUrl('/signin');
+                  }, 1000);
+                 
                   this.ResetForm();
                   this.finalImage = "";
                   this.iconimage = "";
-                  this.submitbtntext = "Next";
+                
                   this.btndisable = "disable";
                   this.previosusbtn = true;
 
@@ -612,7 +703,7 @@ export class MerchantregistrationComponent implements OnInit {
           }
 
 
-      }
+      
     }
   }
 
@@ -635,24 +726,23 @@ export class MerchantregistrationComponent implements OnInit {
       //      this.countries.push({ label: 'Select Country', value: '' });
       
       Object.keys(res).map(key => (
-        this.countries.push({ label: res[key]["description"], value: res[key]["id"] })
-        
+        this.countries.push({ label: res[key]["description"], value: res[key]["id"] }),
+        this.sellcountry.push({ label: res[key]["description"], value: res[key]["id"] })
        
       ));
     })
 
   }
- bindsellcountries(){
-  this.merchantservice.GetCountries().subscribe(res => {
-    //      this.countries.push({ label: 'Select Country', value: '' });
+//  bindsellcountries(){
+//   this.merchantservice.GetCountries().subscribe(res => {
+  
+//     Object.keys(res).map(key => (
     
-    Object.keys(res).map(key => (
-    
-      this.sellcountry.push({ label: res[key]["description"], value: res[key]["id"] })
+//       this.sellcountry.push({ label: res[key]["description"], value: res[key]["id"] })
      
-    ));
-  })
- }
+//     ));
+//   })
+//  }
 
   onKeyPress(event: any) {
 
