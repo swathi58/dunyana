@@ -17,6 +17,7 @@ export class MerchantDto{
     PWD:string;  
     
     
+    
    
     
 }
@@ -40,3 +41,4 @@ export class merchentFormData {
     PWD:string;  
     CPWD:string;
 }
+

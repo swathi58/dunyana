@@ -484,6 +484,7 @@ body .ui-button:enabled:focus{
     right: 5%;
 }
 
+
 .otperrormsg{
     text-align: center;
     color: red;
@@ -502,4 +503,9 @@ body .ui-button:enabled:focus{
   //  float: right;
     position: absolute;
    // right: 5%;
+}
+.btn-primary{
+  background-color: #00c0f3;
+  border-color: #00c0f3;    
+
 }

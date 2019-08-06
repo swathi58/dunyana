@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { LocalStorageService } from 'angular-web-storage';
+import {RegistrationDto } from '../../customer/model/DTOs/RegistraionDto';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +18,8 @@ export class MerchantService {
     return this.http.post<MerchantDto>(environment.API_URL + 'Merchant/InsertMerchant', merchantregistor);
   }
 
-  public EmailVerification(merchantregistor: MerchantDto): Observable<MerchantDto> { 
-    return this.http.post<MerchantDto>(environment.API_URL + 'Customer/EmailCheckValidation', merchantregistor);
+  public EmailVerification(registrationDto: RegistrationDto): Observable<RegistrationDto> { 
+    return this.http.post<RegistrationDto>(environment.API_URL + 'Customer/EmailCheckValidation', registrationDto);
   }
 
   public GetCountries(): Observable<any> {
