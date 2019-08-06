@@ -339,9 +339,7 @@ button:hover {
                     height: 60px;
                     margin-bottom: 20px;
                     line-height: 55px;
-                    color: #bdbdbd;
-         
-        
+                    color: #bdbdbd;     
              span.timer{
                color: #bdbdbd !important;
               }
@@ -352,6 +350,11 @@ button:hover {
                  }
                
               }
+            }
+            &.disable{
+                .ui-button{
+                    margin-bottom: 0;
+                }
             }
           }
     }

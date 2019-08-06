@@ -120,13 +120,6 @@ export class CustomerAccountComponent implements OnInit {
     this.totalorderproductsRecords=0;
     this.pager={};
     this.ProgressSpinnerDlg = true;
-    // if (this.orderservice.orderhistorydetailsdata.length > 0) {
-    //   this.orderhistorylist = [];
-    //   this.orderhistorylist = this.orderservice.orderhistorydetailsdata;
-    //   this.Fillproductdetails();
-    //   this.ProgressSpinnerDlg = false;
-    // }
-
       this.orderhistorylist = [];
       this.customerid = this.localStorage.get("customerid");
       this.orderservice.GetOrderHistory(this.customerid).subscribe(res => {
@@ -157,7 +150,6 @@ export class CustomerAccountComponent implements OnInit {
         let Orderproducthistory = new orderhistory();
 
         Orderproducthistory.orderid = items["orderNo"];
-        //Orderproducthistory.soldby = items["merchant"]["name"];
         Orderproducthistory.orderplaced = items["orderDate"];
         Orderproducthistory.productname = prod["productName"];
         Orderproducthistory.productid = prod["id"];

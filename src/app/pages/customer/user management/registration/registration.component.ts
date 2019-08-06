@@ -53,9 +53,9 @@ export class RegistrationComponent implements OnInit {
   txterrorresponse:string="";
   nextslide:string="next";
   namepattern:string='^([A-Za-z0-9]+ )+[A-Za-z0-9]+$|^[A-Za-z0-9]+$';
-  addresspattern:string='^([A-Za-z0-9,]+ )+[A-Za-z0-9,]+$|^[A-Za-z0-9,]+$';
+  addresspattern:string='^([A-Za-z0-9,-/]+ )+[A-Za-z0-9,-/]+$|^[A-Za-z0-9,-/]+$';
   passwordpattern:string='^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$';
-
+  
   imageChangedEvent: any = '';
   croppedImage: any = '';
   finalImage: any = '';
@@ -63,6 +63,7 @@ export class RegistrationComponent implements OnInit {
   termesdialogdisplay: boolean = false;
   emailvaliderrormsg:string="";
   pwdvaliderrormsg:string="";
+  phonevaliderrormsg:string="";
 
   timerbtndisplay: boolean = true;
   verifybtndisplay:boolean=false;
@@ -263,45 +264,63 @@ export class RegistrationComponent implements OnInit {
   formauthdatavalidate() {
 
     if (this.registerdto.Email != null) {
-      if (this.registerdto.Email.match('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}')) {
-        this.txterrormsg=true;
-        this.emailvaliderrormsg="";
-        if (this.registerdto.PWD != null) {
-          if (this.registerdto.PWD.length >= 6) {
-            if(this.registerdto.PWD.match(this.passwordpattern))
-            {
-              this.txterrormsg=true;
-              this.pwdvaliderrormsg="";
-              this.CheckEmail();
-            }
-            else
-            {
-              this.txterrormsg=false;
-              this.pwdvaliderrormsg="Password must be at least special characters";
-            }
-           
-          // this.btndisable = "line_btn sblue";  
-        }
-        else if(this.registerdto.PWD.length==0) 
-        {
-          this.txterrormsg=false;
-          this.pwdvaliderrormsg="";
-          this.btndisable = "disable";
-        } 
-        else  if ((this.registerdto.PWD.length < 6 )&& (this.registerdto.PWD.length>0)) {
-          this.btndisable = "disable";
-          this.txterrormsg=false;
-          this.pwdvaliderrormsg="Password must be at least 6 characters";
-        }
+      if(this.registerdto.Email.length>0)
+      {
+        if (this.registerdto.Email.match('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}')) {
+          this.txterrormsg=true;
+          this.emailvaliderrormsg="";
         
+          if (this.registerdto.PWD != null) {
+  
+          
+            if (this.registerdto.PWD.length >= 6) {
+              if(this.registerdto.PWD.match(this.passwordpattern))
+              {
+                this.txterrormsg=true;
+                this.pwdvaliderrormsg="";
+                //this.btndisable = "line_btn sblue";
+                this.CheckEmail();
+              }
+              else
+              {
+                this.btndisable = "disable";
+                this.txterrormsg=false;
+                this.pwdvaliderrormsg="Password must be at least 6 characters and one special characters";
+              }
+             
+            // this.btndisable = "line_btn sblue";  
+          }
+          else if(this.registerdto.PWD.length==0) 
+          {
+            this.txterrormsg=false;
+            this.pwdvaliderrormsg="";
+            this.btndisable = "disable";
+          } 
+          else  if ((this.registerdto.PWD.length < 6 )&& (this.registerdto.PWD.length>0)) {
+            this.btndisable = "disable";
+            this.txterrormsg=false;
+            this.pwdvaliderrormsg="Password must be at least 6 characters and one special characters";
+          }
+          
+          }
+          else
+          {
+            this.btndisable = "disable";
+          }
+        }
+        else {
+          this.txterrormsg=false;
+          this.emailvaliderrormsg="Please enter valid email";
+          this.btndisable = "disable";
         }
       }
-      else {
+      else
+      {
         this.txterrormsg=false;
-        this.emailvaliderrormsg="Please enter valid email";
+        this.emailvaliderrormsg="Please enter email";
         this.btndisable = "disable";
       }
-
+      
     }
     else {
       this.btndisable = "disable";
@@ -328,12 +347,17 @@ export class RegistrationComponent implements OnInit {
                 this.btndisable = "disable";
               }
             }
-
+            else {
+              this.btndisable = "disable";
+            }
           }
         }
         else if (this.registerdto.City.length === 0) {
           this.btndisable = "disable";
         }
+      }
+      else {
+        this.btndisable = "disable";
       }
 
     }
@@ -345,12 +369,15 @@ export class RegistrationComponent implements OnInit {
     if (this.registerdto.Mobile != null) {
       if (this.registerdto.Mobile.length == 10) {
         this.btndisable = "line_btn sblue";
+        this.phonevaliderrormsg="";
       }
       else if (this.registerdto.Mobile.length <= 9) {
         this.btndisable = "disable";
+        this.phonevaliderrormsg="Please enter a valid mobile number";
       }
     }
     else {
+      //this.phonevaliderrormsg="Please enter mobile number";
       this.btndisable = "disable";
     }
   }
@@ -478,9 +505,7 @@ export class RegistrationComponent implements OnInit {
             this.response="";
             //this.HideResponse();
             this.responsesty="succsmsg";
-            //this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
-            //  this.issucss=false;
-            //  this.succsmsg=res["result"];
+
             this.btndisable = "line_btn sblue";
           }
           else if (res["result"] === "EmailId is already registred") {
@@ -540,24 +565,26 @@ export class RegistrationComponent implements OnInit {
             this.submitbtntext = "Verify";
             this.contactformvalidate();
             this.registerdto.Country = this.registrationForm.value["country"];
+      
           }
           else if (Number.parseInt(this.currentIndex) == 3) {
+       
+            this.verifybtndisplay = true;
+            this.submitbtntext = "Confirm";
             this.ConvertingFormToDto();
             this.ProgressSpinnerDlg=true;
+           
             this.userservice.SendOTP(this.registerdto).subscribe(res => {
-              // this.ProgressSpinnerDlg = false;     
+              // this.ProgressSpinnerDlg = false; 
+              this.timerbtndisplay = false;    
               this.response=res["result"];   
               this.responsesty="succsmsg";     
               this.HideResponse();
-              //this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
-              // this.issucss=false;
-              // this.succsmsg=res["result"];
               this.registerdto.OTP = res["otp"];
               this.callDuration = this.elementRef.nativeElement.querySelector('#time');
               this.startTimer(this.callDuration);
               
-              this.timerbtndisplay = false;
-              this.verifybtndisplay = true;
+
               //this.router.navigateByUrl('/');
               //this.ResetForm();
               this.ProgressSpinnerDlg=false;
@@ -573,8 +600,9 @@ export class RegistrationComponent implements OnInit {
                 // this.iserror=false;
               });
 
-            this.submitbtntext = "Confirm";
-            this.timerbtndisplay = false;
+          
+           // this.timerbtndisplay = false;
+            this.prevbtn = "none";
             this.otpformvalidate();
           }
 
@@ -588,7 +616,7 @@ export class RegistrationComponent implements OnInit {
               // this.succsmsg=res["result"];
               this.response=res["result"];
               this.responsesty="succsmsg";
-              this.HideResponse();
+              //this.HideResponse();
               //this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
               //this.localStorage.set("Email", res["reEmail"]);
               this.userdata = res['reFirstName'];
