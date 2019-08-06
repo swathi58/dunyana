@@ -49,9 +49,12 @@ export class OrderDetailsComponent implements OnInit {
     this.orderhistorylist.forEach(items => {
       this.productdetails.status=items["orderStatus"];
       this.productdetails.ordereddate=items["orderDate"];
+      if(items["orderAddress"][0] !=null ) {
       this.productdetails.address=items["orderAddress"][0]["line1"]+" , "+items["orderAddress"][0]["line2"]+" , "+items["orderAddress"][0]["city"]+" , "+items["orderAddress"][0]["state"]
+      
       this.productdetails.zip=items["orderAddress"][0]["zip"];
       this.productdetails.country=items["orderAddress"][0]["country"];
+      }
       var prod:any[]=items["orderDetails"];
       let proitems=[];
       proitems=prod.filter(x=>x.id==this.productid);
