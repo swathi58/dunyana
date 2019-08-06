@@ -28,7 +28,7 @@ export class CustomerAccountComponent implements OnInit {
   pagedItems: any[] = [];
   filtereditems: any[] = [];
   totalproducts: Array<orderhistory> = [];
-  noorders:boolean=true;
+  noorders: boolean = true;
   registerdto: RegistrationDto = {
     Id: 0,
     FirstName: null,
@@ -58,10 +58,17 @@ export class CustomerAccountComponent implements OnInit {
 
   ngOnInit() {
     //this.ProgressSpinnerDlg=true;
-    this.customerid = this.localStorage.get("customerid");
-    this.GetProfiledata();
+
+    if((this.localStorage.get("Email")) && (this.localStorage.get("loginType")==="C"))
+    {
+      this.GetProfiledata();
+    }
+    else
+    {
+      this.router.navigateByUrl("customer/home");
+    }
+
     //this.GetOrderHistory();
-    this.GetOrderHistoryDetails();
   }
   showDialog() {
     this.display = true;
@@ -80,6 +87,7 @@ export class CustomerAccountComponent implements OnInit {
     this.GetProfiledata();
   }
   GetProfiledata() {
+
     this.registerdto.Email = this.localStorage.get("Email");
     this.userservice.GetProfileInformation(this.registerdto).subscribe(res => {
       this.profiledata.Image = 'data:image/png;base64,' + res["image"];
@@ -94,7 +102,11 @@ export class CustomerAccountComponent implements OnInit {
       this.localStorage.set("PWD", res["pwd"]);
       this.localStorage.set("customerid", res["id"]);
       this.profiledata.PWD = res["pwd"];
-      this.ProgressSpinnerDlg = false;
+     // this.ProgressSpinnerDlg = false;
+    
+      this.GetOrderHistoryDetails();
+     
+    
       // console.log(this.profiledata["image"]);
     });
   }
@@ -104,35 +116,43 @@ export class CustomerAccountComponent implements OnInit {
   }
 
   GetOrderHistoryDetails() {
-     if(this.orderservice.orderhistorydetailsdata.length>0)
-     {
-      this.orderhistorylist = this.orderservice.orderhistorydetailsdata;
-      this.Fillproductdetails();
-     }
-     else
-     {
+    this.pagedItems=[];
+    this.totalorderproductsRecords=0;
+    this.pager={};
+    this.ProgressSpinnerDlg = true;
+    // if (this.orderservice.orderhistorydetailsdata.length > 0) {
+    //   this.orderhistorylist = [];
+    //   this.orderhistorylist = this.orderservice.orderhistorydetailsdata;
+    //   this.Fillproductdetails();
+    //   this.ProgressSpinnerDlg = false;
+    // }
+
+      this.orderhistorylist = [];
+      this.customerid = this.localStorage.get("customerid");
       this.orderservice.GetOrderHistory(this.customerid).subscribe(res => {
-       
-        this.orderhistorylist =res;
-        if(this.orderhistorylist.length>0)
-        {
-          this.orderservice.orderhistorydetailsdata=res;
+
+        this.orderhistorylist = res;
+        if (this.orderhistorylist.length > 0) {
+          this.orderservice.orderhistorydetailsdata = res;
           this.Fillproductdetails();
+          this.ProgressSpinnerDlg = false;
         }
-       else
-       {
-          this.noorders=false;
-       }
+        else {
+          this.noorders = false;
+          this.ProgressSpinnerDlg = false;
+        }
       });
-     }
+    
   }
 
-  Fillproductdetails()
-  {
+  Fillproductdetails() {
+    this.totalproducts = [];
+    this.totalorderproductsRecords=0;
+
     this.orderhistorylist.forEach(items => {
-  
+
       this.totalorderproductsRecords = this.totalorderproductsRecords + items["orderDetails"].length;
-    
+      
       items["orderDetails"].forEach(prod => {
         let Orderproducthistory = new orderhistory();
 
@@ -141,28 +161,30 @@ export class CustomerAccountComponent implements OnInit {
         Orderproducthistory.orderplaced = items["orderDate"];
         Orderproducthistory.productname = prod["productName"];
         Orderproducthistory.productid = prod["id"];
-        if(prod["productImage"]!="")
-        {
-          Orderproducthistory.productimage='data:image/png;base64,'+prod["productImage"];
-        }     
-        else
-        {
-          Orderproducthistory.productimage="assets/layout/images/cat_img_virtual.jpg";
+        Orderproducthistory.soldby=items["merchant"]["name"];
+        Orderproducthistory.productcost=prod["unitCost"];
+        Orderproducthistory.MasterCard="MasterCard ****5100";
+        if (prod["productImage"] != "") {
+          Orderproducthistory.productimage = 'data:image/png;base64,' + prod["productImage"];
         }
-        this.totalproducts.push(Orderproducthistory);        
-      });    
+        else {
+          Orderproducthistory.productimage = "assets/layout/images/no-image.png";
+        }
+        this.totalproducts.push(Orderproducthistory);
+      });
       this.setPage(1);
     });
   }
 
   setPage(page: number) {
+    this.pagedItems=[];
     if (page < 1 || page > this.pager.totalPages) {
       return;
     }
     this.pager = this.pagerService.getPager(this.totalorderproductsRecords, page, 3);
     this.pagedItems = this.totalproducts.slice(this.pager.startIndex, this.pager.endIndex + 1);
   }
-  
+
 
 
 }

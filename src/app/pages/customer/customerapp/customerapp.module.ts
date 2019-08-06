@@ -55,14 +55,15 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { ShoppingComponent } from './shopping/shopping.component';
 import { PagerService } from '../services/pager.service';
 import { OrderDetailsComponent } from './order management/order-details/order-details.component';
-
+import { OrderEditaddressMapComponent } from './order management/order-editaddress-map/order-editaddress-map.component';
+import { AgmCoreModule } from '@agm/core';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent, HomeComponent,CustomerappComponent, CategoriessliderComponent, CustomerAccountComponent,ChangepasswordComponent, ShopByCategoryComponent, OurStoryComponent, HowDunyanaWorksComponent, BecomeSellerComponent, TermsConditionsComponent, ContactUsComponent, FAQComponent, AboutDunyanaComponent, PrivacyPolicyComponent, OrderingPaymentComponent, ShippingComponent, ReturnsComponent, PressEnquiriesComponent, PaymentMethodsComponent, CustomerServiceComponent, TrackYourPackageComponent, DealsPromotionsComponent, CategoryComponent, EditProfileComponent, ShoppingComponent, OrderDetailsComponent],
+  declarations: [HeaderComponent, FooterComponent, HomeComponent,CustomerappComponent, CategoriessliderComponent, CustomerAccountComponent,ChangepasswordComponent, ShopByCategoryComponent, OurStoryComponent, HowDunyanaWorksComponent, BecomeSellerComponent, TermsConditionsComponent, ContactUsComponent, FAQComponent, AboutDunyanaComponent, PrivacyPolicyComponent, OrderingPaymentComponent, ShippingComponent, ReturnsComponent, PressEnquiriesComponent, PaymentMethodsComponent, CustomerServiceComponent, TrackYourPackageComponent, DealsPromotionsComponent, CategoryComponent, EditProfileComponent, ShoppingComponent, OrderDetailsComponent, OrderEditaddressMapComponent],
   exports: [CustomerappComponent,HeaderComponent,FooterComponent,TermsConditionsComponent],
   imports: [
     CommonModule,
@@ -77,6 +78,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     CarouselModule,
     ReactiveFormsModule,
     ProgressSpinnerModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyD-DxhwCnziY69grwJGlMlJ3IYURiPws8U'
+    }),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

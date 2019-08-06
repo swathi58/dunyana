@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
   isBrowser: boolean;
   base64Image: any;
   submitted: boolean = false;
-  ProgressSpinnerDlg: boolean;
+  ProgressSpinnerDlg: boolean=false;
   display: boolean = false;
   btndisable: string = "disable";
   btnfdisable: string = "disable";
@@ -88,7 +88,7 @@ export class LoginComponent implements OnInit {
     }
     this.loginForm = this.formBuilder.group({
       lEmail: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{1,}[.]{1}[a-zA-Z]{2,}')]],
-      lPassword: ['', [Validators.compose([Validators.required,Validators.pattern('^([A-Za-z0-9]+ )+[A-Za-z0-9]+$|^[A-Za-z0-9]+$'), Validators.minLength(6)])]]
+      lPassword: ['', [Validators.compose([Validators.required,Validators.pattern('^([A-Za-z0-9!@#$%^&*(),.?":{}]+ )+[A-Za-z0-9!@#$%^&*(),.?":{}]+$|^[A-Za-z0-9!@#$%^&*(),.?":{}]+$'), Validators.minLength(6)])]]
     });
 
     this.ForgetForm = this.formBuilder.group({
@@ -298,29 +298,39 @@ export class LoginComponent implements OnInit {
       this.userdata = res['reFirstName'];
       this.localStorage.set('username', this.userdata);
       this.localStorage.set('Email', res['reEmail']);
+      this.localStorage.set('loginType',res["loginType"]);
       //this.messageService.add({severity:'success', summary:'Success Message', detail:res["result"]});
       if(res["loginStatus"]==1){
       this.show = false;
       this.div.nativeElement.innerHTML = res["result"];
-      this.router.navigateByUrl("customer/customeraccount");
+      if(res["loginType"]=="C")
+      {
+        this.router.navigateByUrl("customer/home");
+      }
+      else if(res["loginType"]=="M")
+      {
+        this.router.navigateByUrl("merchant/home");
+      }
+
+      //this.router.navigateByUrl("customer/customeraccount");
       this.Resetlog();
       }
       else if(res["loginStatus"]==0){
         this.show = false;
 
-        this.div.nativeElement.innerHTML = "Please Activate Your Account";
+        this.div.nativeElement.innerHTML = "Please activate your account";
 
       }
 
       else if(res["loginStatus"]==2){
         this.show = false;
 
-        this.div.nativeElement.innerHTML = 'Account is Locked'; //res["result"];
+        this.div.nativeElement.innerHTML = 'Account is locked'; //res["result"];
       }
 
       else if(res["loginStatus"]==3){
         this.show = false;
-        this.div.nativeElement.innerHTML = "Your Account is Barred";
+        this.div.nativeElement.innerHTML = "Your account is barred";
       }
 
     },

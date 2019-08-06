@@ -16,7 +16,7 @@ export class ChangepasswordComponent implements OnInit {
   
   @Input() display: boolean;
   @Output() displayChange = new EventEmitter();
-
+  ProgressSpinnerDlg:boolean=false;
 
 
   changepwdForm:FormGroup;
@@ -56,9 +56,9 @@ export class ChangepasswordComponent implements OnInit {
   ngOnInit() {
     this.changepwdForm=this.formBuilder.group({
  
-      PWD:['',[Validators.required,Validators.pattern('^([A-Za-z0-9]+ )+[A-Za-z0-9]+$|^[A-Za-z0-9]+$'),Validators.minLength(6)]],
-      NPWD:['',[Validators.required,Validators.pattern('^([A-Za-z0-9]+ )+[A-Za-z0-9]+$|^[A-Za-z0-9]+$'),Validators.minLength(6)]],
-      confirmpassword:['',[Validators.required,Validators.pattern('^([A-Za-z0-9]+ )+[A-Za-z0-9]+$|^[A-Za-z0-9]+$')]]
+      PWD:['',[Validators.required,Validators.pattern('^([A-Za-z0-9!@#$%^&*(),.?":{}]+ )+[A-Za-z0-9!@#$%^&*(),.?":{}]+$|^[A-Za-z0-9!@#$%^&*(),.?":{}]+$'),Validators.minLength(6)]],
+      NPWD:['',[Validators.required,Validators.pattern('^([A-Za-z0-9!@#$%^&*(),.?":{}]+ )+[A-Za-z0-9!@#$%^&*(),.?":{}]+$|^[A-Za-z0-9!@#$%^&*(),.?":{}]+$'),Validators.minLength(6)]],
+      confirmpassword:['',[Validators.required,Validators.pattern('^([A-Za-z0-9!@#$%^&*(),.?":{}]+ )+[A-Za-z0-9!@#$%^&*(),.?":{}]+$|^[A-Za-z0-9!@#$%^&*(),.?":{}]+$')]]
  },
  {
   validator: MustMatch('NPWD', 'confirmpassword')
@@ -78,8 +78,10 @@ SaveChangePassword()
     let oldpwd=this.localStorage.get("PWD");
     if(oldpwd===this.changepwdForm.value["PWD"])
     {
+      this.ProgressSpinnerDlg=true;
       this.registerdto.PWD=this.changepwdForm.value["PWD"];
       this.userservice.ChangePassword(this.registerdto).subscribe(res=>{
+        this.ProgressSpinnerDlg=false;
         this.FormReset();
         this.response=res["result"];
         this.responsesty="succsmsg";
@@ -100,7 +102,7 @@ SaveChangePassword()
     }
     else
     {
-      this.response="Invalid Old Password";
+      this.response="Invalid old password";
       this.responsesty="errormsg";
       this.HideResponse();
       //this.messageService.add({severity:'error', summary:'Error Message', detail:"Invalid Old Password"});
@@ -126,6 +128,7 @@ SaveChangePassword()
   }
   redirectCustomer(){ 
     this.displayChange.emit(false);
+    this.FormReset();
   }
   FormReset()
   {

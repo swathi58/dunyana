@@ -15,6 +15,7 @@ export class DealsPromotionsComponent implements OnInit {
   pager: any = {};
   pagedItems: any[]=[];
   filtereditems:any[]=[];
+  isempty:boolean=true;
   alphabetpaging = [ '#','A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' ];
   constructor(private dealsservice:DealsmanagementService,private pagerService: PagerService) { }
 
@@ -61,8 +62,18 @@ Filterbyalphabet(char)
 {
 
  this.filtereditems=this.filter(this.dealslist,1,char);
- 
- this.setPage(1);
+ if(this.filtereditems.length>0)
+ {
+  this.setPage(1);
+  this.isempty=true;
+ }
+ else
+ {
+  this.pagedItems=[];
+  this.pager={};
+  this.isempty=false;
+ }
+
 }
 setPage(page: number) {
   if (page < 1 || page > this.pager.totalPages) {

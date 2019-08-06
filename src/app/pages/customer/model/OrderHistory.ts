@@ -6,4 +6,5 @@ export class orderhistory{
     MasterCard:string;
     productid:number;
     productimage:string;
+    productcost:number;
 }

@@ -3,6 +3,7 @@ import { LangShareService } from 'src/app/shared/services/lang-share.service';
 import { TranslateService } from '@ngx-translate/core';
 import { LocalStorageService } from 'angular-web-storage';
 import { Router } from '@angular/router';
+import { OrdermanagementService } from '../../../services/ordermanagemet.service';
 
 @Component({
   selector: 'app-header',
@@ -30,7 +31,8 @@ export class HeaderComponent implements OnInit {
   name: string;
 
   constructor(  public langShare: LangShareService,
-    public translate: TranslateService,private localStorage: LocalStorageService,private router :Router
+    public translate: TranslateService,private localStorage: LocalStorageService,private router :Router,
+    private orderservice:OrdermanagementService
     ) { }
 
   ngOnInit() {
@@ -126,11 +128,17 @@ this.showlngDiv="showDiv";
 
   logout()
   {
+    this.orderservice.orderhistorydetailsdata=[];
+    this.orderservice.orderhistorydetailsdata.length=0;
     this.localStorage.remove("username");
     this.localStorage.remove("Email");
+    this.localStorage.remove("customerid");
+    this.localStorage.remove("otp");
+    this.localStorage.remove("PWD");
    // this.localStorage.clear();
     this.islogin=false;
     this.router.navigateByUrl('customer/home');
    // this.ngOnInit();
+
   }
 }

@@ -29,7 +29,7 @@
                       <!-- <div class="login-error"
                         *ngIf="loginForm.controls['lEmail'].hasError('') && loginForm.controls['lEmail'].touched">
                         Email is </div> -->
-                      <div class="login-error" [hidden]="!loginForm.controls['lEmail'].errors?.pattern">Please Enter valid emailid
+                      <div class="login-error" [hidden]="!loginForm.controls['lEmail'].errors?.pattern">Please enter valid email
                         </div>
   
   
@@ -42,13 +42,13 @@
                     <div class="col-sm-4"><label>Password</label><span class="">*</span></div>
                     <div class="col-sm-8">
                       <input type="password"  formControlName="lPassword" id="lPassword"
-                        placeholder="********" (keyup)="onKeyPress($event);validateform()">
+                        placeholder="********" (keyup)="onKeyPress($event);validateform()" maxlength="20" minlength="6">
                       <!-- <div class="login-error"
                         *ngIf="loginForm.controls['lPassword'].hasError('') && loginForm.controls['lPassword'].touched">
                         Password is </div> -->
-                        <div class="login-error" [hidden]="!loginForm.controls['lPassword'].errors?.pattern">Your password can't start or end with a blank sapce</div>
+                        <div class="login-error" [hidden]="!loginForm.controls['lPassword'].errors?.pattern">Your password can't start or end with a blank spaces</div>
 
-                      <div class="login-error" [hidden]="!loginForm.controls['lPassword'].errors?.minlength">Password Must be Grater Than 6 Characters</div>
+                      <div class="login-error" [hidden]="!loginForm.controls['lPassword'].errors?.minlength"></div>
                     </div>
                     <div class="col-sm-12">
                       <hr>
@@ -207,3 +207,10 @@
                 </div>
   
   <!-- <app-terms-conditions [display]="display" (displayChange)="onDialogClose($event)"></app-terms-conditions> -->
+
+
+  <div class="loading-indicator mid" *ngIf="ProgressSpinnerDlg">
+    <p-progressSpinner></p-progressSpinner>
+  </div> 
+  
+  <div class="overlay" *ngIf="ProgressSpinnerDlg"></div>

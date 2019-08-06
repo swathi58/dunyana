@@ -6,8 +6,12 @@
                 <div class="col-xl-12 leftPanel">
 
                     <h2>Deals And Promotions <span class="font-weight-bold"></span></h2>
-                    <p class="small">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ut finibus ligula, et vestibulum libero. Maecenas lectus diam, sagittis in iaculis et, ultrices eget mi. Mauris quam leo, auctor eget sapien sit amet, ullamcorper elementum
-                        mauris. Vivamus euismod lorem sed diam vehicula, eu feugiat arcu vestibulum. Nam eu purus aliquam dolor lobortis sollicitudin rutrum at tellus. In lobortis massa sodales neque congue consectetur. Morbi tempus vel lacus id tincidunt.</p>
+                    <p class="small">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ut finibus
+                        ligula, et vestibulum libero. Maecenas lectus diam, sagittis in iaculis et, ultrices eget mi.
+                        Mauris quam leo, auctor eget sapien sit amet, ullamcorper elementum
+                        mauris. Vivamus euismod lorem sed diam vehicula, eu feugiat arcu vestibulum. Nam eu purus
+                        aliquam dolor lobortis sollicitudin rutrum at tellus. In lobortis massa sodales neque congue
+                        consectetur. Morbi tempus vel lacus id tincidunt.</p>
 
                 </div>
             </div>
@@ -17,14 +21,15 @@
                     <div class="row">
                         <div class="col-md-10 offset-md-1">
                             <h2>Deals</h2>
-                        
+
                             <p class="text-center let-space">
-                                <span *ngFor="let char of alphabetpaging" (click)="Filterbyalphabet(char)">{{char}}</span>
+                                <span *ngFor="let char of alphabetpaging"
+                                    (click)="Filterbyalphabet(char)">{{char}}</span>
                             </p>
                         </div>
                     </div>
-                    <hr/>
-                </div>          
+                    <hr />
+                </div>
             </section>
 
             <!-- <div class="row">
@@ -36,7 +41,8 @@
             <section class="row">
 
                 <div class="col-md-6" *ngFor="let deal of pagedItems">
-                    <div class="card mb-4 box-shadow"><img alt="Thumbnail [100%x225]" class="card-img-top" [src]="deal.image">
+                    <div class="card mb-4 box-shadow"><img alt="Thumbnail [100%x225]" class="card-img-top"
+                            [src]="deal.image">
                         <div class="card-body">
                             <p class="card-text">{{deal.name}}</p>
                         </div>
@@ -65,9 +71,10 @@
 
                 </div>
 
-
             </section>
-
+            <div class="no-orders" [hidden]="isempty">
+                <span>No Deals Found</span>
+            </div>
         </div>
     </div>
 

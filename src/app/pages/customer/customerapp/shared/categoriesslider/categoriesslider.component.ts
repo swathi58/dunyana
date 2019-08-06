@@ -49,8 +49,8 @@ export class CategoriessliderComponent implements OnInit {
     this.categoryCarousel.moveTo(slide, !this.withAnim);
   }
 
-  navigatetocategory(catname) {
-    this.route.navigateByUrl('customer/shopping/' + catname);
+  navigatetocategory(catid) {
+    this.route.navigateByUrl('customer/shopping/' + catid);
   }
   LoadCategories() {
     this.catgservice.CategoryList().subscribe(res => {
@@ -59,6 +59,21 @@ export class CategoriessliderComponent implements OnInit {
         this.items.push(img);
       });
     });
+  }
+  
+  goDown(){
+    let scrollToTop = window.setInterval(() => {
+      let pos = window.pageYOffset;
+      let brands = document.getElementById("brands").offsetTop;
+       
+if(brands){
 
+      if (pos < brands) {
+         window.scrollTo(brands, brands); 
+      } else {
+         window.clearInterval(scrollToTop);
+      }
+    }
+  }, 5);
   }
 }

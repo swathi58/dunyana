@@ -11,10 +11,13 @@ import { Productdetails } from '../../../model/ProductDetails';
 })
 export class OrderDetailsComponent implements OnInit {
 
+  display: boolean = false;
+
   customerid:number;
   productid:number=0;
   orderhistorylist: any[] = [];
   productitem:any[]=[];
+  ProgressSpinnerDlg:boolean=false;
   productdetails:Productdetails={
     productimage:null,
     ordereddate:null,
@@ -36,6 +39,7 @@ export class OrderDetailsComponent implements OnInit {
   }
   GetOrderHistoryDetails()
   {
+    this.ProgressSpinnerDlg=true;
     this.orderhistorylist=this.orderservice.orderhistorydetailsdata;
     this.Fillproductdetails();
   }
@@ -61,7 +65,7 @@ export class OrderDetailsComponent implements OnInit {
     this.productitem.forEach(item=>{
       if(item["productImage"]==="")
       {
-        this.productdetails.productimage="assets/layout/images/cat_img_virtual.jpg";
+        this.productdetails.productimage="assets/layout/images/no-image.png";
       }
       else
       {
@@ -71,5 +75,13 @@ export class OrderDetailsComponent implements OnInit {
       this.productdetails.productname=item["productName"];
     
     });
+    this.ProgressSpinnerDlg=false;
+  }
+  onDialogClose(event) {
+    this.display = event;
+  }
+  editaddressinmap()
+  {
+    this.display = true;
   }
 }

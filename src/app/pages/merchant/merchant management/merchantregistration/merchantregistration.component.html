@@ -42,7 +42,8 @@
                                     <p class="para">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                                     <div class="row inputset">
                                         
-                                        <div class="col-sm-12"><input type="text"  pInputText formControlName="Name" [(ngModel)]="_merchentFormData.Name"  placeholder="Name*" (keyup)="formvalidate();onKeyPress($event)" class="w-100"> </div>
+                                     <div class="col-sm-12"><input type="text"  pInputText formControlName="Name" [(ngModel)]="_merchentFormData.Name"  placeholder="Name" (keyup)="formvalidate();onKeyPress($event)" class="w-100"> </div>
+
                                         <div class="col-sm-12">
 
                                             <!-- <p *ngIf="merchantForm.get('Name').hasError('required') && merchantForm.submitted">Name is required</p> -->
@@ -186,7 +187,7 @@
                                       
                                         <div class="col-sm-12">
                                             
-                                            <p-multiSelect [options]="categories" placeholder="categories*" formControlName="categorie"  [(ngModel)]="_merchentFormData.categories" defaultLabel="Categories" [panelStyle]="{minWidth:'12em'}">
+                                            <p-multiSelect [options]="categories" placeholder="categories*" formControlName="categorie"  [(ngModel)]="_merchentFormData.Categories" defaultLabel="Categories" [panelStyle]="{minWidth:'12em'}">
                                                
                                             </p-multiSelect>
                                          
