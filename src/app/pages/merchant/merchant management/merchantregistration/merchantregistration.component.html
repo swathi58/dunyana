@@ -35,7 +35,7 @@
                                         <li data-target="#demo" data-slide-to="0" class="active"></li>
                                         <li data-target="#demo" data-slide-to="1"></li>
                                         <li data-target="#demo" data-slide-to="2"></li>
-
+                                        <li data-target="#demo" data-slide-to="3"></li>
 
                                     </ul>
                                     <div class="carousel-inner">
@@ -113,7 +113,6 @@
                                             </div>
 
                                             <div class="row inputset">
-
                                                 <div class="col-sm-12 upl-btn">
                                                     <input type="file" placeholder="Icon Image*" #uploader
                                                         (change)="fileChangeEvent($event)" [hidden]=true />
@@ -121,14 +120,12 @@
                                                     <button type="button" (click)="uploader.click()" label="Upload"
                                                         data-toggle="modal" data-target="#myModal1"
                                                         class="btn-small float-right">Upload</button>
-
                                                 </div>
                                                 <div class="col-sm-12">
                                                     <span class="text-danger error" [hidden]="fileSelected">
                                                         please upload company image
                                                     </span>
                                                 </div>
-
                                                 <div class="col-sm-12  ht" [ngClass]="popup">
                                                     <img [src]="iconimage"  [ngClass]="btnupload"/>
 
@@ -137,11 +134,7 @@
                                                 </div>
                                             </div>
 
-                                            <!-- <div class="row inputset">
-                                            <div class="col-sm-12">
-                                                    <img [src]="finalImage" class="uploadimgsty" />
-                                            </div>
-                                        </div>  -->
+                                        
 
                                         </div>
                                         <div class="carousel-item">
@@ -152,18 +145,18 @@
                                                 <div class="col-sm-12"><input placeholder="Website link*" type="text"
                                                         formControlName="Website"
                                                         [(ngModel)]="_merchentFormData.Website"
-                                                        (keyup)="formauthdatavalidate()" class="w-100" /></div>
+                                                        (focusout)="formauthdatavalidate()" class="w-100" /></div>
                                                 <div class="col-sm-12">
                                                     <div *ngIf="merchantForm.controls['Website'].errors && !merchantForm.controls['Website'].pristine"
                                                         class="text-danger error">
                                                         <div
                                                             [hidden]="!merchantForm.controls['Website'].errors.required">
                                                             please enter website link</div>
-                                                        <div
-                                                            [hidden]="!merchantForm.controls['Website'].errors.pattern">
-                                                            enter valid website link</div>
+                                                        
                                                     </div>
                                                 </div>
+                                                <div [hidden]="merwebsite" class="col-sm-12">
+                                                   <span class="text-danger error-msg float-right"> please enter valid website link</span></div>
                                                 <div class="col-sm-12">
                                                     <hr>
                                                 </div>
@@ -173,20 +166,22 @@
 
                                                 <div class="col-sm-12"><input placeholder="Email*" type="text"
                                                         formControlName="Email" [(ngModel)]="_merchentFormData.Email"
-                                                        (keyup)="formauthdatavalidate()" class="w-100" /></div>
+                                                        (focusout)="formauthdatavalidate()" class="w-100" /></div>
                                                 <div class="col-sm-12">
                                                     <div *ngIf="merchantForm.controls['Email'].errors && !merchantForm.controls['Email'].pristine"
                                                         class="text-danger error">
                                                         <div [hidden]="!merchantForm.controls['Email'].errors.required">
                                                             please enter email </div>
-                                                        <!-- <div  [hidden]="!merchantForm.controls['Email'].errors?.email">Email must be a valid email address</div> -->
-                                                        <div [hidden]="!merchantForm.controls['Email'].errors?.pattern">
-                                                            please enter valid email address</div>
+                                                       
+                                                        
                                                     </div>
 
 
 
 
+                                                </div>
+                                                <div [hidden]="meremail" class="col-sm-12">
+                                                    <span class="text-danger error-msg float-right">please enter valid email address</span>
                                                 </div>
                                                 <div class="col-sm-12">
                                                     <hr>
@@ -197,18 +192,22 @@
 
                                                 <div class="col-sm-12"><input type="password" placeholder="Password*"
                                                         formControlName="PWD" [(ngModel)]="_merchentFormData.PWD"
-                                                        (keyup)="formauthdatavalidate()" class="w-100" /></div>
+                                                        (focusout)="formauthdatavalidate()" class="w-100" /></div>
                                                 <div class="col-sm-12">
                                                     <div *ngIf="merchantForm.controls['PWD'].errors && !merchantForm.controls['PWD'].pristine"
                                                         class="text-danger error">
                                                         <div [hidden]="!merchantForm.controls['PWD'].errors.required">
                                                             please enter password</div>
-                                                        <div [hidden]="!merchantForm.controls['PWD'].errors?.pattern">
-                                                            your password can't start or end with a blank space</div>
-                                                        <div [hidden]="!merchantForm.controls['PWD'].errors?.minlength">
-                                                            password length must be greater than 6 characters</div>
+                                                     
 
                                                     </div>
+                                                </div>
+
+                                                <div [hidden]="merpwdleter" class="col-sm-12">
+                                                  <span class="text-danger error-msg float-right"> please inclued atleast one special character,one capital letter and one number</span> 
+                                                </div>
+                                                <div [hidden]="merpwdlength" class="col-sm-12">
+                                                    <span class="text-danger error-msg float-right">password length must be greater than 6 characters</span>
                                                 </div>
                                                 <div class="col-sm-12">
                                                     <hr>
@@ -220,7 +219,7 @@
                                                 <div class="col-sm-12"><input placeholder="Confirm Password*"
                                                         type="password" formControlName="confirmpassword"
                                                         [(ngModel)]="_merchentFormData.CPWD"
-                                                        (keyup)="formauthdatavalidate();" class="w-100" /></div>
+                                                        (focusout)="formauthdatavalidate();" class="w-100" /></div>
                                                 <div class="col-sm-12">
                                                     <div *ngIf="merchantForm.controls['confirmpassword'].errors && !merchantForm.controls['confirmpassword'].pristine"
                                                         class="text-danger error-msg float-right">
@@ -228,11 +227,12 @@
                                                             [hidden]="!merchantForm.controls['confirmpassword'].errors.required">
                                                             please enter confirm password</div>
                                                         <!-- <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</div> -->
-                                                        <div
-                                                            [hidden]="!merchantForm.controls['confirmpassword'].errors?.mustMatch">
-                                                            confirm password must match password</div>
+                                                       
                                                     </div>
                                                 </div>
+
+                                                <div [hidden]="mercpwd" class="col-sm-12">
+                                                <span class="text-danger error-msg float-right"> confirm password must match password</span></div>
                                                 <div class="col-sm-12">
                                                     <hr>
                                                 </div>
@@ -249,7 +249,7 @@
                                                     <p-multiSelect [options]="categories" placeholder="categories"
                                                         formControlName="categorie"
                                                         [(ngModel)]="_merchentFormData.categories"
-                                                        defaultLabel="Categories*" required=""
+                                                        defaultLabel="Categories" required=""
                                                         
                                                         [panelStyle]="{minWidth:'12em'}">
 
@@ -271,14 +271,6 @@
 
                                                     </p-dropdown>
 
-                                                    <div class="col-sm-12">
-                                                        <div *ngIf="!merchantForm.controls['country'].valid && merchantForm.controls['country'].dirty"
-                                                            class="text-danger error">
-                                                            country is required
-                                                        </div>
-                                                    </div>
-
-
                                                 </div>
                                                 <div class="col-sm-12">
                                                     <hr>
@@ -298,8 +290,6 @@
                                                         [panelStyle]="{minWidth:'12em'}">
 
                                                     </p-multiSelect>
-
-                                                   
 
                                                 </div>
 
@@ -322,11 +312,21 @@
                                     </div> -->
                                         </div>
 
+                                        <!-- <div class="carousel-item" >
+                                            <div class="center col-md-12 p-0 text-center">
+        
+                                                <img class="text-center" [src]="checkinfo">
+                                                <h2>Success!</h2>
+                                                <p>
+                                                    You have signed in successfully. You will be redirected in 5 seconds.
+                                                </p>
+                                                <p>Redirecting...</p>
+                                            </div>
+                                        </div>  -->
+
                                     </div>
 
-                                    <!-- <a class="carousel-control-next" href="#demo" data-slide="next">
-                                <span class="carousel-control-next-icon"></span>
-                            </a> -->
+                                
                                 </div>
 
 
@@ -345,6 +345,7 @@
                                         <span [hidden]="show" [ngClass]="responsesty" #div></span>
                                     </div>
                                 </div>
+                               
 
                             </form>
 
