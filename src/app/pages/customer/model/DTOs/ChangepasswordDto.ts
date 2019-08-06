@@ -1,6 +1,6 @@
 export class ChangepasswordDto
 {
-    Email:string;
+    confirmpassword:string;
     PWD:string;
     NPWD:string;
 }

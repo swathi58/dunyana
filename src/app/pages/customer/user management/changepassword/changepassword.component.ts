@@ -13,21 +13,24 @@ import { RegistrationDto } from '../../model/DTOs/RegistraionDto';
   styleUrls: ['./changepassword.component.scss']
 })
 export class ChangepasswordComponent implements OnInit {
-  
+
   @Input() display: boolean;
   @Output() displayChange = new EventEmitter();
-  ProgressSpinnerDlg:boolean=false;
+  ProgressSpinnerDlg: boolean = false;
 
 
-  changepwdForm:FormGroup;
-  btndisable:string="disable";
-  response:string="";
-  responsesty:string="";
-  // changepassword:ChangepasswordDto={
-  //   Email:null,
-  //   PWD:null,
-  //   NPWD:null
-  // }
+  changepwdForm: FormGroup;
+  btndisable: string = "disable";
+  response: string = "";
+  responsesty: string = "";
+  oldpwdmsg: string = "";
+  passwordpattern: string = '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$';
+  //old  '^([A-Za-z0-9!@#$%^&*(),.?":{}]+ )+[A-Za-z0-9!@#$%^&*(),.?":{}]+$|^[A-Za-z0-9!@#$%^&*(),.?":{}]+$'
+  changepassword: ChangepasswordDto = {
+    confirmpassword: null,
+    PWD: null,
+    NPWD: null
+  }
   registerdto: RegistrationDto = {
     Id: 0,
     FirstName: null,
@@ -45,103 +48,110 @@ export class ChangepasswordComponent implements OnInit {
     Type: null,
     EmailVerified: 0,
     Status: 0,
-   // EncId: null,
-   // NPWD: null,
+    // EncId: null,
+    // NPWD: null,
     OTP: 0
   }
 
-  constructor(private userservice:UsermanagementService,private formBuilder:FormBuilder,private messageService: MessageService,
-    private localStorage: LocalStorageService,public router:Router) { }
+  constructor(private userservice: UsermanagementService, private formBuilder: FormBuilder, private messageService: MessageService,
+    private localStorage: LocalStorageService, public router: Router) { }
 
   ngOnInit() {
-    this.changepwdForm=this.formBuilder.group({
- 
-      PWD:['',[Validators.required,Validators.pattern('^([A-Za-z0-9!@#$%^&*(),.?":{}]+ )+[A-Za-z0-9!@#$%^&*(),.?":{}]+$|^[A-Za-z0-9!@#$%^&*(),.?":{}]+$'),Validators.minLength(6)]],
-      NPWD:['',[Validators.required,Validators.pattern('^([A-Za-z0-9!@#$%^&*(),.?":{}]+ )+[A-Za-z0-9!@#$%^&*(),.?":{}]+$|^[A-Za-z0-9!@#$%^&*(),.?":{}]+$'),Validators.minLength(6)]],
-      confirmpassword:['',[Validators.required,Validators.pattern('^([A-Za-z0-9!@#$%^&*(),.?":{}]+ )+[A-Za-z0-9!@#$%^&*(),.?":{}]+$|^[A-Za-z0-9!@#$%^&*(),.?":{}]+$')]]
- },
- {
-  validator: MustMatch('NPWD', 'confirmpassword')
-   });
+    this.changepwdForm = this.formBuilder.group({
+
+      PWD: ['', [Validators.required, Validators.pattern(this.passwordpattern), Validators.minLength(6)]],
+      NPWD: ['', [Validators.required, Validators.pattern(this.passwordpattern), Validators.minLength(6)]],
+      confirmpassword: ['', [Validators.required, Validators.pattern(this.passwordpattern)]]
+    },
+      {
+        validator: MustMatch('NPWD', 'confirmpassword')
+      });
 
   }
   checkPasswords(group: FormGroup) { // here we have the 'passwords' group
-  let pass = group.controls.PWD.value;
-  let confirmPass = group.controls.confirmPassword.value;
-  return pass === confirmPass ? null : { notSame: true }      
-}
+    let pass = group.controls.PWD.value;
+    let confirmPass = group.controls.confirmPassword.value;
+    return pass === confirmPass ? null : { notSame: true }
+  }
 
-SaveChangePassword()
-  {
+  SaveChangePassword() {
 
-    this.registerdto.Email=this.localStorage.get("Email");
-    let oldpwd=this.localStorage.get("PWD");
-    if(oldpwd===this.changepwdForm.value["PWD"])
-    {
-      this.ProgressSpinnerDlg=true;
-      this.registerdto.PWD=this.changepwdForm.value["PWD"];
-      this.userservice.ChangePassword(this.registerdto).subscribe(res=>{
-        this.ProgressSpinnerDlg=false;
+    this.registerdto.Email = this.localStorage.get("Email");
+    let oldpwd = this.localStorage.get("PWD");
+    if (oldpwd === this.changepwdForm.value["PWD"]) {
+      this.ProgressSpinnerDlg = true;
+      this.registerdto.PWD = this.changepwdForm.value["PWD"];
+      this.userservice.ChangePassword(this.registerdto).subscribe(res => {
+        this.ProgressSpinnerDlg = false;
         this.FormReset();
-        this.response=res["result"];
-        this.responsesty="succsmsg";
+        this.response = res["result"];
+        this.responsesty = "succsmsg";
         this.HideResponse();
         //this.messageService.add({severity:'success', summary:'Success Message', detail:res["result"]});
         setTimeout(() => {
           this.onClose();
           this.router.navigateByUrl("signin");
-      }, 1000); 
-   
+        }, 1000);
+
       },
-      errormsg=>{
-        this.response=errormsg["error"]["result"];
-        this.responsesty="errormsg";
-        this.HideResponse();
-       // this.messageService.add({severity:'error', summary:'Error Message', detail:errormsg["error"]["result"]});
-      });
+        errormsg => {
+          this.response = errormsg["error"]["result"];
+          this.responsesty = "errormsg";
+          this.HideResponse();
+          // this.messageService.add({severity:'error', summary:'Error Message', detail:errormsg["error"]["result"]});
+        });
     }
-    else
-    {
-      this.response="Invalid old password";
-      this.responsesty="errormsg";
+    else {
+      this.response = "Invalid old password";
+      this.responsesty = "errormsg";
       this.HideResponse();
       //this.messageService.add({severity:'error', summary:'Error Message', detail:"Invalid Old Password"});
     }
-    
-   
-    
+
+
+
   }
 
-  formvalidate()
-  {
-    if(this.changepwdForm.valid)
-    {
-      this.btndisable="line_btn sblue mr-4";
+  formvalidate() {
+    if (this.changepwdForm.valid) {
+      this.btndisable = "line_btn sblue mr-4";
     }
-    else
-    {
-      this.btndisable="disable";
+    else {
+      if(this.changepassword.PWD==null)
+      {
+        this.oldpwdmsg = "Please enter old password";
+      }
+      else if (this.changepassword.PWD.length == 0) {
+        this.oldpwdmsg = "Password must be at least 6 characters and one special characters";
+      }
+      else if(this.changepassword.PWD.match(this.passwordpattern))
+      {
+        this.oldpwdmsg = "Password must be at least 6 characters and one special characters";
+      }
+     
+     
+      this.btndisable = "disable";
     }
   }
-  onClose(){
-    this.displayChange.emit(false);
-  }
-  redirectCustomer(){ 
+
+  onClose() {
     this.displayChange.emit(false);
     this.FormReset();
   }
-  FormReset()
-  {
-    this.changepwdForm.reset({
-      'PWD':'',
-      'NPWD':'',
-      'confirmpassword':''
-    })
+  redirectCustomer() {
+    this.displayChange.emit(false);
+    this.FormReset();
   }
-  HideResponse()
-  {
-  //   setTimeout(() => {          
-  //     this.response="";
-  // }, 3000); 
+  FormReset() {
+    this.changepwdForm.reset({
+      'PWD': '',
+      'NPWD': '',
+      'confirmpassword': ''
+    });
+  }
+  HideResponse() {
+    //   setTimeout(() => {          
+    //     this.response="";
+    // }, 3000); 
   }
 }

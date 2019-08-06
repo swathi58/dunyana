@@ -508,7 +508,7 @@ export class RegistrationComponent implements OnInit {
 
             this.btndisable = "line_btn sblue";
           }
-          else if (res["result"] === "EmailId is already registred") {
+          else if (res["result"] === "Email Id already registered") {
 
             this.response="EmailId is already registered";
           
@@ -579,7 +579,7 @@ export class RegistrationComponent implements OnInit {
               this.timerbtndisplay = false;    
               this.response=res["result"];   
               this.responsesty="succsmsg";     
-              this.HideResponse();
+              //this.HideResponse();
               this.registerdto.OTP = res["otp"];
               this.callDuration = this.elementRef.nativeElement.querySelector('#time');
               this.startTimer(this.callDuration);
@@ -594,7 +594,7 @@ export class RegistrationComponent implements OnInit {
                 
                 this.response=error["result"];
                 this.responsesty="errormsg";
-                this.HideResponse();
+                //this.HideResponse();
                 //this.messageService.add({ severity: 'error', summary: 'Error Message', detail: error["result"] });
                 // this.errormsg=error["result"];
                 // this.iserror=false;
@@ -603,6 +603,7 @@ export class RegistrationComponent implements OnInit {
           
            // this.timerbtndisplay = false;
             this.prevbtn = "none";
+            //this.topheader = "none";
             this.otpformvalidate();
           }
 

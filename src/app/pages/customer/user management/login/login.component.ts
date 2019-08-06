@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
   @ViewChild('closeAddExpenseModal') closeAddExpenseModal: ElementRef;
   @ViewChild('Ferror') Ferror: ElementRef;
   public show = false;
+  emailvaliderrormsg:string="";
 
   userdata: any;
 
@@ -255,6 +256,7 @@ export class LoginComponent implements OnInit {
   // }
   validateform() {
     if (this.loginForm.valid) {
+
       this.btndisable = "line_btn sblue";
     }
     else {
@@ -332,6 +334,11 @@ export class LoginComponent implements OnInit {
         this.show = false;
         this.div.nativeElement.innerHTML = "Your account is barred";
       }
+      else if(res["loginStatus"]===null)
+      {
+        this.show = false;
+        this.div.nativeElement.innerHTML = res["result"];
+      }
 
     },
       // error=>{
@@ -340,12 +347,10 @@ export class LoginComponent implements OnInit {
 
       errormsg => {
         this.ProgressSpinnerDlg = false;
-        console.log(errormsg["error"]["result"]);
-        this.show = false;
-        this.div.nativeElement.innerHTML = errormsg["error"]["result"];
+        // console.log(errormsg["error"]["result"]);
+        // this.show = false;
+        // this.div.nativeElement.innerHTML = errormsg["error"]["result"];
 
-        //this.messageService.add({severity:'error', summary:'Error Message', detail:errormsg["error"]["result"]});
-        //this.router.navigateByUrl("customer/home");
 
       });
 

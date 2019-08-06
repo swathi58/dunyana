@@ -48,9 +48,6 @@
                                                                 <div [hidden]="!registrationForm.controls['firstname'].errors.required">Please enter first name</div>
                                                                 <div [hidden]="!registrationForm.controls['firstname'].errors.pattern">Please enter valid first name</div>          
                                                             </div>
-                                                            <!-- <div class="text-danger error">
-                                                                <span [hidden]="txterrormsg">{{registererrormsg.firstname}}</span>                                                           
-                                                            </div> -->
                                                         </div>
                                                         <div class="col-sm-12">
                                                             <hr>
@@ -66,9 +63,6 @@
                                                                 <div [hidden]="!registrationForm.controls['lastname'].errors.pattern">Please enter valid last name</div>
                                                               
                                                             </div>
-                                                            <!-- <div class="text-danger error">
-                                                                <span [hidden]="txterrormsg">{{registererrormsg.lastname}}</span>                                                           
-                                                            </div> -->
                                                         </div>
                                                         <div class="col-sm-12">
                                                             <hr>
@@ -99,7 +93,7 @@
 
                                     <div class="row inputset">
                                         <div class="col-sm-5"><label>Password</label><span class="">*</span></div>
-                                        <div class="col-sm-7"><input type="password" placeholder="********" formControlName="password" [(ngModel)]="registerdto.PWD" (focusout)="formauthdatavalidate()" /></div>
+                                        <div class="col-sm-7"><input type="password" placeholder="********" formControlName="password" maxlength="200" [(ngModel)]="registerdto.PWD" (focusout)="formauthdatavalidate()" /></div>
                                         <div class="col-sm-12">
                                             <div *ngIf="registrationForm.controls['password'].errors && !registrationForm.controls['password'].pristine" class="text-danger error">
                                                 <div [hidden]="!registrationForm.controls['password'].errors.required"></div>
@@ -182,7 +176,7 @@
                                 </div>
                                 <div class="carousel-item">
                                     <p class="para">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                    <div class="col-sm-10 m-auto hid">
+                                    <div class="">
                                                            
                                           <div class="otp-num">
                                             <input id="otp" type="number" oninput="if(value.length>6)value=value.slice(0,6)" formControlName="otp" [ngClass]="otpdisable" [(ngModel)]="Otp" (keyup)="otpformvalidate()">
@@ -212,7 +206,6 @@
                         <div class="row btns" [hidden]="hidenextbtn">
                             <div class="col-sm-11 m-auto">
                                 <p-button class="timersty" [ngClass]="btnotpdis" [hidden]="timerbtndisplay" (click)="resendotp()"><span id="time" class="text-primary timer" >{{resendtext}}</span></p-button>
-                                <br/>
                                     <p-button class="line_btn sblue" [label]="submitbtntext" href="#demo" data-slide="next" [ngClass]="btndisable" [hidden]="verifybtndisplay" (click)="addcustomer()"></p-button>
 
                             </div>
@@ -241,50 +234,6 @@
 
 </footer>
 </section>
-
-
-
-  <!-- <div class="modal" id="myModal">
-    <div class="modal-dialog">
-      <div class="modal-content">         
-        <div class="modal-header">
-          <h4 class="modal-title">Profile Photo</h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-
-    
-        <div class="modal-body">
-                <div class="row inputset">
-
-                       <div class="col-sm-12">
-                            <image-cropper
-                            [imageChangedEvent]="imageChangedEvent"
-                            [maintainAspectRatio]="true"
-                            [aspectRatio]="4 / 3"
-                            [resizeToWidth]="150"
-                            [resizeToHeight]="150"
-                            format="png"
-                            (imageCropped)="imageCropped($event)"
-                            (imageLoaded)="imageLoaded()"
-                            (cropperReady)="cropperReady()"
-                            (loadImageFailed)="loadImageFailed()"
-                            [roundCropper]="true"
-                        ></image-cropper>
-                       </div>
-                        <div class="col-sm-12">
-                                <img [src]="croppedImage" class="uploadimgsty" />
-                        </div>
-                    </div>
-        </div>
-
-        <div class="modal-footer">
-                <button type="button" (click)="saveCropImage()" pButton icon="pi pi-info-circle" label="Save" class="btn btn-primary btn-sm" data-dismiss="modal" ></button>
-          <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
-        </div>
-
-      </div>
-    </div>
-  </div> -->
 
   <div class="loading-indicator mid" *ngIf="ProgressSpinnerDlg">
     <p-progressSpinner></p-progressSpinner>
