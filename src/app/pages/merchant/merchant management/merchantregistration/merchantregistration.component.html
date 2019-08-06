@@ -27,7 +27,7 @@
                             <h4 class="_top">Become a Seller</h4>
 
 
-                            <form class="from_wrapper" [formGroup]="merchantForm" (ngSubmit)="addmerchent()" novalidate
+                            <form class="from_wrapper" [formGroup]="merchantForm" (ngSubmit)="addMerchent()" novalidate
                                 #myform="ngForm">
 
                                 <div id="demo" class="carousel" data-ride="carousel" data-interval="false" data-wrap="false">
@@ -248,7 +248,7 @@
 
                                                     <p-multiSelect [options]="categories" placeholder="categories"
                                                         formControlName="categorie"
-                                                        [(ngModel)]="_merchentFormData.categories"
+                                                        [(ngModel)]="_merchentFormData.Categories"
                                                         defaultLabel="Categories" required=""
                                                         
                                                         [panelStyle]="{minWidth:'12em'}">
