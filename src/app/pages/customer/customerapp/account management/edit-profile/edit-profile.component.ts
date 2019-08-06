@@ -90,6 +90,7 @@ export class EditProfileComponent implements OnInit {
   }
   onClose() {
     this.displayChange.emit(false);
+    this.ResetForm();
   }
   fileChangeEvent(event: any): void {
     this.imageChangedEvent = event;
@@ -104,7 +105,17 @@ export class EditProfileComponent implements OnInit {
   }
 
   saveCropImage() {
-    this.finalImage = this.croppedImage;
+  
+    if(this.croppedImage==="")
+    {
+      console.log(this.croppedImage);
+      this.finalImage = "";
+    }
+    else
+    {
+      this.finalImage = this.croppedImage;
+    }
+   
   }
   formvalidate() {
     if (this.EditprofileForm.valid) {
@@ -150,7 +161,7 @@ export class EditProfileComponent implements OnInit {
     this.profiledata.Address = this.EditprofileForm.value["address"];
     this.profiledata.Country = this.EditprofileForm.value["country"];
     this.profiledata.Mobile = this.EditprofileForm.value["mobile"];
-
+console.log(this.profiledata);
     this.userservice.UpdateCustomerProfileData(this.profiledata).subscribe(res => {
       //this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
       this.response = res["result"];

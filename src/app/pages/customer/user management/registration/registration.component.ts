@@ -73,7 +73,8 @@ export class RegistrationComponent implements OnInit {
   timerdata:any='';
   btnotpdis:string= "disable";
   otpdisable:string='';
-  
+  otpresponse:string="";
+
   registerdto: RegistrationDto = {
     Id: 0,
     FirstName: null,
@@ -377,7 +378,6 @@ export class RegistrationComponent implements OnInit {
       }
     }
     else {
-      //this.phonevaliderrormsg="Please enter mobile number";
       this.btndisable = "disable";
     }
   }
@@ -405,27 +405,16 @@ export class RegistrationComponent implements OnInit {
 
           }
           else {
-			   this.response="Invalid OTP";
-            this.responsesty="errormsg";
-            this.HideResponse();
-            //this.messageService.add({ severity: 'error', summary: 'Error Message', detail: "Invalid OTP" });
-            // this.errormsg="Invalid OTP";
-            // this.iserror=false;
-
+			   this.otpresponse="Invalid OTP";
+            this.responsesty="otperrormsg";
             this.btndisable = "disable";
           }
         }
         else {
-          this.response="Please enter OTP with in 10 minutes";
-          this.responsesty="errormsg";
-          this.HideResponse();
-          //this.messageService.add({ severity: 'error', summary: 'Error Message', detail: "Invalid OTP" });
-          // this.errormsg="Invalid OTP";
-          // this.iserror=false;
-
+          this.otpresponse="Please enter OTP with in 10 minutes";
+          this.responsesty="otperrormsg";
           this.btndisable = "disable";
           this.btnotpdis = "line_btn sblue";          
-          //this.messageService.add({ severity: 'error', summary: 'Error Message', detail: "Please Enter OTP With in 10 Minutes" });
           this.timerbtndisplay = true;
           this.verifybtndisplay = false;
           this.resendtext = 'Resend in 00:00';
@@ -577,8 +566,8 @@ export class RegistrationComponent implements OnInit {
             this.userservice.SendOTP(this.registerdto).subscribe(res => {
               // this.ProgressSpinnerDlg = false; 
               this.timerbtndisplay = false;    
-              this.response=res["result"];   
-              this.responsesty="succsmsg";     
+              this.otpresponse=res["result"];   
+              this.responsesty="otpsuccsmsg";     
               //this.HideResponse();
               this.registerdto.OTP = res["otp"];
               this.callDuration = this.elementRef.nativeElement.querySelector('#time');
@@ -592,8 +581,8 @@ export class RegistrationComponent implements OnInit {
               error => {
                 // this.ProgressSpinnerDlg = false;
                 
-                this.response=error["result"];
-                this.responsesty="errormsg";
+                this.otpresponse=error["result"];
+                this.responsesty="otperrormsg";
                 //this.HideResponse();
                 //this.messageService.add({ severity: 'error', summary: 'Error Message', detail: error["result"] });
                 // this.errormsg=error["result"];

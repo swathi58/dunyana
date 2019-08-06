@@ -483,3 +483,23 @@ body .ui-button:enabled:focus{
     position: absolute;
     right: 5%;
 }
+
+.otperrormsg{
+    text-align: center;
+    color: red;
+    padding: 0px;
+    margin-top: 0px;
+    
+   // float: right;
+    position: absolute;
+   // right: 5%;
+}
+.otpsuccsmsg{
+    text-align: center;
+    color: #4CAF50;
+    padding: 0px;
+    margin-top: 0px;
+  //  float: right;
+    position: absolute;
+   // right: 5%;
+}
