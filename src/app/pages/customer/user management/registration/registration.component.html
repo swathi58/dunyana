@@ -100,7 +100,7 @@
                                                 <div class="col-sm-5"><label>Email</label><span class="">*</span></div>
                                                 <div class="col-sm-7"><input type="text" placeholder="email@domain.com"
                                                         formControlName="emailid" maxlength="50"
-                                                        [(ngModel)]="registerdto.Email" (focusout)="CheckEmail()"
+                                                        [(ngModel)]="registerdto.Email"
                                                         (focusout)="formauthdatavalidate()" /></div>
                                                 <div class="col-sm-12">
                                                     <div *ngIf="registrationForm.controls['emailid'].errors && !registrationForm.controls['emailid'].pristine"

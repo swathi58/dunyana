@@ -36,7 +36,7 @@ export class HeaderComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    
+    debugger
     this.logoimg=this.headerimg;
     /* this.translate.setDefaultLang('en');
     this.translate.use('en'); */
@@ -63,9 +63,9 @@ export class HeaderComponent implements OnInit {
     else
     {
      
-      this.currentlang="English";
+      this.currentlang="العربية";
       this.englicon=true;
-     // this.toggleLang("en");
+      //this.toggleLang("ar");
     }
     this.langShare.setTranslate(this.translate);
     this.translation();

@@ -15,7 +15,7 @@ import { LocalStorageService } from 'angular-web-storage';
 import { OTP } from '../../model/OTP';
 import { IfStmt } from '@angular/compiler';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import{Observable}from 'rxjs/Rx';
+import { Observable } from 'rxjs/Rx';
 import { registererrormsg } from '../../model/registererrormsg';
 
 @Component({
@@ -41,40 +41,42 @@ export class RegistrationComponent implements OnInit {
   timerbtntext: string = "Resend in";
   prevbtn: string = "none";
   topheader: string = "";
-  userdata:any;
-  otpnumb:string="";
-  response:string="";
-  responsesty:string="";
+  userdata: any;
+  otpnumb: string = "";
+  response: string = "";
+  responsesty: string = "";
   iserror: boolean = true;
   issucss: boolean = true;
   errormsg: string = "";
   succsmsg: string = "";
-  txterrormsg:boolean=true;
-  txterrorresponse:string="";
-  nextslide:string="next";
-  namepattern:string='^([A-Za-z0-9]+ )+[A-Za-z0-9]+$|^[A-Za-z0-9]+$';
-  addresspattern:string='^([A-Za-z0-9,-/]+ )+[A-Za-z0-9,-/]+$|^[A-Za-z0-9,-/]+$';
-  passwordpattern:string='^([A-Za-z0-9!@#$%^&*(),.?":{}]+ )+[A-Za-z0-9!@#$%^&*(),.?":{}]+$|^[A-Za-z0-9!@#$%^&*(),.?":{}]+$';
+  txterrormsg: boolean = true;
+  txterrorresponse: string = "";
+  nextslide: string = "next";
+  namepattern: string = '^([A-Za-z0-9]+ )+[A-Za-z0-9]+$|^[A-Za-z0-9]+$';
+  addresspattern: string = '^([A-Za-z0-9,-/]+ )+[A-Za-z0-9,-/]+$|^[A-Za-z0-9,-/]+$';
+  passwordpattern: string = '^([A-Za-z0-9!@#$%^&*(),.?":{}]+ )+[A-Za-z0-9!@#$%^&*(),.?":{}]+$|^[A-Za-z0-9!@#$%^&*(),.?":{}]+$';
+  emailpatrn = '^[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{1,4}$';
+  // emailpatrn='[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}';
   // '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$';
-  
+
   imageChangedEvent: any = '';
   croppedImage: any = '';
   finalImage: any = '';
   display: boolean = false;
   termesdialogdisplay: boolean = false;
-  emailvaliderrormsg:string="";
-  pwdvaliderrormsg:string="";
-  phonevaliderrormsg:string="";
+  emailvaliderrormsg: string = "";
+  pwdvaliderrormsg: string = "";
+  phonevaliderrormsg: string = "";
 
   timerbtndisplay: boolean = true;
-  verifybtndisplay:boolean=false;
-  callDuration:string='';
-  resendtext:string='Resend in 00:00';
-  timetaken:any='';
-  timerdata:any='';
-  btnotpdis:string= "disable";
-  otpdisable:string='';
-  otpresponse:string="";
+  verifybtndisplay: boolean = false;
+  callDuration: string = '';
+  resendtext: string = 'Resend in 00:00';
+  timetaken: any = '';
+  timerdata: any = '';
+  btnotpdis: string = "disable";
+  otpdisable: string = '';
+  otpresponse: string = "";
 
   registerdto: RegistrationDto = {
     Id: 0,
@@ -97,23 +99,23 @@ export class RegistrationComponent implements OnInit {
     // NPWD: null,
     OTP: 0
   }
-  registererrormsg:registererrormsg=
-  {
-    firstname:null,
-    lastname:null,
-    email:null,
-    mobile:null,
-    address:null,
-    country:null,
-    password:null
-  }
+  registererrormsg: registererrormsg =
+    {
+      firstname: null,
+      lastname: null,
+      email: null,
+      mobile: null,
+      address: null,
+      country: null,
+      password: null
+    }
 
   Otp: string = null;
   cars: any[];
   constructor(private formBuilder: FormBuilder, private userservice: UsermanagementService,
     private messageService: MessageService, private ngxService: NgxUiLoaderService,
     public translate: TranslateService, private localStorage: LocalStorageService,
-    private router: Router,private elementRef: ElementRef) {
+    private router: Router, private elementRef: ElementRef) {
 
   }
 
@@ -131,15 +133,15 @@ export class RegistrationComponent implements OnInit {
     this.registrationForm = this.formBuilder.group({
       //  FirstregistrationForm:this.formBuilder.array([this.BasicDetails()]),
       //firstname: ['', [Validators.required,Validators.pattern('[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*')]],
-      firstname: ['', [Validators.required,Validators.pattern(this.namepattern)]],
-      lastname: ['', [Validators.required,Validators.pattern(this.namepattern)]],
-      emailid: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}')]],
+      firstname: ['', [Validators.required, Validators.pattern(this.namepattern)]],
+      lastname: ['', [Validators.required, Validators.pattern(this.namepattern)]],
+      emailid: ['', [Validators.required, Validators.pattern(this.emailpatrn)]],
       mobile: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
-      address: ['', [Validators.required,Validators.pattern(this.addresspattern)]],
+      address: ['', [Validators.required, Validators.pattern(this.addresspattern)]],
       country: ['', Validators.required],
-      city: ['', [Validators.required,Validators.pattern(this.namepattern)]],
-      password: ['', [Validators.required,Validators.pattern(this.passwordpattern),Validators.minLength(6)]],
-      confirmpassword: ['', [Validators.required, Validators.pattern(this.passwordpattern),Validators.minLength(6)]],
+      city: ['', [Validators.required, Validators.pattern(this.namepattern)]],
+      password: ['', [Validators.required, Validators.pattern(this.passwordpattern), Validators.minLength(6)]],
+      confirmpassword: ['', [Validators.required, Validators.pattern(this.passwordpattern), Validators.minLength(6)]],
       otp: ['', Validators.required]
     },
       {
@@ -147,7 +149,7 @@ export class RegistrationComponent implements OnInit {
       }
     );
 
-   
+
     // this.countries = [
     //   { label: 'KSA', value: 'KSA' },
     //   { label: 'United States', value: 'United States' },
@@ -161,7 +163,7 @@ export class RegistrationComponent implements OnInit {
 
   _keyPress(event: any) {
     //const pattern = /[0-9\+\-\ ]/;
-    const pattern=/^([0-9]+ )+[0-9]+$|^[0-9]+$/;
+    const pattern = /^([0-9]+ )+[0-9]+$|^[0-9]+$/;
     let inputChar = String.fromCharCode(event.charCode);
 
     if (!pattern.test(inputChar)) {
@@ -219,16 +221,14 @@ export class RegistrationComponent implements OnInit {
     // }
     if (this.registerdto.FirstName != null) {
 
-      if(this.registerdto.FirstName.match(this.namepattern))
-      {
+      if (this.registerdto.FirstName.match(this.namepattern)) {
 
         if ((this.registerdto.FirstName.length - 1 > -1)) {
           // if(this.registerdto.FirstName.match("('[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*')"))
           // {
           if (this.registerdto.LastName != null) {
-            
-            if(this.registerdto.LastName.match(this.namepattern))
-            {
+
+            if (this.registerdto.LastName.match(this.namepattern)) {
               if (this.registerdto.LastName.length - 1 > -1) {
                 this.btndisable = "line_btn sblue";
               }
@@ -236,23 +236,21 @@ export class RegistrationComponent implements OnInit {
                 this.btndisable = "disable";
               }
             }
-            else
-            {
+            else {
               this.btndisable = "disable";
             }
-       
+
           }
           else {
             this.btndisable = "disable";
           }
-  
+
         }
         else {
           this.btndisable = "disable";
         }
       }
-      else
-      {
+      else {
         this.btndisable = "disable";
       }
 
@@ -266,63 +264,56 @@ export class RegistrationComponent implements OnInit {
   formauthdatavalidate() {
 
     if (this.registerdto.Email != null) {
-      if(this.registerdto.Email.length>0)
-      {
-        if (this.registerdto.Email.match('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}')) {
-          this.txterrormsg=true;
-          this.emailvaliderrormsg="";
-        
+      if (this.registerdto.Email.length > 0) {
+        if (this.registerdto.Email.match(this.emailpatrn)) {
+          this.txterrormsg = true;
+          this.emailvaliderrormsg = "";
+          this.CheckEmail();
           if (this.registerdto.PWD != null) {
-  
-          
+
             if (this.registerdto.PWD.length >= 6) {
-              if(this.registerdto.PWD.match(this.passwordpattern))
-              {
-                this.txterrormsg=true;
-                this.pwdvaliderrormsg="";
-                //this.btndisable = "line_btn sblue";
-                this.CheckEmail();
+              if (this.registerdto.PWD.match(this.passwordpattern)) {
+                this.txterrormsg = true;
+                this.pwdvaliderrormsg = "";
+            
+               this.CheckEmail();
               }
-              else
-              {
+              else {
                 this.btndisable = "disable";
-                this.txterrormsg=false;
-                this.pwdvaliderrormsg="Password must be at least 6 characters and one special characters";
+                this.txterrormsg = false;
+                this.pwdvaliderrormsg = "Password must be at least 6 characters";
               }
-             
-            // this.btndisable = "line_btn sblue";  
+
+              // this.btndisable = "line_btn sblue";  
+            }
+            else if (this.registerdto.PWD.length == 0) {
+              this.txterrormsg = false;
+              this.pwdvaliderrormsg = "";
+              this.btndisable = "disable";
+            }
+            else if ((this.registerdto.PWD.length < 6) && (this.registerdto.PWD.length > 0)) {
+              this.btndisable = "disable";
+              this.txterrormsg = false;
+              this.pwdvaliderrormsg = "Password must be at least 6 characters";
+            }
+
           }
-          else if(this.registerdto.PWD.length==0) 
-          {
-            this.txterrormsg=false;
-            this.pwdvaliderrormsg="";
-            this.btndisable = "disable";
-          } 
-          else  if ((this.registerdto.PWD.length < 6 )&& (this.registerdto.PWD.length>0)) {
-            this.btndisable = "disable";
-            this.txterrormsg=false;
-            this.pwdvaliderrormsg="Password must be at least 6 characters and one special characters";
-          }
-          
-          }
-          else
-          {
+          else {
             this.btndisable = "disable";
           }
         }
         else {
-          this.txterrormsg=false;
-          this.emailvaliderrormsg="Please enter valid email";
+          this.txterrormsg = false;
+          this.emailvaliderrormsg = "Please enter valid email";
           this.btndisable = "disable";
         }
       }
-      else
-      {
-        this.txterrormsg=false;
-        this.emailvaliderrormsg="Please enter email";
+      else {
+        this.txterrormsg = false;
+        this.emailvaliderrormsg = "Please enter email";
         this.btndisable = "disable";
       }
-      
+
     }
     else {
       this.btndisable = "disable";
@@ -332,22 +323,20 @@ export class RegistrationComponent implements OnInit {
   Addressformvalidate() {
 
     if (this.registerdto.City != null) {
-      if(this.registerdto.City.match(this.namepattern))
-      {
+      if (this.registerdto.City.match(this.namepattern)) {
         if (this.registerdto.City.length - 1 > -1) {
           if (this.registerdto.Address != null) {
-              if (this.registerdto.Address.length - 1 > -1) {
-              
-                this.btndisable = "line_btn sblue";
-              }
-              else if (this.registerdto.Address.length == 0) {
-                this.btndisable = "disable";
-              }
-              else
-              {
-                this.btndisable = "disable";
-              }
-          
+            if (this.registerdto.Address.length - 1 > -1) {
+
+              this.btndisable = "line_btn sblue";
+            }
+            else if (this.registerdto.Address.length == 0) {
+              this.btndisable = "disable";
+            }
+            else {
+              this.btndisable = "disable";
+            }
+
           }
         }
         else if (this.registerdto.City.length === 0) {
@@ -367,11 +356,11 @@ export class RegistrationComponent implements OnInit {
     if (this.registerdto.Mobile != null) {
       if (this.registerdto.Mobile.length == 10) {
         this.btndisable = "line_btn sblue";
-        this.phonevaliderrormsg="";
+        this.phonevaliderrormsg = "";
       }
       else if (this.registerdto.Mobile.length <= 9) {
         this.btndisable = "disable";
-        this.phonevaliderrormsg="Please enter a valid mobile number";
+        this.phonevaliderrormsg = "Please enter a valid mobile number";
       }
     }
     else {
@@ -379,22 +368,22 @@ export class RegistrationComponent implements OnInit {
     }
   }
 
-  
+
   otpformvalidate() {
     this.timerdata = this.localStorage.get('timerdata');
     if (this.Otp != null) {
 
       if (this.Otp.toString().length == 6) {
         this.otpnumb = "numb";
-      
-        if (this.timerdata < "01:00") {
-        
+
+        if (this.timerdata < "02:00") {
+
           if (this.Otp == this.registerdto.OTP.toString()) {
-          
-            this.btndisable = "line_btn sblue";         
-            this.btnotpdis="disabled";
-            
-  
+
+            this.btndisable = "line_btn sblue";
+            this.btnotpdis = "disabled";
+
+
             this.timerbtndisplay = true;
             this.verifybtndisplay = false;
             //this.resendtext = 'Resend in 00:00';
@@ -402,16 +391,16 @@ export class RegistrationComponent implements OnInit {
 
           }
           else {
-			   this.otpresponse="Invalid OTP";
-            this.responsesty="otperrormsg";
+            this.otpresponse = "Invalid OTP";
+            this.responsesty = "otperrormsg";
             this.btndisable = "disable";
           }
         }
         else {
-          this.otpresponse="Please enter OTP with in 10 minutes";
-          this.responsesty="otperrormsg";
+          this.otpresponse = "Please enter OTP with in 10 minutes";
+          this.responsesty = "otperrormsg";
           this.btndisable = "disable";
-          this.btnotpdis = "line_btn sblue";          
+          this.btnotpdis = "line_btn sblue";
           this.timerbtndisplay = true;
           this.verifybtndisplay = false;
           this.resendtext = 'Resend in 00:00';
@@ -463,8 +452,8 @@ export class RegistrationComponent implements OnInit {
   GetCountriesList() {
     this.userservice.GetCountriesList().subscribe(res => {
       Object.keys(res).map(key => (
-       this.countries.push({label:res[key]["description"], value:res[key]["description"]})    
-        ));
+        this.countries.push({ label: res[key]["description"], value: res[key]["description"] })
+      ));
     });
   }
 
@@ -481,24 +470,24 @@ export class RegistrationComponent implements OnInit {
     this.registerdto.LoginType = "D";
   }
 
-  CheckEmail() {
+  CheckEmail() : any {
     //this.registerdto.Email="swathi.chinnala@gmail.com";
     this.ConvertingFormToDto();
     if (this.registerdto.Email != null) {
-      if (this.registerdto.Email.match('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}')) {
+      if (this.registerdto.Email.match(this.emailpatrn)) {
         this.userservice.EmailVerification(this.registerdto).subscribe(res => {
           if (res["result"] === "Email is valid") {
-            this.response="";
+            this.response = "";
             //this.HideResponse();
-            this.responsesty="succsmsg";
-
+            this.responsesty = "succsmsg";
             this.btndisable = "line_btn sblue";
+            
           }
           else if (res["result"] === "Email Id already registered") {
 
-            this.response="EmailId is already registered";
-          
-            this.responsesty="errormsg";
+            this.response = "Email is already registered";
+
+            this.responsesty = "errormsg";
             //this.HideResponse();
             //this.messageService.add({ severity: 'error', summary: 'Error Message', detail: res["result"] });
             // this.errormsg=res["result"];
@@ -507,9 +496,9 @@ export class RegistrationComponent implements OnInit {
           }
         },
           errormsg => {
-            this.response=errormsg["error"]["result"];
-            this.responsesty="errormsg";
-           // this.HideResponse();
+            this.response = errormsg["error"]["result"];
+            this.responsesty = "errormsg";
+            // this.HideResponse();
             //this.messageService.add({ severity: 'error', summary: 'Error Message', detail: errormsg["error"]["result"] });
             // this.errormsg=errormsg["error"]["result"];
             // this.iserror=false;
@@ -529,7 +518,7 @@ export class RegistrationComponent implements OnInit {
         this.currentIndex = slides[i].getAttribute('data-slide-to');
 
         if (Number.parseInt(this.currentIndex) >= 0) {
-          
+
           this.prevbtn = "backBtn";
           this.topheader = "_top";
         }
@@ -538,8 +527,8 @@ export class RegistrationComponent implements OnInit {
           if (Number.parseInt(this.currentIndex) == 0) {
             this.formauthdatavalidate();
             //  this.basicformvalidate();
-           // this.prevbtn = "backBtn";
-           this.registrationForm.controls['country'].setValue(this.countries[0].value,{onlySelf: true});
+            // this.prevbtn = "backBtn";
+            this.registrationForm.controls['country'].setValue(this.countries[0].value, { onlySelf: true });
 
           }
           else if (Number.parseInt(this.currentIndex) == 1) {
@@ -551,43 +540,43 @@ export class RegistrationComponent implements OnInit {
             this.submitbtntext = "Verify";
             this.contactformvalidate();
             this.registerdto.Country = this.registrationForm.value["country"];
-      
+
           }
           else if (Number.parseInt(this.currentIndex) == 3) {
-       
+
             this.verifybtndisplay = true;
             this.submitbtntext = "Confirm";
             this.ConvertingFormToDto();
-            this.ProgressSpinnerDlg=true;
-           
+            this.ProgressSpinnerDlg = true;
+
             this.userservice.SendOTP(this.registerdto).subscribe(res => {
               // this.ProgressSpinnerDlg = false; 
-              this.timerbtndisplay = false;    
-              this.otpresponse=res["result"];   
-              this.responsesty="otpsuccsmsg";     
+              this.timerbtndisplay = false;
+              this.otpresponse = res["result"];
+              this.responsesty = "otpsuccsmsg";
               //this.HideResponse();
               this.registerdto.OTP = res["otp"];
               this.callDuration = this.elementRef.nativeElement.querySelector('#time');
               this.startTimer(this.callDuration);
-              
+
 
               //this.router.navigateByUrl('/');
               //this.ResetForm();
-              this.ProgressSpinnerDlg=false;
+              this.ProgressSpinnerDlg = false;
             },
               error => {
                 // this.ProgressSpinnerDlg = false;
-                
-                this.otpresponse=error["result"];
-                this.responsesty="otperrormsg";
+
+                this.otpresponse = error["result"];
+                this.responsesty = "otperrormsg";
                 //this.HideResponse();
                 //this.messageService.add({ severity: 'error', summary: 'Error Message', detail: error["result"] });
                 // this.errormsg=error["result"];
                 // this.iserror=false;
               });
 
-          
-           // this.timerbtndisplay = false;
+
+            // this.timerbtndisplay = false;
             this.prevbtn = "none";
             //this.topheader = "none";
             this.otpformvalidate();
@@ -597,13 +586,13 @@ export class RegistrationComponent implements OnInit {
             this.hidenextbtn = true;
             this.prevbtn = "none";
             this.topheader = "none";
-            
-            this.registerdto.Address =  this.registerdto.Address.trim();
+
+            this.registerdto.Address = this.registerdto.Address.trim();
             this.userservice.InsertCustomer(this.registerdto).subscribe(res => {
               // this.issucss=false;
               // this.succsmsg=res["result"];
-              this.response=res["result"];
-              this.responsesty="succsmsg";
+              this.response = res["result"];
+              this.responsesty = "succsmsg";
               //this.HideResponse();
               //this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
               //this.localStorage.set("Email", res["reEmail"]);
@@ -644,81 +633,83 @@ export class RegistrationComponent implements OnInit {
     }); */
   }
 
-  resendotp(){
-    this.ProgressSpinnerDlg=true;
-    this.btndisable="disable";
+  resendotp() {
+    this.ProgressSpinnerDlg = true;
+    this.btndisable = "disable";
     this.userservice.sendingotp(this.registerdto).subscribe(res => {
-      this.ProgressSpinnerDlg=false;
-      this.btndisable="disable";
-      this.submitbtntext="Verify";
-     this.verifybtndisplay=false;
-     this.timerbtndisplay=true;
-       this.response=res["result"];   
-       this.responsesty="succsmsg";     
-       this.HideResponse();
+      this.ProgressSpinnerDlg = false;
+      this.btndisable = "disable";
+      this.submitbtntext = "Verify";
+      this.verifybtndisplay = false;
+      this.timerbtndisplay = true;
+      this.otpresponse = res["result"];
+      this.responsesty = "otpsuccsmsg";
+      this.HideResponse();
       //this.messageService.add({ severity: 'success', summary: 'Success Message', detail: res["result"] });
       // this.show = false;
       // this.div.nativeElement.innerHTML = res["result"];
-      
-      
-     
-      this.registerdto.OTP=res["otp"];
+
+
+
+      this.registerdto.OTP = res["otp"];
       //sessionStorage.setItem('otp',res["otp"]);      
-      this.localStorage.set('otp',res["otp"]);
+      this.localStorage.set('otp', res["otp"]);
       this.callDuration = this.elementRef.nativeElement.querySelector('#time');
       this.startTimer(this.callDuration);
-      
-      this.timerbtndisplay=false;
-      this.verifybtndisplay=true;
-      this.btnotpdis = "disable";  
-      this.resendtext="Resend in 00:00";
-      this.otpdisable="";
-     // this.show=true;
 
-      
+      this.timerbtndisplay = false;
+      this.verifybtndisplay = true;
+      this.btnotpdis = "disable";
+      this.resendtext = "Resend";
+      this.otpdisable = "";
+      // this.show=true;
+
+
     },
       errormsg => {
         //this.show = false;
-        this.verifybtndisplay=true;
-        this.timerbtndisplay=false;
-      //this.div.nativeElement.innerHTML = errormsg["error"]["result"];
-	   this.response=errormsg["error"]["result"];   
-       this.responsesty="errormsg";   
-      // this.messageService.add({ severity: 'error', summary: 'Error Message', detail: errormsg["error"]["result"] });
+        this.verifybtndisplay = true;
+        this.timerbtndisplay = false;
+        //this.div.nativeElement.innerHTML = errormsg["error"]["result"];
+        this.response = errormsg["error"]["result"];
+        this.responsesty = "errormsg";
+        // this.messageService.add({ severity: 'error', summary: 'Error Message', detail: errormsg["error"]["result"] });
       });
   }
 
-  
+
   startTimer(display) {
-    var timer = 60;
+    var timer = 120;
     var minutes;
     var seconds;
-    var subscription= Observable.interval(1000).subscribe(x => {
-        minutes = Math.floor(timer / 60);
-        seconds = Math.floor(timer % 60);
+    var subscription = Observable.interval(1000).subscribe(x => {
+      minutes = Math.floor(timer / 60);
+      seconds = Math.floor(timer % 60);
 
-        minutes = minutes < 10 ? "0" + minutes : minutes;
-        seconds = seconds < 10 ? "0" + seconds : seconds;
+      minutes = minutes < 10 ? "0" + minutes : minutes;
+      seconds = seconds < 10 ? "0" + seconds : seconds;
 
-        display.textContent ="Resend in "+ minutes + ":" + seconds;
-       
-        --timer;
-        this.localStorage.set('timerdata', minutes + ":" + seconds);
-       
-        if (minutes + ":" + seconds == "00:00") {  
-                               
-          subscription.unsubscribe();
-          this.btnotpdis = "line_btn sblue";         
-          this.timerbtndisplay=false;
-          this.verifybtndisplay=true;
-          this.resendtext='Resend in 00:00';    
-          this.callDuration="";
-          this.otpdisable="disable";
-          
-        }
+      display.textContent = "Resend in " + minutes + ":" + seconds;
+
+      --timer;
+      this.localStorage.set('timerdata', minutes + ":" + seconds);
+
+      if (minutes + ":" + seconds == "00:00") {
+
+        subscription.unsubscribe();
+        this.btnotpdis = "line_btn sblue";
+        this.otpresponse = "";
+        display.textContent = "Resend";
+        this.timerbtndisplay = false;
+        this.verifybtndisplay = true;
+        this.resendtext = 'Resend';
+        this.callDuration = "";
+        this.otpdisable = "disable";
+
+      }
     });
-    
-}
+
+  }
 
 
   ResetForm() {
@@ -744,10 +735,9 @@ export class RegistrationComponent implements OnInit {
     this.termesdialogdisplay = event;
   }
 
-  HideResponse()
-  {
-    setTimeout(() => {          
-      this.response="";
-  }, 5000); 
+  HideResponse() {
+    setTimeout(() => {
+      this.response = "";
+    }, 5000);
   }
 }

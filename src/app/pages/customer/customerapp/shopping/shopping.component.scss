@@ -68,6 +68,9 @@ section.brands {
         font-size: 18pt;
         span{
             letter-spacing: 6pt;
+            &.active{
+                color:#00c0f3;
+            }
          }
     }
     hr {

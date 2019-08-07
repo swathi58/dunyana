@@ -46,6 +46,8 @@ export class ShoppingComponent implements OnInit {
     private catgservice: CategoryService,private pagerService:PagerService) { }
 
   ngOnInit() {
+
+
     this.CategoryID = this.router.snapshot.params["catid"];
 
     this.router.params.subscribe(params => {
@@ -105,7 +107,15 @@ export class ShoppingComponent implements OnInit {
   
 Filterbyalphabet(char)
 {
-  this.selectedchar=char;
+  if(this.selectedchar=='')
+  {
+    this.selectedchar='#';
+  }
+  else
+  {
+    this.selectedchar=char;
+  }
+
  this.filtereditems=this.filter(this.categorywisemerchants,1,char);
  if(this.filtereditems.length>0)
  {

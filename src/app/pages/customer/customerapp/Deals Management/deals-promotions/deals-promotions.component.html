@@ -23,7 +23,7 @@
                             <h2>Deals</h2>
 
                             <p class="text-center let-space">
-                                <span *ngFor="let char of alphabetpaging"
+                                <span *ngFor="let char of alphabetpaging" [ngClass]="{'active':char == selectedchar}"
                                     (click)="Filterbyalphabet(char)">{{char}}</span>
                             </p>
                         </div>
