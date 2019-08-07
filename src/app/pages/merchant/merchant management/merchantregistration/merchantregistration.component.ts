@@ -73,6 +73,7 @@ export class MerchantregistrationComponent implements OnInit {
   pwdValiderrormsg:string="";
   websitevalidmsg:string="";
   cpwdValiderrormsg:string="";
+  dropValiderromsg:string="";
 
   merwebsite: boolean = true;
   meremail: boolean = true;
@@ -366,10 +367,12 @@ export class MerchantregistrationComponent implements OnInit {
 
   }
 
-  dropdownvalidation() {
 
+  dropdownvalidation() {
+    
     this.btndisable = "disable";
-    debugger
+ 
+
     if (this._merchentFormData.Categories != null) {
       if (this._merchentFormData.Categories.length !== 0) {
 
@@ -379,47 +382,46 @@ export class MerchantregistrationComponent implements OnInit {
             if (this._merchentFormData.SellCountries.length !== 0) {
 
               this.btndisable = "line_btn sblue";
-              this.show = true;
-              this.flage = true;
+              this.txtErrormsg = true;
+              this.dropValiderromsg = "";
             } else {
-              debugger
-              this.responsesty = "errormsg";
-              this.div.nativeElement.innerHTML = "please select merchant sell countries";
-              this.show = false;
+              
+              this.dropValiderromsg = "please select merchant sell countries";
+              this.txtErrormsg=false;
               this.flage = false;
             }
           } else {
-            this.responsesty = "errormsg";
-            this.div.nativeElement.innerHTML = "please select merchant sell countries";
-            this.show = false;
+          
+            this.dropValiderromsg = "please select merchant sell countries";
+            this.txtErrormsg = false;
             this.flage = false;
 
           }
         }else {
           this.responsesty = "errormsg";
-          this.div.nativeElement.innerHTML = "please select merchant countrie name";
-          this.show = false;
+          this.dropValiderromsg = "please select merchant countrie name";
+          this.txtErrormsg = false;
           this.flage = false;
         }
       }else {
         this.responsesty = "errormsg";
-        this.div.nativeElement.innerHTML = "please select merchant countrie name";
-        this.show = false;
+        this.dropValiderromsg = "please select merchant countrie name";
+        this.txtErrormsg= false;
         this.flage = false;
       }
       } else {
-        debugger
+
         this.responsesty = "errormsg";
-        this.show = false;
+        this.txtErrormsg = false;
         this.flage = false;
-        this.div.nativeElement.innerHTML = "please select merchant categories name";
+        this.dropValiderromsg= "please select merchant categories name";
 
       }
     } else {
       this.responsesty = "errormsg";
-      this.show = false;
+      this.txtErrormsg = false;
       this.flage = false;
-      this.div.nativeElement.innerHTML = "please select merchant categories name";
+      this.dropValiderromsg= "please select merchant categories name";
 
     }
   }
@@ -648,8 +650,8 @@ export class MerchantregistrationComponent implements OnInit {
             }
 
          
-
-            if (this.flage==true) {
+        
+          
               this.ProgressSpinnerDlg = true;
 
 
@@ -682,14 +684,8 @@ export class MerchantregistrationComponent implements OnInit {
                   //this.messageService.add({ severity: 'error', summary: 'Error Message', detail: error["result"] });
                 });
 
-            }
-            else {
-              this.btndisable = "disable";
-              this.show = false;
-              this.div.nativeElement.innerHTML = "Please select dropdown values";
-              return false;
-
-            }
+            
+            
           }
 
           //this.btndisable = "disable";

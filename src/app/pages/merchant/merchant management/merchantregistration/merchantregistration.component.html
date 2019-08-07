@@ -158,7 +158,7 @@
                                                     </div>
                                                     <div  class="text-danger error">
                                                         <!-- <span class="text-danger error-msg float-right"> please enter valid website link</span> -->
-                                                        <span [hidden]="txterrormsg">{{websitevalidmsg}}</span>
+                                                        <span [hidden]="txtErrormsg">{{websitevalidmsg}}</span>
                                                      </div>
                                                 </div>
                                                 
@@ -186,7 +186,7 @@
                                                     </div>
                                                    
                                                     <div class="text-danger error">
-                                                        <span [hidden]="txterrormsg">{{emailValiderrormsg}}</span>
+                                                        <span [hidden]="txtErrormsg">{{emailValiderrormsg}}</span>
                                                     </div>
                                                 </div>
 
@@ -228,7 +228,7 @@
                                                     </div>
 
                                                     <div class="text-danger error">
-                                                        <span [hidden]="txterrormsg">{{pwdValiderrormsg}}</span>
+                                                        <span [hidden]="txtErrormsg">{{pwdValiderrormsg}}</span>
                                                     </div>
                                                    
                                                 </div>
@@ -256,7 +256,7 @@
                                                        
                                                     </div>
                                                     <div class="text-danger error">
-                                                        <span [hidden]="txterrormsg">{{cpwdValiderrormsg}}</span>
+                                                        <span [hidden]="txtErrormsg">{{cpwdValiderrormsg}}</span>
                                                     </div>
                                                 </div>
 
@@ -281,7 +281,7 @@
                                                         [(ngModel)]="_merchentFormData.Categories"
                                                         defaultLabel="Categories" required=""
                                                         
-                                                        [panelStyle]="{minWidth:'12em'}" (focusout)="dropdownvalidation()">
+                                                        [panelStyle]="{minWidth:'12em'}" (onChange)="dropdownvalidation()">
 
                                                     </p-multiSelect>
                                                     
@@ -317,17 +317,17 @@
                                                         [(ngModel)]="_merchentFormData.SellCountries"
                                                         defaultLabel="Where do you want to Sell" required=""
                                                        
-                                                        [panelStyle]="{minWidth:'12em'}" (focusout)="dropdownvalidation()">
+                                                        [panelStyle]="{minWidth:'12em'}" (onChange)="dropdownvalidation()">
 
                                                     </p-multiSelect>
 
                                                 </div>
-
+                                             
                                                 <div class="col-sm-12">
                                                     <hr>
                                                 </div>
                                             </div>
-
+                                            
                                             <!-- <div class="row inputset">
                                       
                                        
@@ -369,6 +369,10 @@
                                     </div>
 
                                 </div>
+
+                                <div  class="col-sm-12">
+                                        <span [hidden]="txtErrormsg" class="text-danger error">{{dropValiderromsg}}</span>
+                                    </div>
 
                                 <div class="pt-2">
                                     <div [ngClass]="responsesty">
