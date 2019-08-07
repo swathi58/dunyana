@@ -358,6 +358,11 @@ export class RegistrationComponent implements OnInit {
         this.btndisable = "line_btn sblue";
         this.phonevaliderrormsg = "";
       }
+      else if(this.registerdto.Mobile.length==0)
+      {
+        this.btndisable = "disable";
+        this.phonevaliderrormsg = "Please enter mobile number";
+      }
       else if (this.registerdto.Mobile.length <= 9) {
         this.btndisable = "disable";
         this.phonevaliderrormsg = "Please enter a valid mobile number";
