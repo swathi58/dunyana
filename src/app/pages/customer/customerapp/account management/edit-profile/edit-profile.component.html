@@ -63,7 +63,7 @@
           <div *ngIf="EditprofileForm.controls['address'].errors && !EditprofileForm.controls['address'].pristine"
             class="text-danger error-msg float-right">
             <div [hidden]="!EditprofileForm.controls['address'].errors.required">Please enter address </div>
-            <div [hidden]="!EditprofileForm.controls['address'].errors.pattern">Please enter address</div>
+            <!-- <div [hidden]="!EditprofileForm.controls['address'].errors.pattern">Please enter address</div> -->
           </div>
         </div>
         <div class="col-sm-12">

@@ -14,6 +14,9 @@
                     <div class="profile mb-5">
 
                         <div class="thumb text-center w-100">
+                                <button class="line_btn blue edit back"
+                                (click)="backtoaccountpage()">Back</button>
+
                             <img src="{{productdetails.productimage}}" class="float-none">
                             <h2>${{productdetails.productcost}}</h2>
                             <div>{{productdetails.ordereddate | date:'MMM d, y'}}</div>

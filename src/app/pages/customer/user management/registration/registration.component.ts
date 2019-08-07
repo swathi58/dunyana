@@ -54,7 +54,8 @@ export class RegistrationComponent implements OnInit {
   nextslide:string="next";
   namepattern:string='^([A-Za-z0-9]+ )+[A-Za-z0-9]+$|^[A-Za-z0-9]+$';
   addresspattern:string='^([A-Za-z0-9,-/]+ )+[A-Za-z0-9,-/]+$|^[A-Za-z0-9,-/]+$';
-  passwordpattern:string='^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$';
+  passwordpattern:string='^([A-Za-z0-9!@#$%^&*(),.?":{}]+ )+[A-Za-z0-9!@#$%^&*(),.?":{}]+$|^[A-Za-z0-9!@#$%^&*(),.?":{}]+$';
+  // '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$';
   
   imageChangedEvent: any = '';
   croppedImage: any = '';
@@ -335,9 +336,8 @@ export class RegistrationComponent implements OnInit {
       {
         if (this.registerdto.City.length - 1 > -1) {
           if (this.registerdto.Address != null) {
-            if(this.registerdto.Address.match(this.addresspattern))
-            {
               if (this.registerdto.Address.length - 1 > -1) {
+              
                 this.btndisable = "line_btn sblue";
               }
               else if (this.registerdto.Address.length == 0) {
@@ -347,10 +347,7 @@ export class RegistrationComponent implements OnInit {
               {
                 this.btndisable = "disable";
               }
-            }
-            else {
-              this.btndisable = "disable";
-            }
+          
           }
         }
         else if (this.registerdto.City.length === 0) {
@@ -600,7 +597,8 @@ export class RegistrationComponent implements OnInit {
             this.hidenextbtn = true;
             this.prevbtn = "none";
             this.topheader = "none";
-
+            
+            this.registerdto.Address =  this.registerdto.Address.trim();
             this.userservice.InsertCustomer(this.registerdto).subscribe(res => {
               // this.issucss=false;
               // this.succsmsg=res["result"];

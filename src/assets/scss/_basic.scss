@@ -412,8 +412,10 @@ body .ui-widget-overlay {
     color: #00c0f3;
 }
 
-.carouselSlider .ui-carousel .ui-carousel-viewport .ui-carousel-items .ui-carousel-item .desc.active{
-    color: #00c0f3;
+
+.carouselSlider .ui-carousel .ui-carousel-viewport .ui-carousel-items .ui-carousel-item .desc.active {
+        color: #00c0f3;
+    
 }
 
 .carouselSlider .ui-carousel .ui-carousel-page-links .ui-carousel-page-link,
@@ -508,4 +510,8 @@ body .ui-button:enabled:focus{
   background-color: #00c0f3;
   border-color: #00c0f3;    
 
+}
+
+.card-img-top {
+    height: 413px;
 }

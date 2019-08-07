@@ -107,5 +107,8 @@ export class HomeComponent implements OnInit {
   // {name:3,image:"assets/layout/images/hero_banner.jpg"},{name:4,image:"assets/layout/images/hero_banner.jpg"},
   // {name:5,image:"assets/layout/images/hero_banner.jpg"},{name:6,image:"assets/layout/images/hero_banner.jpg"}];
  }
-
+ shopbycategory()
+ {
+   this.router.navigateByUrl('customer/shopping/' + this.localStorage.get("catid"));
+ }
 }

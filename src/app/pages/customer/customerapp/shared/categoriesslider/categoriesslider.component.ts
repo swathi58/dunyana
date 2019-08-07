@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { LangShareService } from 'src/app/shared/services/lang-share.service';
 import { TranslateService } from '@ngx-translate/core';
 import { CategoryService } from 'src/app/pages/admin/services/category.service';
+import { LocalStorageService } from 'angular-web-storage';
 @Component({
   selector: 'app-categoriesslider',
   templateUrl: './categoriesslider.component.html',
@@ -17,6 +18,7 @@ export class CategoriessliderComponent implements OnInit {
   resetAnim = true;
   items: any[] = [];
   Shopbycategory:string="Shop By Category";
+  selectecatid:number=0;
   @Input() childMessage: string;
 
   @ViewChild('categoryCarousel') categoryCarousel: NguCarousel<any>;
@@ -39,10 +41,11 @@ export class CategoriessliderComponent implements OnInit {
 
   constructor(private cdr: ChangeDetectorRef, private sanitizer: DomSanitizer, private route: Router,
     public langShare: LangShareService,
-    public translate: TranslateService, private catgservice: CategoryService) {
+    public translate: TranslateService, private catgservice: CategoryService,private localStorage: LocalStorageService) {
   }
 
   ngOnInit() {
+    
     this.LoadCategories();
   }
   catmoveTo(slide) {
@@ -50,7 +53,11 @@ export class CategoriessliderComponent implements OnInit {
   }
 
   navigatetocategory(catid) {
+
     this.route.navigateByUrl('customer/shopping/' + catid);
+
+    this.localStorage.set("selectedcatgid",catid);
+    this.selectecatid=this.localStorage.get("selectedcatgid");
   }
   LoadCategories() {
     this.catgservice.CategoryList().subscribe(res => {
@@ -58,6 +65,14 @@ export class CategoriessliderComponent implements OnInit {
         img["image"] = 'data:image/png;base64,' + img["image"]
         this.items.push(img);
       });
+
+      this.localStorage.set("catid",this.items[0]["id"]);
+
+      if(this.localStorage.get("selectedcatgid"))
+      {
+        this.selectecatid=this.localStorage.get("selectedcatgid");
+        this.localStorage.remove("selectedcatgid");
+      }
     });
   }
   

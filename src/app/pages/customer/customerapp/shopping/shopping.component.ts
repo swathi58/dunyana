@@ -23,6 +23,7 @@ export class ShoppingComponent implements OnInit {
   alphabetpaging = [ '#','A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' ];
   filtereditems:any[]=[];
   isempty:boolean=true;
+  selectedchar:string='#';
   // merchants:CategoryWiseMerchants={
   //   categoryid:0,
   //   categoryname:null,
@@ -104,6 +105,7 @@ export class ShoppingComponent implements OnInit {
   
 Filterbyalphabet(char)
 {
+  this.selectedchar=char;
  this.filtereditems=this.filter(this.categorywisemerchants,1,char);
  if(this.filtereditems.length>0)
  {

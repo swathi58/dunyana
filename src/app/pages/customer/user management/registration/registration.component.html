@@ -42,6 +42,7 @@
                                         <div class="carousel-item c-btm" [ngClass]="activetab">
                                             <p class="para btm">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                                                 Praesent interdum seconds. adipiscing elit. Praesent interdum</p>
+
                                             <div class="row inputset">
                                                 <div class="col-sm-5"><label>First Name</label><span class="r">*</span>
                                                 </div>
@@ -205,9 +206,9 @@
                                                         <div
                                                             [hidden]="!registrationForm.controls['address'].errors.required">
                                                             Please enter address</div>
-                                                        <div
+                                                        <!-- <div
                                                             [hidden]="!registrationForm.controls['address'].errors?.pattern">
-                                                            Please enter valid address</div>
+                                                            Please enter valid address</div> -->
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-12">
@@ -247,9 +248,9 @@
                                         <div class="carousel-item">
                                             <p class="para">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                                             <div class="">
-
                                                 <div class="otp-num">
-                                                    <input id="otp" type="number"
+                                                    <input id="otp" id="xax" autofocus="autofocus" type="number"
+                                                        onkeydown="javascript: return (event.keyCode >31 && ( event.keyCode<48 || event.keyCode>57) ) ? false : true"
                                                         oninput="if(value.length>6)value=value.slice(0,6)"
                                                         formControlName="otp" [ngClass]="otpdisable" [(ngModel)]="Otp"
                                                         (keyup)="otpformvalidate()">

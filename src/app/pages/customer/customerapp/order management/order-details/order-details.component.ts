@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { OrdermanagementService } from '../../../services/ordermanagemet.service';
 import { LocalStorageService } from 'angular-web-storage';
 import { Productdetails } from '../../../model/ProductDetails';
@@ -29,7 +29,8 @@ export class OrderDetailsComponent implements OnInit {
     country:null,
     productname:null
   }
-  constructor(private router:ActivatedRoute,private orderservice:OrdermanagementService,private localStorage: LocalStorageService) { }
+  constructor(private router:ActivatedRoute,private orderservice:OrdermanagementService,private localStorage: LocalStorageService,
+    private route:Router) { }
 
   ngOnInit() {
     this.customerid=this.localStorage.get("customerid");
@@ -86,5 +87,9 @@ export class OrderDetailsComponent implements OnInit {
   editaddressinmap()
   {
     this.display = true;
+  }
+  backtoaccountpage()
+  {
+    this.route.navigateByUrl("customer/customeraccount");
   }
 }

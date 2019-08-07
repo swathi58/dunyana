@@ -32,7 +32,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(  public langShare: LangShareService,
     public translate: TranslateService,private localStorage: LocalStorageService,private router :Router,
-    private orderservice:OrdermanagementService
+    private orderservice:OrdermanagementService,private route:Router
     ) { }
 
   ngOnInit() {
@@ -140,5 +140,9 @@ this.showlngDiv="showDiv";
     this.router.navigateByUrl('customer/home');
    // this.ngOnInit();
 
+  }
+  shopbycategory()
+  {
+    this.route.navigateByUrl('customer/shopping/' + this.localStorage.get("catid"));
   }
 }

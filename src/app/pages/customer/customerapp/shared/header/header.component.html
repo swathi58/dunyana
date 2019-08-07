@@ -55,7 +55,7 @@
                 </div>
                 <div class="col-sm-6 right-align">
                     <ul class="user-actions">
-                        <li class="cat"><a [routerLink]="['/customer/shop-by-category']">{{ 'Shopby' | translate }} <strong>{{ 'Category' | translate }}</strong></a></li>
+                        <li class="cat"><a  href="javascript:void(0)" (click)="shopbycategory()" >{{ 'Shopby' | translate }} <strong>{{ 'Category' | translate }}</strong></a></li>
                         <!-- <li class="del"><a [routerLink]="['/customer/test']">{{ 'Deliverto' | translate }} <strong>{{ 'SaudiArabia' | translate }}</strong><i class="icon-arrows"></i> </a></li> -->
                         <li class="ac" [hidden]="islogin"><a [routerLink]="['/signin']">{{ 'Hithere' | translate }},  <strong>{{ 'Signin' | translate }}</strong></a></li>
                         <li class="ac" [hidden]="!islogin" [routerLink]="['/customer/customeraccount']"><a>{{'Welcome' | translate}}{{' '|translate}}{{ useremail | translate }},  <strong>{{ 'Account' | translate }}</strong></a></li>

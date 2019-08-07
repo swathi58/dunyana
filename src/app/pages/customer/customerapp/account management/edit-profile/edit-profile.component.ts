@@ -77,7 +77,7 @@ export class EditProfileComponent implements OnInit {
       // emailid:['',[Validators.required,Validators.email]],
       //emailid:['', [Validators.required,Validators.pattern('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}')]],
       mobile: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
-      address: ['', [Validators.required, Validators.pattern(this.addresspattern)]],
+      address: ['', Validators.required],
       country: ['Select Country', Validators.required],
       city: ['', [Validators.required, Validators.pattern(this.namepattern)]],
     });
@@ -159,6 +159,7 @@ export class EditProfileComponent implements OnInit {
     this.profiledata.LastName = this.EditprofileForm.value["lastname"];
     this.profiledata.City = this.EditprofileForm.value["city"];
     this.profiledata.Address = this.EditprofileForm.value["address"];
+    this.profiledata.Address=this.profiledata.Address.trim();
     this.profiledata.Country = this.EditprofileForm.value["country"];
     this.profiledata.Mobile = this.EditprofileForm.value["mobile"];
 console.log(this.profiledata);

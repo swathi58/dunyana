@@ -384,7 +384,7 @@ button:hover {
     right: -85px;
     bottom: -160px;
     left: 0;
-    z-index: 15;
+    z-index: 1;
     display: flex;
     justify-content: flex-end;
     padding-left: 0;
@@ -458,6 +458,8 @@ input[type="number"] {
 
 .otp-num span {
     border-bottom: 1px solid black;
+    position: relative;
+    top:-10px;
     margin-right: 15px;
     width: 30px;
     display: inline-block;
@@ -565,4 +567,8 @@ input[type="number"] {
 .text-danger{
     font-size: 13px;
     float: right;
+}
+
+.otperrormsg {
+    position: unset;
 }
