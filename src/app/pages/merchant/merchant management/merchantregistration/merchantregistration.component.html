@@ -274,12 +274,14 @@
 
                                                 <div class="col-sm-12">
 
+                                                    
+
                                                     <p-multiSelect [options]="categories" placeholder="categories"
                                                         formControlName="categorie"
                                                         [(ngModel)]="_merchentFormData.Categories"
                                                         defaultLabel="Categories" required=""
                                                         
-                                                        [panelStyle]="{minWidth:'12em'}">
+                                                        [panelStyle]="{minWidth:'12em'}" (focusout)="dropdownvalidation()">
 
                                                     </p-multiSelect>
                                                     
@@ -294,7 +296,7 @@
                                                 <div class="col-sm-12">
                                                     <p-dropdown [options]="countries" formControlName="country"
                                                         Placeholder="Country" [(ngModel)]="_merchentFormData.Country"
-                                                        [autoWidth]="false" [filter]="false"
+                                                        [autoWidth]="false" [filter]="false" (focusout)="dropdownvalidation()"
                                                        >
 
                                                     </p-dropdown>
@@ -315,7 +317,7 @@
                                                         [(ngModel)]="_merchentFormData.SellCountries"
                                                         defaultLabel="Where do you want to Sell" required=""
                                                        
-                                                        [panelStyle]="{minWidth:'12em'}">
+                                                        [panelStyle]="{minWidth:'12em'}" (focusout)="dropdownvalidation()">
 
                                                     </p-multiSelect>
 
@@ -340,7 +342,7 @@
                                     </div> -->
                                         </div>
 
-                                        <!-- <div class="carousel-item" >
+                                        <div class="carousel-item" >
                                             <div class="center col-md-12 p-0 text-center">
         
                                                 <img class="text-center" [src]="checkinfo">
@@ -350,7 +352,7 @@
                                                 </p>
                                                 <p>Redirecting...</p>
                                             </div>
-                                        </div>  -->
+                                        </div>
 
                                     </div>
 
