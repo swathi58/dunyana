@@ -66,7 +66,7 @@ export class MerchantregistrationComponent implements OnInit {
   nextslide:string="next";
   namePattern:string='^([A-Za-z0-9]+ )+[A-Za-z0-9]+$|^[A-Za-z0-9]+$';
   addressPattern:string='^([A-Za-z0-9,-/]+ )+[A-Za-z0-9,-/]+$|^[A-Za-z0-9,-/]+$';
-  passwordPattern:string='^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$';
+  passwordPattern:string='^([A-Za-z0-9!@#$%^&*(),.?":{}]+ )+[A-Za-z0-9!@#$%^&*(),.?":{}]+$|^[A-Za-z0-9!@#$%^&*(),.?":{}]+$';//'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$';
   emailPattern:string='[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{1,}[.]{1}[a-zA-Z]{2,}';
   webReg: string = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
   emailValiderrormsg:string="";
@@ -368,17 +368,21 @@ export class MerchantregistrationComponent implements OnInit {
 
   dropdownvalidation() {
 
-    // this.btndisable = "disable";
-    
-    if (this._merchentFormData.Categories !== "") {
-      if (this._merchentFormData.Categories !== ",") {
+    this.btndisable = "disable";
+    debugger
+    if (this._merchentFormData.Categories != null) {
+      if (this._merchentFormData.Categories.length !== 0) {
+
         if (this._merchentFormData.Country !== null) {
-          if (this._merchentFormData.SellCountries !== "") {
-            if (this._merchentFormData.SellCountries !== ",") {
+          if(this._merchentFormData.Country!==""){
+          if (this._merchentFormData.SellCountries != null) {
+            if (this._merchentFormData.SellCountries.length !== 0) {
+
               this.btndisable = "line_btn sblue";
               this.show = true;
               this.flage = true;
             } else {
+              debugger
               this.responsesty = "errormsg";
               this.div.nativeElement.innerHTML = "please select merchant sell countries";
               this.show = false;
@@ -390,29 +394,33 @@ export class MerchantregistrationComponent implements OnInit {
             this.show = false;
             this.flage = false;
 
-            //this.btndisable = "disable";
           }
-        } else {
+        }else {
           this.responsesty = "errormsg";
+          this.div.nativeElement.innerHTML = "please select merchant countrie name";
           this.show = false;
           this.flage = false;
-          this.div.nativeElement.innerHTML = "please select merchant countrie name";
-
-          // this.btndisable = "disable";
         }
+      }else {
+        this.responsesty = "errormsg";
+        this.div.nativeElement.innerHTML = "please select merchant countrie name";
+        this.show = false;
+        this.flage = false;
+      }
       } else {
+        debugger
         this.responsesty = "errormsg";
         this.show = false;
         this.flage = false;
-        this.div.nativeElement.innerHTML = "please select categories";
-        //this.btndisable = "disable";
+        this.div.nativeElement.innerHTML = "please select merchant categories name";
+
       }
     } else {
       this.responsesty = "errormsg";
       this.show = false;
       this.flage = false;
-      this.div.nativeElement.innerHTML = "please select categories";
-      //this.btndisable = "disable";
+      this.div.nativeElement.innerHTML = "please select merchant categories name";
+
     }
   }
 
@@ -469,7 +477,7 @@ export class MerchantregistrationComponent implements OnInit {
                     else {
                       this.btndisable = "disable";
                       this.txtErrormsg = false;
-                      this.pwdValiderrormsg = "Password must be at least 6 characters and one special characters";
+                      this.pwdValiderrormsg = "Password not allowed spaces";
                     }
 
                     // this.btndisable = "line_btn sblue";  
@@ -482,7 +490,7 @@ export class MerchantregistrationComponent implements OnInit {
                   else if ((this._merchentFormData.PWD.length < 6) && (this._merchentFormData.PWD.length > 0)) {
                     this.btndisable = "disable";
                     this.txtErrormsg = false;
-                    this.pwdValiderrormsg = "Password must be at least 6 characters and one special characters";
+                    this.pwdValiderrormsg = "Password must be at least 6 characters";
                   }
 
                 }
@@ -595,7 +603,7 @@ export class MerchantregistrationComponent implements OnInit {
             //this.dropdownvalidation();
             //this.otpformvalidate(); 
             this.submitbtntext = "Submit";
-            this.btndisable = "line_btn sblue";
+            //this.btndisable = "line_btn sblue";
             // this.couraselHref = "#demo-2";
             //this.btndisable="disable";
             //this._merchentFormData.Country = this.merchantForm.value["country"];
@@ -606,7 +614,7 @@ export class MerchantregistrationComponent implements OnInit {
 
             this.show = false;
             this.ConvertingFormToDto();
-            this.dropdownvalidation();
+           // this.dropdownvalidation();
             /*if (!this.show || !this.flage) {
             this.btndisable = "line_btn sblue";
             this.couraselHref = "#demo-3";
@@ -676,8 +684,10 @@ export class MerchantregistrationComponent implements OnInit {
 
             }
             else {
-              this.btndisable = "line_btn sblue";
+              this.btndisable = "disable";
               this.show = false;
+              this.div.nativeElement.innerHTML = "Please select dropdown values";
+              return false;
 
             }
           }
@@ -693,6 +703,7 @@ export class MerchantregistrationComponent implements OnInit {
   }
 
   bindcategories() {
+    this.categories.length=0;
     this.merchantservice.Getcategories().subscribe(res => {
 
       Object.keys(res).map(Key => (
@@ -705,6 +716,7 @@ export class MerchantregistrationComponent implements OnInit {
 
   }
   bindcountries() {
+    this.sellcountry.length=0;
     this.merchantservice.GetCountries().subscribe(res => {
       // this.countries.push({ label: 'Select Country', value: '' });
 
