@@ -27,8 +27,8 @@
                             <h4 class="_top">Become a Seller</h4>
 
 
-                            <form class="from_wrapper" [formGroup]="merchantForm" (ngSubmit)="addMerchent()" novalidate
-                                #myform="ngForm">
+                            <form class="from_wrapper" [formGroup]="merchantForm" novalidate
+                                #myform="ngForm" (keydown.enter)="$event.preventDefault()">
 
                                 <div id="demo" class="carousel" data-ride="carousel" data-interval="false" data-wrap="false">
                                     <ul class="carousel-indicators">
@@ -47,7 +47,7 @@
 
                                                 <div class="col-sm-12"><input type="text" pInputText
                                                         formControlName="Name" [(ngModel)]="_merchentFormData.Name"
-                                                        placeholder="Name*" (keyup)="formvalidate();onKeyPress($event)"
+                                                        placeholder="Name*" (focusout)="formvalidate();"
                                                         class="w-100"> </div>
                                                 <div class="col-sm-12">
 
@@ -92,7 +92,7 @@
                                                 <div class="col-sm-12"><input placeholder="Company*" type="text"
                                                         formControlName="Company"
                                                         [(ngModel)]="_merchentFormData.Company"
-                                                        (keyup)="formvalidate();onKeyPress($event)" class="w-100" />
+                                                        (focusout)="formvalidate();" class="w-100" />
                                                 </div>
                                                 <div class="col-sm-12">
                                                     <div *ngIf="merchantForm.controls['Company'].errors && !merchantForm.controls['Company'].pristine"
@@ -114,9 +114,9 @@
 
                                             <div class="row inputset">
                                                 <div class="col-sm-12 upl-btn">
-                                                    <input type="file" placeholder="Icon Image*" #uploader
+                                                    <input type="file" placeholder="Icon Image" #uploader
                                                         (change)="fileChangeEvent($event)" [hidden]=true />
-                                                    <input type="text" placeholder="Icon Image" class="w-50" disabled>
+                                                    <input type="text" placeholder="Icon Image*" class="w-50" disabled>
                                                     <button type="button" (click)="uploader.click()" label="Upload"
                                                         data-toggle="modal" data-target="#myModal1"
                                                         class="btn-small float-right">Upload</button>
@@ -151,12 +151,15 @@
                                                         class="text-danger error">
                                                         <div
                                                             [hidden]="!merchantForm.controls['Website'].errors.required">
-                                                            please enter website link</div>
+                                                           </div>
                                                         
                                                     </div>
+                                                    <div  class="text-danger error">
+                                                        <!-- <span class="text-danger error-msg float-right"> please enter valid website link</span> -->
+                                                        <span [hidden]="txterrormsg">{{websitevalidmsg}}</span>
+                                                     </div>
                                                 </div>
-                                                <div [hidden]="merwebsite" class="col-sm-12">
-                                                   <span class="text-danger error-msg float-right"> please enter valid website link</span></div>
+                                                
                                                 <div class="col-sm-12">
                                                     <hr>
                                                 </div>
@@ -167,22 +170,27 @@
                                                 <div class="col-sm-12"><input placeholder="Email*" type="text"
                                                         formControlName="Email" [(ngModel)]="_merchentFormData.Email"
                                                         (focusout)="formauthdatavalidate()" class="w-100" /></div>
+                                              
+
                                                 <div class="col-sm-12">
                                                     <div *ngIf="merchantForm.controls['Email'].errors && !merchantForm.controls['Email'].pristine"
                                                         class="text-danger error">
-                                                        <div [hidden]="!merchantForm.controls['Email'].errors.required">
-                                                            please enter email </div>
-                                                       
-                                                        
+                                                        <div
+                                                            [hidden]="!merchantForm.controls['Email'].errors.required">
+                                                        </div>
+                                                        <div
+                                                            [hidden]="!merchantForm.controls['Email'].errors?.pattern">
+                                                        </div>
                                                     </div>
-
-
-
-
+                                                   
+                                                    <div class="text-danger error">
+                                                        <span [hidden]="txterrormsg">{{emailValiderrormsg}}</span>
+                                                    </div>
                                                 </div>
-                                                <div [hidden]="meremail" class="col-sm-12">
-                                                    <span class="text-danger error-msg float-right">please enter valid email address</span>
-                                                </div>
+
+
+                                                
+                                               
                                                 <div class="col-sm-12">
                                                     <hr>
                                                 </div>
@@ -193,7 +201,7 @@
                                                 <div class="col-sm-12"><input type="password" placeholder="Password*"
                                                         formControlName="PWD" [(ngModel)]="_merchentFormData.PWD"
                                                         (focusout)="formauthdatavalidate()" class="w-100" /></div>
-                                                <div class="col-sm-12">
+                                                <!-- <div class="col-sm-12">
                                                     <div *ngIf="merchantForm.controls['PWD'].errors && !merchantForm.controls['PWD'].pristine"
                                                         class="text-danger error">
                                                         <div [hidden]="!merchantForm.controls['PWD'].errors.required">
@@ -201,17 +209,33 @@
                                                      
 
                                                     </div>
+                                                </div> -->
+
+                                                <div class="col-sm-12">
+                                                    <div *ngIf="merchantForm.controls['PWD'].errors && !merchantForm.controls['PWD'].pristine"
+                                                        class="text-danger error">
+                                                        <div
+                                                            [hidden]="!merchantForm.controls['PWD'].errors.required">
+                                                        </div>
+                                                        <div
+                                                            [hidden]="!merchantForm.controls['PWD'].errors?.pattern">
+                                                        </div>
+                                                        <div
+                                                            [hidden]="!merchantForm.controls['PWD'].errors?.minlength">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="text-danger error">
+                                                        <span [hidden]="txterrormsg">{{pwdValiderrormsg}}</span>
+                                                    </div>
+                                                   
                                                 </div>
 
-                                                <div [hidden]="merpwdleter" class="col-sm-12">
-                                                  <span class="text-danger error-msg float-right"> please inclued atleast one special character,one capital letter and one number</span> 
-                                                </div>
-                                                <div [hidden]="merpwdlength" class="col-sm-12">
-                                                    <span class="text-danger error-msg float-right">password length must be greater than 6 characters</span>
-                                                </div>
+                                               
                                                 <div class="col-sm-12">
                                                     <hr>
                                                 </div>
+
                                             </div>
 
                                             <div class="row inputset">
@@ -225,14 +249,16 @@
                                                         class="text-danger error-msg float-right">
                                                         <div
                                                             [hidden]="!merchantForm.controls['confirmpassword'].errors.required">
-                                                            please enter confirm password</div>
+                                                           </div>
                                                         <!-- <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</div> -->
                                                        
                                                     </div>
+                                                    <div class="text-danger error">
+                                                        <span [hidden]="txterrormsg">{{cpwdValiderrormsg}}</span>
+                                                    </div>
                                                 </div>
 
-                                                <div [hidden]="mercpwd" class="col-sm-12">
-                                                <span class="text-danger error-msg float-right"> confirm password must match password</span></div>
+                                                
                                                 <div class="col-sm-12">
                                                     <hr>
                                                 </div>
@@ -254,6 +280,7 @@
                                                         [panelStyle]="{minWidth:'12em'}">
 
                                                     </p-multiSelect>
+                                                    <p>selected categories:{{_merchentFormData.Categories}}</p>
 
                                                 </div>
                                                 <div class="col-sm-12">
