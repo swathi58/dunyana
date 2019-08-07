@@ -647,9 +647,9 @@ export class MerchantregistrationComponent implements OnInit {
 
             }
 
+         
 
-
-            if (this.flage) {
+            if (this.flage==true) {
               this.ProgressSpinnerDlg = true;
 
 
